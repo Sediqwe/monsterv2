@@ -5,22 +5,16 @@
     a.btn.btn-primary[href=""]
       | Támogatás »
   ul.links
-    input.search[type="text" placeholder="Keresés..."]
+    = search_form_for @q, class:"search", url: games_path do |f|
+      = f.text_field :name_cont, placeholder: "Gyors kereső..."
     li
-      a[href="listpage.html"]
-        | Forditások
+      = link_to " Fordítások", games_path
     li
-      a[href="forum_mainpage.html"]
-        | Forum
+      = link_to " Készítők", translaters_path
+    lia
+      = link_to " Regisztráció", login_reg_path()
     li
-      a[href="creator.html"]
-        | Készitők
-    li
-      a[href="registration.html"]
-        | Regisztráció
-    li
-      a[href="login.html"]
-        | Belépés
+      = link_to " Belépés", login_signin_path()
   .toggle
     .line1
     .line2

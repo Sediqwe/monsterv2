@@ -3,4 +3,7 @@ class ApplicationRecord < ActiveRecord::Base
   def self.default_timezone
     :utc
   end
+  def self.ransackable_attributes(auth_object = nil)
+    [ "name", "slug"]
+end
 end

@@ -1,7 +1,10 @@
 class ApplicationController < ActionController::Base
     helper_method :current_user  
-add_flash_types :info, :error, :warning
-
+    add_flash_types :info, :error, :warning
+    before_action :set_search
+def set_search
+  @q = Game.ransack(params[:q])
+  end
 #def default_url_options
   #{ host: ENV["DOMAIN"] || "https://gep.monster" }
 #end
