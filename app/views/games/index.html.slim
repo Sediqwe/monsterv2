@@ -54,34 +54,27 @@
                 .side__header
                     h5
                         | Utolsó feltöltések:
-                .side__elements
-                    a[href=""]
-                        .side__card
-                            p
-                                | Ether One Redux 
-                                br
-                                |  2023-02-12 17:17
-                
+                -@upload.each do |t|
+                    .side__elements
+                        = link_to  game_path(t.game)
+                            .side__card
+                                p
+                                    =t.game.name
+                                    br
+                                    |(
+                                    =t.created_at.strftime("%Y-%m-%d %H:%M") 
+                                    |)
                 .side__header
                     h5
-                        | Utolsó feltöltések:
-                .side__elements
-                    a[href=""]
-                        .side__card
-                            p
-                                | Ether One Redux 
-                                br
-                                |  2023-02-12 17:17
+                        | Utolsó letöltések:
+                -@download.each do |t|
+                    .side__elements
+                        = link_to  game_path(t.game)
+                            .side__card
+                                p
+                                    =t.game.name
+                                    br
+                                    |(
+                                    =t.created_at.strftime("%Y-%m-%d %H:%M") 
+                                    |)                
                 
-                .side__header
-                    h5
-                        | Utolsó feltöltések:
-                .side__elements
-                    a[href=""]
-                        .side__card
-                            p
-                                | Ether One Redux 
-                                br
-                                |  2023-02-12 17:17
-                
-
