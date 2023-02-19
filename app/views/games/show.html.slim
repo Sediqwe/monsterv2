@@ -16,7 +16,7 @@
         /! datasheet__image ez a képnek a tartója
         .datasheet__image
           
-          = image_tag @game.image.variant(resize_to_limit: [500, 500]), class: "img-fluid framed" if @game.image.attached?
+          = image_tag @game.image, class: "img-fluid framed" if @game.image.attached?
           
         .row
           .col-sm-12.col-md-8.col-xs-12.mx-auto

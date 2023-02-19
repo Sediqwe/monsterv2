@@ -36,12 +36,12 @@
                 - @games.each do |game|
                     .col-xs-12.col-sm-6.col-md-6.col-lg-4
                         .list-card
-                            a[href="/game_data.html"]
+                            a[href="/games/#{game.slug}"]
                                 .list-card__img
                                     .list-card__label
                                         |  PC
                                     
-                                    =image_tag(game.image.variant(resize_to_limit: [300, 300]), class: 'img-fluid') if game.image.attached? 
+                                    =image_tag(game.image, class: 'img-fluid') if game.image.attached? 
                                         -if game.done
                                             .list-card__hun-text
                                                 |  A játékhoz elérhető kézi fordítás 
