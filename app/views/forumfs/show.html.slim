@@ -1,0 +1,53 @@
+
+
+.container-fluid.mt-100
+  
+  .d-flex.flex-wrap.justify-content-between
+  - if current_user.present?
+    -if current_user.admin? or current_user.moderator?
+      div
+        = link_to new_foruma_path(id: params[:id]) do |de|
+          button.btn.btn-shadow.btn-wide.btn-primary type="button" 
+            span.btn-icon-wrapper.pr-2.opacity-7
+              i.fa.fa-plus.fa-w-20
+            | Új téma
+nav aria-label="breadcrumb"
+  ol.breadcrumb.breadcrumb-arrow.p-0
+    li.breadcrumb-item
+      = link_to "GM Fórum" , forum_path, class: "text-uppercase pl-3"
+      
+    li.breadcrumb-item.pl-0
+      a href="#" class="text-uppercase"
+        = Forumf.find(params[:id]).title
+        
+    
+    
+ 
+  .card.mb-3
+    .card-header.pl-0.pr-0
+      .row.no-gutters.w-100.align-items-center
+        .col.ml-3 Téma
+        .col-4.text-muted
+          .row.no-gutters.align-items-center
+            .col-4.text-big Bejegyzések
+            .col-8.text-big Létrehozva
+    - @forumas.each do |foruma|
+      .card-body.py-3
+        .row.no-gutters.align-items-center
+          .col
+            = link_to foruma.title + " »", foruma_path(id: foruma.id) , class: "text-big text-light"
+            .small.mt-1
+              | Started 25 days ago &nbsp;&middot;&nbsp;
+              a.text-muted data-abc="true" href="javascript:void(0)"  Neon Mandela
+          .d-none.d-md-block.col-4
+            .row.no-gutters.align-items-center
+              .col-4 = Uzenet.where(foruma: foruma).size
+              .media.col-8.align-items-center
+                = image_tag("user.png", class: "d-block ui-w-30 rounded-circle")
+                .media-body.flex-truncate.ml-2
+                  i.fas.fa-user-cowboy.d-block.ui-w-30.rounded-circle
+                  .line-height-1.text-truncate = time_ago_in_words(foruma.created_at)
+                  a.text-muted.small.text-truncate data-abc="true"  Készítő: 
+        hr.m-0/
+nav
+  = paginate @forumas

@@ -1,0 +1,29 @@
+h1 Karaktercserélő
+
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th Eredeti
+      th
+      th Módosított
+      th
+      th
+      th
+
+  tbody
+    - @changers.each do |changer|
+      tr
+        td
+          h1 = changer.ori
+        td 
+          h1
+            | →→
+        td 
+          h1 = changer.mod
+        td = link_to "Megnéz", changer, class:"btn btn-success text-light"
+        td = link_to "Módosít", edit_changer_path(changer), class:"btn btn-success text-light"
+        td = link_to "Törlés", changer, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-danger text-light"
+
+br
+
+= link_to "Új karakter", new_changer_path, class:"btn btn-success text-light"

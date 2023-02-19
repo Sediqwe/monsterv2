@@ -1,0 +1,19 @@
+p#notice = notice
+h1
+  strong Open:
+  = "\t\t\t\"" + @car.open + "\""
+
+h1
+  strong Close:
+  = "\t\t\t\"" + @car.close + "\""
+h1
+  strong OpenC:
+  = "\t\t\t\"" + @car.openc + "\""
+
+h1
+  strong CloseC:
+  = "\t\t\t\"" + @car.closec + "\""
+
+=> link_to "Edit", edit_car_path(@car)
+'|
+=< link_to "Back", cars_path(id: session[:trans_id])

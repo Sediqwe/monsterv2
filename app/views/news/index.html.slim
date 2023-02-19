@@ -1,0 +1,46 @@
+p id="notice"  = notice
+- if current_user.present?
+    h3 Be vagy lépve: 
+    - if current_user.alias.present?
+        h3 = current_user.alias.capitalize()
+    - else
+        h3 = current_user.name.capitalize()
+    
+- if current_user.present?
+  - if current_user.admin?
+    h2 = current_user.admin?
+    = link_to 'Új hír!', new_news_path , class: "btn btn-success text-light"
+
+
+.container
+  .row
+    .col-12
+      h3 Üdvözöllek a GÉPI magyarítások oldalon!
+    .col
+      h4 Legutóbbi 10 nap feltöltése:
+  .row
+    .col
+      #accordion.panel-group aria-multiselectable="true" role="tablist" 
+        - @uploads.each_with_index do |upload, index| 
+          .panel.panel-default
+            div id="heading#{index}" class="panel-heading" role="tab" 
+              h4.panel-title
+                a aria-controls="collapse#{index}" aria-expanded="true" data-parent="#accordion" data-toggle="collapse" href="#collapse#{index}" role="button" 
+                  =upload.datum
+                  |  Fájlok:(
+                  =Upload.where(datum: upload.datum).size
+                  |)
+                
+            div id="collapse#{index}" class="panel-collapse collapse in #{ "show" if index==0}" aria-labelledby="heading_#{index}" role="tabpanel" 
+              .panel-body.rounded
+                -Upload.where("datum like ?", upload.datum).each do |d|
+                    li.text-light
+                      = link_to "#{d.game.name} »", game_path(d.game.slug), class: "btn btn-link text-light"
+                      |(v.:
+                      = d.version 
+                      |)(Készítő: #{Translater.find(d.translater_id).translater_name})
+                      span.ml-2
+                        |{
+                        = number_to_human_size(Upload.find(d.id).game_files.byte_size) if Upload.find(d.id).game_files.present?
+                        |}
+                      br

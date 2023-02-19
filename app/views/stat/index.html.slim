@@ -1,0 +1,61 @@
+.container-flex.pt-10
+    h2 Statisztikák:
+    table.table-hover.table-dark.table-striped
+        tr 
+            td Userek
+            td =@users
+        tr
+            td Adminok
+            td =@adminok 
+        tr
+            td Játék adatlapok:
+            td =@game_all 
+        tr
+            td Letöltések / Óriás:
+            td 
+                =@download 
+                |  / 
+                =@mega
+                |
+        tr
+            td Letölthető fájlok:
+            td =@game_uploaded_file  
+.text-light.bg-primary
+    = line_chart Download.group_by_day(:created_at, last: 100).count , title: "Utolsó 100 nap letöltése:",  colors: ["white", "white"],library: {backgroundColor: "#eee"} , download: {background: "#ffffff"}
+    |FreeSpace: 
+    = number_to_human(FreeDiskSpace.gigabytes('/'))
+br
+.container-flex
+    .row
+        .col-4
+            h3.bg-secondary.col-12 TOP 10 letöltés
+            table.table.table-dark.table-stripped
+
+                - @proba.each do |top|
+                    tr
+                        td
+                            = Game.find(top[0]).name
+                        td
+                            = top[1]
+        .col-4
+            h3.bg-secondary.col-12 Utolsó 2 hét TOP 10 letöltése
+            table.table.table-dark.table-stripped
+
+                - @toptiz.each do |top|
+                    tr
+                        td
+                            = Game.find(top[0]).name
+                        td
+                            = top[1]
+        .col-4
+            h3.bg-secondary.col-12 Utolsó 7 nap TOP 10 letöltése
+            table.table.table-dark.table-stripped
+
+                - @toptizhet.each do |top|
+                    tr
+                        td
+                            = Game.find(top[0]).name
+                        td
+                            = top[1]
+        
+            

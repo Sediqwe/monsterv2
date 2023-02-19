@@ -1,0 +1,15 @@
+= form_for @changer do |f|
+  - if @changer.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@changer.errors.count, "error")} prohibited this changer from being saved:"
+      ul
+        - @changer.errors.full_messages.each do |message|
+          li = message
+  .form-blocks
+    .field
+      = f.label "Eredeti Karakter:"
+      = f.text_field :ori , class:"form-control"
+    .field
+      = f.label "Csere Karakter:"
+      = f.text_field :mod, class:"form-control"
+    .actions = f.submit "Felvesz", class: "btn btn-success text-light"

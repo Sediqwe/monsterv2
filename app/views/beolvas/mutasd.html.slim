@@ -1,0 +1,79 @@
+h1 Fordító
+= link_to "Vissza a főoldalra", beolvas_path , class:"btn btn-success text-light"
+.row 
+  .col-2 
+    input.form-control type="text" id="keresd" 
+  .col-1
+    .btn.btn-success id="kereso_gomb_mutasd" name="#{params[:id]}"
+      |Keresd    
+  .col-1
+    SELECT ID="sor" class="form-control"
+      OPTION SELECTED="SELECTED" VALUE="1" 1
+      OPTION VALUE="2" 2
+      OPTION VALUE="3" 3
+      OPTION VALUE="4" 4
+      
+
+  
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th Eredeti
+      th Aminek nincs 
+      th Ami azonos
+      th Fordítás
+      
+
+  tbody
+    - start = 0
+    - szoveg = ""
+    - veg = ""
+    - kaos = ""
+    - boss = ""
+    - @beolva.each do |csv1|
+      
+      -if (csv1.data.scan(/#{params[:keresd]}/).count) > 0
+        -start = 0
+        
+      - if start.to_i == params[:sor].to_i
+        - csv1.data.split("\t").each_with_index do |duit , index|
+          - if index == @beolva_adat.col-1
+            - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + duit.to_s + "\n"
+          - if index == @beolva_adat.col-1 && csv1.tdata.nil?
+            - veg += csv1.id.to_s + "#ǝǝ\t\t" + duit.to_s + "\n"
+          - if csv1.tdata.present? 
+            -if index == @beolva_adat.col-1
+              - kov = csv1.tdata.split("\t")
+              - boss += csv1.id.to_s + "#ǝǝ\t\t" + kov[1].to_s + "\n" 
+            -if index == @beolva_adat.col-1 && csv1.tdata.count('"') == 4
+              - kaos += csv1.id.to_s + "#ǝǝ\t\t" + duit.to_s + "\n"
+              
+            - if index == @beolva_adat.col-1 && csv1.tdata.present?
+              - if csv1.tdata == csv1.data
+                - kaos += csv1.id.to_s + "#ǝǝ\t\t" + duit.to_s + "\n"
+            
+      - start +=1
+        
+      
+      
+    tr
+      td = text_area_tag "visszakoz_", szoveg, rows: 20, cols: 40,  wrap: "off", disabled: true
+      td = text_area_tag "veg_", veg, rows: 20, cols: 40,  wrap: "off", disabled: true
+      td = text_area_tag "boss_", boss, rows: 20, cols: 40,  wrap: "off", disabled: true
+      td = text_area_tag "kaos_", kaos, rows: 20, cols: 40,  wrap: "off", disabled: true
+      td = text_area_tag "textarea_1","", rows: 20, cols: 50,  wrap: "off"
+      td
+        button name="1" data-id="#{params[:id]}" id="beolvas_csv_1" class="btn btn-success"
+          |Beolvas
+        = link_to "Vissza", beolvas_path, class: "btn btn-success text-light"
+             
+  
+      
+    tr
+      td = text_area_tag "visszakoz_99999999",veg , rows: 20, cols: 50,  wrap: "off"
+      td = text_area_tag "textarea_99999999","" , rows: 20, cols: 50,  wrap: "off"
+      
+        
+
+
+=< link_to "Back", beolvas_path, class:"btn btn-success text-light"

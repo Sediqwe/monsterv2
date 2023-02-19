@@ -1,0 +1,3 @@
+class Changer < ApplicationRecord
+  
+end

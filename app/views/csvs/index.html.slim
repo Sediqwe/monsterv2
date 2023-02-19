@@ -1,0 +1,38 @@
+h1 Listing csvs
+
+table
+  thead
+    tr
+      th Game name
+      th Game version
+      th Game string
+      th Trans
+      th User
+      th
+      th
+      th
+      th
+
+  tbody
+    - @csvs.each do |csv|
+      tr
+        td = csv.game_name
+        td = csv.game_version
+        td = csv.game_string
+        td = csv.trans
+        td = csv.user.name
+        td 
+          - if csv.trans?
+           = link_to "File elkészítés", csv_mentes_path(id: csv), class:"btn btn-success text-light m-2"
+           = link_to "Letöltés", dow_csv_url, class:"btn btn-success text-light m-2" if File.exists?("tmp/csv.csv")
+          -else
+            = link_to "Beolvas", csv_beolvas_path(id: csv), class:"btn btn-success text-light m-2" 
+        td = link_to "Show", csv, class:"btn btn-success text-light m-2" 
+        
+        td = link_to "Edit", edit_csv_path(csv), class:"btn btn-success text-light m-2" 
+        td = link_to "Destroy", csv, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-danger text-light m-2" 
+       
+
+br
+
+= link_to "New Csv", new_csv_path

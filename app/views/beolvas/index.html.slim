@@ -1,0 +1,91 @@
+h1 Fordító Bázis
+.container 
+  .row 
+    .col-2   
+      = link_to "Karakter cserélő", changers_path, class:"btn btn-success text-light m-2" 
+    .col-4 
+      = link_to "Karakter kiemelő", cars_path, class:"btn btn-success text-light m-2" 
+
+= link_to "Új fordítandó cucc", new_beolva_path, class: "btn btn-success text-light"
+table.table.table-secondary.table-bordered
+  thead
+    tr
+      th Game name
+      th Game version
+      th Game Filename
+      th Game Sorok
+      th
+      th
+      th
+      th
+
+    tbody
+    - @beolvas.each do |csv|
+      - tdatameret = Databeolva.where(beolva_id: csv.id).where.not(tdata: [nil, ""]).size
+      - datameret = Databeolva.where(beolva_id: csv.id).size
+      tr
+        td = csv.game_name
+        td = csv.game_version
+        td = csv.csv_file.filename
+        td 
+          |Sor #{szamol(csv.id)} 
+          br
+          |Fordítva: #{tdatameret}
+          
+        td
+          - if datameret >0
+            = link_to "Feldolgozás törlése - Törli a Fordítást is!", databeolvas_reset_path(id: csv), data: {confirm: "Biztos vagy benne?"} ,method: :get, class:"btn btn-danger text-light m-2"
+          - else
+            = link_to "File feldolgozás RN", file_process_path(id: csv), class:"btn btn-success text-light m-2"
+            
+          
+        
+        td
+          .row
+            .col-4
+              .row
+                .col-12
+                  = text_field_tag "savesize_#{csv.id}","" ,class: "form-control"
+                .col-4
+                  .btn.btn-success.m-2.p-2 id="filesave_#{csv.id}" name="#{csv.id}"
+                    |File lementés
+                .col-4
+                  .btn.btn-success.m-2 id="filesavekalap_#{csv.id}" name="#{csv.id}"
+                    |File lementés - kalappal
+            .col-4
+              = link_to "File lementés Original", file_download_original_path(id: csv), class:"btn btn-success text-light m-2"
+              = link_to csv.csv_file.filename, rails_blob_path(csv.csv_file, disposition: 'attachment'), class: "btn btn-success"
+            .col-4
+              = link_to "Idézőjelek rendbetétele!", igezo_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "<> tagek rendbe tétele", nyito_path(id: csv.id), class:"btn btn-secondary text-light m-2"
+              = link_to "Kézi fordítás", line_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "Kézi fordítás - Unreal", line_unreal_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "Line By Line", linebyline_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "% arány összehasonlító", kozelito_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "Duplikator", duplikalo_path(id: csv), class:"btn btn-secondary text-light m-2"
+              = link_to "Duplikator Delete", duplikalo_delete_path(id: csv), class:"btn btn-secondary text-light m-2"
+            
+
+        td 
+          = link_to "Tömeges fordítás", csv, class:"btn btn-success text-light m-2" 
+          = link_to "Tömeges fordítás - Mutasd", mutasd_path(id: csv, keresd: "Dialogue System" , sor: 1), class:"btn btn-success text-light m-2" 
+          = link_to "Tömeges Fordítás - Idézőjellel", fordsor_path(id: csv), class:"btn btn-success text-light m-2" 
+          = link_to "Tömeges Fordítás - Unreal", unreal_path(id: csv), class:"btn btn-success text-light m-2" 
+          = link_to "Tömeges Fordítás - UNIVERSAL", universal_path(id: csv), class:"btn btn-dark text-light m-2" 
+        td
+          |Tömeges szó csere
+          = text_field_tag "mit_#{csv.id}", "Mit" , class:"form-control"
+          = text_field_tag "mire_#{csv.id}", "Mire", class:"form-control"
+          .btn.btn-success.btn-block name="#{csv.id}" id="csereld_#{csv.id}"
+            |Cseréld
+           
+        
+        td
+          = link_to "Fordítás(DT) törlése", datatranslate_reset_path(id: csv), data: {confirm: "Biztos vagy benne?"}, method: :get, class:"btn btn-danger text-light m-2" 
+          = link_to "Módosítás", edit_beolva_path(csv), class:"btn btn-success text-light m-2" 
+          = link_to "Scanner", new_scanner_path(id: csv), class:"btn btn-success text-light m-2" 
+        td = link_to "Törlés", csv, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-danger text-light m-2" 
+
+br
+
+

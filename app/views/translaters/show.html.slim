@@ -1,0 +1,36 @@
+p#notice = notice
+
+p
+  - if @translater.user.present?
+    - if @translater.user.photo.attached?
+      = image_tag @translater.user.photo
+    br
+    - if @translater.user.desc.present?
+      = @translater.user.desc
+    br
+    - if @translater.user.tam1.present?
+      |Támogatásod megteheted STEAM játék küldéssel:
+      br
+      = @translater.user.tam1
+    br
+    - if @translater.user.tam2.present?
+      |Támogatásod megteheted PAYPAL-on keresztül:
+      br
+      = @translater.user.tam2
+    br
+    - if @translater.user.tam3.present?
+      |Támogatásod megteheted itt:
+      br
+      = @translater.user.tam3
+    br
+    - if @translater.user.tam4.present?
+      |Támogatásod megteheted itt:
+      br
+      = @translater.user.tam4
+
+= @translater.translater_name
+br
+
+  
+    
+=< link_to 'Vissza', translaters_path, class: "btn btn-success text-light"

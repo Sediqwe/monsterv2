@@ -1,0 +1,14 @@
+
+.container-flex
+  h1 A fordításokat készítették:
+  - @translaters.each do |t|
+    a.text-light.border-animation(href="/translaters/#{t.id}")
+      .border-animation__inner
+        =t.translater_name
+        |»    
+    br
+
+- if current_user.present?
+  - if current_user.admin?
+    = link_to 'New Translater', new_translater_path
+

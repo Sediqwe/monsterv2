@@ -1,0 +1,30 @@
+= form_for @program do |f|
+  - if @program.errors.any?
+    #error_explanation.bg-secondary
+      h2 = "#{pluralize(@program.errors.count, 'error')} prohibited this upload from being saved:"
+      ul
+        - @program.errors.full_messages.each do |message|
+          li = message
+
+ 
+  
+  .container-lg
+    .row
+      .col-10
+        #testimonial-slider.owl-carousel
+          .testimonial  
+            .field
+              = f.label "Új fordító program neve:"
+              = f.text_field :program_name
+          
+            
+            .actions = f.submit "Felvétel" , class: "btn btn-success text-light"
+
+
+
+          
+            
+         
+
+
+                

@@ -1,0 +1,35 @@
+table.table.table-secondary.table-bordered
+    thead
+        tr
+        th Game name
+      
+
+    tbody
+        - @igezo.each do |csv|
+            
+            - data = csv.data.split(/\t/)
+            - tdata = csv.tdata.split(/\t/)
+            - if ellenorzo_dat(tdata[1])
+                - if csv.tdata.count('"') > 0 
+                    - if csv.tdata.count('"')== 2 &&  tdata[1][0] == '"' && tdata[1][-1,1] == '"' 
+                    - else
+                        tr
+                            td
+                                .row
+                                    .col-1 
+                                        |Eredeti:
+                                    .col-11
+                                        = text_area_tag "trans__def#{csv.id}", data[1], rows: 10, class:"form-control" , disabled:true
+                                    .col-12 =cserelo(csv.tdata)
+                                    .col-1 
+                                        |Fordítás:
+                                    .col-11
+                                        = text_area_tag "trans_#{csv.id}",  tdata[1], rows:10, class:"form-control"
+                                    .col-1  
+                                        .btn.btn-success name="#{csv.id}" id="igezo_#{csv.id}"
+                                            |Lement
+                                    .col-11 
+                                        = ellenorzo(tdata[1]).html_safe
+br
+
+= link_to "Vissza", beolvas_path, class:"btn btn-success text-light"

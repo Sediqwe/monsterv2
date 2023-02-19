@@ -1,0 +1,7 @@
+h1 Editing Mega
+- if current_user.present?
+    - if current_user.admin?
+        == render 'form'
+
+= link_to 'Show', @mega
+= link_to 'Back', megas_path

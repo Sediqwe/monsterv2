@@ -1,0 +1,48 @@
+h1 Fordító
+
+= link_to "Vissza a főoldalra", beolvas_path , class:"btn btn-success text-light"
+.row 
+  .col-2 
+    |Elválasztó:
+    SELECT ID="elvalaszto" class="form-control"
+      OPTION SELECTED="SELECTED" VALUE="egyenloseg" '='
+      OPTION VALUE="tab" 'tab'
+  .col-1
+    .btn.btn-success id="universal" name="#{params[:id]}"
+      |Feldolgoz      
+    
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th Eredeti
+      th Lefordított
+      th Kimaradt
+      th Hibás
+      th Adatok
+      th Fordítás
+      
+
+  tbody
+    - meret = 0
+    - szoveg = ""
+    - start = 1
+    - veg = ""
+    - mar = ""
+    - utolso = 1
+    - bumm = 0
+    - marta = ""
+    - @beolva.each_with_index do |csv1,index|
+      - mar = universal(csv1.data.strip.to_s,params[:elvalaszto])
+      -if mar.length>0
+        - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + mar + "\r\n"
+      
+    td = text_area_tag "hatalmas_", szoveg, rows: 100, cols: 40,  wrap: "off"
+    td = text_area_tag "textarea_","" , rows: 100, cols: 50,  wrap: "off"
+    td
+      
+      button name="#{}" data-elvalaszto="#{params[:elvalaszto]}" data-id="#{params[:id]}" id="universal_beolvas" class="btn btn-success"
+        |Beolvas
+      = link_to "Vissza", beolvas_path, class: "btn btn-success text-light"
+=> link_to "Edit", edit_beolva_path(@beolva)
+'|
+=< link_to "Back", beolvas_path

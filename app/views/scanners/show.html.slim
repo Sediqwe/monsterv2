@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong Start:
+  = @scanner.start
+
+p
+  strong Stop:
+  = @scanner.stop
+
+p
+  strong Beolva:
+  = @scanner.beolva
+
+=> link_to "Edit", edit_scanner_path(@scanner)
+'|
+=< link_to "Back", scanners_path

@@ -1,0 +1,70 @@
+h1 Fordító
+
+= link_to "Vissza a főoldalra", beolvas_path , class:"btn btn-success text-light"
+
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th Eredeti
+      th Lefordított
+      th Kimaradt
+      th Hibás
+      th Adatok
+      th Fordítás
+      
+
+  tbody
+    - meret = 0
+    - szoveg = ""
+    - start = 1
+    - veg = ""
+    - mar = ""
+    - utolso = 1
+    - bumm = 0
+    - marta = ""
+    - @beolva.each_with_index do |csv1,index|
+      - szoveg_alt = ""
+      
+          
+          
+      -if csv1.data.count('"') == 2
+        - szoveg_alt = csv1.data[/\"(.*?)\"/m, 1]
+      - if csv1.data.count('"') == 4 
+          - szoveg_alt = csv1.data[/\"(.*?)\"/m, 1]
+          - temp = csv1.data.gsub("\"#{csv1.data[/\"(.*?)\"/m, 1]}\"" ,"")
+          - if index == 0
+          - szoveg_alt += szoveg_alt + "\t\t#ǝǝ\t\t" +  temp[/\"(.*?)\"/m, 1] 
+      - if szoveg_alt.length >0  
+        - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + szoveg_alt + "\r\n"
+      - if szoveg.length> 4700
+        - elso = szoveg.split("#ǝǝ")
+        - elso = elso[0].to_i
+        tr
+         
+          
+          - bumm = csv1.id 
+          - mar = kieg2(elso, bumm, csv1.beolva_id)
+          - marta = kiegminus2(elso, bumm)
+          - sanyi = sanyi2(elso, bumm)
+          - veg += sanyi
+          td = text_area_tag "hatalmas_" + csv1.id.to_s, szoveg, rows: 20, cols: 40,  wrap: "off"
+          td = text_area_tag "haramia_" + start.to_s, mar, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "forditott_" + start.to_s, sanyi, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "hatalmas_" + start.to_s, marta, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "textarea_" + start.to_s,"" , rows: 20, cols: 50,  wrap: "off"
+          td
+            
+            button name="#{start}" data-id="#{params[:id]}" id="readeu_#{start}" class="btn btn-success"
+              |Beolvas
+            = link_to "Vissza", beolvas_path, class: "btn btn-success text-light"
+            - szoveg = ""
+            
+          
+      - start+=1
+    tr
+      td = text_area_tag "visszakoz_99999999",veg , rows: 20, cols: 50,  wrap: "off"
+
+
+=> link_to "Edit", edit_beolva_path(@beolva)
+'|
+=< link_to "Back", beolvas_path

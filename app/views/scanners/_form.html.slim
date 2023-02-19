@@ -1,0 +1,17 @@
+= form_for @scanner do |f|
+  - if @scanner.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@scanner.errors.count, "error")} prohibited this scanner from being saved:"
+      ul
+        - @scanner.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :start
+    = f.text_field :start
+  .field
+    = f.label :stop
+    = f.text_field :stop
+    = f.hidden_field(:beolva_id, id:  @para)
+    
+  .actions = f.submit

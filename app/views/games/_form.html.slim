@@ -1,0 +1,31 @@
+= form_for @game do |f|
+  - if @game.errors.any?
+    #error_explanation.bg-dark
+      h2 = "#{pluralize(@game.errors.count, 'error')} prohibited this game from being saved:"
+      ul
+        - @game.errors.full_messages.each do |message|
+          li = message
+  .container-fluid
+    
+    .form-blocks
+      h2 Új játék adatlap
+      .form-group
+        = f.text_field :name, class: "form-control", placeholder: "Játék neve"
+      
+      .form-group
+        = f.text_field :link_steam, class: "form-control", placeholder: "Steam Link"
+      
+      .form-group
+        = f.text_field :link_epic, class: "form-control", placeholder: "Epic Link"
+    
+      .form-group
+        = f.text_field :link_other, class: "form-control", placeholder: "Egyéb ink" 
+    
+      .form-group
+        = f.text_field :link_hun, class: "form-control", placeholder: "Magyarítások.hu Link"
+      .form-group
+        label for="newGameCoverUpload"  Borítókép
+        = f.file_field :image
+    
+      button.btn.btn-primary Beküld »
+

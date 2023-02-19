@@ -1,0 +1,13 @@
+
+p#notice = notice
+- if current_user.present?
+  -if current_user.admin?
+    p
+      strong Name:
+      = @user.name
+
+    p
+  - else  
+    p Ehhez semmi jogod!
+
+=< link_to 'Back', translaters_path

@@ -1,0 +1,19 @@
+.bg-light.col-10.text-dark.rounded.shadow
+  = form_for @blog do |f|
+    - if @blog.errors.any?
+      #error_explanation.bg-secondary
+        h2 = "#{pluralize(@blog.errors.count, 'error')} prohibited this upload from being saved:"
+        ul
+          - @blog.errors.full_messages.each do |message|
+            li = message
+
+  
+      
+    .field
+      h1= f.label "Címe:"
+      = f.text_field :title, class: 'form-control col-4'
+    .field
+      h1= f.label "Leírás:"
+      = f.rich_text_area :desc,  class: 'form-control col customized-min-height'
+    
+    .actions = f.submit "Beküld", class:"btn btn-success m-4"

@@ -1,0 +1,42 @@
+h1 Kezdőoldal
+- if current_user.present?
+    h3 Be vagy lépve: 
+    - if current_user.alias.present?
+        h3 = current_user.name.capitalize()
+    - else
+        h3 = current_user.alias.capitalize()
+  
+.container.shadow
+    
+    .row.justify-content-center
+        .card.shadow.bg-secondary
+            .card-header
+                h5.card-title.text-light
+                    i class="bi bi-power pr-2" 
+                    | Gépi Magyarítások 2022 Start
+            .card-block.text-light.bg-secondary.p-2
+                p.card-text 
+                p + Platform jelölés
+                p + Készítő jelölés
+                p + Program jelölés
+                p + Letöltés kijelzés
+            .card-footer.text-light
+                p #2022.04.03 
+                p.fw-bold Powered by Ruby On Rails
+    
+
+    .row.justify-content-center
+        .card.shadow.bg-secondary
+            .card-header
+                h5.card-title.text-light
+                    i class="bi bi-power pr-2" 
+                    | Gépi Magyarítások 2022 Start
+            .card-block.text-light.bg-secondary.p-2
+                p.card-text 
+                p  + Feltöltés oldal
+                p  + Játék adatlap
+                p  + Apró design kezdemény
+            .card-footer.text-light
+                p #2022.03.31 
+                p.fw-bold Powered by Ruby On Rails
+

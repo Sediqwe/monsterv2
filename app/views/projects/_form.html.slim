@@ -1,0 +1,57 @@
+.row 
+  .col-4
+    = form_for @project do |f|
+      - if @project.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@project.errors.count, "error")} prohibited this project from being saved:"
+          ul
+            - @project.errors.full_messages.each do |message|
+              li = message
+
+      .field
+        = f.label :game
+        = f.text_field :game
+      .field
+        = f.label :version
+        = f.number_field :version
+      .field
+        = f.label :vege
+        = f.text_field :vege
+      .field
+        = f.label :col
+        = f.number_field :col
+      .field
+        = f.label :copy
+        = f.number_field :copy
+      .field
+        = f.label :trans
+        = f.check_box :trans
+      .field
+        = f.label :files
+        = f.file_field :files, multiple: true
+      .actions = f.submit
+
+  - if @project.persisted?
+    .col-8.form-blocks2
+    
+      H3 Választható karakterek:
+      table
+        thead
+        tbody 
+          - @karakterek.each do |f|
+            - ism = Procharto.where(file: params[:id], char: f.id).count
+            tr id="boss_#{f.id}" class="#{ " bg-success rounded" if ism.to_i >0}"
+              td
+                .row 
+                  .col-1
+                    h1
+                    - if ism.to_i > 0 
+                      = check_box_tag "project_nyito_#{f.id}", params[:id], checked: true 
+                    - else
+                      = check_box_tag "project_nyito_#{f.id}", params[:id]
+                  .col-10
+                    h1
+                      = f.open 
+                      = f.close
+      
+      br

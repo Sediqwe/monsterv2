@@ -1,0 +1,29 @@
+- if flash[:login_error] 
+  p
+    = flash[:login_error]
+
+
+
+
+.container-fluid
+  
+  .form-blocks
+  
+    h2 Belépés
+    = form_for :session , url: :sessions_create do |f|
+      .form-group
+        = f.text_field :name,  class: "form-control"
+    
+      .form-group
+        = f.password_field :password,  class: "form-control"
+    
+      button.btn.btn-primary.btn-block Belépés »
+  
+    p.or vagy
+  
+    
+    =link_to "Regisztráció »", login_reg_path, class: "btn btn-primary text-light"
+
+
+
+              

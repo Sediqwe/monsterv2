@@ -1,0 +1,24 @@
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>Title:</strong>
+  <%= @mega.title %>
+</p>
+
+<p>
+  <strong>Link:</strong>
+  <%= @mega.link %>
+</p>
+
+<p>
+  <strong>Active:</strong>
+  <%= @mega.active %>
+</p>
+
+<p>
+  <strong>Version:</strong>
+  <%= @mega.version %>
+</p>
+
+<%= link_to 'Edit', edit_mega_path(@mega) %> |
+<%= link_to 'Back', megas_path %>

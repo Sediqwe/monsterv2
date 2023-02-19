@@ -1,0 +1,61 @@
+table.table.table-secondary.table-bordered
+    thead
+        tr
+        th Game name
+      
+
+    tbody
+        - @nyito.each do |csv|
+            - data = csv.data.split(/\t/)
+            - tdata = csv.tdata.split(/\t/)
+            tr
+                td
+                    .row
+                        .col-1 
+
+                            |Eredeti: 
+                            .btn.btn-info.btn-block
+                                |N :  
+                                = counter(data[1], "-<N>-")
+                            .btn.btn-info.btn-block
+                                |NR :
+                                = counter(data[1], "-<NR>-")
+                            
+                            .btn.btn-info.btn-block
+                                |R :
+                                = counter(data[1], "-<R>-")
+                            
+                            .btn.btn-info.btn-block
+                                |IDÉZ:
+                                = csv.data.count('"')
+                    
+                        .col-11
+                            = text_area_tag "original_#{csv.id}",  data[1], rows: 10, class:"form-control" , disabled: true
+                        .col-1
+                            |Fordítás:
+                            .btn.btn-info.btn-block
+                                |N :  
+                                = counter(tdata[1], "-<N>-")
+                            .btn.btn-info.btn-block
+                                |NR :
+                                = counter(tdata[1], "-<NR>-")
+                            
+                            .btn.btn-info.btn-block
+                                |R :
+                                = counter(tdata[1], "-<R>-")
+                            
+                            .btn.btn-info.btn-block
+                                |IDÉZ:
+                                = csv.tdata.count('"')
+                        .col-11
+                            = text_area_tag "trans_#{csv.id}",  tdata[1], rows: 10, class:"form-control"
+                        .col-1  
+                            .btn.btn-success name="#{csv.id}" id="igezo_#{csv.id}"
+                                |Elment
+                        .col-1 
+                            .btn.btn-warning 
+                                | #{ "> vagy <  hiba"}
+            
+br
+
+= link_to "Vissza", beolvas_path, class:"btn btn-success text-light"

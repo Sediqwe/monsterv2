@@ -1,0 +1,26 @@
+h1 Listing user2s
+
+table
+  thead
+    tr
+      th Username
+      th Uid
+      th
+      th
+      th
+
+  tbody
+    - @user2s.each do |user2|
+      tr
+        td 
+          = user2.alias || user2.name          
+        - if current_user.present?
+          - if current_user.admin?
+            td = user2.id
+            td = link_to "Show", user2
+            td = link_to "Edit", edit_user_path(user2)
+            td = link_to "Destroy", user2, data: {confirm: "Are you sure?"}, method: :delete
+
+br
+
+

@@ -1,0 +1,69 @@
+.container-fluid
+ .row
+    .col-sm-6.mx-auto
+        /! Kereső felépítése
+        = search_form_for @q, class: " pl-3",  url: @ransack_path do |f|
+            .search
+            .input-group.mb-3
+                = f.text_field :data_cont, placeholder: "Keresés a eredeti vagy fordítás között...", aria_label: "Recipient's username", aria_describedby: "basic-addon2",class: "form-control"
+                .input-group-append
+                = f.submit "Keresés",class: "btn btn-primary ml-2"
+    .col-sm-6.mx-auto
+        /! Kereső felépítése
+        = search_form_for @q, class: " pl-3",  url: @ransack_path do |f|
+            .search
+            .input-group.mb-3
+                = f.text_field :tdata_cont, placeholder: "Keresés CSAK a fordítás között...", aria_label: "Recipient's username", aria_describedby: "basic-addon2",class: "form-control"
+                .input-group-append
+                = f.submit "Keresés",class: "btn btn-primary ml-2"
+= paginate @soronkent
+h1 =@adat
+table.table.table-secondary.table-bordered
+    thead
+        tr
+        th Game name
+    
+
+    tbody
+        - @soronkent.each do |csv|
+            - data = csv.data.split(/\t/)
+            - if csv.tdata.present?
+                - tdata = csv.tdata.split(/\t/)
+                tr
+                    td
+                        .row
+                            .col-3 
+                                |id: 
+                                =csv.id
+                                |Eredeti: 
+                                br
+                                |Sorszám: #{csv.row}
+                                br
+                                |Eltérés:#{csv.file_id} %
+                                br
+                                - if csv.tdata.present? 
+                                    = analizator(data[1],tdata[1], csv.beolva_id, 0)
+                            .col-8
+                                = text_area_tag "original_#{csv.id}",  csv.data, rows: 5, class:"form-control" , disabled: true
+                            
+                            .col-3
+                                |Fordítás:
+                                br
+                                - if csv.tdata.present?
+                                    - da = analizator(data[1],tdata[1], csv.beolva_id, 1)
+                                    = da
+                            .col-8
+                                - tdata1 = ""
+                                - if csv.tdata.present?
+                                    - tdata1 = kiemelo(csv.tdata,"\"","\"")
+                                = text_area_tag "trans_#{csv.id}", tdata1  , rows: 5, class:"form-control"
+                            .col-1
+
+                            .col-1  
+                                .btn.btn-success name="#{csv.id}" id="linebyline_#{csv.id}"
+                                    |Elment
+                
+            
+= paginate @soronkent
+
+

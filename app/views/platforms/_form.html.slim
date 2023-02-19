@@ -1,0 +1,16 @@
+= form_for @platform do |f|
+  - if @platform.errors.any?
+    #error_explanation.bg-secondary
+      h2 = "#{pluralize(@platform.errors.count, 'error')} prohibited this upload from being saved:"
+      ul
+        - @platform.errors.full_messages.each do |message|
+          li = message
+
+ 
+    
+  .field
+    = f.label :platform_name
+    = f.text_field :platform_name
+ 
+  
+  .actions = f.submit "Beküld", class:"btn btn-success"

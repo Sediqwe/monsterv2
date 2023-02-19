@@ -1,0 +1,12 @@
+=form_tag do 
+    .field
+        = label_tag "Tömbösített adat"
+        = text_area_tag 'post'
+    .field
+        = label_tag "Link"
+        = text_field_tag 'desc'
+    .field
+        = label_tag "DeepL név"
+        = text_field_tag 'list_type'
+    br
+    = submit_tag "Beküldés" , class: "btn btn-success"

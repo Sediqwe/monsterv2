@@ -1,0 +1,52 @@
+h1 Feltöltések listája:
+- de_rebase
+.container-fluid
+  /! A row-ra azért van szükség, mert ez töri be a colokat a megfelelő méretekben.
+  .row
+    .col-sm-6.mx-auto
+      /! Kereső felépítése
+      = search_form_for @q, class: " pl-3" do |f|
+        .search
+          .input-group.mb-3
+            = f.text_field :name_cont, placeholder: "Keresés a játékok között...", aria_label: "Recipient's username", aria_describedby: "basic-addon2",class: "form-control"
+            .input-group-append
+            = f.submit "Keresés",class: "btn btn-primary ml-2"
+= paginate @uploads
+table.table.table-dark.text-light.table-striped.table-bordered
+  thead
+    tr
+      th Game
+      th Version
+      th Filename
+      th User
+      th User.Edit
+      th Time
+      th Action
+      th Action
+      th Action
+      
+
+  tbody
+    - @uploads.each do |upload|
+      tr id="#{upload.id}"
+        td = upload.game.name
+        td = upload.version
+        td = upload.game_files.filename
+        td = Translater.find(upload.translater_id).translater_name
+        td 
+          .input-group.mb-3
+            - if current_user.present? 
+              -if current_user.admin?
+                = select("edit_", upload.id, Translater.all.collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
+            
+        td = upload.created_at
+        td = link_to 'Show', upload, class:"btn btn-success text-light"
+        - if current_user.present? 
+          -if current_user.admin?
+            td = link_to 'Edit', edit_upload_path(upload), class:"btn btn-info text-light"
+            td = link_to 'Destroy', upload, data: { confirm: 'Are you sure?' }, method: :delete, class:"btn btn-secondary text-light"
+
+br
+- if current_user.present? 
+  -if current_user.admin?
+    = link_to 'New Upload', new_upload_path, class:"btn btn-secondary"

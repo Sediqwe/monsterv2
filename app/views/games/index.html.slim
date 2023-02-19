@@ -1,0 +1,93 @@
+.container-fluid
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+            ul.abc
+                
+                a class="abc__all" href="/games"
+                    li 
+                        |Összes
+                        span  
+                            =number_game("")
+                -("A".."Z").each do |letter|
+                    -if params[:q].present?
+                        a href="games?q%5Bname_start%5D=#{letter}"
+                            li class=" #{"active" if letter. == params[:q][:name_start]}"
+                                =letter
+                
+                    -else
+                    a href="games?q%5Bname_start%5D=#{letter}"
+                        li 
+                            =letter
+                
+                
+            .step-filter
+                .step-filter__numbers
+                    a.step-filter__number[href=""]
+                        | 1
+                    a.step-filter__number[href=""]
+                        | 2
+                    a.step-filter__number[href=""]
+                        | 3
+                    a.step-filter__number[href=""]
+                        | Következő
+                    a.step-filter__number[href=""]
+                        | Utolsó
+            .row
+                - @games.each do |game|
+                    .col-xs-12.col-sm-6.col-md-6.col-lg-4
+                        .list-card
+                            a[href="/game_data.html"]
+                                .list-card__img
+                                    .list-card__label
+                                        |  PC
+                                    
+                                    =image_tag(game.image.variant(resize_to_limit: [300, 300]), class: 'img-fluid') if game.image.attached? 
+                                        -if game.done
+                                            .list-card__hun-text
+                                                |  A játékhoz elérhető kézi fordítás 
+                                .list-card__text
+                                    h6
+                                        = game.name 
+                                        |  »
+
+
+
+
+
+
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            .side
+                .side__header
+                    h5
+                        | Utolsó feltöltések:
+                .side__elements
+                    a[href=""]
+                        .side__card
+                            p
+                                | Ether One Redux 
+                                br
+                                |  2023-02-12 17:17
+                
+                .side__header
+                    h5
+                        | Utolsó feltöltések:
+                .side__elements
+                    a[href=""]
+                        .side__card
+                            p
+                                | Ether One Redux 
+                                br
+                                |  2023-02-12 17:17
+                
+                .side__header
+                    h5
+                        | Utolsó feltöltések:
+                .side__elements
+                    a[href=""]
+                        .side__card
+                            p
+                                | Ether One Redux 
+                                br
+                                |  2023-02-12 17:17
+                
+

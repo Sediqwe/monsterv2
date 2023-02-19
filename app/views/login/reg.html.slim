@@ -1,0 +1,56 @@
+- if @user.errors.any?
+    = @user.errors.full_messages.each do |message|
+        li = message
+  
+
+.container-fluid
+  .form-blocks
+    h2 Regisztráció
+    = form_for @user,:html => {:class => 'form-signin', autocomplete: "off" } , url: login_create_url  do |f|     
+        .form-group
+        = f.text_field :name,  class: "form-control", placeholder: "Felhasználó", autocomplete: 'false'
+        
+        
+        .form-group
+        = f.text_field :email,  class: "form-control", placeholder: "E-mail cím", autocomplete: 'disabled'
+        
+        .form-group
+        = f.password_field :password,  class: "form-control", placeholder: "Jelszó", autocomplete: 'disabled'
+        
+        .form-group
+        = f.password_field :password_confirmation,  class: "form-control ", placeholder: "Jelszó mégegyszer", autocomplete: 'disabled'
+        br
+        br
+        
+        .form-group
+        = f.text_field :alias,  class: "form-control", placeholder: "Nickname", autocomplete: 'false'
+        |*Nem kötelező
+        
+        button.btn.btn-primary.btn-block Regisztráció »
+        p.or vagy
+        = link_to "Belépés »", login_signin_path, class: "btn btn-primary btn-block text-light "
+
+
+  
+
+
+
+
+
+
+    
+    
+    
+    
+    
+
+    
+  
+  
+  
+  
+  
+  
+  
+  
+  

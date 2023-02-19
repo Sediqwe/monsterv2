@@ -1,0 +1,25 @@
+p#notice = notice
+
+p
+  strong Desc:
+  = @uzenet.desc
+
+p
+  strong User:
+  = @uzenet.user
+
+p
+  strong Active:
+  = @uzenet.active
+
+p
+  strong Foruma:
+  = @uzenet.foruma
+
+p
+  strong Uzenet:
+  = @uzenet.uzenet
+
+=> link_to "Edit", edit_uzenet_path(@uzenet)
+'|
+=< link_to "Back", uzenets_path

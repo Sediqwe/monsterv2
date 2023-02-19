@@ -1,0 +1,21 @@
+= form_for @foruma do |f|
+  - if @foruma.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@foruma.errors.count, "error")} prohibited this foruma from being saved:"
+      ul
+        - @foruma.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field
+    = f.label :desc
+    = f.text_field :desc
+ 
+  .field
+    =f.hidden_field :user_id, value: current_user.id
+  .field
+    = f.label :forumf
+      =f.hidden_field :forumf_id, value: params[:id]
+  .actions = f.submit

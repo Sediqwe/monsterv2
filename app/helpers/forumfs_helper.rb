@@ -1,0 +1,2 @@
+module ForumfsHelper
+end

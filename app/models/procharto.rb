@@ -1,0 +1,3 @@
+class Procharto < ApplicationRecord
+    
+end

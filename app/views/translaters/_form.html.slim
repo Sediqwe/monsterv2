@@ -1,0 +1,12 @@
+= form_for @translater do |f|
+  - if @translater.errors.any?
+    #error_explanation.bg-secondary
+      h2 = "#{pluralize(@translater.errors.count, 'error')} prohibited this upload from being saved:"
+      ul
+        - @translater.errors.full_messages.each do |message|
+          li = message
+  = f.label :translater_name
+  = f.text_field :translater_name
+ 
+  
+  .actions = f.submit 'Új feltöltő felvétele', class: "btn btn-success"

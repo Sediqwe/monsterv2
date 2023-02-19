@@ -1,0 +1,54 @@
+h1 Listing csvs
+
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th #ID
+      th SOR#1
+      th SOR#2
+      th SOR#3     
+      
+
+  tbody
+    - meret = 0
+    - szoveg = ""
+    - start = 1
+    - veg = ""
+    - @csvdata.each do |csv1|
+      tr
+        
+        - csv1.csv_data.split("\t").each_with_index do |duit , index|
+          
+          - if szoveg.length > 4000
+            td = text_area_tag "visszakoz_" + start.to_s, szoveg, rows: 20, cols: 50
+            td = text_area_tag "textarea_" + start.to_s,"" , rows: 20, cols: 50
+            td
+              button name="#{start}" data-id="#{params[:id]}" id="beolvas_csv_#{start}" class="btn btn-success"
+                |Beolvas
+
+            - szoveg = ""
+            
+          - if index == 2
+            
+            - szoveg += csv1.id.to_s + "#\t\t" + duit.to_s + "\n"
+            - veg += csv1.id.to_s + "#\t\t" + duit.to_s + "\n"
+            - p szoveg
+            - start+=1
+    tr 
+      td = text_area_tag "visszakoz_99999999",veg , rows: 20, cols: 50
+      td = text_area_tag "textarea_99999999","" , rows: 20, cols: 50
+      td
+        button name="99999999" data-id="#{params[:id]}" id="beolvas_csv_99999999" class="btn btn-success"
+          |Beolvas
+          
+
+      
+        
+        
+
+      
+br
+
+=> link_to "Edit", edit_csv_path(@csv)
+'|
+=< link_to "Back", csvs_path

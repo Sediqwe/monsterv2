@@ -1,0 +1,13 @@
+p#notice = notice
+
+p
+  strong Ori:
+  = @changer.ori
+
+p
+  strong Mod:
+  = @changer.mod
+
+=> link_to "Módosít", edit_changer_path(@changer), class:"btn btn-success text-light"
+'|
+=< link_to "Vissza", changers_path, class:"btn btn-success text-light"

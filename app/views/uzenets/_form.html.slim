@@ -1,0 +1,13 @@
+= form_for @uzenet do |f|
+  - if @uzenet.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@uzenet.errors.count, "error")} prohibited this uzenet from being saved:"
+      ul
+        - @uzenet.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :desc
+    = f.text_area :desc
+    =f.hidden_field :foruma_id, value: params[:id]
+  .actions = f.submit

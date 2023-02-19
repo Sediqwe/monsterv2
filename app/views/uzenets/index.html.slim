@@ -1,0 +1,28 @@
+h1 Listing uzenets
+
+table
+  thead
+    tr
+      th Desc
+      th User
+      th Active
+      th Foruma
+      th Uzenet
+      th
+      th
+      th
+
+  tbody
+    - @uzenets.each do |uzenet|
+      tr
+        td = uzenet.desc
+        td = uzenet.user
+        - if current_user.present?
+          - if current_user.admin?
+            td = link_to "Show", uzenet
+            td = link_to "Edit", edit_uzenet_path(uzenet)
+            td = link_to "Destroy", uzenet, data: {confirm: "Are you sure?"}, method: :delete
+
+br
+
+= link_to "New Uzenet", new_uzenet_path

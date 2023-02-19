@@ -1,0 +1,64 @@
+.row
+  .col-4
+    = form_for @beolva do |f|
+      - if @beolva.errors.any?
+        #error_explanation
+          h2 = "#{pluralize(@beolva.errors.count, "error")} prohibited this beolva from being saved:"
+          ul
+            - @beolva.errors.full_messages.each do |message|
+              li = message
+
+      .field
+        = f.label :Játék
+        = f.text_field :game_name, class:"form-control"
+      .field
+        = f.label :Verzió
+        = f.text_field :game_version, class:"form-control"
+      .field
+        = f.label "Feldolgozandó sor végjel"
+        = f.text_field :fileend, class:"form-control"
+      .field
+        .row
+          .col-2
+            = f.label "oszlop"
+            = f.select "col", options_for_select((1..5).step(1)), html: {class: 'form-control col-1'}, :prompt => 'Válassz'
+          .col-10      
+            = f.label "Szülő fordítás"
+            = f.select(:copy, Beolva.all.collect {|u| [u.game_name + "(" + u.game_version + ")", u.id]}, html: {class: 'form-control col-1'}, :prompt => 'Válassz', class:"form-control")
+            - if @beolva.copy.present?
+              .btn.btn-success id="revizio" name="#{@beolva.id}"
+                |Beolvasom a régi fordítást
+
+      .field
+        = f.label :File
+        = f.file_field :csv_file , class:"form-control bg-success p-2 rounded "
+      - if @beolva.persisted?
+        .actions = f.submit "Módosítás" , class:"btn btn-success"
+      - else
+        .actions = f.submit "Felvétel" , class:"btn btn-success"
+  - if @beolva.persisted?
+    .col-8.form-blocks2
+    
+      H3 Választható karakterek:
+      table
+        thead
+        tbody 
+          - @karakterek.each do |f|
+            - ism = Charto.where(beolva_id: params[:id], car_id: f.id).count
+            tr id="boss_#{f.id}" class="#{ " bg-success rounded" if ism.to_i >0}"
+              td
+                .row 
+                  .col-1
+                    h1
+                    - if ism.to_i > 0 
+                      = check_box_tag "nyito_#{f.id}", params[:id], checked: true 
+                    - else
+                      = check_box_tag "nyito_#{f.id}", params[:id]
+                  .col-10
+                    h1
+                      = f.open 
+                      = f.close
+      
+      br
+      = link_to "Új karakter felvétele", new_car_path, class:"btn btn-success text-light"
+   

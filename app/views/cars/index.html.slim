@@ -1,0 +1,29 @@
+h1 Listázott karakterek
+
+table.table-dark.table.table-striped
+  thead
+    tr
+      th Open
+      th Close
+      th OpenC
+      th CloseC
+      th
+
+  tbody
+    - @cars.each do |car|
+      tr
+        td
+          h2 = car.open
+        td
+          h2 = car.close
+        td
+          h2 = car.openc
+        td
+          h2 = car.closec
+        td = link_to "Show", car, class:"btn btn-success text-light"
+        td = link_to "Edit", edit_car_path(car), class:"btn btn-success text-light"
+        td = link_to "Destroy", car, data: {confirm: "Are you sure?"}, method: :delete, class:"btn btn-danger text-light"
+
+br
+
+= link_to "Új karakter", new_car_path(id: params[:id]), class:"btn btn-success text-light"

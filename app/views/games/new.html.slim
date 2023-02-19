@@ -1,0 +1,5 @@
+h1 Új játék adatlap:
+- if current_user.admin? or current_user.moderator?
+    == render 'form'
+
+= link_to '← Vissza', games_path, class: "btn btn-primary text-light"

@@ -1,0 +1,63 @@
+
+
+.container-fluid.mt-100
+  .d-flex.flex-wrap.justify-content-between
+  - if current_user.present?
+    -if current_user.admin? or current_user.moderator?
+      div
+        = link_to new_uzenet_path(id: params[:id]) do |de|
+          button.btn.btn-shadow.btn-wide.btn-primary type="button" 
+            span.btn-icon-wrapper.pr-2.opacity-7
+              i.fa.fa-plus.fa-w-20
+            | Új hozzászólás
+  nav aria-label="breadcrumb"
+    ol.breadcrumb.breadcrumb-arrow.p-0
+      li.breadcrumb-item
+        = link_to "GM Fórum", forum_path, class: "text-uppercase pl-3"
+      li.breadcrumb-item.pl-0
+        = link_to @forumf , forumf_path(@str), class:"text-uppercase  pl-3"
+      li.breadcrumb-item.pl-0
+        a href="#" class="text-uppercase"
+          = Foruma.find(params[:id]).title
+    
+    
+ 
+nav
+  = paginate @uzenetek
+
+
+/! Main Body
+section
+.container
+  .row 
+      .col-sm-5.col-md-6.col-12.pb-4
+      form#algin-form
+        .form-group
+          h4 Hozzászólás
+          label for="message"  Üzenet
+          textarea.form-control cols="30" id="" msg="" name="msg" rows="5" style=("background-color: black;") 
+        
+        
+        
+        .form-group 
+          .btn.btn-primary
+            |Elküld
+
+  .row
+    .col-sm-5.col-md-6.col-12.pb-4
+      h1 Hozzászólások:
+      - @uzenetek.each do |uzenet|
+        .comment.mt-4.text-justify.col
+          = image_tag("user.png", class: "rounded-circle", style: 'width: 40px')
+          h4.pl-2 =uzenet.user.alias
+          span.pl-2 = uzenet.created_at
+          br/
+          br/
+          p = uzenet.desc
+          - if current_user.present?
+            - if current_user.admin?
+              td = link_to "Show", uzenet
+              td = link_to "Edit", edit_foruma_path(uzenet)
+              td = link_to "Destroy", uzenet, data: {confirm: "Are you sure?"}, method: :delete
+      
+  

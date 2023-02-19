@@ -1,0 +1,84 @@
+table.table.table-secondary.table-bordered
+    thead
+        tr
+        th Game name
+      
+
+    tbody
+        tr
+            td
+                table
+                
+                    - @idezojel.each do |csv|
+                        - data = csv.data.split(/#{session[:project_elvalaszto]}/)
+                        - tdata = csv.tdata.split(/#{session[:project_elvalaszto]}/)
+                        - if project_ellenorzo_dat(csv.tdata)
+                            - if csv.tdata.count("✞\t\t") <1
+                                tr
+                                    td 
+                                        = tdata[1]
+
+                            - if csv.data.count('✞') > 0
+                                - if csv.data.count('✞') != csv.tdata.count('✞') || csv.tdata[-1,1] != "✞"
+                                    - if csv.tdata[-1,1] != "⇝"
+                                        tr
+                                            td
+                                                .row
+                                                    .col-1 
+                                                        |Eredeti:
+                                                        br
+                                                        |id: 
+                                                        = csv.id
+                                                    .col-11
+                                                        = text_area_tag "trans__def#{csv.id}", csv.data, rows: 10, class:"form-control" , disabled:true
+                                                    .col-1
+                                                    .col-11.bg-secondary.text-light 
+                                                        h3 =project_cserelo(csv.data)
+                                                    .col-1
+                                                    .col-11.bg-success.text-light 
+                                                        h3 =project_cserelo(csv.tdata) + "'"
+                                                    .col-1 
+                                                        |Fordítás:
+                                                    .col-11
+                                                        = text_area_tag "trans_2_#{csv.id}",  csv.tdata, rows:10, class:"form-control"
+                                                    .col-1  
+                                                        .btn.btn-success name="#{csv.id}" id="project_idezo_mentes_2_#{csv.id}"
+                                                            |Lement
+                                                    .col-11 
+                                                        = project_ellenorzo(csv.tdata.strip,csv.data.strip).html_safe
+            td.col-6
+                table
+                    - @idezojel.each do |csv|
+                        - data = csv.data.split(/#{session[:project_elvalaszto]}/)
+                        - tdata = csv.tdata.split(/#{session[:project_elvalaszto]}/)
+                        - if project_ellenorzo_dat(tdata)
+                            - if csv.data.count('✞') > 0
+                                 - if csv.data.count('✞') != csv.tdata.count('✞')
+                                    tr
+                                        td
+                                            .row
+                                                .col-1 
+                                                    |Eredeti:
+                                                    br
+                                                    |id: 
+                                                    = csv.id
+                                                .col-11
+                                                    = text_area_tag "trans__def#{csv.id}", csv.data, rows: 10, class:"form-control" , disabled:true
+                                                .col-1
+                                                .col-11.bg-secondary.text-light 
+                                                    h3 =project_cserelo(csv.data)
+                                                .col-1
+                                                .col-11.bg-success.text-light 
+                                                    h3 =project_cserelo(csv.tdata)
+                                                .col-1 
+                                                    |Fordítás:
+                                                .col-11
+                                                    = text_area_tag "trans_#{csv.id}",  csv.tdata, rows:10, class:"form-control"
+                                                .col-1  
+                                                    .btn.btn-success name="#{csv.id}" id="project_idezo_mentes_#{csv.id}"
+                                                        |Lement
+                                                .col-11 
+                                                    = project_ellenorzo(csv.tdata.strip,csv.data.strip).html_safe
+br
+
+= link_to "Vissza", projects_path, class:"btn btn-success text-light"

@@ -1,0 +1,80 @@
+h1 Fordító
+= link_to "Vissza a főoldalra", beolvas_path , class:"btn btn-success text-light"
+table.table.table-dark.table-stripped
+  thead
+    tr
+      th Eredeti
+      th Lefordított
+      th Kimaradt
+      th Hibás
+      th Adatok
+      th Fordítás
+      
+
+  tbody
+    - meret = 0
+    - szoveg = ""
+    - start = 1
+    - veg = ""
+    - mar = ""
+    - utolso = 1
+    - bumm = 0
+    - marta = ""
+    - ikea = 1
+    - @beolva.each do |csv1|
+      - p csv1
+      - if szoveg.length > 4600 || szoveg.include?((@databeolvamax.id).to_s)
+        tr 
+          td Eredeti
+          td Lefordított
+          td Kimaradt
+          td Hibás
+          td Adatok
+          td Fordítás
+
+        tr
+          - utolso = szoveg.split("#ǝǝ\t")
+          - utolso = utolso[0]
+          - mar = kieg_unreal(utolso, bumm, csv1.beolva_id)
+          - marta = kiegminus_unreal(utolso, bumm)
+          
+          - sanyi = sanyi_unreal(utolso, bumm)
+          - veg += marta
+          td = text_area_tag "visszakoz_" + start.to_s, szoveg, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "haramia_" + start.to_s, mar, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "forditott_" + start.to_s, sanyi, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td = text_area_tag "hatalmas_" + start.to_s, marta, rows: 20, cols: 40,  wrap: "off", disabled: true
+          td 
+            | Szöveg méret: #{szoveg.lines.count}
+            br
+            | Hibás: #{mar.scan("#############################################").size} sor
+            br 
+            |#
+            = ikea
+            - ikea += 1
+            
+          td = text_area_tag "textarea_" + start.to_s,"" , rows: 20, cols: 50,  wrap: "off"
+          
+          td
+            button name="#{start}" data-id="#{params[:id]}" id="beolvas_unreal_#{start}" class="btn btn-success"
+              |Beolvas
+            = link_to "Vissza", beolvas_path, class: "btn btn-success text-light"
+          - szoveg = ""
+        
+        
+      
+      - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data.to_s
+      
+      - start+=1
+      - bumm = csv1.id
+            
+  
+      
+    tr
+      td = text_area_tag "visszakoz_99999999",veg + szoveg , rows: 20, cols: 50,  wrap: "off"
+      td = text_area_tag "textarea_99999999","" , rows: 20, cols: 50,  wrap: "off"
+      
+        
+
+
+=< link_to "Back", beolvas_path, class:"btn btn-success text-light"

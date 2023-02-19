@@ -1,0 +1,24 @@
+h1 Listing scanners
+
+table
+  thead
+    tr
+      th Start
+      th Stop
+      th Beolva
+      th
+      th
+      th
+
+  tbody
+    - @scanners.each do |scanner|
+      tr
+        td = scanner.start
+        td = scanner.stop
+        td = scanner.beolva.game_name
+        td = link_to "Show", scanner
+        td = link_to "Edit", edit_scanner_path(scanner)
+        td = link_to "Destroy", scanner, data: {confirm: "Are you sure?"}, method: :delete
+
+br
+

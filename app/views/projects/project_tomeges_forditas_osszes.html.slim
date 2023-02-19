@@ -1,0 +1,130 @@
+.row    
+     - session.keys.each do |key|
+        ="#{key} => #{session[key]}"
+        br
+    
+
+.row 
+    .col-1
+        h1 A fájl eredeti tartalma:
+        
+        pre.bg-dark.text-light
+            - @sample.each do |t|
+                p.h3
+                    = megjelenito(t.data).html_safe
+    .col-11
+        .row.bg-info 
+            .col-1
+                |elválasztó
+                br
+                = session[:project_elvalaszto]
+            .col-1
+                |oszlop
+                br
+                = session[:project_oszlop]
+            .col-1
+                |szoveg 
+                br
+                = session[:project_szoveg]
+            .col-1
+                |sorvalto
+                br
+                = session[:project_sorvalto]
+            .col-1
+                |nemvalto
+                br
+                = session[:project_nemvalto]
+            
+        h1 Rendező 
+        h5 |(első 1000 sor, utána a "nem lefordítottak" a megoldás)
+        .row.bg-dark
+            .col-8
+                h3 Eredeti:
+                - szoveg = "" 
+                - szoveg2 = ""
+                - szoveg3 = ""
+                - @adatok.each_with_index do |csv1,index|
+                    -if session[:project_paros].to_i == 0
+                        - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data
+                    - if session[:project_paros].to_i == 1
+                        - if index.even?
+                            - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data
+                    - if session[:project_paros].to_i == 2
+                        - if index.odd?
+                            - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data
+
+                = text_area_tag "hatalmas_", szoveg, rows: 40, cols: 70,  wrap: "off"
+                - @adatokmind.each_with_index do |csv3,index|
+                    - if csv3.tdata.present?
+                        - if csv3.data.strip == csv3.tdata.strip
+                            - szoveg3 += csv3.id.to_s + "#ǝǝ\t\t" + csv3.data
+                = text_area_tag "hatalmas3", szoveg3, rows: 40, cols: 20,  wrap: "off"
+                - @adatok.each_with_index do |csv2,index|
+                    - if csv2.tdata.present?
+                        - szoveg2 += csv2.id.to_s + "#ǝǝ\t\t" + csv2.tdata
+                = text_area_tag "hatalmas2", szoveg2, rows: 40, cols: 70,  wrap: "off"
+            .col-2 
+                h3 Teendők
+                .row.bg-warning.rounded
+                    H3.m-2.mx-auto.text-dark Elválasztás módja
+                    = text_field :elvalaszto, "" , class:"form-control m-2", placeholder: "Add meg mi legyen az elválasztás alapja"
+                    .btn.btn-dark.btn-block.m-4 id="project_elvalaszto" data-id="#{params[:id]}"
+                        | Beállít
+                .row.bg-info.rounded
+                    H3.m-2.mx-auto.text-dark Oszlop kiválasztás
+                    SELECT ID="oszlop" class="form-control m-2"
+                        -(1..40).each do |index|
+                            OPTION VALUE="#{(index-1)}" #{index}
+                        
+                    .btn.btn-dark.m-2.mx-auto id="project_oszlop" data-id="#{params[:id]}" 
+                        |Oszlop tartalma
+                    
+                .row.bg-warning.rounded
+                    h3.mx-auto.text-dark Keresés
+                    = text_field :text, "#{session[:project_szoveg]}" , class:"form-control m-2", placeholder: "Tartalmazza az alábbi szöveget"
+                    h5.ml-2 # legyen elöl ha NOT
+                    h5.ml-2 Feloldó karakter a \ 
+                    .btn.btn-dark.btn-block.m-4 id="project_szoveg" data-id="#{params[:id]}"
+                        | Keresés
+                .row.bg-info.rounded
+                    H3.m-2.mx-auto.text-dark Hanyadik sort?
+                    SELECT ID="sorvalto" class="form-control m-2"
+                        OPTION SELECTED="SELECTED" VALUE="0" Pont a kiválasztott sort
+                        OPTION VALUE="1" +1
+                        OPTION VALUE="2" +2
+                        OPTION VALUE="3" +3
+                    .btn.btn-dark.btn-block.m-4 id="project_sorvalto" data-id="#{params[:id]}"
+                        | Beállít
+                .row.bg-secondary.rounded
+                    H3.m-2.mx-auto.text-dark Melyiket?
+                    SELECT ID="nemvalto" class="form-control m-2"
+                        OPTION SELECTED="SELECTED" VALUE="0" Mindet
+                        OPTION VALUE="1" Csak a lefordítottat
+                        OPTION VALUE="2" Csak a nem lefordítottat                        
+                    .btn.btn-dark.btn-block.m-4 id="project_nemvalto" data-id="#{params[:id]}"
+                        | Beállít
+                .row.bg-success.rounded
+                    h3.mx-auto.text-dark Fordítás mentése
+                    .btn.btn-dark.btn-block.m-4 id="project_mentes" data-id="#{params[:id]}"
+                        | Mentés
+                .row.bg-dark.rounded 
+                    |Tömeges szó csere
+                    = text_field_tag "mit", "" , class:"form-control", placeholder: "Mit"
+                    = text_field_tag "mire", "", class:"form-control", placeholder: "Mire"
+                    .btn.btn-success.btn-block name="#{@project_id}" id="project_tomeges_csere"
+                        |Cseréld
+                .row.bg-success.rounded
+                    H3.m-2.mx-auto.text-dark Páros?
+                    SELECT ID="Paros" class="form-control m-2"
+                        OPTION SELECTED="SELECTED" VALUE="0" Mind
+                        OPTION VALUE="1" Páros
+                        OPTION VALUE="2" Páratlan
+                    .btn.btn-success.btn-block name="#{params[:id]}" id="project_paros"
+                        |Mentés
+                
+            .col-2
+                h3 Fordítás
+                = text_area_tag "textarea_","" , rows: 100, cols: 50,  wrap: "off"
+                
+
+        

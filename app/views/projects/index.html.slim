@@ -1,0 +1,73 @@
+h1 Listing projects
+= link_to "New Project", new_project_path, class: "btn btn-success text-light"
+table
+  thead
+    tr
+      th Game
+      th Version
+      th Vege
+      th Col
+      th Copy
+      th Trans
+      th
+      th
+      th
+
+  tbody
+    - @projects.each do |project|
+      tr
+        td = project.id
+        td = project.game
+        td = project.version
+        td = project.vege
+        td
+          
+        td = project.copy
+        td 
+
+          - if project.trans?
+            = link_to "SOROK TÖRLÉSE!", project_trans_reset_path(id: project.id), data: {confirm: "Törlöd a felvett sorokat?"}, class: "btn btn-danger text-light"
+          - else
+            = link_to "BEOLVASÁS", fbn_path(id: project.id), class: "btn btn-success"
+          
+        td 
+          table
+            - project.files.each do |t|
+              tr
+                
+                td
+                  = t.filename
+                td 
+                  = fajl_sor_szamolo(t.id)
+                  |   sor beolvasva
+                  br
+                  = fajl_tdata_sor_szamolo(t.id)
+                  |   sor lefordítva
+                td
+                  = link_to "GTF", ptf_path(id: t.id), class: "btn btn-success" 
+                td
+                  = link_to "GTF - összesített ", ptfo_path(id: t.id), class: "btn btn-success" 
+                td
+                  = link_to "Soronként ellenörző ALL", project_line_path(id: t.id , only: 0), class: "btn btn-success" 
+                  = link_to "Soronként ellenörző FILTER", project_line_path(id: t.id , only: 1), class: "btn btn-success" 
+                td
+                  = link_to "Soronként ellenörző - összes", project_lines_path(id: t.id), class: "btn btn-success" 
+                td
+                  = link_to "Idezojel ellenöző", project_idezojel_path(id: t.id), class: "btn btn-success" 
+                td
+                  = link_to "Nyitó", project_nyito_path(id: t.id), class: "btn btn-success" 
+                td 
+                  =link_to "ZIP ZIP", project_file_zip_path(id: project.id), class: "btn btn-success" 
+                  =link_to "ZIP LETÖLTÉS", project_download_path(id: project.id), class: "btn btn-success" 
+                td 
+                  = link_to t.filename, rails_blob_path(t, disposition: 'attachment'), class: "btn btn-success"
+                td 
+                  .btn.btn-success.m-2 id="project_file_download_kalap_#{t.id}" name="#{t.id}" data-name="#{t.filename}"
+                    |File lementés - kalappal
+        td = link_to "Show", project, class: "btn btn-success text-light"
+        td = link_to "Edit", edit_project_path(project), class: "btn btn-success text-light"
+        td = link_to "Destroy", project, data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-danger text-light"
+
+br
+
+

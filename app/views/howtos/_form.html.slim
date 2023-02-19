@@ -1,0 +1,18 @@
+= form_for @howto do |f|
+  - if @howto.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@howto.errors.count, "error")} prohibited this howto from being saved:"
+      ul
+        - @howto.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :title
+    = f.text_field :title
+  .field.bg-light.text-dark
+    = f.label :description
+    = f.rich_text_area :description
+  .field
+    = f.label :poz
+    = f.number_field :poz
+  .actions = f.submit

@@ -1,0 +1,33 @@
+p#notice = notice
+
+p
+  strong Game:
+  = @project.game
+
+p
+  strong Version:
+  = @project.version
+
+p
+  strong Vege:
+  = @project.vege
+
+p
+  strong Col:
+  = @project.col
+
+p
+  strong User:
+  = @project.user
+
+p
+  strong Copy:
+  = @project.copy
+
+p
+  strong Trans:
+  = @project.trans
+
+=> link_to "Edit", edit_project_path(@project)
+'|
+=< link_to "Back", projects_path

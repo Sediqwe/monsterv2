@@ -1,0 +1,9 @@
+p#notice = notice
+
+p
+  strong Name:
+  = @program.program_name
+
+=> link_to 'Edit', edit_program_path(@program)
+'|
+=< link_to 'Back', uploads_path

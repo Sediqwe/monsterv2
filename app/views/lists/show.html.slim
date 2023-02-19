@@ -1,0 +1,37 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @list.title
+
+p
+  strong Desc:
+  = @list.desc
+
+p
+  strong Active:
+  = @list.active
+
+p
+  strong List type:
+  = @list.list_type
+
+p
+  strong Link:
+  = @list.link
+
+p
+  strong Local:
+  = @list.local
+
+p
+  strong Ready:
+  = @list.ready
+
+p
+  strong Version:
+  = @list.version
+
+=> link_to "Edit", edit_list_path(@list)
+'|
+=< link_to "Back", lists_path

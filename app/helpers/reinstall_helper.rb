@@ -1,0 +1,2 @@
+module ReinstallHelper
+end

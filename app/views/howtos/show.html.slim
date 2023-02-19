@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong Title:
+  = @howto.title
+
+p
+  strong Description:
+  = @howto.description
+
+p
+  strong Poz:
+  = @howto.poz
+
+=> link_to "Edit", edit_howto_path(@howto)
+'|
+=< link_to "Back", howtos_path

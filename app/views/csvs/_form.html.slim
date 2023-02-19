@@ -1,0 +1,18 @@
+= form_for @csv do |f|
+  - if @csv.errors.any?
+    #error_explanation
+      h2 = "#{pluralize(@csv.errors.count, "error")} prohibited this csv from being saved:"
+      ul
+        - @csv.errors.full_messages.each do |message|
+          li = message
+
+  .field
+    = f.label :game_name
+    = f.text_field :game_name
+  .field
+    = f.label :game_version
+    = f.text_field :game_version
+  .field
+    = f.label :csv_file
+    = f.file_field :csv_file
+  .actions = f.submit

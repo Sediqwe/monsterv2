@@ -1,0 +1,24 @@
+h1 Listing forumas1
+
+table.table.table-hover.table-dark
+  thead
+    tr
+      th Title
+      th Desc
+   
+     
+  tbody
+    - @forumas.each do |foruma|
+      tr
+        td = foruma.title
+        td = foruma.desc
+        - if current_user.present?        
+          - if current_user.admin?       
+            td = link_to "Show", foruma
+            td = link_to "Edit", edit_foruma_path(foruma)
+            td = link_to "Destroy", foruma, data: {confirm: "Are you sure?"}, method: :delete
+
+br
+- if current_user.present?
+  -if current_user.admin?
+    = link_to "New Foruma", new_foruma_path(id: params[:id])

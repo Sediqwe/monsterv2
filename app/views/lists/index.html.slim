@@ -1,0 +1,83 @@
+h1 Gépi Magyarítások #Lista
+- if current_user.present?
+  - if current_user.admin?
+    = link_to "Új lista elem", new_list_path, class: "btn btn-success text-light"
+    br
+h3 List: #{@list_all.to_s + "(" + @list_controll.to_s + ")"}
+
+
+.container-fluid
+  /! A row-ra azért van szükség, mert ez töri be a colokat a megfelelő méretekben.
+  .row
+    .col-sm-6.mx-auto
+      /! Kereső felépítése
+      = search_form_for @q, class: " pl-3" do |f|
+        .search
+          .input-group.mb-3
+            = f.text_field :title_cont, placeholder: "Keresés a játékok között...", aria_label: "Recipient's username", aria_describedby: "basic-addon2",class: "form-control"
+            .input-group-append
+            = f.submit "Keresés",class: "btn btn-primary ml-2"
+= paginate @lists
+
+table.table.table-hover.table-dark.table-striped
+  thead
+    tr
+      th Név
+      th Helyi elérhetőség
+      th #Mega.NZ
+      th #Mega Name     
+      
+      - if current_user.present?
+        - if current_user.admin?
+          th Active
+          th List type
+          th Link
+          th Local
+          th Ready
+          th Version
+          th
+          th
+          th
+  tbody
+    - @lists.each_with_index do |list, ind|
+      -k = ""
+      tr 
+        td
+          h4 
+            = truncate(list.title, :length => 100, :separator => ' ')
+        - if current_user.present?
+          - if current_user.admin?
+            td  
+              - if current_user.present?
+                - if current_user.admin?
+                  = select("lista_", list.id, Game.all.order(:name).collect {|p| [ p.name, p.id ] } , {  include_blank: "- VÁLASSZ -", selected: list.link }, tabindex: ind)
+
+        
+        td 
+          -if list.link.to_s.length > 0
+            = link_to "Megnézem »", game_path(list.link), class:"btn btn-primary text-light"
+        td = link_to "Mega.NZ link »",list.desc, target: :_blank, class:"btn btn-primary text-light"
+        td = list.list_type
+        - if current_user.present?
+          - if current_user.admin?
+            td 
+              - uploads = Upload.where(game_id: list.link)
+              - uploads.each do |d|
+                - if d.game_files.filename.to_s.include?(list.title)
+                  font.text-success = d.game_files.filename
+                  - k = "bg-success"
+                - else
+                  font.text-warning = d.game_files.filename
+
+                br
+            td class="#{k}"
+                          
+            td = list.local            
+            td = list.version
+            td = link_to "Show", list
+            td = link_to "Edit", edit_list_path(list)
+            td = link_to "Destroy", list, data: {confirm: "Are you sure?"}, method: :delete
+
+
+= paginate @lists
+
