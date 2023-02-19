@@ -50,31 +50,5 @@
 
 
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-            .side
-                .side__header
-                    h5
-                        | Utolsó feltöltések:
-                -@upload.each do |t|
-                    .side__elements
-                        = link_to  game_path(t.game)
-                            .side__card
-                                p
-                                    =t.game.name
-                                    br
-                                    |(
-                                    =t.created_at.strftime("%Y-%m-%d %H:%M") 
-                                    |)
-                .side__header
-                    h5
-                        | Utolsó letöltések:
-                -@download.each do |t|
-                    .side__elements
-                        = link_to  game_path(t.game)
-                            .side__card
-                                p
-                                    =t.game.name
-                                    br
-                                    |(
-                                    =t.created_at.strftime("%Y-%m-%d %H:%M") 
-                                    |)                
+            = render 'shared/side'   
                 

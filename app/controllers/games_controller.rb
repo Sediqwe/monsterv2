@@ -62,7 +62,8 @@ class GamesController < ApplicationController
     @mega = Mega.where(game: @user.id)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
     @uzenetek = Uzenet.where(game_id: @user.id).order(id: :DESC)
-    
+    @upload = Upload.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(10)
   end
 
 

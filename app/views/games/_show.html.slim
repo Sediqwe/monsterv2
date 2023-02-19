@@ -1,0 +1,188 @@
+
+.container-fluid
+  .row
+    .col-xl-9.col-lg-7.col-md-12.col-sm-12.col-xs-12.mx-auto
+      /! datasheet egy fő konténer ami középre igazít mindent ami benne van
+      .datasheet
+        /! datasheet__headline ez a datasheet konténerben lévő headline
+        .datasheet__headline
+          h1 =@game.name
+          - if current_user.present?
+            - if current_user.admin?
+              -if @game.done != true
+                = link_to "Van KÉSZ Magy.hu", games_magyhu_path(id: @game.id, type: "van"), method: :post, class: "btn btn-success"
+              -else
+                = link_to "Nincs kész Magy.hu", games_magyhu_path(id: @game.id, type: "nincs"), method: :post, class: "btn btn-danger"
+        /! datasheet__image ez a képnek a tartója
+        .datasheet__image
+          
+          = image_tag @game.image, class: "img-fluid framed" if @game.image.attached?
+          
+        .row
+          .col-sm-12.col-md-8.col-xs-12.mx-auto
+            /! Ha plusz gomb lenne akkor a btn-holder-group tartalmazza
+            .btn-holder-group
+              - if @game.link_steam.present?
+                  = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
+              - if @game.link_epic.present?
+                = link_to " Epic »", @game.link_epic, target: "_blank" , class: "btn btn-secondary text-light"
+              - if @game.link_other.present?
+                = link_to " Egyéb »", @game.link_other, target: "_blank" , class: "btn btn-secondary text-light"
+              - if @game.link_hun.present?
+                = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
+        - if @game.done?
+          .row
+              .col-sm-12.col-md-8.col-xs-12.mx-auto
+                .personal-message
+                  
+                    
+                  .alert.alert-danger
+                    h3.mokus.btn.btn-block
+                      
+                    h3
+                      | A játékhoz elérhető kézzel készült fordítás is, kérlek látogass el ide:                  
+                      =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-secondary text-warning"
+                    h3.mokus.btn.btn-block
+        /! üzenetek oké tölthető ide még be kell majd másolni a mostani táblázatot
+        .datasheet__message
+          .row
+            .col-sm-12.col-md-8.col-xs-12.mx-auto
+              .personal-message
+                .alert.alert-info
+                  h5 Elfogadom, hogy ezek a fordítások GÉPPEL készültek. 
+                  
+                  h5 A fordítás tartalmazhat: félre fordításokat, angolul maradt szövegelemeket, erősen befolyásolhatják a játékélményt! 
+                  h5 Csak a készítő által megjelölt verzióra használható!
+                  a class="btn btn-primary" data-toggle="collapse" href="#collapseExample" role="button" aria-expanded="false" aria-controls="collapseExample"
+                    |Elfogadom »
+        .row 
+          .container-fluid
+            .col-sm-12.col-md-12.col-xs-12.mx-auto
+              .collapse id="collapseExample"
+                table class="table table-bordered table-dark text-light kicsitable shadow hidden"
+                  thead
+                    tr
+                      - if current_user.present?
+                        -if current_user.admin?
+                          th scope="col-1" #DB ID
+                      th scope="col-3" Letöltés
+                      th scope="col-1" Verzió
+                      th scope="col-1" Fordító
+                      th scope="col-1" Mérete
+                      th scope="col-1" Megjegyzés
+                      th scope="col-1" Letöltve
+                      
+                      - if current_user.present?
+                        -if current_user.admin?
+                          th scope="col-1" Megjelölés
+                  
+                  tbody
+                    -@game.uploads.order('created_at DESC').each do |t|
+                      tr class="#{ " bg-danger" if t.bad == true }"
+                        - if current_user.present?
+                          -if current_user.admin?
+                            td 
+                              =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info"
+                        td
+                          - if t.bad == false
+                            =link_to "Letöltés", rails_blob_path(t.game_files, disposition: :attachment) , id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-success  text-light"
+                        td = t.version 
+                        td = t.translater.translater_name
+                        
+                        td = number_to_human_size(t.game_files.byte_size) if t.game_files.present?
+                        td 
+                          span data-bs-toggle="tooltip" title="#{t.description}" style="cursor: progress;"
+                            = truncate(t.description, :length => 37, :separator => ' ')
+
+                        td 
+                          |Letöltve: 
+                          = Download.where(upload_id: t.id).size 
+                          |X
+                          br
+                          |Feltöltés dátuma: 
+                          br
+                          = t.created_at.strftime("%Y-%m-%d %H:%M")                    
+                        
+                        - if current_user.present?
+                            -if current_user.admin?
+                              td
+                                - if t.bad == false
+                                  =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn btn-danger  text-light" 
+                                - else
+                                  =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-success  text-light"
+                                = link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn m-1 btn-primary text-light"
+                    -@mega.each do |t|
+                      tr
+                        - if current_user.present?
+                          -if current_user.admin?
+                            td 
+                              =  link_to "Szerkesztés" , edit_mega_path(t.id), class: "btn btn-info"
+                        td 
+                          = link_to "Letöltés" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-success text-light"
+                        td = t.version 
+                        
+                        td 
+                          b Ez a fájl egy túlméretes(2GB+) file!! Fordító nem jelölt 
+                        td 
+                          - if File.exists?("file/" + t.link)
+                            = number_to_human_size(File.size("file/" + t.link))
+                        td 
+                          span data-bs-toggle="tooltip" title="" style="cursor: progress;"
+                            = t.title
+                        td 
+                          |Letöltve: 
+                          = t.szamlalo
+                          |X       
+                        
+                            
+                                     
+                        
+          
+            /! üzenetek van magyarítás
+          
+      /! szimpla vissza gomb
+      .row
+        .col-sm-12.col-md-9.col-xs-12.mx-auto
+          .btn-holder-group
+            - if current_user.present? 
+                  -if current_user.admin?
+                    => link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+            =< link_to '← Vissza', games_path, class: "btn btn-primary text-center text-light mr-1"
+            - if current_user.present? 
+              -if current_user.admin?
+                = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+    .col-xl-3.col-lg-5.col-md-12.col-sm-12.col-xs-12.mx-auto
+      .container
+        .row      
+          .col
+            form#algin-form
+              - if current_user.present?
+                .form-group
+                  h4 Hagyj üzenetet
+                  label for="message"  Üzenet
+                  textarea.form-control cols="30" id="uzenet" msg="" name="msg" rows="5" style=("background-color: black;") 
+                .form-group
+                  button.btn.btn-success.btn-block type="button" name="#{@game.id}" id="uzenet"  Beküld
+              -else
+                H3 Lépj be az üzenetküldéshez
+        .row
+          .col
+            h1 Üzenetek
+            - @uzenetek.each do |to|
+              .comment.mt-4.text-justify.float-left.col-12
+                - if to.user.alias.present?
+                  - if to.user.alias.length > 0
+                    h4 = to.user.alias
+                - else 
+                  h4 = to.user.name
+                span.pl-3 
+                  |Beküldve ekkor: 
+                  = time_ago_in_words(to.created_at)
+                br
+                br
+                h5 = to.desc
+                -if current_user.present?
+                  -if current_user.admin?
+                    = link_to "Töröl",  delete_uzenet_path(id: to.id), class:"btn btn-primary text-light"
+
+        
