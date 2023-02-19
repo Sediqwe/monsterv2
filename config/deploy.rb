@@ -1,8 +1,21 @@
 # config valid for current version and patch releases of Capistrano
 lock "~> 3.17.1"
 
-set :application, "my_app_name"
-set :repo_url, "git@example.com:me/my_repo.git"
+set :rbenv_type, :user
+set :rbenv_ruby, '3.0.0'
+set :stages, %w(production)
+set :default_stage, "production"
+
+set :application, "monsterv2"
+set :repo_url, "https://github.com/Sediqwe/monsterv2.git"
+set :branch, "main"
+set :deploy_to, "/var/www/monsterv2"
+set :keep_releases, 3
+set :migration_command, 'db:migrate'
+set :conditionally_migrate, true
+
+
+append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets" "public/system", "public/uploads", "storage" , "file"
 
 # Default branch is :master
 # ask :branch, `git rev-parse --abbrev-ref HEAD`.chomp
