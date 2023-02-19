@@ -9,13 +9,15 @@
                         span  
                             =number_game("")
                 -("A".."Z").each do |letter|
-                    a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-info  text-dark  " if letter. == params[:q][:name_start]}"
-                        -if params[:q]
+                    -if params[:q]
+                        a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-info  text-dark  " if letter. == params[:q][:name_start]}"
                             li 
                                 =letter
-                        - else
-                            li
+                    - else
+                        a href="games?q%5Bname_start%5D=#{letter}"
+                            li 
                                 =letter
+                        
                         
                 
                     
