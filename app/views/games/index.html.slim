@@ -10,7 +10,7 @@
                             =number_game("")
                 -("A".."Z").each do |letter|
                     -if params[:q]
-                        a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-info  text-dark  " if letter. == params[:q][:name_start]}"
+                        a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-light text-dark" if letter. == params[:q][:name_start]}"
                             li 
                                 =letter
                     - else
@@ -25,16 +25,7 @@
                 
             .step-filter
                 .step-filter__numbers
-                    a.step-filter__number[href=""]
-                        | 1
-                    a.step-filter__number[href=""]
-                        | 2
-                    a.step-filter__number[href=""]
-                        | 3
-                    a.step-filter__number[href=""]
-                        | Következő
-                    a.step-filter__number[href=""]
-                        | Utolsó
+                   = paginate @games
             .row
                 - @games.each do |game|
                     .col-xs-12.col-sm-6.col-md-6.col-lg-4
