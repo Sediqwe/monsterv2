@@ -1,0 +1,51 @@
+- @q = Game.ransack(params[:q])
+nav.navbar.navbar-expand-md.navbar-dark.bg-dark.fixed-top
+    a.navbar-brand href="/news"  G M 2022
+    button.navbar-toggler aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label=("Toggle navigation") data-target="#navbarsExampleDefault" data-toggle="collapse" type="button" 
+        span.navbar-toggler-icon
+    .collapse.navbar-collapse id="navbarsExampleDefault"
+        ul.navbar-nav.mr-auto
+            li class="nav-item #{(url_for(only_path: true)) == "/news" ? "bg-success" : "" }" 
+                = link_to " Hírek ", news_index_path , class: "nav-link text-light fas fa-home "
+            li class="nav-item #{(url_for(only_path: true)) == "/games" ? "bg-success" : "" }"
+                = link_to " Fordítások", games_path , class: "nav-link text-light fas  fa-language "
+            li class="nav-item #{(url_for(only_path: true)) == "/translaters" ? "bg-success" : "" }"
+                = link_to " Készítők", translaters_path , class: "nav-link text-light fas fa-info "
+            li class="nav-item #{(url_for(only_path: true)) == "/stat" ? "bg-success" : "" }" 
+                = link_to " Statisztika", stat_path , class: "nav-link text-light fas fa-chart-line "
+            li class="nav-item #{(url_for(only_path: true)) == "/howtos" ? "bg-success" : "" }"
+                        = link_to " Hogyan?", howtos_path , class: "nav-link text-light far fa-newspaper "
+            
+                        
+            -if current_user.present?
+                -if current_user.admin?
+                    li class="nav-item"
+                        = link_to " Feltöltés", uploads_path , class: "nav-link text-light fas fa-upload "
+                    li class="nav-item"
+                        = link_to " CSVS", beolvas_path , class: "nav-link text-light fas fa-upload "
+                    li class="nav-item"
+                        = link_to " Projects", projects_path , class: "nav-link text-light fas fa-upload "
+                    li class="nav-item #{(url_for(only_path: true)) == "/lists" ? "bg-success" : "" }"
+                        = link_to " Lista", lists_path , class: "nav-link text-light  fas fa-list"
+                    
+        - if current_user.present?
+            = link_to "Kilépés", login_signout_path() , class: "nav-link text-light fas fa-sign-out-alt"
+            .text-light.my-2.my-lg-0
+                =link_to edit_user_path(current_user) do |t|
+                    i.fas.fa-cog.fa-3x.text-light
+        - else
+            ul.navbar-nav
+                li.nav-item 
+                    = link_to " Belépés", login_signin_path() , class: "nav-link text-light fas fa-sign-in-alt "
+                li.nav-item 
+                    = link_to " Regisztráció", login_reg_path() , class: "nav-link text-light fas fa-plus "
+        = link_to " Discord", "https://discord.gg/avG3TAUwBK", target: :_blank, class: "nav-link text-light fab fa-discord"
+        = link_to " Facebook", "https://www.facebook.com/groups/2366748376888214", target: :_blank, class: "nav-link text-light fab fa-facebook"
+        li class="nav-item col-3" style="list-style: none;" 
+                = search_form_for @q, class:"FormPapa", url: games_path do |f|
+                        = f.text_field :name_cont, placeholder: "Gyors kereső...", class:" form-control"        
+        
+ 
+        
+                
+    

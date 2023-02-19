@@ -1,0 +1,87 @@
+<nav class="navbar navbar-expand-md navbar-dark bg-dark fixed-top">
+  <a class="navbar-brand" href="/news">G M 2022</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+
+  <div class="collapse navbar-collapse " id="navbarsExampleDefault">
+    <ul class="navbar-nav mr-auto">
+      <li class="nav-item <%= (url_for(only_path: true)) == "/" ? "bg-primary" : "" %> ">
+      
+      <%= link_to " Hírek ", news_index_path , class: "nav-link text-light fas fa-home " %>  
+      
+      </li>
+
+      <li class="nav-item <%= (url_for(only_path: true)) == "/games" ? "active" : "" %> ">
+
+      
+        <%= link_to " Fordítások", games_path , class: "nav-link text-light fas  fa-language " %>
+      </li>
+     
+      <% if current_user.present? %>
+        <% if current_user.admin? %>
+        <% end %>
+        <li class="nav-item <%= (url_for(only_path: true)) == "/" ? "bg-primary" : "" %> ">
+       <li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> "> 
+      
+        <%= link_to " Feltöltés", uploads_path , class: "nav-link fas fa-upload " %>
+      </li>
+        <% end %>
+      <% if current_user.present? %>
+      <%= link_to "Kilépés", login_signout_path() , class: "nav-link text-light fas fa-sign-out-alt" %>
+      <% else %>
+      <% end %>
+            <% if current_user.present? %>
+      <li class="nav-item <%= (url_for(only_path: true)) == "/" ? "bg-primary" : "" %> ">
+       <!--<li class="nav-item <%= (url_for(only_path: true)) == "/uploads" ? "active" : "" %> "> 
+      
+        <%= link_to " Feltöltés", uploads_path , class: "nav-link fas fa-upload " %>
+      </li>!-->
+      
+        
+      </li>
+      <% else %>
+
+      <li class="nav-item <%= (url_for(only_path: true)) == "/sessions/new" ? "active" : "" %> " >
+      <%= link_to " Belépés", login_signin_path() , class: "nav-link text-light fas fa-sign-in-alt " %>
+        
+      </li>
+      <li class="nav-item <%= (url_for(only_path: true)) == "/login/reg" ? "active" : "" %> ">
+        <%= link_to " Regisztráció", login_reg_path() , class: "nav-link text-light fas fa-plus " %>
+      </li>
+      <% end %>
+
+       <li class="nav-item <%= (url_for(only_path: true)) == "/translaters" ? "active" : "" %> ">
+
+      
+        <%= link_to " Készítők", translaters_path , class: "nav-link text-light fas fa-info " %>
+      </li>
+    <li class="nav-item <%= (url_for(only_path: true)) == "/forum" ? "active" : "" %> ">
+
+      
+        <%= link_to " Fórum", forum_path , class: "nav-link text-light fas fa-chart-line " %>
+      </li>
+
+       <li class="nav-item <%= (url_for(only_path: true)) == "/stat" ? "active" : "" %> ">
+
+      
+        <%= link_to " Statisztika", stat_path , class: "nav-link text-light fas fa-chart-line " %>
+      </li>
+      
+           <li class="nav-item <%= (url_for(only_path: true)) == "/list" ? "active" : "" %> ">
+            
+              <%= link_to " Lista", lists_path , class: "nav-link text-light  fas fa-list" %>
+           </li>
+         
+    </ul>
+    <% if current_user.present? %>
+    <div class=" text-light my-2 my-lg-0"">
+    <%=link_to edit_user_path(current_user) do %>
+      <i class="fas fa-cog fa-3x text-light"></i>
+    
+      <% end %>
+      <% end %>
+    </div>
+   
+  </div>
+</nav>

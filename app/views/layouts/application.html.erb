@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Monsterv2</title>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>  
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>  </head>
+
+  <body>
+    <%= render 'shared/menu' %>
+    <%= yield  %>
+    <%= render 'shared/footer' %>
+  </body>
+    <script>
+      const navbar = document.querySelector('.navbar')
+      navbar.querySelector('.toggle').addEventListener('click',()=>
+      {
+	    navbar.classList.toggle('collapsed')
+      })
+      window.addEventListener('scroll',(e)=>{
+	    let windowY = window.pageYOffset
+	    let navbarHeight = document.querySelector('.navbar').offsetHeight
+	    if(windowY>navbarHeight) navbar.classList.add('sticky')
+	    else navbar.classList.remove('sticky')
+      })   
+   </script>
+</html>
