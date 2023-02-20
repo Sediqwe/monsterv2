@@ -1,16 +1,18 @@
 .container-flex
-  
-  .col-xs-12.col-md-9.col-lg-10.bg-basic-color
-    .row
-      - @translaters.each do |t|
-        .col-sx-12.col-sm-3
-          .creator-card
-            = link_to translater_path(id: t)
-              .creator-card__img
-                = image_tag("ize/2.svg", class: "img-fluid")
-                
-              h4
-                = t.translater_name
+  .row 
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        - @translaters.each do |t|
+          .col-sx-12.col-sm-3
+            .creator-card
+              = link_to translater_path(id: t)
+                .creator-card__img
+                  = image_tag("ize/2.svg", class: "img-fluid")
+                  
+                h4
+                  = t.translater_name
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
       
 
 - if current_user.present?
