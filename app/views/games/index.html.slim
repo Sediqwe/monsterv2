@@ -1,4 +1,9 @@
 .container-fluid
+    .row 
+        .col 
+            - if current_user.present? 
+                -if current_user.admin? or current_user.moderator?
+                    = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light mb-3 ml-3"
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color
             ul.abc

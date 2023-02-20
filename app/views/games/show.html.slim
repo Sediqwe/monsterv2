@@ -1,5 +1,11 @@
 .row
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+        .row 
+            .col 
+                - if current_user.present? 
+                    -if current_user.admin?
+                        = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+                        = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
         .row
         .game-data
             .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
