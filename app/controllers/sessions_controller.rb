@@ -1,6 +1,7 @@
 class SessionsController < ApplicationController
   def new
-    
+    @upload = Upload.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(10)
   end
 
   def create
