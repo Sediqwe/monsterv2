@@ -6,14 +6,14 @@
           .form
             h1.form__headline
               | Bejelentkezés
-            = form_for :session , url: :sessions_create do |f|
+            = form_for :session, class: "form", url: :sessions_create do |f|
               = f.text_field :name,  class: "mb-2"
               br
               = f.password_field :password,  class: "mb-2"
-            button.btn.btn-primary.btn-block Belépek »
+              button.btn.btn-primary Belépek
             p.mt-2
               | vagy
-            =link_to "Regisztráció »", login_reg_path, class: "btn btn-primary"
+            =link_to "Regisztráció", login_reg_path, class: "btn btn-primary"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'
 

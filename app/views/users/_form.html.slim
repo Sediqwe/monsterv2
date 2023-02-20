@@ -54,5 +54,25 @@
           .form-group.aljas
             = select("translater_", @user.id, Translater.all.order(translater_name: :ASC).collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
       
-      button.btn.btn-primary Beküld » 
+      button.btn.btn-primary Beküld »
+  .container-fluid
+    .row
+      .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+        .row
+          .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+            .form
+              h1.form__headline
+                | Regisztráció
+              input.mb-2[type="text" name="" placeholder="Név"]
+              input.mb-2[type="text" name="" placeholder="Email"]
+              input.mb-2[type="text" name="" placeholder="Jelszó"]
+              input.mb-2[type="text" name="" placeholder="Jelszó újra"]
+              input.mb-2[type="text" name="" placeholder="Becenév"]
+              input#myFile.p-0.mb-2[type="file" name="filename"]
+              a.btn.btn-primary[href=""]
+                | Regisztrálok
+              p.mt-2
+                | vagy
+              a.btn.btn-primary[href=""]
+                | Belépek
  

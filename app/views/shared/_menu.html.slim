@@ -1,8 +1,9 @@
 .navbar
   .logo
     h2
-      | GM 2023
-    a.btn.btn-primary[href=""]
+     |G M 2023
+    
+    a.btn.btn-primary[href="/games"]
       | Támogatás »
   ul.links
     = search_form_for @q, class:"search", url: games_path do |f|

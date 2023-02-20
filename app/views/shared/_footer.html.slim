@@ -4,20 +4,15 @@
       h2
         | Elérhetőségek
     .footer__links
-      a[href=""]
-        | Discord
-      a[href=""]
-        | Facebook
+      = link_to " Discord", "https://discord.gg/avG3TAUwBK", target: :_blank
+      = link_to " Facebook", "https://www.facebook.com/groups/2366748376888214", target: :_blank
   .footer__other
     .footer__header
       h2
         | Egyéb
     .footer__links
-      a[href="creator.html"]
-        | Készítők
-      a[href="statistic.html"]
-        | Statisztika
-      a[href="howto.html"]
-        | Hogyan készül
+      = link_to " Készítők", translaters_path
+      = link_to " Statisztika", stat_path 
+      = link_to " Hogyan készül", howtos_path 
       a[href=""]
         | Támogatás

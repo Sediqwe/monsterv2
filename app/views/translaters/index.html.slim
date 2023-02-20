@@ -1,12 +1,17 @@
-
 .container-flex
-  h1 A fordításokat készítették:
-  - @translaters.each do |t|
-    a.text-light.border-animation(href="/translaters/#{t.id}")
-      .border-animation__inner
-        =t.translater_name
-        |»    
-    br
+  
+  .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+    .row
+      - @translaters.each do |t|
+        .col-sx-12.col-sm-3
+          .creator-card
+            = link_to translater_path(id: t)
+              .creator-card__img
+                = image_tag("ize/2.svg", class: "img-fluid")
+                
+              h4
+                = t.translater_name
+      
 
 - if current_user.present?
   - if current_user.admin?
