@@ -37,21 +37,38 @@
                     -@game.uploads.order('created_at DESC').each do |t|
                         .game-data__download-section__version
                         h6.game-data__headline
-                            | Lírás:
-                            span
-                            = t.description
-                        p
-                            | Készítette: 
-                            span
-                                = t.translater.translater_name
-                        p
-                            | verzió: 
-                            span
-                                = t.version 
-                        a.btn.btn-primary.mb-3[href=""]
-                            | Letöltés (
-                            = number_to_human_size(t.game_files.byte_size) if t.game_files.present?
-                            |) »
+                            
+                        
+                            
+                        
+                        .row
+                            .col-2
+                                - if t.bad == false
+                                    =link_to  rails_blob_path(t.game_files, disposition: :attachment) , id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3" do |to|
+                                        | Letöltés (
+                                        = number_to_human_size(t.game_files.byte_size) if t.game_files.present?
+                                        |) »
+                            .col-2 
+                                | Verzió: 
+                                span
+                                    = t.version
+                            .col-2 
+                                | Készítette: 
+                                span
+                                    = t.translater.translater_name 
+                            .col-2 
+                                |Letöltve: 
+                                = Download.where(upload_id: t.id).size 
+                                |X
+                            .col-2 
+                                - if t.description.length > 0
+                                    | Lírás:
+                                    span
+                                        = t.description
+                            .col-2
+                                |Feltöltés dátuma: 
+                                br
+                                = t.created_at.strftime("%Y-%m-%d %H:%M")  
                 .data
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
         = render'shared/side'
