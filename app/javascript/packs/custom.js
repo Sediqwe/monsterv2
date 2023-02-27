@@ -1,3 +1,7 @@
+$(document).on("turbo:load", () => {
+  console.log("turbo!");
+});
+console.log($)  // ok
 $(document).on('turbolinks:load', function() {
   
     $('#sidebarCollapse').on('click', function() {
