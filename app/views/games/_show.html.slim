@@ -85,6 +85,7 @@
                               =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info"
                         td
                           - if t.bad == false
+                            
                             =link_to "Letöltés", rails_blob_path(t.game_files, disposition: :attachment) , id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-success  text-light"
                         td = t.version 
                         td = t.translater.translater_name

@@ -44,7 +44,9 @@ class GamesController < ApplicationController
     @upload = Upload.order("created_at DESC").first(10)
     @uzenetek = Uzenet.all.order(id: :DESC).first(20)    
   end
-
+  def download_games
+    send_file(rails_blob_path(Upload.find(params[:id]), disposition: "attachment"))
+  end
   def magyhu
     @game = Game.find(params[:id])
     if params[:type] == "van"

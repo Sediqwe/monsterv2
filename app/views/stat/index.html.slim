@@ -19,10 +19,12 @@
                 .labels__element.labels__element--yellow
                     |  Letölthető fájlok: 
                     =@game_uploaded_file
-                .labels__element.labels__element--libafos
-                    |FreeSpace: 
-                    = number_to_human(FreeDiskSpace.gigabytes('/')) 
-                    |   GB
+                -if current_user.present?
+                    - if current_user.admin?
+                        .labels__element.labels__element--libafos
+                            |FreeSpace: 
+                            = number_to_human(FreeDiskSpace.gigabytes('/')) 
+                            |   GB
             .row
                 .col-xs-12.col-sm-4
                     h2.top-header
@@ -40,7 +42,7 @@
                         | TOP 10 letöltés
                     .top-download
                         - @toptiz.each do |top2|
-                            a[href=""]
+                            a[href="/#{top2.slug}"]
                                 h5
                                     = Game.find(top2[0]).name
                                 h5

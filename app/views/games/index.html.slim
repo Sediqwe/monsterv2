@@ -1,9 +1,17 @@
+
+
 .container-fluid
-    .row 
-        .col 
-            - if current_user.present? 
-                -if current_user.admin? or current_user.moderator?
-                    = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light mb-3 ml-3"
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+            div[data-controller="games"]
+                input[data-hello-target="name" type="text"]
+                button[data-action="click->games#greet"]
+                    |  Greet 
+                span[data-hello-target="output" class="bg-light"] 
+                    |sed2
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
+            - if current_user&.admin? 
+                = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light mb-3 ml-3"
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color
             ul.abc
