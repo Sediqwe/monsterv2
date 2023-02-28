@@ -28,7 +28,7 @@
             .row
                 .col-xs-12.col-sm-4
                     h2.top-header
-                        | TOP 10 letöltés
+                        | TOP 10 letöltése
                     .top-download
                         - @proba.each do |top|
                             a[href=""]
@@ -39,7 +39,7 @@
                         
                 .col-xs-12.col-sm-4
                     h2.top-header
-                        | TOP 10 letöltés
+                        | Utolsó 2 hét TOP 10 letöltése
                     .top-download
                         - @toptiz.each do |top2|
                             a[href="/#{top2.slug}"]
@@ -50,7 +50,7 @@
                        
                 .col-xs-12.col-sm-4
                     h2.top-header
-                        | TOP 10 letöltés
+                        | Utolsó 7 nap TOP 10 letöltése
                     .top-download
                         - @toptizhet.each do |top|
                             a[href=""]
