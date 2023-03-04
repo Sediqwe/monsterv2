@@ -6,6 +6,10 @@
                     -if current_user.admin?
                         = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
                         = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+                        -if @game.done != true
+                            = link_to "Van KÉSZ Magy.hu", games_magyhu_path(id: @game.id, type: "van"), method: :post, class: "btn btn-success"
+                        -else
+                            = link_to "Nincs kész Magy.hu", games_magyhu_path(id: @game.id, type: "nincs"), method: :post, class: "btn btn-danger"
         .row
         .game-data
             .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
@@ -13,6 +17,9 @@
                     =@game.name
                
                 = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img') if @game.image.attached?
+                -if @game.done
+                    .list-card__hun-text
+                        |  A játékhoz elérhető kézi fordítás 
                 - if @game.done
                     .green-box
                         h5
