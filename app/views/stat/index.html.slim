@@ -31,9 +31,12 @@
                         | TOP 10 letöltése
                     .top-download
                         - @proba.each do |top|
-                            a[href="/games/#{Game.find(top[0]).slug}"]
+                            a[href="/games/#{Game.find(Upload.find(top[0]).game_id).slug}"]
                                 h5
-                                    = Game.find(top[0]).name
+                                    = Game.find(Upload.find(top[0]).game_id).name
+                                    |(
+                                    = Upload.find(top[0]).version
+                                    |)
                                 h5
                                     = top[1]
                         
@@ -42,9 +45,12 @@
                         | Utolsó 2 hét TOP 10 letöltése
                     .top-download
                         - @toptiz.each do |top2|
-                            a[href="/games/#{Game.find(top2[0]).slug}"]
+                            a[href="/games/#{Game.find(Upload.find(top2[0]).game_id).slug}"]
                                 h5
-                                    = Game.find(top2[0]).name
+                                    = Game.find(Upload.find(top2[0]).game_id).name
+                                    |(
+                                    = Upload.find(top2[0]).version
+                                    |)
                                 h5
                                     = top2[1]
                        
@@ -53,9 +59,13 @@
                         | Utolsó 7 nap TOP 10 letöltése
                     .top-download
                         - @toptizhet.each do |top|
-                            a[href="/games/#{Game.find(top[0]).slug}"]
+                            a[href="/games/#{Game.find(Upload.find(top[0]).game_id).slug}"]
                                 h5
-                                    = Game.find(top[0]).name
+                                    = Game.find(Upload.find(top[0]).game_id).name
+                                    |(
+                                    = Upload.find(top[0]).version
+                                    |)
+
                                 h5
                                     = top[1]
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
