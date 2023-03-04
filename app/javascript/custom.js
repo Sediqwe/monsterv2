@@ -1,9 +1,4 @@
-$(document).on("turbo:load", () => {
-  console.log("turbo!");
-});
-console.log($)  // ok
-$(document).on('turbolinks:load', function() {
-  
+$(document).on('ready', function() {
     $('#sidebarCollapse').on('click', function() {
         $('#sidebar, #content').toggleClass('active');
       });
@@ -391,7 +386,6 @@ $(document).on('turbolinks:load', function() {
         }
       });
       $('#letoltes_gomb').on('click', function(){
-        alert();
         var adat = $(this).attr('datagame');
         var done = $(this).attr('done');
         $.ajax({

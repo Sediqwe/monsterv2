@@ -2,8 +2,6 @@
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
         .row 
             .col
-                div data-controller="games"
-                    h1 This is home page   
                 - if current_user.present? 
                     -if current_user.admin?
                         = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"

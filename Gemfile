@@ -4,12 +4,10 @@ ruby "3.2.1"
 gem "bootstrap"
 gem 'google-analytics-rails', '1.1.1'
 gem 'kaminari'
-gem "autocomplete-off"
 gem 'free_disk_space'
 gem 'friendly_id', '~> 5.4.0'
 gem 'slim-rails'
 gem "font-awesome-rails"
-gem 'jquery-turbolinks'
 gem "groupdate"
 gem 'pg'
 gem 'rubyzip'
