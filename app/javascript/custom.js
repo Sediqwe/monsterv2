@@ -385,7 +385,7 @@ $(document).on('ready', function() {
                 })
         }
       });
-      $('#letoltes_gomb').on('click', function(){
+      $('a[id^="letoltes_gomb"]').on('click', function(){
         var adat = $(this).attr('datagame');
         var done = $(this).attr('done');
         $.ajax({

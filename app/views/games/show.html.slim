@@ -39,8 +39,8 @@
                         h6.game-data__headline                            
                         .row
                             .col-lg-2.col-xs-12
-                                - if t.bad == false
-                                    =link_to  rails_blob_path(t.game_files, disposition: :attachment) , id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3" do |to|
+                                - if t.bad == false && t.game_files.attached?
+                                    =link_to  rails_blob_path(t.game_files, disposition: :attachment) , id: "letoltes_gomb_#{t.id}", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3" do |to|
                                         | Letöltés (
                                         = number_to_human_size(t.game_files.byte_size) if t.game_files.present?
                                         |) »

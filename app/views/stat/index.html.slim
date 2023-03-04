@@ -31,7 +31,7 @@
                         | TOP 10 letöltése
                     .top-download
                         - @proba.each do |top|
-                            a[href=""]
+                            a[href="#{Game.find(top[0]).slug}"]
                                 h5
                                     = Game.find(top[0]).name
                                 h5
@@ -42,7 +42,7 @@
                         | Utolsó 2 hét TOP 10 letöltése
                     .top-download
                         - @toptiz.each do |top2|
-                            a[href="/#{top2.slug}"]
+                            a[href="#{Game.find(top2[0]).slug}"]
                                 h5
                                     = Game.find(top2[0]).name
                                 h5
@@ -53,7 +53,7 @@
                         | Utolsó 7 nap TOP 10 letöltése
                     .top-download
                         - @toptizhet.each do |top|
-                            a[href=""]
+                            a[href="#{Game.find(top[0]).slug}"]
                                 h5
                                     = Game.find(top[0]).name
                                 h5

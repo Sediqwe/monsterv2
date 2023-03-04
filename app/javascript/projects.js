@@ -1,6 +1,4 @@
-$(document).on('ready', function() {
-    
-    
+$(document).on('ready', function() {   
     $('#project_oszlop').on('click', function(){
         var id = $(this).attr('data-id');
         var adat = $("#oszlop").val();
