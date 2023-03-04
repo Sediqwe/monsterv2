@@ -11,8 +11,8 @@
             .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
                 h1.game-data__header
                     =@game.name
-                = image_tag @game.image, class: "img-fluid game-data__img" if @game.image.attached?
-                
+               
+                = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img') if @game.image.attached?
                 - if @game.done
                     .green-box
                         h5

@@ -11,14 +11,14 @@
     li
       = link_to " Fordítások", games_path
     li
-      = link_to " Készítők", translaters_path
+      = link_to " Statisztika", stat_path
     - if !current_user
       li
         = link_to " Regisztráció", login_reg_path()
       
-      = link_to login_signin_path() do 
-        li
-          |Belépés
+      li
+        = link_to "Belépés", login_signin_path()
+          
 
     -else
       li
