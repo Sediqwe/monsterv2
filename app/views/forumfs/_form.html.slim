@@ -1,10 +1,11 @@
-= form_for @forumf do |f|
-  - if @forumf.errors.any?
+ - if @forumf.errors.any?
     #error_explanation
       h2 = "#{pluralize(@forumf.errors.count, "error")} prohibited this forumf from being saved:"
       ul
         - @forumf.errors.full_messages.each do |message|
           li = message
+= form_for @forumf do |f|
+ 
 
   .field
     = f.label :title

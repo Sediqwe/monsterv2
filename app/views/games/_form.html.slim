@@ -1,31 +1,41 @@
-= form_for @game do |f|
-  - if @game.errors.any?
-    #error_explanation.bg-dark
-      h2 = "#{pluralize(@game.errors.count, 'error')} prohibited this game from being saved:"
-      ul
-        - @game.errors.full_messages.each do |message|
-          li = message
-  .container-fluid
-    
-    .form-blocks
-      h2 Új játék adatlap
-      .form-group
-        = f.text_field :name, class: "form-control", placeholder: "Játék neve"
+
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
+          - if @game.errors.any?
       
-      .form-group
-        = f.text_field :link_steam, class: "form-control", placeholder: "Steam Link"
-      
-      .form-group
-        = f.text_field :link_epic, class: "form-control", placeholder: "Epic Link"
-    
-      .form-group
-        = f.text_field :link_other, class: "form-control", placeholder: "Egyéb ink" 
-    
-      .form-group
-        = f.text_field :link_hun, class: "form-control", placeholder: "Magyarítások.hu Link"
-      .form-group
-        label for="newGameCoverUpload"  Borítókép
-        = f.file_field :image
-    
-      button.btn.btn-primary Beküld »
+            h2 = "#{pluralize(@game.errors.count, "error")} hiba történt a mentés közben:"
+            ul
+              - @game.errors.full_messages.each do |message|
+                li = message
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+          .form
+            h1.form__headline
+              - if @game.persisted?
+                |  Adatlap módosítás
+              - else 
+                |  Új játék adatlap
+            
+            = form_for @game, html: {class: 'form'} do |f|  
+              = f.text_field :name, class: "mb-2", placeholder: "Játék neve"
+              = f.text_field :link_steam, class: "mb-2", placeholder: "Steam Link"
+              = f.text_field :link_epic, class: "mb-2", placeholder: "Epic Link"
+              = f.text_field :link_other, class: "mb-2", placeholder: "Egyéb Link" 
+              = f.text_field :link_hun, class: "mb-2", placeholder: "Magyarítások.hu Link"
+              p.text-start.mt-1
+                | Boritókép:
+              = f.file_field :image , class: "myFile p-0 mb-2"
+              br
+              - if @game.persisted?
+                = f.submit "Módosítás »" , class: "btn btn-primary"
+              - else 
+                = f.submit "Felvétel »" , class: "btn btn-primary"
+              
+              
+              
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
 

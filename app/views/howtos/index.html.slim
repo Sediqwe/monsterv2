@@ -2,7 +2,7 @@
   - if current_user&.admin? 
     .row
       .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
-        h1 Hogyan készítsek játék fordítást?
+        h1.text-light Hogyan készítsek játék fordítást?
         - if current_user.present?
           -if current_user.admin?
             = link_to "Új cikk", new_howto_path, class: "btn btn-success text-light"

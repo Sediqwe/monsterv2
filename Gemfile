@@ -15,6 +15,7 @@ gem 'zip-zip' # will load compatibility for old rubyzip API.
 gem 'ransack'
 gem 'jquery-rails'
 gem 'active_storage_validations'
+
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 

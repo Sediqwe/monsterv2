@@ -23,38 +23,16 @@ class GamesController < ApplicationController
     @uzenetek = Uzenet.all.order(id: :DESC).first(20)
   
   end
-  def index2
-    @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
-    @q = Game.ransack(params[:q])
-    
-    if params[:page_n].present?
-      number = params[:page_n]
-      session[:page_n] = number
-      if number>"30"
-        session[:page_n] = "30"
-      end
-      
-    else
-      if session[:page_n].nil?
-        session[:page_n] = "30"
-      end
-    end
-    @games = @q.result(distinct: true).order('created_at DESC').page(params[:page]).per(session[:page_n])
-    @download = Download.order("created_at DESC").first(10)
-    @upload = Upload.order("created_at DESC").first(10)
-    @uzenetek = Uzenet.all.order(id: :DESC).first(20)    
-  end
-  def download_games
-    send_file(rails_blob_path(Upload.find(params[:id]), disposition: "attachment"))
-  end
   def magyhu
-    @game = Game.find(params[:id])
+    game = Game.find(params[:id])
+    upd = game.updated_at
     if params[:type] == "van"
-      @game.done = true
+      game.done = true
     else
-     @game.done=false  
+     game.done=false  
     end
-      @game.save
+    game.save
+    game.update(updated_at: upd)
   end
 
 
@@ -71,15 +49,20 @@ class GamesController < ApplicationController
 
   def new
     @game = Game.new
+    @download = Download.order("created_at DESC").first(10)
+    @upload = Upload.order("created_at DESC").first(10)
   end
 
 
   def edit
-    
+    @download = Download.order("created_at DESC").first(10)
+    @upload = Upload.order("created_at DESC").first(10)
   end
 
   
   def create
+    @upload = Upload.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(10)
     @game = Game.new(game_params)
     @game.user_id = current_user.id
     respond_to do |format|
