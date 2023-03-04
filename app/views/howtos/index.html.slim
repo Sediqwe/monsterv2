@@ -1,37 +1,29 @@
-.container-flex
-  h1 Hogyan készítsek játék fordítást?
-  - if current_user.present?
-    -if current_user.admin?
-      = link_to "Új cikk", new_howto_path, class: "btn btn-success text-light"
-
-  .container2
-    - @howtos.each do |howto|
-      article.episode
-        .col-2
-          .episode__number
-            br
-            br
-            br
-            br
-            br
-            br
-            br
-            br
-            br
-            br
-            =  howto.poz
-        .col-10
-          .episode__content
-          .title
-            = howto.title
-          .story.bg-dark.shadow.round.trix-content
-            = howto.description.to_s.html_safe
-      
-            - if current_user.present?
-              - if current_user.admin?
-                br
-                = link_to "Megnéz", howto , class: "btn btn-success text-light mr-2"
-                = link_to "Módosít", edit_howto_path(howto), class: "btn btn-success text-light mr-2"
-                = link_to "Töröl", howto, data: {confirm: "Tuti?"}, method: :delete, class: "btn btn-danger text-light mr-2"
-
+.container-fluid
+  - if current_user&.admin? 
+    .row
+      .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
+        h1 Hogyan készítsek játék fordítást?
+        - if current_user.present?
+          -if current_user.admin?
+            = link_to "Új cikk", new_howto_path, class: "btn btn-success text-light"
+  .row
     
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      - @howtos.each do |howto|
+        .container-fluid
+          .row
+            .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+              h1.how-to-headline
+                = howto.title
+              ul.how-to-text
+                = howto.description.to_s.html_safe
+                
+                - if current_user.present?
+                  - if current_user.admin?
+                    br
+                    = link_to "Megnéz", howto , class: "btn btn-success text-light mr-2"
+                    = link_to "Módosít", edit_howto_path(howto), class: "btn btn-success text-light mr-2"
+                    = link_to "Töröl", howto, data: {confirm: "Tuti?"}, method: :delete, class: "btn btn-danger text-light mr-2"
+            
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side'   

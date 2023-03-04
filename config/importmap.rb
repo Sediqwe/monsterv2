@@ -10,3 +10,5 @@ pin "jquery_ujs", to: "jquery_ujs.js", preload: true
 pin "bootstrap", to: 'bootstrap.min.js', preload: true
 pin "custom", to: 'custom.js', preload: true
 pin "projects", to: 'projects.js', preload: true
+pin "trix"
+pin "@rails/actiontext", to: "actiontext.js"
