@@ -14,7 +14,10 @@
           .row
             .col-xs-12.col-md-9.col-lg-10.bg-basic-color
               h1.how-to-headline
+                |#
+                = howto.poz 
                 = howto.title
+                
               ul.how-to-text
                 = howto.description.to_s.html_safe
                 

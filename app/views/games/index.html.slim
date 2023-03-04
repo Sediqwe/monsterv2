@@ -34,9 +34,9 @@
                                     .list-card__label
                                         |  PC
                                     =image_tag(game.image.variant(resize_to_limit: [473, 271]), class: 'img-fluid') if game.image.attached?
-                                        -if game.done
-                                            .list-card__hun-text
-                                                |  A játékhoz elérhető kézi fordítás 
+                                    -if game.done
+                                        .list-card__hun-text
+                                            |  A játékhoz elérhető kézi fordítás 
                                 .list-card__text
                                     h6
                                         = game.name 
