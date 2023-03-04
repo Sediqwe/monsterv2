@@ -17,7 +17,7 @@ class GamesController < ApplicationController
         session[:page_n] = "30"
       end
     end
-    @games = @q.result(distinct: true).order('updated_at DESC').page(params[:page]).per(3)
+    @games = @q.result(distinct: true).order('updated_at DESC').page(params[:page]).per(session[:page_n])
     @download = Download.order("created_at DESC").first(10)
     @upload = Upload.order("created_at DESC").first(10)
     @uzenetek = Uzenet.all.order(id: :DESC).first(20)
