@@ -29,7 +29,9 @@
                - @games.each do |game|
                     -cache game do
                         = render game
-                    
+            step-filter
+                .step-filter__numbers
+                   = paginate @games       
 
 
 

@@ -20,7 +20,10 @@
             = link_to  game_path(t.game)
                 .side__card
                     p
-                        =t.game.name
+                        =t.game.name 
+                        |  (
+                        = statisztika(t.game.id,t.id)
+                        |.letöltés)
                         br
                         |(
                         =t.created_at.strftime("%Y-%m-%d %H:%M") 
