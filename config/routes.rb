@@ -12,6 +12,7 @@ Rails.application.routes.draw do
   resources :databeolvas, to: 'beolvas#soronkent'
   get "kozelito", to: "beolvas#kozelito"
   get 'reinstall/index'
+  get 'reinstall/game_up'
   get "file_process", to: "beolvas#file_process"
   get "file_process_new", to: "beolvas#file_process_new"
   get "igezo", to: "beolvas#igezo"

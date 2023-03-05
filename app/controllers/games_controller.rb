@@ -17,7 +17,7 @@ class GamesController < ApplicationController
         session[:page_n] = "30"
       end
     end
-    @games = @q.result(distinct: true).order('updated_at DESC').page(params[:page]).per(session[:page_n])
+    @games = @q.result(distinct: true).order('uploaded_at DESC').page(params[:page]).per(session[:page_n])
     @download = Download.order("created_at DESC").first(10)
     @upload = Upload.order("created_at DESC").first(5)
     @uzenetek = Uzenet.all.order(id: :DESC).first(20)
@@ -32,7 +32,7 @@ class GamesController < ApplicationController
      game.done=false  
     end
     game.save
-    game.update(updated_at: upd)
+
   end
 
 
@@ -84,7 +84,6 @@ class GamesController < ApplicationController
     respond_to do |format|
       record_activity("Játék módosítva - Előtte: #{@game.name}")
       if @game.update(game_params)
-        @game.update(updated_at: upd)
         record_activity("Játék módosítva - Utána: #{@game.name}")
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }        
       else

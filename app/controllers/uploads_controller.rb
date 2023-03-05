@@ -61,7 +61,7 @@ class UploadsController < ApplicationController
     @upload.name = Game.find(@upload.game_id).name
     @upload.bad = false
     upd = Game.find(@upload.game_id)
-    upd.updated_at = DateTime.now
+    upd.uploaded_at = DateTime.now
     upd.save
     respond_to do |format|
       if @upload.save
