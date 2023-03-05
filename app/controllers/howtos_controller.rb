@@ -4,7 +4,7 @@ class HowtosController < ApplicationController
   # GET /howtos or /howtos.json
   def index
     @howtos = Howto.all.order(poz: :ASC)
-    @download = Download.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(5)
     @upload = Upload.order("created_at DESC").first(10)
   end
 

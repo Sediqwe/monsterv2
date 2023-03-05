@@ -19,7 +19,7 @@ class GamesController < ApplicationController
     end
     @games = @q.result(distinct: true).order('updated_at DESC').page(params[:page]).per(session[:page_n])
     @download = Download.order("created_at DESC").first(10)
-    @upload = Upload.order("created_at DESC").first(10)
+    @upload = Upload.order("created_at DESC").first(5)
     @uzenetek = Uzenet.all.order(id: :DESC).first(20)
   
   end
@@ -42,26 +42,26 @@ class GamesController < ApplicationController
     @mega = Mega.where(game: @user.id)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
     @uzenetek = Uzenet.where(game_id: @user.id).order(id: :DESC)
-    @upload = Upload.order("created_at DESC").first(10)
+    @upload = Upload.order("created_at DESC").first(5)
     @download = Download.order("created_at DESC").first(10)
   end
 
 
   def new
     @game = Game.new
-    @download = Download.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(5)
     @upload = Upload.order("created_at DESC").first(10)
   end
 
 
   def edit
-    @download = Download.order("created_at DESC").first(10)
+    @download = Download.order("created_at DESC").first(5)
     @upload = Upload.order("created_at DESC").first(10)
   end
 
   
   def create
-    @upload = Upload.order("created_at DESC").first(10)
+    @upload = Upload.order("created_at DESC").first(5)
     @download = Download.order("created_at DESC").first(10)
     @game = Game.new(game_params)
     @game.user_id = current_user.id

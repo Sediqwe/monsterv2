@@ -449,7 +449,7 @@ textarea {
 }
 
 .side .side__header {
-    margin-top: 20px;
+    margin-top: 5px;
 }
 
 .side .side__elements a {
@@ -458,13 +458,27 @@ textarea {
 
 .side .side__card {
     background-color: #252525;
-    border-radius: 10px;
-    padding: 10px;
+    border-radius: 5px;
+    padding: 5px;
     text-align: center;
     color: white;
-    margin-top: 10px;
+    margin-top: 5px;
 }
-
+.side .side__card_two {
+    background-color: #0E717E;
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
+.side .side__card_two p {
+    margin-bottom: 0;
+}
+.side .side__elements a:hover .side__card_two {
+    background-color: #252525;
+    transition: 0.2s;
+}
 .side .side__card p {
     margin-bottom: 0;
 }
