@@ -7,7 +7,14 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-     <script>
+     
+    </head>
+  <body>
+    <%= render 'shared/menu' %>
+    <%= yield  %>
+    <%= render 'shared/footer' %>
+  </body>
+   <script>
       const navbar = document.querySelector('.navbar')
       navbar.querySelector('.toggle').addEventListener('click',()=>
       {
@@ -20,11 +27,4 @@
 	    else navbar.classList.remove('sticky')
       })   
    </script>
-    </head>
-  <body>
-    <%= render 'shared/menu' %>
-    <%= yield  %>
-    <%= render 'shared/footer' %>
-  </body>
-   
 </html>
