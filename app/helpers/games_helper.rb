@@ -6,6 +6,4 @@ module GamesHelper
     def Rebase
       
     end
-    
-
 end

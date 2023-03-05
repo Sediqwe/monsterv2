@@ -9,4 +9,7 @@ module ApplicationHelper
         doc.to_html.html_safe
     end
     @meta_title = "Gépi fordítások"
+    def statisztika(game,upload_id)
+
+    end
 end

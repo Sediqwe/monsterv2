@@ -1,15 +1,10 @@
 .container-fluid
-  - if current_user&.admin? 
-    .row
-      .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
-        h1.text-light Hogyan készítsek játék fordítást?
-        - if current_user.present?
-          -if current_user.admin?
-            = link_to "Új cikk", new_howto_path, class: "btn btn-success text-light"
   .row
-    
+    - if current_user&.admin? 
+      
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
       - @howtos.each do |howto|
+        
         .container-fluid
           .row
             .col-xs-12.col-md-9.col-lg-10.bg-basic-color
@@ -27,6 +22,6 @@
                     = link_to "Megnéz", howto , class: "btn btn-success text-light mr-2"
                     = link_to "Módosít", edit_howto_path(howto), class: "btn btn-success text-light mr-2"
                     = link_to "Töröl", howto, data: {confirm: "Tuti?"}, method: :delete, class: "btn btn-danger text-light mr-2"
-            
+          hr.text-light     
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render 'shared/side'   
