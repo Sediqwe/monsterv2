@@ -11,7 +11,7 @@ module ApplicationHelper
     @meta_title = "Gépi fordítások"
     def statisztika(game,upload_id)
         datum = Download.find(upload_id).created_at
-        re = Download.where(game_id: game).where("created_at < ?", datum).size
+        re = Download.where(game_id: game).where("created_at < ?", datum).size + 1
         #SalesReport.where(date: SalesReport.select('MAX(date)'))
     end
 end
