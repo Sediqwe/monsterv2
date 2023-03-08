@@ -14,4 +14,6 @@ module ApplicationHelper
         re = Download.where(game_id: game).where("created_at < ?", datum).size + 1
         #SalesReport.where(date: SalesReport.select('MAX(date)'))
     end
+    
+    
 end

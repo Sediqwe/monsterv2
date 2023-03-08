@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'openai/index'
   get 'magyhu/index'
   get 'magyhu/beolvas'
   get 'search/kereses'

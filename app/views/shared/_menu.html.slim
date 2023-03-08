@@ -8,6 +8,9 @@
   ul.links
     = search_form_for @q, class:"search", url: games_path do |f|
       = f.text_field :name_cont, placeholder: "Gyors kereső..."
+    - if current_user&.admin?
+      li
+        = link_to " Projects", projects_path
     li
       = link_to " Fordítások", games_path
     li

@@ -9,3 +9,4 @@ import "custom"
 import "projects"
 import "trix"
 import "@rails/actiontext"
+
