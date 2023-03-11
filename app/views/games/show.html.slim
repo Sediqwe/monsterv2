@@ -44,7 +44,7 @@
                 .game-data__download-section
                     -@game.uploads.order('created_at DESC').each do |t|
                         .game-data__download-section__version
-                        h6.game-data__headline                            
+                            h6.game-data__headline                            
                         .row
                             .col-lg-2.col-xs-12
                                 - if t.bad == false && t.game_files.attached?
@@ -52,6 +52,34 @@
                                         | Letöltés (
                                         = number_to_human_size(t.game_files.byte_size) if t.game_files.present?
                                         |) »
+                            .col-lg-2.col-xs-12 
+                                | Verzió: 
+                                span
+                                    = t.version
+                            .col-lg-2.col-xs-12 
+                                | Készítette: 
+                                span
+                                    = t.translater.translater_name 
+                            .col-lg-2.col-xs-12 
+                                |Letöltve: 
+                                = Download.where(upload_id: t.id).size 
+                                |X
+                            .col-lg-2.col-xs-12
+                                - if t.description.length > 0
+                                    | Lírás:
+                                    span
+                                        = t.description
+                            .col-lg-2.col-xs-12
+                                |Feltöltés dátuma: 
+                                br
+                                = t.created_at.strftime("%Y-%m-%d %H:%M")
+                .game-data__download-section
+                    -@mega.each do |t|
+                        .game-data__download-section__version
+                            h6.game-data__headline                            
+                        .row
+                            .col-lg-2.col-xs-12
+                                 = link_to "Letöltés" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-primary mb-3"
                             .col-lg-2.col-xs-12 
                                 | Verzió: 
                                 span
