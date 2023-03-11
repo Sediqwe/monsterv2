@@ -81,7 +81,7 @@
                             .col-lg-2.col-xs-12
                                 - if File.exists?("file/" + t.link)
                                     - meret = number_to_human_size(File.size("file/" + t.link))
-                                 = link_to "Letöltés (#{meret})" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-primary mb-3"
+                                = link_to "Letöltés (#{meret})" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-primary mb-3"
                             .col-lg-2.col-xs-12 
                                 | Verzió: 
                                 span
