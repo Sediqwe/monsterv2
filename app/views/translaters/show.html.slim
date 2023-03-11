@@ -5,7 +5,7 @@
         = @translater.translater_name
       h2
         |Utolsó 10 fordítása:
-        - Upload.where(translater_id: @translater).last(10).each do |t|
+        - Upload.where(translater_id: @translater).order(id: :DESC).first(10).each do |t|
           = t.name 
           br
       - if @translater.user.present?
