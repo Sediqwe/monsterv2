@@ -113,6 +113,7 @@ GEM
       xpath (~> 3.2)
     concurrent-ruby (1.2.2)
     crass (1.0.6)
+    csv (3.2.6)
     date (3.3.3)
     date (3.3.3-java)
     debug (1.7.1)
@@ -262,7 +263,7 @@ GEM
     slim (5.1.0)
       temple (~> 0.10.0)
       tilt (>= 2.0.6, < 2.2)
-    slim-rails (3.6.1)
+    slim-rails (3.6.2)
       actionpack (>= 3.1)
       railties (>= 3.1)
       slim (>= 3.0, < 6.0, != 5.0.0)
@@ -333,6 +334,7 @@ DEPENDENCIES
   capistrano-rails
   capistrano-rbenv
   capybara
+  csv
   debug
   font-awesome-rails
   free_disk_space
