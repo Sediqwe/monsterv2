@@ -12,3 +12,5 @@ pin "custom", to: 'custom.js', preload: true
 pin "projects", to: 'projects.js', preload: true
 pin "trix"
 pin "@rails/actiontext", to: "actiontext.js"
+pin "chartkick", to: "chartkick.js"
+pin "Chart.bundle", to: "Chart.bundle.js"

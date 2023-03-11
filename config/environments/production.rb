@@ -11,7 +11,6 @@ Rails.application.configure do
   }
   config.hosts << "gep.monster"
   config.hosts << "paradoxmagyarorszag.hu"
-  
   GA.tracker = "G-5Y9BZL1H1F"
 
 

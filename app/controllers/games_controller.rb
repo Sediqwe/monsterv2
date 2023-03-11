@@ -35,7 +35,7 @@ class GamesController < ApplicationController
 
 
   def show
-    
+    Game.default_timezone = :utc
     @user = Game.friendly.find(params[:id])
     @mega = Mega.where(game: @user.id)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
