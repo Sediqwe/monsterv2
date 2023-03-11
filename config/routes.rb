@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   get 'openai/index'
+  get 'regexp', to: 'games#regexp'
   get 'magyhu/index'
   get 'magyhu/beolvas'
   get 'search/kereses'

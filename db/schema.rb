@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_05_205054) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_10_212048) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -219,6 +219,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_205054) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lemurs", force: :cascade do |t|
+    t.string "str"
+    t.bigint "project_id", null: false
+    t.integer "line"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_lemurs_on_project_id"
+  end
+
   create_table "lists", force: :cascade do |t|
     t.string "title"
     t.string "desc"
@@ -405,6 +414,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_05_205054) do
   add_foreign_key "forumas", "forumfs"
   add_foreign_key "forumas", "users"
   add_foreign_key "games", "users"
+  add_foreign_key "lemurs", "projects"
   add_foreign_key "messages", "users"
   add_foreign_key "news", "users"
   add_foreign_key "projects", "users"
