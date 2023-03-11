@@ -4,6 +4,8 @@ class ApplicationController < ActionController::Base
     before_action :set_search
 def set_search
   @q = Game.ransack(params[:q])
+  @download = Download.order("created_at DESC").first(10)
+  @upload = Upload.order("created_at DESC").first(5)
   end
 #def default_url_options
   #{ host: ENV["DOMAIN"] || "https://gep.monster" }

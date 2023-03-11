@@ -16,7 +16,7 @@
  @import "bootstrap";
  @import "actiontext";
 
- html {
+html {
     scroll-behavior: smooth;
 }
 
@@ -70,6 +70,7 @@ textarea {
 .navbar .logo {
     cursor: pointer;
     display: -webkit-inline-box;
+    text-decoration: none;
 }
 
 .navbar .logo h2 {

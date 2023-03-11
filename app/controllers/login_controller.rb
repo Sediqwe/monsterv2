@@ -1,12 +1,10 @@
 class LoginController < ApplicationController
   def signin
-    @upload = Upload.order("created_at DESC").first(5)
-    @download = Download.order("created_at DESC").first(10)
+    
   end
   
   def create
-    @upload = Upload.order("created_at DESC").first(5)
-    @download = Download.order("created_at DESC").first(10)
+  
     @user = User.create(user_params)
     if @user.save
      redirect_to :sessions_new
@@ -22,8 +20,7 @@ class LoginController < ApplicationController
   end
 
   def reg
-    @upload = Upload.order("created_at DESC").first(5)
-    @download = Download.order("created_at DESC").first(10)
+    
     @user = User.new
   end
 
