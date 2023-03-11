@@ -1,8 +1,13 @@
 .container-fluid
   .row
-    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
       h1.creator-data-name
         = @translater.translater_name
+      h2
+        |Utolsó 10 fordítása:
+        - Upload.where(translater_id: @translater).last(10).each do |t|
+          = t.name 
+          br
       - if @translater.user.present?
         .row
           .col-xs-12.col-sm-12.col-md-3
@@ -16,17 +21,8 @@
               h2
                 | Bemutatkozás
               p
-                
-                  - if @translater.user.desc.present?
-                    = @translater.user.desc
-              p
-                | Hobbi: Programozás
-              p
-                | Kedvenc játék: Doom
-              p
-                | Kedvenc étel: Spagetti
-              p
-                | FunFact: Kávé nélkül nincs élet, viszont élet nélkül nincs kávé
+                - if @translater.user.desc.present?
+                  = @translater.user.desc
               - if @translater.user.tam1.present?
                 |Támogatásod megteheted STEAM játék küldéssel:
                   br
