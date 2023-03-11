@@ -25,8 +25,12 @@
                     p
                     | Letöltésemmel elfogadom, hogy ezek a fordítások GÉPPEL készültek. A fordítás tartalmazhat: félre fordításokat, angolul maradt szövegelemeket, erősen befolyásolhatják a játékélményt! Csak a készítő által megjelölt verzióra használható!
                 h4.game-data__headline
+                    |Letöltési statisztika
+                .text-light
+                    = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 30).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
+                h4.game-data__headline
                     | Játék linkek:
-                = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 30).count , title: "Utolsó 30 nap letöltése:", library: {backgroundColor: "#fff"}, download: {background: "#fff"}
+                
                 .gme-data__buy-game
                     - if @game.link_steam.present?
                     = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"

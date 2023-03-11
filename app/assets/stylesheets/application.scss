@@ -16,6 +16,10 @@
  @import "bootstrap";
  @import "actiontext";
 
+.orulet{
+    background-color: var(--bs-cyan);
+    border-radius: 10px;
+} 
 html {
     scroll-behavior: smooth;
 }
