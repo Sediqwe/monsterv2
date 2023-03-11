@@ -3,11 +3,7 @@
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
       h1.creator-data-name
         = @translater.translater_name
-      h2
-        |Utolsó 10 fordítása:
-        - Upload.where(translater_id: @translater).order(id: :DESC).first(10).each do |t|
-          = t.name 
-          br
+      
       - if @translater.user.present?
         .row
           .col-xs-12.col-sm-12.col-md-3
@@ -27,6 +23,12 @@
                 |Támogatásod megteheted STEAM játék küldéssel:
                   br
                 = @translater.user.tam1
+      h2
+        |Utolsó 10 fordítása:
+        br
+        - Upload.where(translater_id: @translater).order(id: :DESC).first(10).each do |t|
+          = t.name 
+          br
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render 'shared/side' 
