@@ -1,5 +1,5 @@
 class StatController < ApplicationController
-  impressionist :actions=>[:index]
+  
   def index
       Download.default_timezone = :utc
       @users = User.all.count
@@ -11,7 +11,5 @@ class StatController < ApplicationController
       @proba = Download.all.group(:upload_id).order('count_id DESC').limit(10).count('id')      
       @toptiz = Download.where("date(created_at) > ?", 14.days.ago.to_date).group(:upload_id).order('count_id DESC').limit(10).count('id') 
       @toptizhet = Download.where("date(created_at) > ?", 7.days.ago.to_date).group(:upload_id).order('count_id DESC').limit(10).count('id') 
-      @download = Download.order("created_at DESC").first(10)
-      @upload = Upload.order("created_at DESC").first(10)
   end
 end

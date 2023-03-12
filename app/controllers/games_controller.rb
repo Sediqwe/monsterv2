@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
   before_action :authorized?, only: %i[new edit update destroy]
-  impressionist :actions=>[:show,:index]
+ 
   
   def index
     @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."

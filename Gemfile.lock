@@ -143,8 +143,6 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
-    impressionist (2.0.0)
-      nokogiri (~> 1)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -347,7 +345,6 @@ DEPENDENCIES
   groupdate
   image_processing (~> 1.2)
   importmap-rails
-  impressionist
   jbuilder
   jquery-rails
   kaminari
