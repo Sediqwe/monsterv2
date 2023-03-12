@@ -1,4 +1,5 @@
 class StatController < ApplicationController
+  impressionist :actions=>[:index]
   def index
       @users = User.all.count
       @adminok = User.where(admin: [true]).count

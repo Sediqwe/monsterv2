@@ -1,5 +1,6 @@
 class HowtosController < ApplicationController
   before_action :set_howto, only: %i[ show edit update destroy ]
+  impressionist :actions=>[:show,:index]
 
   # GET /howtos or /howtos.json
   def index

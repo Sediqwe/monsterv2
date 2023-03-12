@@ -143,6 +143,8 @@ GEM
     importmap-rails (1.1.5)
       actionpack (>= 6.0.0)
       railties (>= 6.0.0)
+    impressionist (2.0.0)
+      nokogiri (~> 1)
     jbuilder (2.11.5)
       actionview (>= 5.0.0)
       activesupport (>= 5.0.0)
@@ -191,7 +193,7 @@ GEM
       net-ssh (>= 2.6.5, < 8.0.0)
     net-smtp (0.3.3)
       net-protocol
-    net-ssh (7.0.1)
+    net-ssh (7.1.0)
     nio4r (2.5.8)
     nio4r (2.5.8-java)
     nokogiri (1.14.2)
@@ -345,6 +347,7 @@ DEPENDENCIES
   groupdate
   image_processing (~> 1.2)
   importmap-rails
+  impressionist
   jbuilder
   jquery-rails
   kaminari
