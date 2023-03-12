@@ -68,5 +68,10 @@
 
                                 h5
                                     = top[1]
+            .row
+                .col-xs-12.col-sm-12.bg-secondary
+                    = line_chart Download.group_by_day(:created_at, last: 100).count , title: "Utolsó 100 nap letöltései:",  colors: ["white", "white"],library: {backgroundColor: "#eee"} , download: {background: "#ffffff"}
+            br
+            br
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
             = render'shared/side'
