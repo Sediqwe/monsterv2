@@ -1,6 +1,7 @@
 class StatController < ApplicationController
   impressionist :actions=>[:index]
   def index
+      Download.default_timezone = :utc
       @users = User.all.count
       @adminok = User.where(admin: [true]).count
       @downloads = Download.all.count 
