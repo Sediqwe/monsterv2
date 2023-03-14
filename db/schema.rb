@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_12_102925) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_12_200435) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -346,6 +346,15 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_102925) do
     t.index ["user_id"], name: "index_projects_on_user_id"
   end
 
+  create_table "regexadatoks", force: :cascade do |t|
+    t.string "indito"
+    t.string "vege"
+    t.bigint "project_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["project_id"], name: "index_regexadatoks_on_project_id"
+  end
+
   create_table "scanners", force: :cascade do |t|
     t.string "start"
     t.string "stop"
@@ -444,6 +453,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_102925) do
   add_foreign_key "messages", "users"
   add_foreign_key "news", "users"
   add_foreign_key "projects", "users"
+  add_foreign_key "regexadatoks", "projects"
   add_foreign_key "scanners", "beolvas"
   add_foreign_key "uploads", "games"
   add_foreign_key "uploads", "platforms"

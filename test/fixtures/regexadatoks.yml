@@ -1,0 +1,11 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  indito: MyString
+  vege: MyString
+  project: one
+
+two:
+  indito: MyString
+  vege: MyString
+  project: two

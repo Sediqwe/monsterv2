@@ -23,6 +23,26 @@ class ProjectsController < ApplicationController
     nem = Procharto.where(file: product_params[:data], char: product_params[:id])
     nem.delete_all  
   end
+  def regex
+  indito = product_params[:data]
+  vege = product_params[:file]
+  id = product_params[:id]
+  adatok = Regexadatok.new
+  adatok.indito = indito
+  adatok.vege = vege
+  p_id = Dataproject.where(file: id).first.project_id
+  adatok.project_id = p_id
+  
+    if adatok.save
+      render json: { valami: "A mentés sikeres" }
+    else
+      render json: { valami: "HIBA!"}
+    end
+  
+  
+  
+  
+  end
   # POST /projects or /projects.json
   def create
     @project = Project.new(project_params)

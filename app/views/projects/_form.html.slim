@@ -53,5 +53,13 @@
                     h1
                       = f.open 
                       = f.close
+      H3 Regex Adatok:
+      table
+        thead
+        tbody 
+          - Regexadatok.where(project_id: params[:id]).each do |f|
+            = f.indito 
+            br
+            = f.vege        
       
       br

@@ -13,6 +13,22 @@ $(document).on('ready', function() {
             }
         })
       });
+      $('[id^="project_regex"]').on('click', function(){
+        var id = $(this).attr('data-id');
+        var indito = $('#start').val();
+        var vege = $('#end').val();
+        $.ajax({
+          url: "/project_regex",
+          type: "POST",
+          data: { product: { id: id, data: indito, file: vege} },
+          success: function(data) {
+            $('div#regex').html(data.valami); 
+             },
+          error: function(data) {
+            $('div#regex').html(data.valami); 
+            }
+        })
+      }); 
       //Szöveg keresés a DATA-ban
       $('[id^="project_szoveg"]').on('click', function(){
         var id = $(this).attr('data-id');

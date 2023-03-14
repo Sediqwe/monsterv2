@@ -33,31 +33,34 @@
         h5 |(első 1000 sor, utána a "nem lefordítottak" a megoldás)
         .row.bg-dark
             .col-8
-                h3 Eredeti:
-                - szoveg = "" 
-                - szoveg2 = ""
-                - szoveg3 = ""
-                - szamol = 0
-                - @adatok.each_with_index do |csv1,index|
-                    - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data
-                = text_area_tag "hatalmas_", szoveg, rows: 40, cols: 60,  wrap: "off"
-                
-                - @adatokmind.each_with_index do |csv3,index|
-                    - if session[:project_elvalaszto].present?
-                    -else
-                        - session[:project_elvalaszto] = ""
-                    
-                    - if csv3.tdata.present?
-                        - if csv3.tdata.gsub(session[:project_elvalaszto],"").strip.length > 10
-                            - if compare_sections(csv3.data.strip, csv3.tdata.strip) <20 
-                                - szoveg3 += csv3.id.to_s + "#ǝǝ\t\t" + csv3.data.gsub(session[:project_elvalaszto],"").strip + "\r\n"
-                                - szamol += 1
-                = text_area_tag "hatalmas3", szoveg3, rows: 40, cols:   60,  wrap: "off"
-                = szamol.to_s
-                - @adatok.each_with_index do |csv2,index|
-                    - if csv2.tdata.present?
-                        - szoveg2 += csv2.id.to_s + "->  " + csv2.data.gsub(session[:project_elvalaszto],"").strip + "  -->  " + csv2.tdata.gsub(session[:project_elvalaszto],"").strip  + "\r\n"
-                = text_area_tag "hatalmas2", szoveg2, rows: 40, cols: 50,  wrap: "off"
+                .row
+                    .col-8
+                        - szoveg = "" 
+                        - szoveg2 = ""
+                        - szoveg3 = ""
+                        - szamol = 0
+                        - @adatok.each_with_index do |csv1,index|
+                            - szoveg += csv1.id.to_s + "#ǝǝ\t\t" + csv1.data
+                        = text_area_tag "hatalmas_", szoveg, rows: 40, cols: 100,  wrap: "off"
+                        
+                        - @adatokmind.each_with_index do |csv3,index|
+                            - if session[:project_elvalaszto].present?
+                            -else
+                                - session[:project_elvalaszto] = ""
+                            
+                            - if csv3.tdata.present?
+                                - if csv3.tdata.gsub(session[:project_elvalaszto],"").strip.length > 10
+                                    - if compare_sections(csv3.data.strip, csv3.tdata.strip) <20 
+                                        - szoveg3 += csv3.id.to_s + "#ǝǝ\t\t" + csv3.data.gsub(session[:project_elvalaszto],"").strip + "\r\n"
+                                        - szamol += 1
+                    .col-2
+                        = text_area_tag "hatalmas3", szoveg3, rows: 40, cols:   20,  wrap: "off"
+                        = szamol.to_s
+                        - @adatok.each_with_index do |csv2,index|
+                            - if csv2.tdata.present?
+                                - szoveg2 += csv2.id.to_s + "->  " + csv2.data.gsub(session[:project_elvalaszto],"").strip + "  -->  " + csv2.tdata.gsub(session[:project_elvalaszto],"").strip  + "\r\n"
+                    .col-2
+                        = text_area_tag "hatalmas2", szoveg2, rows: 40, cols: 20,  wrap: "off"
             .col-2 
                 h3 Teendők
                 .row.bg-warning.rounded
@@ -102,6 +105,20 @@
                     h3.mx-auto.text-dark Fordítás mentése
                     .btn.btn-dark.btn-block.m-4 id="project_mentes" data-id="#{params[:id]}"
                         | Mentés
+                .row.bg-secondary.text-light.rounded.p-2 
+                    h3.mx-auto REGEX 
+                    = text_field_tag "start", "" , class:"form-control", placeholder: "Nyitó"
+                    = text_field_tag "end", "", class:"form-control", placeholder: "Záró"
+                    .btn.btn-dark.m-2.btn-block data-id="#{params[:id]}" id="project_regex"
+                        |Mentés
+                    div id="regex"
+                        -  p_id = Dataproject.where(file: params[:id]).first.project_id
+                        - Regexadatok.where(project_id: p_id ).each do |t|
+                            = t.indito 
+                            |  -  
+                            =t.vege
+                            br
+
                 .row.bg-warning.rounded.p-2 
                     h3.mx-auto Tömeges szó csere
                     = text_field_tag "mit", "" , class:"form-control", placeholder: "Mit"
