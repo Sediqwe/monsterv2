@@ -88,6 +88,7 @@ class GamesController < ApplicationController
   end
   
   def download
+    Game.default_timezone = :utc
     i = Download.new
     i.game_id = je_params[:id]
     i.upload_id = je_params[:done]
