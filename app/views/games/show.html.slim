@@ -56,10 +56,10 @@
                                 -if current_user.admin?
                                     .col-lg-2.col-xs-12
                                         - if t.bad == false
-                                        =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn btn-danger mb-3  text-light" 
+                                            =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn btn-danger mb-3  text-light" 
                                         - else
-                                        =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn  btn-success mb-3 text-light"
-                                        = link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn mb-3 btn-primary text-light"
+                                            =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn  btn-success mb-3 text-light"
+                                        =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn mb-3 btn-primary text-light"
                             .col-lg-2.col-xs-12 
                                 | Verzió: 
                                 span
