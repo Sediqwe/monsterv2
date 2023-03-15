@@ -119,6 +119,10 @@ get "search", to: "search#kereses"
 get "searchmagyhu", to: "search#keresesmagyhu"
 get "searchtl", to: "search#keresestl"
 get "magyhu", to: "magyhu#beolvas"
+get "downend", to: "games#downend"
+get "jakab", to: "games#jakab"
+get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
+
 end
 
 

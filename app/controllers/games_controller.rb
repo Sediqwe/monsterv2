@@ -86,27 +86,29 @@ class GamesController < ApplicationController
       end
     end
   end
-  
-  def download
-    Game.default_timezone = :utc
-    i = Download.new
-    i.game_id = je_params[:id]
-    i.upload_id = je_params[:done]
-    if i.save
-      render json: { valami: 'OK' }
-    else
-      render json: { valami: 'NOK' }
+  def jakab 
+    
+    
+    
+  end
+    def downloadend(id)
+    
     end
-   end
-   def download_file
-    Game.default_timezone = :utc
-    i = Download.new
-    adat = Upload.find(params[:id])
-    i.game_id = adat.game_id
-    i.upload_id = adat.id
-    i.save    
-    redirect_to rails_blob_path( Upload.find(params[:id]).game_files , disposition: "attachment")
-   end
+    def download_file
+      ActiveStorage::Blob
+      adat = Upload.find(params[:id])
+      redirect_to root_path unless adat.game_files.attached?
+      Game.default_timezone = :utc
+      i = Download.new
+      i.game_id = adat.game_id
+      i.upload_id = adat.id
+      i.save  
+      
+
+      send_data adat.game_files.blob.download, type: adat.game_files.content_type
+    end
+  
+   
   
   def destroy
     
