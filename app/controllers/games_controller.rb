@@ -98,7 +98,15 @@ class GamesController < ApplicationController
       render json: { valami: 'NOK' }
     end
    end
-
+   def download_file
+    Game.default_timezone = :utc
+    i = Download.new
+    adat = Upload.find(params[:id])
+    i.game_id = adat.game_id
+    i.upload_id = adat.id
+    i.save    
+    redirect_to rails_blob_path( Upload.find(params[:id]).game_files , disposition: "attachment")
+   end
   
   def destroy
     

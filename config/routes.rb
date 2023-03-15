@@ -58,6 +58,7 @@ Rails.application.routes.draw do
   get 'stat', to: 'stat#index'
   post 'down', to: 'megas#download'
   get 'download_games', to: 'games#download_games'
+  get 'download_file', to: 'games#download_file'
   resources :news
   resources :blogs
   resources :programs
