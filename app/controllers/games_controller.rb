@@ -91,10 +91,7 @@ class GamesController < ApplicationController
     
     
   end
-    def downloadend(id)
-    
-    end
-    def download_file
+    def downloadend
       ActiveStorage::Blob
       adat = Upload.find(params[:id])
       redirect_to root_path unless adat.game_files.attached?
@@ -103,11 +100,13 @@ class GamesController < ApplicationController
       i.game_id = adat.game_id
       i.upload_id = adat.id
       i.save  
-      
-
       send_data adat.game_files.blob.download, type: adat.game_files.content_type
     end
-  
+    def download_file
+      @adat = Upload.find(params[:id])
+
+    end
+    
    
   
   def destroy

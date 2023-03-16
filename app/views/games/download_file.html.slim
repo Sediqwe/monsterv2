@@ -1,0 +1,23 @@
+.container-fluid
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
+            |Mielőtt letöltenéd ezt a fájlt, kérlek olvasd el az alábbi információkat
+            br
+            |A fordítás készítője: 
+            = Translater.find(@adat.translater_id).translater_name
+            br
+            |Jelenleg 
+            = Upload.where(translater_id: @adat.translater_id).size
+            |  fordítást adott a közösségnek.
+            br
+            |Amennyiben lehetőséged adódik, és a fordító is elfogadja, támogasd a fordítót.
+            br
+            br            
+
+
+
+            - if @adat.game_files.present?
+                = link_to "Letöltés (#{number_to_human_size(@adat.game_files.byte_size)}) »", downloadend_path(id: @adat.id), type: @adat.game_files.content_type, target: :blank, download: @adat.game_files.filename, id: "letoltesvege", class:"btn btn-primary mb-3 "
+                .div id="koszi"
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render'shared/side'

@@ -1,5 +1,8 @@
 $(document).on('ready', function() {
-  
+  $('#letoltesvege').on('click', function(){
+    $("#koszi").html('A letöltés előkészítése folyamatban, nagyobb fájl esetén kicsit várni kell az elindulásra!').show()
+    $(this).hide('3000');
+  }); 
     $('#sidebarCollapse').on('click', function() {
         $('#sidebar, #content').toggleClass('active');
       });
