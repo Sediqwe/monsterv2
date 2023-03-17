@@ -41,11 +41,11 @@
                 = f.text_field :tam3, class: "mb-2"
                 label for="newGameCoverUpload" Egyéb 2 link
                 = f.text_field :tam4, class: "mb-2"
-                - if current_user.present? 
-                  - if current_user.admin?
-                    = f.label "Moderator:"
-                    = f.check_box :moderator, class: "mb-2"
-                    = select("translater_", @user.id, Translater.all.order(translater_name: :ASC).collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
+              - if current_user.present? 
+                - if current_user.admin?
+                  = f.label "Moderator:"
+                  = f.check_box :moderator, class: "mb-2"
+                  = select("translater_", @user.id, Translater.all.order(translater_name: :ASC).collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
             button.btn.btn-primary Beküld »
       .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
         = render 'shared/side'   
