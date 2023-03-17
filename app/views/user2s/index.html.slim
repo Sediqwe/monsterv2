@@ -13,7 +13,7 @@ table
     - @user2s.each do |user2|
       tr
         td 
-          = user2.alias || user2.name          
+          = user2.name          
         - if current_user.present?
           - if current_user.admin?
             td = user2.id
