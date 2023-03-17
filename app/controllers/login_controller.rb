@@ -9,7 +9,9 @@ class LoginController < ApplicationController
     if @user.save
      redirect_to :sessions_new
     else
-     render "reg"
+      flash[:error] = @user.errors.full_messages
+      redirect_to login_reg_path
+     
     end
   end
    
@@ -20,8 +22,7 @@ class LoginController < ApplicationController
   end
 
   def reg
-    
-    @user = User.new
+     @user = User.new
   end
 
 

@@ -1,78 +1,57 @@
-
 = form_for @user do |f|
   - if @user.errors.any?
-    #error_explanation.bg-secondary
+    #error_explanation.bg-dark
       h2 = "#{pluralize(@user.errors.count, 'error')} prohibited this upload from being saved:"
       ul
         - @user.errors.full_messages.each do |message|
           li = message
-
  
-  .container-fluid
-  
-    .form-blocks
-      h2 Adataid
-      .form-group
-        = f.label "Felhasználó:"
-        = f.text_field :name , readonly: true, class: "form-control"
-      .form-group
-        = f.label "Alias:"
-        = f.text_field :alias, class: "form-control"
-      .form-group
-        = f.label "E-mail:"
-        = f.text_field :email, class: "form-control"
-      .form-group
-        = f.label "Jelszó:"
-        = f.text_field :password, class: "form-control"
-      - if @user.translater_id?
-        - if @user.photo.attached?
-          = image_tag @user.photo
-        br
-        .form-group
-          label for="newGameCoverUpload" Fordítói fotód
-          = f.file_field :photo
-        .form-group
-          label for="newGameCoverUpload" Leírás
-          = f.text_area :desc , cols: 26, rows: 10, class: "form-control"
-        .form-group
-          label for="newGameCoverUpload" STEAM kívánságlistád
-          = f.text_field :tam1, class: "form-control"
-        .form-group
-          label for="newGameCoverUpload" PAYPAL linked
-          = f.text_field :tam2, class: "form-control"
-        .form-group
-          label for="newGameCoverUpload" Egyéb link
-          = f.text_field :tam3, class: "form-control"
-        .form-group
-          label for="newGameCoverUpload" Egyéb 2 link
-          = f.text_field :tam4, class: "form-control"
-      - if current_user.present? 
-        - if current_user.admin?
-          .form-group
-            = f.label "Moderator:"
-            = f.check_box :moderator, class: "form-control"
-          .form-group.aljas
-            = select("translater_", @user.id, Translater.all.order(translater_name: :ASC).collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
-      
-      button.btn.btn-primary Beküld »
+
   .container-fluid
     .row
       .col-xs-12.col-md-9.col-lg-10.bg-basic-color
         .row
           .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+            - flash.each do |type, msg|
+              .div.text-light.green-box
+                = msg
             .form
               h1.form__headline
-                | Regisztráció
-              input.mb-2[type="text" name="" placeholder="Név"]
-              input.mb-2[type="text" name="" placeholder="Email"]
-              input.mb-2[type="text" name="" placeholder="Jelszó"]
-              input.mb-2[type="text" name="" placeholder="Jelszó újra"]
-              input.mb-2[type="text" name="" placeholder="Becenév"]
-              input#myFile.p-0.mb-2[type="file" name="filename"]
-              a.btn.btn-primary[href=""]
-                | Regisztrálok
-              p.mt-2
-                | vagy
-              a.btn.btn-primary[href=""]
-                | Belépek
+                | Beállítások
+              label for="name" Username
+              = f.text_field :name , readonly: true, class: "mb-2"
+              label for="email" E-mail
+              = f.text_field :email, class: "mb-2"
+              label for="password" Password
+              = f.text_field :password, class: "mb-2"
+              label for="alias" Alias
+              = f.text_field :alias, class: "mb-2"
+              label for="alias" Photo
+              = f.file_field :photo
+              - if @user.translater_id?
+                - if @user.photo.attached?
+                  = image_tag @user.photo, class: "mb-2"
+                label for="newGameCoverUpload" Leírás
+                = f.text_area :desc , cols: 26, rows: 10, class: "mb-2"
+                label for="newGameCoverUpload" STEAM kívánságlistád
+                = f.text_field :tam1, class: "mb-2"
+                label for="newGameCoverUpload" PAYPAL linked
+                = f.text_field :tam2, class: "mb-2"
+                label for="newGameCoverUpload" Egyéb link
+                = f.text_field :tam3, class: "mb-2"
+                label for="newGameCoverUpload" Egyéb 2 link
+                = f.text_field :tam4, class: "mb-2"
+                - if current_user.present? 
+                  - if current_user.admin?
+                    = f.label "Moderator:"
+                    = f.check_box :moderator, class: "mb-2"
+                    = select("translater_", @user.id, Translater.all.order(translater_name: :ASC).collect {|p| [ p.translater_name, p.id ] }, { include_blank: true })
+            button.btn.btn-primary Beküld »
+      .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+        = render 'shared/side'   
+
+              
+ 
+  
+  
  

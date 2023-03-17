@@ -1,4 +1,4 @@
-- if current_user.admin?
+- if current_user.admin? || current_user.moderator?
     == render 'form'
 
 => link_to 'Show', @game, class: "btn btn-success  text-light"

@@ -19,7 +19,8 @@
               - else 
                 |  Új játék adatlap
             
-            = form_for @game, html: {class: 'form'} do |f|  
+            = form_for @game, html: {class: 'form'} do |f|
+              
               = f.text_field :name, class: "mb-2", placeholder: "Játék neve"
               = f.text_field :link_steam, class: "mb-2", placeholder: "Steam Link"
               = f.text_field :link_epic, class: "mb-2", placeholder: "Epic Link"
