@@ -12,3 +12,5 @@ import "@rails/actiontext"
 import "chartkick"
 import "Chart.bundle"
 
+   
+

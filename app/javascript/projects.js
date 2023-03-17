@@ -1,4 +1,5 @@
-$(document).on('ready', function() {   
+$(document).on('ready', function() { 
+  
     $('#project_oszlop').on('click', function(){
         var id = $(this).attr('data-id');
         var adat = $("#oszlop").val();
@@ -180,6 +181,7 @@ $(document).on('ready', function() {
                 type: "POST",
                 data: { product: { id: id, adat: adat, name: name} },
                 success: function(data) {  
+                  alert(data);
                   },
                 error: function(data) {  
                   

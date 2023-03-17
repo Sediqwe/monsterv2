@@ -9,8 +9,7 @@ module ProjectsHelper
         str = str.gsub("\n","-<N>-")
         str = str.gsub("\r","-<R>-")
         str = str.gsub('""', "⇝")
-        str = str.gsub('"', "✞")
-        p str
+        str = str.gsub('"', "✞")        
     end
     def compare_sections(data, tdata )
         distance = Text::Levenshtein.distance(data, tdata).to_f

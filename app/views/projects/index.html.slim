@@ -62,8 +62,8 @@ table
                 td 
                   = link_to t.filename, rails_blob_path(t, disposition: 'attachment'), class: "btn btn-success"
                 td 
-                  .btn.btn-success.m-2 id="project_file_download_kalap_#{t.id}" name="#{t.id}" data-name="#{t.filename}"
-                    |File lementés - kalappal
+                  = link_to "Letöltés Kalappal  »", project_file_download_kalap_path(id: t.id), type: t.content_type, target: :blank, download: t.filename, id: "letoltesvege", class:"btn btn-primary mb-3 "
+                  
         td = link_to "Show", project, class: "btn btn-success text-light"
         td = link_to "Edit", edit_project_path(project), class: "btn btn-success text-light"
         td = link_to "Destroy", project, data: {confirm: "Are you sure?"}, method: :delete, class: "btn btn-danger text-light"

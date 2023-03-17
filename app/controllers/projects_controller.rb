@@ -239,14 +239,9 @@ class ProjectsController < ApplicationController
       end
     end
     proj = params[:name]
-   
-
-
-
-
-
     File.write("tmp/#{proj}", bullshit)
-    send_file "tmp/#{proj}",  :x_sendfile=>true
+    send_data "tmp/#{proj}"
+    send_file "tmp/#{proj}", :type => 'text/html; charset=utf-8',  :x_sendfile=>true
   end
   def project_forditas_mentes
     adat = product_params[:data]
