@@ -7,8 +7,10 @@
             h1.form__headline
               | Bejelentkezés
             = form_for :session, class: "form", url: :sessions_create do |f|
+              label for="name" Username
               = f.text_field :name,  class: "mb-2"
               br
+              label for="password" Password
               = f.password_field :password,  class: "mb-2"
               button.btn.btn-primary Belépek
             p.mt-2
