@@ -54,6 +54,7 @@
                                 - if current_user.present?
                                     -if current_user.admin?
                                         .col-lg-2.col-xs-12
+                                            =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info"
                                             - if t.bad == false
                                                 =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn btn-danger mb-3  text-light" 
                                             - else
