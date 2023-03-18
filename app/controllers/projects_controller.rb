@@ -184,10 +184,13 @@ class ProjectsController < ApplicationController
     end
   end
   def project_file_download_kalap
-    redirect_to project_finish_path(id: product_params[:id], adat: product_params[:adat], file: "kalap", name: product_params[:name])
+    redirect_to project_finish_path(id: params[:id], filename: params[:filename], type: params[:type], file: params[:file])
   end
   def project_file_download
     redirect_to project_finish_path(id: product_params[:id], adat: product_params[:adat])
+  end
+  def filem
+    send_file(params[:file])
   end
   def project_file_zip
     projectem = Project.find(params[:id])
@@ -219,9 +222,10 @@ class ProjectsController < ApplicationController
   end
   def project_finish
     id = params[:id]
-    size = params[:adat]
+    filename = params[:filename]
+    type = params[:type]
+    size = params[:size]
     file = params[:file]
-    project = params[:project]
     if size.present?
       adatok = Dataproject.where(file: id).order(row: :ASC).limit(size)
     else
@@ -237,11 +241,9 @@ class ProjectsController < ApplicationController
       changer.each do |t|
         bullshit = bullshit.gsub(t.ori, t.mod)
       end
-    end
-    proj = params[:name]
-    File.write("tmp/#{proj}", bullshit)
-    send_data "tmp/#{proj}"
-    send_file "tmp/#{proj}", :type => 'text/html; charset=utf-8',  :x_sendfile=>true
+    end    
+    File.write("tmp/#{filename}", bullshit)
+    send_file "tmp/#{filename}", :type => 'text/html; charset=utf-8',  :x_sendfile=>true
   end
   def project_forditas_mentes
     adat = product_params[:data]

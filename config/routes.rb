@@ -97,7 +97,7 @@ post "project_elvalaszto", to: "projects#project_elvalaszto"
 post "project_mentes", to: "projects#project_forditas_mentes"
 post "project_nemvalto", to: "projects#project_nemvalto"
 post "project_sorvalto", to: "projects#project_sorvalto"
-post "project_file_download_kalap", to: "projects#project_file_download_kalap"
+get "project_file_download_kalap", to: "projects#project_file_download_kalap"
 get "project_finish", to: "projects#project_finish"
 get "project_line", to: "projects#line"
 get "project_lines", to: "projects#lines"
@@ -122,7 +122,7 @@ get "magyhu", to: "magyhu#beolvas"
 get "downloadend", to: "games#downloadend"
 get "jakab", to: "games#jakab"
 get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
-
+get 'filem', to: "projects#filem"
 end
 
 
