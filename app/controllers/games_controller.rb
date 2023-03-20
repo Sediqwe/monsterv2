@@ -101,10 +101,11 @@ class GamesController < ApplicationController
       i.upload_id = adat.id
       i.save  
       send_data adat.game_files.blob.download, type: adat.game_files.content_type
+      
     end
     def download_file
       @adat = Upload.find(params[:id])
-
+      
     end
     
    

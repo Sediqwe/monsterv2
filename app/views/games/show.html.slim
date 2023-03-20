@@ -50,7 +50,7 @@
                                     - if t.bad == false && t.game_files.attached?
                                         - if t.game_files.present?
                                             = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", download_file_path(id: t), class:"btn btn-primary mb-3 "                                        
-
+                                            
                                 - if current_user.present?
                                     -if current_user.admin?
                                         .col-lg-2.col-xs-12
