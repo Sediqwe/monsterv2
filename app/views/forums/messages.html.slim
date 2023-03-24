@@ -25,7 +25,10 @@
               .forum-post__img
                 img.img-fluid[src="imgs/portrait.png" alt=""]
                 p.forum-post__name
-                  = User.find(m.user_id).alias || User.find(m.user_id).name
+                  - if  User.find(m.user_id).alias.present?
+                    = User.find(m.user_id).alias
+                  - else
+                    = User.find(m.user_id).name
                   br
                   = m.created_at.strftime("%Y-%m-%d %H:%M")
               .forum-post__text
