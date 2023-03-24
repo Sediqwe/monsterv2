@@ -19,20 +19,16 @@
           textarea[name="" cols="30" rows="5" placeholder="Leirás..."]
           a.btn.btn-primary[href=""]
             | Küldés
-        .col-sm-12
-          .forum-post
-            .forum-post__img
-              img.img-fluid[src="imgs/portrait.png" alt=""]
-              p.forum-post__name
-                | STRAGO IVÁN - ROBOT 
-                br
-                | 22:23 
-                br
-                | 02.03.2023
-            .forum-post__text
-              |  Sziasztok! 
-              br
-              br
-              | A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! 
+        - @message.each do |m|
+          .col-sm-12
+            .forum-post
+              .forum-post__img
+                img.img-fluid[src="imgs/portrait.png" alt=""]
+                p.forum-post__name
+                  = User.find(m.user_id).alias || User.find(m.user_id).name
+                  br
+                  = m.created_at.strftime("%Y-%m-%d %H:%M")
+              .forum-post__text
+                = m.desc
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'            
