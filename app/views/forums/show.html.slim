@@ -25,7 +25,10 @@
             = link_to forum_messages_path(forumid: f.id)
               .forum-card--template.forum-card__card
                 p
-                  = Game.find(f.gameid).name || f.title 
+                  - if f.gameid
+                    = Game.find(f.gameid).name 
+                  -else 
+                    = f.title 
                 p.hidden-xs
                   | 2
                 p.hidden-xs
