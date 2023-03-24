@@ -10,7 +10,7 @@
           li.breadcrumb-item
             = link_to @foforum.title, forum_path(@foforum.id)              
           li.breadcrumb-item.text-light
-            = @forum.title
+            = Game.find(@forum.gameid).name ||  @forum.title
       .row
         .col-sm-12
           textarea[name="" cols="30" rows="5" placeholder="Leirás..."]

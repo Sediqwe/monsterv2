@@ -25,12 +25,16 @@
             = link_to forum_messages_path(forumid: f.id)
               .forum-card--template.forum-card__card
                 p
-                  =f.title
+                  = Game.find(f.gameid).name || f.title 
                 p.hidden-xs
                   | 2
                 p.hidden-xs
                   | 1
                 p
                   | Teszt béla 2022.21.22
+                -if current_user.present?
+                  -if current_user.admin?
+                    p 
+                      = link_to "EDIT", edit_forum_path(f.id)
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side' 

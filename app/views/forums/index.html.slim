@@ -24,16 +24,24 @@
               | Topic
             p
               | Last
+            -if current_user.present?
+              -if current_user.admin?
+                p 
+                  | Editor
           - @forums.each do |forum|
             = link_to forum_path(forum.id) do
               .forum-card--template.forum-card__card
                 p
                   = forum.title
                 p.hidden-xs
-                  | 2
+                  = Uzenet.where(game_id: Forum.where(forumpoint: forum.id)).size
                 p.hidden-xs
                   | 1
                 p
                   | Teszt béla 2022.21.22
+                -if current_user.present?
+                  -if current_user.admin?
+                    p 
+                      = link_to "EDIT", edit_forum_path(forum.id)
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'

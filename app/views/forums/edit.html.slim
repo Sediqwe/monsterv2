@@ -1,6 +1,7 @@
 h1 Editing forum
-- if current_user.present?&&.admin? 
-  == render "form", forum: @forum
+- if current_user.present?
+  - if current_user.admin?
+    == render "form", forum: @forum
 
 br
 
