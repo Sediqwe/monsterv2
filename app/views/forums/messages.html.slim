@@ -1,0 +1,38 @@
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      h1.forum-headline
+        | Forum
+      nav[aria-label="breadcrumb"]
+        ol.breadcrumb
+          li.breadcrumb-item
+        a[href="forum_mainpage.html"]
+          | Home
+        li.breadcrumb-item
+        a[href="forum_mainpage_2.html"]
+          | alpont
+        li.breadcrumb-item
+        a[href="forum_mainpage_3.html"]
+          | végpont
+      .row
+        .col-sm-12
+          textarea[name="" cols="30" rows="5" placeholder="Leirás..."]
+          a.btn.btn-primary[href=""]
+            | Küldés
+        .col-sm-12
+          .forum-post
+            .forum-post__img
+              img.img-fluid[src="imgs/portrait.png" alt=""]
+              p.forum-post__name
+                | STRAGO IVÁN - ROBOT 
+                br
+                | 22:23 
+                br
+                | 02.03.2023
+            .forum-post__text
+              |  Sziasztok! 
+              br
+              br
+              | A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! 
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render'shared/side'            

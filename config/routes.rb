@@ -74,7 +74,7 @@ Rails.application.routes.draw do
   post 'games_magyhu', to: "games#magyhu"
   resources :uploads
   resources :games
-  get 'forum', to: 'forumfs#index'
+  resources :forums  
   get 'sessions/new'
   get 'sessions/create'
   get 'login/signin', to: 'sessions#new'

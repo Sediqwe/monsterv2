@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_12_200435) do
+ActiveRecord::Schema[7.0].define(version: 2023_03_24_180855) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -155,24 +155,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_200435) do
     t.index ["upload_id"], name: "index_downloads_on_upload_id"
   end
 
-  create_table "forumas", force: :cascade do |t|
+  create_table "forums", force: :cascade do |t|
     t.string "title"
-    t.string "desc"
-    t.boolean "active"
+    t.text "desc"
     t.bigint "user_id", null: false
-    t.bigint "forumf_id", null: false
+    t.boolean "active", default: true
+    t.boolean "olvashato"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["forumf_id"], name: "index_forumas_on_forumf_id"
-    t.index ["user_id"], name: "index_forumas_on_user_id"
-  end
-
-  create_table "forumfs", force: :cascade do |t|
-    t.string "title"
-    t.string "desc"
-    t.boolean "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
+    t.boolean "forumtype", default: false
+    t.integer "gameid"
+    t.integer "forumpoint"
+    t.index ["user_id"], name: "index_forums_on_user_id"
   end
 
   create_table "friendly_id_slugs", force: :cascade do |t|
@@ -446,8 +440,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_12_200435) do
   add_foreign_key "dataprojects", "projects"
   add_foreign_key "downloads", "games"
   add_foreign_key "downloads", "uploads"
-  add_foreign_key "forumas", "forumfs"
-  add_foreign_key "forumas", "users"
+  add_foreign_key "forums", "users"
   add_foreign_key "games", "users"
   add_foreign_key "lemurs", "projects"
   add_foreign_key "messages", "users"

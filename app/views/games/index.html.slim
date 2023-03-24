@@ -21,10 +21,20 @@
                         a href="games?q%5Bname_start%5D=#{letter}"
                             li 
                                 =letter
+                
+            
     
             .step-filter
                 .step-filter__numbers
-                   = paginate @games
+                    = paginate @games
+                .cu
+                    - if params[:q]
+                        = sort_link(@q, :name, "Név szerint", class: "btn btn-primary text-light ml-2") 
+                        = sort_link(@q, :created_at, "Dátum szerint", class: "btn btn-primary text-light ml-2")
+                .bu
+                    a href="games?page_n=10" class="btn #{" btn-primary " if session[:page_n] == "10"} ml-2 text-light" Laponként 10
+                    a href="games?page_n=20" class="btn #{" btn-primary " if session[:page_n] == "20"} ml-2 text-light" Laponként 20
+                    a href="games?page_n=30" class="btn #{" btn-primary " if session[:page_n] == "30"}  ml-2 text-light" Laponként 30
             .row
                - @games.each do |game|
                 - cache game do

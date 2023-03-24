@@ -1,0 +1,39 @@
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      - if current_user.present?
+        -if current_user.admin?
+          = link_to new_forum_path do |de|
+            button.btn.btn-shadow.btn-wide.btn-primary type="button" 
+               
+              | Új téma
+      h1.forum-headline
+        | Forum
+      nav[aria-label="breadcrumb"]
+        ol.breadcrumb
+          li.breadcrumb-item
+        = link_to "Home", forums_path
+          
+      .forum-card
+        .forum-card--template.forum-card__header
+          p
+            | Title
+          p.hidden-xs
+            | Post
+          p.hidden-xs
+            | Topic
+          p
+            | Last
+        - @forums.each do |forum|
+          = link_to forum_path(forum) do
+            .forum-card--template.forum-card__card
+              p
+                = forum.title
+              p.hidden-xs
+                | 2
+              p.hidden-xs
+                | 1
+              p
+                | Teszt béla 2022.21.22
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render'shared/side'
