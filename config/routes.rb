@@ -75,6 +75,7 @@ Rails.application.routes.draw do
   resources :uploads
   resources :games
   resources :forums  
+  get 'forum/messages', to:  'forums#messages'
   get 'sessions/new'
   get 'sessions/create'
   get 'login/signin', to: 'sessions#new'

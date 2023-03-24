@@ -3,16 +3,19 @@ class ForumsController < ApplicationController
 
   # GET /forums or /forums.json
   def index
-    @forums = Forum.all
+    @forums = Forum.where(forumtype: :false)
   end
 
   # GET /forums/1 or /forums/1.json
   def show
-    tip = Forum.find(params[:id])
-    @adat = Forum.find(tip.forumpoint)
-    @forum = Forum.where(forumpoint: tip.forumpoint )
+    @tip = Forum.find(params[:id])
+    @forum1 = Forum.where(forumpoint: @tip).where(forumtype: true)
   end
-
+  def messages
+    @forum = Forum.find(params[:forumid])
+    @foforum = Forum.find(@forum.forumpoint)
+    @message = Uzenet.where(game_id: @forum.gameid)    
+  end
   # GET /forums/new
   def new
     @forum = Forum.new

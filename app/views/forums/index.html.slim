@@ -25,7 +25,7 @@
             p
               | Last
           - @forums.each do |forum|
-            = link_to forum_path(forum) do
+            = link_to forum_path(forum.id) do
               .forum-card--template.forum-card__card
                 p
                   = forum.title

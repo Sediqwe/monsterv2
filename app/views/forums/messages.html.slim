@@ -6,14 +6,11 @@
       nav[aria-label="breadcrumb"]
         ol.breadcrumb
           li.breadcrumb-item
-        a[href="forum_mainpage.html"]
-          | Home
-        li.breadcrumb-item
-        a[href="forum_mainpage_2.html"]
-          | alpont
-        li.breadcrumb-item
-        a[href="forum_mainpage_3.html"]
-          | végpont
+            = link_to "Home", forums_path
+          li.breadcrumb-item
+            = link_to @foforum.title, forum_path(@foforum.id)              
+          li.breadcrumb-item.text-light
+            = @forum.title
       .row
         .col-sm-12
           textarea[name="" cols="30" rows="5" placeholder="Leirás..."]
@@ -34,5 +31,5 @@
               br
               br
               | A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! A feltöltés menü nem müködik, valami nem oké! 
-        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-            = render'shared/side'            
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render'shared/side'            
