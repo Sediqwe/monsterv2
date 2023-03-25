@@ -18,7 +18,6 @@ gem 'active_storage_validations'
 gem "ruby-openai"
 gem "csv"
 gem "chartkick"
-gem 'ipinfo-rails'
 gem 'rmagick'
 
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
