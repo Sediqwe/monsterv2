@@ -124,6 +124,7 @@ get "downloadend", to: "games#downloadend"
 get "jakab", to: "games#jakab"
 get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
 get 'filem', to: "projects#filem"
+post 'lobot', to: "games#lobot"
 end
 
 

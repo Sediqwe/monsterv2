@@ -1,7 +1,7 @@
 class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
   before_action :authorized?, only: %i[new edit update destroy]
- 
+  require 'rmagick'
   
   def index
     @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
@@ -86,11 +86,7 @@ class GamesController < ApplicationController
       end
     end
   end
-  def jakab 
-    
-    
-    
-  end
+ 
     def downloadend
       ActiveStorage::Blob
       adat = Upload.find(params[:id])
@@ -101,11 +97,53 @@ class GamesController < ApplicationController
       i.upload_id = adat.id
       i.save  
       send_data adat.game_files.blob.download, type: adat.game_files.content_type
-      
+    end
+    def lobot
+      data = je_params[:id]
+      if data.to_s == session[:randoms].to_s
+        render json: { info: 'ok' }
+      else
+        render json: { info: 'nok' }
+      end
     end
     def download_file
-      @adat = Upload.find(params[:id])
+      o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
+      string = (0...5).map { o[rand(o.length)] }.join
+      if !cookies[:randoms]
+        session[:randoms] = nil
+      end
+      if session[:randoms].blank?
+        #Ha nincs randoms, hozzuk létre
+        session[:randoms] = string
+        cookies[:randoms] = {
+        value: "times",
+        expires: 1.minute.from_now
+        }        
+      end
       
+      @adat = Upload.find(params[:id])
+      r = rand(0..255)
+      g = rand(0..255)
+      b = rand(0..255)
+      random_color = "rgb(#{r}, #{g}, #{b})"
+      canvas = Magick::Image.new(300, 100) { |options| options.background_color = random_color}
+      gc = Magick::Draw.new 
+      gc.pointsize(40)
+      
+      r = rand(0..255)
+      g = rand(0..255)
+      b = rand(0..255)
+      text_color = "rgb(#{r}, #{g}, #{b})"
+      font_styles = [Magick::NormalStyle, Magick::ItalicStyle, Magick::ObliqueStyle]
+      random_font_style = font_styles.sample
+      gc.font_style(random_font_style)
+      gc.fill(text_color)
+      gc.font_size(rand(20..30))
+      gc.text(rand(30..60),rand(30..70), session[:randoms].center(rand(20)))
+      gc.draw(canvas)
+      randi = rand().to_s
+      canvas.write('public/vedelem/' + randi + '.png')
+      session[:random] = randi
     end
     
    

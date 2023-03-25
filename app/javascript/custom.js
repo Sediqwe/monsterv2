@@ -11,6 +11,25 @@ $(document).on('turbo:load', function() {
         $('a.hover').removeClass('hover');
         next();
       });
+      $('#lobot').on('click', function(){
+        var adat = $('#pityu').val();
+        $.ajax({
+          url: "/lobot",
+          type: "POST",
+          data: { product: {id: adat } },
+          success: function(data) {
+            if(data.info == "ok")
+            {
+              window.location.href = window.location.href + "&keyword=" + adat ; 
+            }
+          },
+          error: function(data) {
+            // alert("ERROR" + data.valami);
+
+          }
+        })
+
+      }); 
       $('select[id^="translater_"]').on('click', function(){
         var adat = $(this).val();
         var id = $(this).attr('id').replace('translater_','');
