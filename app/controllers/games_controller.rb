@@ -95,6 +95,7 @@ class GamesController < ApplicationController
       i = Download.new
       i.game_id = adat.game_id
       i.upload_id = adat.id
+      i.ip_address = request.remote_ip
       i.save  
       send_data adat.game_files.blob.download, type: adat.game_files.content_type
     end
@@ -120,13 +121,16 @@ class GamesController < ApplicationController
         expires: 1.minute.from_now
         }        
       end
-      
-      @adat = Upload.find(params[:id])
       r = rand(0..255)
       g = rand(0..255)
       b = rand(0..255)
       random_color = "rgb(#{r}, #{g}, #{b})"
-      canvas = Magick::Image.new(300, 100) { |options| options.background_color = random_color}
+      original_color = random_color # Ezt az értéket a valódi színre kell állítani
+      target_color = "rgb(#{g}, #{b}, #{r})"
+      gradient_height = 200
+      gradient = Magick::GradientFill.new(0, 0, 0, gradient_height, original_color, target_color)
+      @adat = Upload.find(params[:id])
+      canvas = Magick::Image.new(300, 100, gradient) { |options| options.background_color = random_color}
       gc = Magick::Draw.new 
       gc.pointsize(40)
       

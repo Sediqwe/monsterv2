@@ -28,6 +28,10 @@
                         |#
                         =t.upload.id
                         br
+                        - if current_user.present?
+                            -if current_user.admin?
+                                =t.ip_address
+                                br
                         |(
                         =t.created_at.strftime("%Y-%m-%d %H:%M") 
                         |)             
