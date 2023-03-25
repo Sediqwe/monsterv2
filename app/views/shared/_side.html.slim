@@ -30,7 +30,11 @@
                         br
                         - if current_user.present?
                             -if current_user.admin?
+                                - require 'httparty'
+                                - response = HTTParty.get("https://ipinfo.io/#{t.ip_address}/json?token=37debcd96d5bd7")
+                                = response.body.force_encoding("ISO-8859-1").encode("UTF-8")
                                 =t.ip_address
+                                
                                 br
                         |(
                         =t.created_at.strftime("%Y-%m-%d %H:%M") 
