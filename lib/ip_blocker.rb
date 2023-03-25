@@ -1,5 +1,5 @@
 class IpBlocker
-    BLOCKED_IP_PREFIX = '194.96.92'
+    BLOCKED_IP_PREFIX = '181.191.171'
     p "indul"
     def initialize(app)
       @app = app
