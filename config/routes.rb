@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'ipadress/index'
   get 'supports', to: 'support#index'
   get 'openai/index'
   get 'regexp', to: 'games#regexp'
