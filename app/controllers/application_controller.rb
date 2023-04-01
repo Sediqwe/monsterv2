@@ -8,7 +8,7 @@ def set_search
   @download = Download.order("created_at DESC").first(10)
   @upload = Upload.order("created_at DESC").first(5)
   
-  @page_description = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
+  @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
   @page_keywords = "Gépi,Magyarítás, Fordítás"  
   end
 #def default_url_options
