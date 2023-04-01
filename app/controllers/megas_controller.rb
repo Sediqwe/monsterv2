@@ -4,7 +4,7 @@ class MegasController < ApplicationController
   # GET /megas or /megas.json
   def index
     @megas = Mega.all.order(:title)
-    @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
+    
   end
 
   # GET /megas/1 or /megas/1.json
