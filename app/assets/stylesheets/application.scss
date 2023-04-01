@@ -755,7 +755,14 @@ textarea {
     transition: 0.2s;
 }
 
-
+.blink {
+    animation: blinker 3s ease-in-out infinite;
+}
+@keyframes blinker {
+    20% {
+        opacity: 0;
+    }
+}
 .forum-post {
     color: white;
     display: flex;
