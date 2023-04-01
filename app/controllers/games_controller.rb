@@ -4,7 +4,6 @@ class GamesController < ApplicationController
   require 'rmagick'
   
   def index
-    @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
     @q = Game.ransack(params[:q])
     if params[:page_n].present?
       number = params[:page_n]
@@ -41,8 +40,6 @@ class GamesController < ApplicationController
     @mega = Mega.where(game: @user.id)
     @uzenetek = Uzenet.where(game_id: @user.id).order(id: :DESC)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
-    
-    
     
   end
 
