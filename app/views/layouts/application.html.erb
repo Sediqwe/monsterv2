@@ -7,7 +7,7 @@
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
     <%= javascript_importmap_tags %>
-    <meta name="description" content="<% if @meta_description.present? %><%=@meta_description %><% else %><%= meta_description %><% end %>">
+    
     <!-- Google tag (gtag.js) -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-5Y9BZL1H1F"></script>
       <script>
@@ -20,7 +20,6 @@
      
     </head>
   <body>
-    <- if  >
     <%= render 'shared/menu' %>
     <%= yield  %>
     <%= render 'shared/footer' %>

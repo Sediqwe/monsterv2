@@ -2,12 +2,13 @@ class ApplicationController < ActionController::Base
     helper_method :current_user  
     add_flash_types :info, :error, :warning
     before_action :set_search
-    
+ 
 def set_search
   @q = Game.ransack(params[:q])
   @download = Download.order("created_at DESC").first(10)
   @upload = Upload.order("created_at DESC").first(5)
   @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
+    
   end
 #def default_url_options
   #{ host: ENV["DOMAIN"] || "https://gep.monster" }
