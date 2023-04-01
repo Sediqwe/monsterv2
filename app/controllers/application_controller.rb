@@ -7,6 +7,8 @@ def set_search
   @q = Game.ransack(params[:q])
   @download = Download.order("created_at DESC").first(10)
   @upload = Upload.order("created_at DESC").first(5)
+  @meta_title: "Gep.Monster"
+  @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
   end
 #def default_url_options
   #{ host: ENV["DOMAIN"] || "https://gep.monster" }
