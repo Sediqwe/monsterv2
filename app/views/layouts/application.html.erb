@@ -3,7 +3,6 @@
   <head>
     <title>GEP.MONSTER </title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
-    <meta property="og:image" content="1.png
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
@@ -20,11 +19,11 @@
     </script>
     <!-- Facebook Open Graph data -->
     <meta property="og:title" content="<% if @meta_title.present? %><%=@meta_title %><% else %><%= meta_title %><% end %>" />
-    <meta property="og:type" content="game.translate" />
+    <meta property="og:type" content="game, translate" />
     <meta property="og:url" content="<%= request.original_url %>" />
     <meta property="og:image" content="<%= meta_image %>" />
     <meta property="og:description" content="<% if @meta_description.present? %><%=@meta_description %><% else %><%= meta_description %><% end %>" />
-    <meta property="og:site_name" content="<%= meta_title %>" />
+    <meta property="og:site_name" content="https://gep.monster" />
 
     </head>
   <body>
