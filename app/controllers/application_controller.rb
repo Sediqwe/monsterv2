@@ -7,8 +7,6 @@ def set_search
   @q = Game.ransack(params[:q])
   @download = Download.order("created_at DESC").first(10)
   @upload = Upload.order("created_at DESC").first(5)
-  
-  @meta_title = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el közvetlenül a szerverről."
   @page_keywords = "Gépi,Magyarítás, Fordítás"  
   end
 #def default_url_options
