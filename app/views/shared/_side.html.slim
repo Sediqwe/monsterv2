@@ -28,9 +28,19 @@
                         |#
                         =t.upload.id
                         br
-                        - if current_user.present?
-                            -if current_user.admin?
-                              br
+                    
+                        -if current_user&.admin?
+                            -begin
+                                - dimensions = t.game.image.blob.metadata
+                                -arany =  (dimensions["width"].to_f / dimensions["height"].to_f )*16/9
+                                - if arany < 3
+                                    .buzi.btn-success.btn   
+                                        |Javítandó!!!!!
+                                    br
+                                
+                            -rescue
+                                
+                                
                         |(
                         =t.created_at.strftime("%Y-%m-%d %H:%M") 
                         |)             
