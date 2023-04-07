@@ -20,8 +20,7 @@
               | Title
             p.hidden-xs
               | Topic
-            p
-              | Last
+            
             -if current_user.present?
               -if current_user.admin?
                 p 
@@ -34,8 +33,7 @@
                
                 p.hidden-xs
                   = Forum.where(forumpoint: forum.id).size
-                p
-                  | 
+                
                 -if current_user.present?
                   -if current_user.admin?
                     p 

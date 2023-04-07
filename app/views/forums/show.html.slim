@@ -17,8 +17,7 @@
               | Title
             p.hidden-xs
               | Post
-            p.hidden-xs
-              | Topic
+           
             p
               | Last
           -@forum1.each do |f|
@@ -29,12 +28,18 @@
                     = Game.find(f.gameid).name 
                   -else 
                     = f.title 
+                
                 p.hidden-xs
-                  | 2
-                p.hidden-xs
-                  | 1
+                  = Uzenet.where(game_id: f.gameid).size
                 p
-                  | Teszt béla 2022.21.22
+                  - adat =  Uzenet.where(game_id: f.gameid).last
+                  - if  User.find(f.user_id).alias.present?
+                    = User.find(f.user_id).alias
+                  - else
+                    = User.find(f.user_id).name                
+                  | (
+                  = adat.created_at.strftime("%Y-%m-%d %H:%M") 
+                  | )
                 -if current_user.present?
                   -if current_user.admin?
                     p 
