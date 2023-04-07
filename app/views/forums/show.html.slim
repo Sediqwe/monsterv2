@@ -33,13 +33,14 @@
                   = Uzenet.where(game_id: f.gameid).size
                 p
                   - adat =  Uzenet.where(game_id: f.gameid).last
-                  - if  User.find(f.user_id).alias.present?
-                    = User.find(f.user_id).alias
-                  - else
-                    = User.find(f.user_id).name                
-                  | (
-                  = adat.created_at.strftime("%Y-%m-%d %H:%M") 
-                  | )
+                  - if adat.present?
+                    - if  User.find(f.user_id).alias.present?
+                      = User.find(f.user_id).alias
+                    - else
+                      = User.find(f.user_id).name                
+                    | (
+                    = adat.created_at.strftime("%Y-%m-%d %H:%M") 
+                    | )
                 -if current_user.present?
                   -if current_user.admin?
                     p 
