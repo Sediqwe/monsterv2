@@ -16,9 +16,10 @@
               =  @forum.title
       .row
         .col-sm-12
-          textarea[name="" cols="30" rows="5" placeholder="Leirás..."]
-          a.btn.btn-primary[href=""]
-            | Küldés
+          textarea[id="uzenet" name="" cols="30" rows="5" placeholder="Leirás..."]
+          - if current_user.present?
+            button.btn.btn-primary id="uzenet" name="#{@forum.gameid}"
+              | Küldés
         - @message.each do |m|
           .col-sm-12
             .forum-post

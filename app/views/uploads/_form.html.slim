@@ -46,8 +46,9 @@
                 
                 .input-group-append
                   = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
-              .form-group
-                label for="coverImageUpload"  Borítókép
+              .input-group.mb-3
+                =f.text_area :description, class: 'form-control rows=3'
+              .input-group.mb-3
                 = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
               
               button.btn.btn-primary Fájl feltöltése »

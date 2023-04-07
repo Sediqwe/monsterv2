@@ -20,6 +20,8 @@ class UzenetsController < ApplicationController
       uzenet.desc = uzenet_params[:desc]
       uzenet.user_id = current_user.id
       uzenet.game_id = uzenet_params[:game_id]
+      forum = Forum.where(gameid: uzenet_params[:game_id]).first
+      forum.touch
       uzenet.save
       redirect_to game_path(uzenet_params[:game_id])
     end
