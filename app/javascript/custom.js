@@ -166,13 +166,6 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
-       
-
-
-
-
-
-
       $('button#uzenet').on('click', function(){
         
         let id = $(this).attr('name')

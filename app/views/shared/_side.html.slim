@@ -1,6 +1,27 @@
 .side
     .side__header
         h5
+            | Utolsó hozzászólás:
+    -@messaging.each do |t|
+        .side__elements
+            - forum = Forum.where(gameid: t.game_id).first
+            = link_to  forum_messages_path(forumid: forum.id)
+                .side__card
+                    p   
+                        = Game.find(t.game_id).name
+                        br
+                        -if t.user.alias.present?
+                            = t.user.alias
+                        -else   
+                            =t.user.name
+                        
+                        | (
+                        =t.created_at.strftime("%Y-%m-%d %H:%M") 
+                        | )
+                        br
+                        = truncate(t.desc, :length => 100, :separator => ' ')
+    .side__header
+        h5
             | Utolsó feltöltések:
     -@uploading.each do |t|
         .side__elements

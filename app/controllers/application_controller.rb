@@ -5,8 +5,9 @@ class ApplicationController < ActionController::Base
     
 def set_search
   @q = Game.ransack(params[:q])
-  @download = Download.order("created_at DESC").first(10)
+  @download = Download.order("created_at DESC").first(5)
   @uploading = Upload.order("created_at DESC").first(5)
+  @messaging = Uzenet.order("created_at DESC").first(5)
   
   
   end
