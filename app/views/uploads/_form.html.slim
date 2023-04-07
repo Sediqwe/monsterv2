@@ -1,61 +1,55 @@
-= form_for @upload do |f|
-  - if @upload.errors.any?
-    #error_explanation.bg-dark
-      h2 = "#{pluralize(@upload.errors.count, 'error')} prohibited this upload from being saved:"
-      ul
-        - @upload.errors.full_messages.each do |message|
-          li = message
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
+          = form_for @upload do |f|
+            - if @upload.errors.any?
+              #error_explanation.bg-dark
+                h2 = "#{pluralize(@upload.errors.count, 'error')} prohibited this upload from being saved:"
+                ul
+                  - @upload.errors.full_messages.each do |message|
+                    li = message
 
 
-  .container-fluid
-    .form-blocks
-    
-      h2 Új fájl feltöltés
-    
-      p
-      - if params[:id].nil?
-        = f.label "Válassz játékot"
-        = f.select(:game_id, Game.all.collect {|u| [u.name, u.id]}, html: {class: 'form-control col-1'}, :prompt => 'Válassz')
-      - else
-        -if url_for(only_path: true).include?('edit')
-        - else
-          h5  Játék: #{Game.find(params[:id]).name }
-          
-          =f.hidden_field :game_id, value: params[:id]
-      .form-group
-        = f.text_field :version, class: 'form-control', placeholder: "Verzió"
-    
-      .form-group
-        = f.text_field :link_mega, class: 'form-control', placeholder: "MEGA.NZ Link"
-      
-      
-      
-      .input-group.mb-3
-        =f.select(:translater_id,  Translater.all.order(:translater_name).collect {|u| [u.translater_name, u.id]},{include_blank: "Készítők"}, { class: "form-control" })
-        
-        .input-group-append
-          = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'
-          
-      .input-group.mb-3
-        =f.select(:program_id,  Program.all.order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
-        
-        .input-group-append
-          = link_to "+", new_program_path(), class: 'btn btn-primary append-btn'
-      
-      .input-group.mb-3
-        =f.select(:platform_id,  Platform.all.collect {|u| [u.platform_name, u.id]},{include_blank: "Platform", selected: 1}, { class: "form-control" })
-        
-        .input-group-append
-          = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
-      
-      
-      .form-group
-        =f.text_area :description, class: 'form-control rows=3'
-        
-      
-      .form-group
-        label for="coverImageUpload"  Borítókép
-        = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
-      
-      button.btn.btn-primary Fájl feltöltése »
-      
+            .form
+              h2 Új fájl feltöltés
+            
+              p
+              - if params[:id].nil?
+                = f.label "Válassz játékot"
+                = f.select(:game_id, Game.all.collect {|u| [u.name, u.id]}, html: {class: 'form-control col-1'}, :prompt => 'Válassz')
+              - else
+                -if url_for(only_path: true).include?('edit')
+                - else
+                  h5  Játék: #{Game.find(params[:id]).name }
+                  
+                  =f.hidden_field :game_id, value: params[:id]
+              .form-group.mb-3
+                = f.text_field :version, class: 'form-control', placeholder: "Verzió"
+            
+              
+              .input-group.mb-3
+                =f.select(:translater_id,  Translater.all.order(:translater_name).collect {|u| [u.translater_name, u.id]},{include_blank: "Készítők"}, { class: "form-control" })
+                
+                .input-group-append
+                  = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'
+                  
+              .input-group.mb-3
+                =f.select(:program_id,  Program.all.order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
+                
+                .input-group-append
+                  = link_to "+", new_program_path(), class: 'btn btn-primary append-btn'
+              
+              .input-group.mb-3
+                =f.select(:platform_id,  Platform.all.collect {|u| [u.platform_name, u.id]},{include_blank: "Platform", selected: 1}, { class: "form-control" })
+                
+                .input-group-append
+                  = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
+              .form-group
+                label for="coverImageUpload"  Borítókép
+                = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
+              
+              button.btn.btn-primary Fájl feltöltése »
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+          = render 'shared/side'          

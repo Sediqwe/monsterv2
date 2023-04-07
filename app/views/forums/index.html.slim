@@ -19,8 +19,6 @@
             p
               | Title
             p.hidden-xs
-              | Post
-            p.hidden-xs
               | Topic
             p
               | Last
@@ -33,12 +31,11 @@
               .forum-card--template.forum-card__card
                 p
                   = forum.title
+               
                 p.hidden-xs
-                  = Uzenet.where(game_id: Forum.where(forumpoint: forum.id)).size
-                p.hidden-xs
-                  | 1
+                  = Forum.where(forumpoint: forum.id).size
                 p
-                  | Teszt béla 2022.21.22
+                  | 
                 -if current_user.present?
                   -if current_user.admin?
                     p 

@@ -2,7 +2,7 @@
     .side__header
         h5
             | Utolsó feltöltések:
-    -@upload.each do |t|
+    -@uploading.each do |t|
         .side__elements
             = link_to  game_path(t.game)
                 .side__card
