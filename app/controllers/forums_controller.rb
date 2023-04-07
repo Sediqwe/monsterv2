@@ -24,7 +24,7 @@ class ForumsController < ApplicationController
   def controll
     game_ids = Uzenet.distinct.pluck(:game_id)
     game_ids.each do |game_id|
-      adat = Uzenet.where(game_id: game_id).last
+      adat = Uzenet.where(game_id: game_id).first
       edit = Forum.where(gameid: game_id).first
       edit.updated_at = adat.created_at
       edit.save
