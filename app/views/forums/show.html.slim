@@ -28,10 +28,7 @@
                     = Game.find(f.gameid).name 
                   -else 
                     = f.title 
-                  br
-                  = f.created_at 
-                  br
-                  = f.updated_at 
+                  
                 
                 p.hidden-xs
                   = Uzenet.where(game_id: f.gameid).size

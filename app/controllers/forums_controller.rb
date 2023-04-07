@@ -4,13 +4,14 @@ class ForumsController < ApplicationController
   # GET /forums or /forums.json
   def index
     @q = Forum.where(forumtype: :false).order(updated_at: :ASC).ransack(params[:q])
-    @forums = @q.result(distinct: true).order(updated_at: :ASC).page(params[:page]).per(10)
+    @forums = @q.result(distinct: true).page(params[:page]).per(10)
    end
 
   # GET /forums/1 or /forums/1.json
   def show
     @tip = Forum.find(params[:id])
-    @forum1 = Forum.where(forumpoint: @tip).where(forumtype: true)
+    @q  = Forum.where(forumpoint: @tip).where(forumtype: true).ransack(params[:q])
+    @forum1 = @q.result(distinct: true).order(updated_at: :DESC).page(params[:page]).per(10)
   end
   def messages
     @forum = Forum.find(params[:forumid])
