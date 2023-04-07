@@ -6,7 +6,7 @@
         .side__elements
             - forum = Forum.where(gameid: t.game_id).first
             = link_to  forum_messages_path(forumid: forum.id)
-                .side__card
+                .side__card_three
                     p   
                         = Game.find(t.game_id).name
                         br

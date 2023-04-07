@@ -481,10 +481,22 @@ textarea {
     color: white;
     margin-top: 5px;
 }
+.side .side__card_three {
+    background-color: hsl(166, 80%, 27%);
+    border-radius: 5px;
+    padding: 5px;
+    text-align: center;
+    color: white;
+    margin-top: 5px;
+}
 .side .side__card_two p {
     margin-bottom: 0;
 }
 .side .side__elements a:hover .side__card_two {
+    background-color: #252525;
+    transition: 0.2s;
+}
+.side .side__elements a:hover .side__card_three {
     background-color: #252525;
     transition: 0.2s;
 }
