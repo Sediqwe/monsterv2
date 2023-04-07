@@ -9,6 +9,7 @@
             = link_to "Home", forums_path
           li.breadcrumb-item.text-light
             = @tip.title
+      
       .forum
       
         .forum-card
@@ -20,6 +21,9 @@
            
             p
               | Last
+          step-filter
+            .step-filter__numbers
+              = paginate @forum1
           -@forum1.each do |f|
             = link_to forum_messages_path(forumid: f.id)
               .forum-card--template.forum-card__card
@@ -46,5 +50,8 @@
                   -if current_user.admin?
                     p 
                       = link_to "EDIT", edit_forum_path(f.id)
+        step-filter
+          .step-filter__numbers
+            = paginate @forum1
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side' 

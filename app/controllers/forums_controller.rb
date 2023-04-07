@@ -11,7 +11,7 @@ class ForumsController < ApplicationController
   def show
     @tip = Forum.find(params[:id])
     @q  = Forum.where(forumpoint: @tip).where(forumtype: true).ransack(params[:q])
-    @forum1 = @q.result(distinct: true).order(updated_at: :DESC).page(params[:page]).per(10)
+    @forum1 = @q.result(distinct: true).order(updated_at: :DESC).page(params[:page]).per(1)
   end
   def messages
     @forum = Forum.find(params[:forumid])
