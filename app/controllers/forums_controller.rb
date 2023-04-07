@@ -14,7 +14,7 @@ class ForumsController < ApplicationController
   def messages
     @forum = Forum.find(params[:forumid])
     @foforum = Forum.find(@forum.forumpoint)
-    @message = Uzenet.where(game_id: @forum.gameid)    
+    @message = Uzenet.where(game_id: @forum.gameid).order(created_at: :DESC)
   end
   # GET /forums/new
   def new

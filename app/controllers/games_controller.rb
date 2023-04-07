@@ -108,6 +108,8 @@ class GamesController < ApplicationController
       end
     end
     def download_file
+      directory_name = "public/vedelem"
+      Dir.mkdir(directory_name) unless File.exist?(directory_name)
       o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
       string = (0...5).map { o[rand(o.length)] }.join
       if !cookies[:randoms]
