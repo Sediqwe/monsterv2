@@ -181,7 +181,8 @@ $(document).on('turbo:load', function() {
                 url: "/uzenet",
                 type: "POST",
                 data: { product: { game_id: id, desc: adat} },
-                success: function(data) {  
+                success: function(data) { 
+                  location.reload(); 
                   
                 },
                 error: function(data) {  
