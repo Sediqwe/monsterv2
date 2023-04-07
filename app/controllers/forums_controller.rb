@@ -24,6 +24,13 @@ class ForumsController < ApplicationController
   # GET /forums/1/edit
   def edit
   end
+  def automata
+    game_ids = Uzenet.distinct.pluck(:game_id)
+    game_ids.each do |game_id|
+      adat = Game.find(game_id)
+      Forum.find_or_create_by(desc: adat.name, title: adat.name, user: current_user,forumtype: true, olvashato: false, gameid: game_id, forumpoint: 3)
+    end
+  end
 
   # POST /forums or /forums.json
   def create

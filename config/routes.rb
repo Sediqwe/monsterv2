@@ -50,6 +50,7 @@ Rails.application.routes.draw do
   get "universal", to: "beolvas#universal"
   post "universal_save", to: "beolvas#universal_save"
   get "delete_uzenet", to:"uzenets#delete_uzenet"
+  get "forumautomatika", to:"forums#automata"
   resources :uzenets
   resources :user2s
   resources :lists

@@ -1,4 +1,5 @@
 module ProjectsHelper
+    
     def fajl_sor_szamolo(file)
         Dataproject.where(file: file).size        
     end

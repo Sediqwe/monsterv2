@@ -135,6 +135,7 @@ GEM
     google-analytics-rails (1.1.1)
     groupdate (6.2.0)
       activesupport (>= 5.2)
+    hash_diff (1.1.1)
     httparty (0.21.0)
       mini_mime (>= 1.0.0)
       multi_xml (>= 0.5.2)
@@ -358,6 +359,7 @@ DEPENDENCIES
   friendly_id (~> 5.4.0)
   google-analytics-rails (= 1.1.1)
   groupdate
+  hash_diff
   image_processing (~> 1.2)
   importmap-rails
   jbuilder

@@ -47,12 +47,7 @@
                             - if session[:project_elvalaszto].present?
                             -else
                                 - session[:project_elvalaszto] = ""
-                            
-                            - if csv3.tdata.present?
-                                - if csv3.tdata.gsub(session[:project_elvalaszto],"").strip.length > 10
-                                    - if compare_sections(csv3.data.strip, csv3.tdata.strip) <20 
-                                        - szoveg3 += csv3.id.to_s + "#ǝǝ\t\t" + csv3.data.gsub(session[:project_elvalaszto],"").strip + "\r\n"
-                                        - szamol += 1
+                                    
                     .col-2
                         = text_area_tag "hatalmas3", szoveg3, rows: 40, cols:   20,  wrap: "off"
                         = szamol.to_s
