@@ -3,8 +3,9 @@ class ForumsController < ApplicationController
 
   # GET /forums or /forums.json
   def index
-    @forums = Forum.where(forumtype: :false)
-  end
+    @q = Forum.where(forumtype: :false).order(updated_at: :ASC).ransack(params[:q])
+    @forums = @q.result(distinct: true).page(params[:page]).per(10)
+   end
 
   # GET /forums/1 or /forums/1.json
   def show
@@ -20,7 +21,15 @@ class ForumsController < ApplicationController
   def new
     @forum = Forum.new
   end
-
+  def controll
+    game_ids = Uzenet.distinct.pluck(:game_id)
+    game_ids.each do |game_id|
+      adat = Uzenet.where(game_id: game_id).last
+      edit = Forum.where(gameid: game_id).first
+      edit.updated_at = adat.created_at
+      edit.save
+    end
+  end
   # GET /forums/1/edit
   def edit
   end
