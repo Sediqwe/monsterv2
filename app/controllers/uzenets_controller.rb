@@ -14,6 +14,30 @@ class UzenetsController < ApplicationController
   def new
     @uzenet = Uzenet.new
   end
+  def muzenet
+      uzenet = Uzenet.new
+    if muzenet_params[:desc].length > 1
+      forum = Forum.find_by(gameid: muzenet_params[:game_id])
+      game = Game.find(muzenet_params[:game_id])
+      if forum.nil?
+        # Ha nem találtunk olyan elemet, akkor létrehozunk egyet
+        f = Forum.create(title: game.name, desc: game.name, user: current_user, forumtype: true, forumpoint: 3, gameid: game.id)
+        f.save
+      end
+      uzenet.desc = muzenet_params[:desc]
+      uzenet.user_id = current_user.id
+      uzenet.game_id = muzenet_params[:game_id]
+      forum = Forum.where(gameid: muzenet_params[:game_id]).first
+      forum.touch
+      uzenet.save
+      redirect_to game_path(muzenet_params[:game_id])
+    end
+  end
+
+
+
+
+
   def uzenet
     uzenet = Uzenet.new
     if uzenet_params[:desc].length > 1
@@ -71,5 +95,8 @@ class UzenetsController < ApplicationController
     # Only allow a list of trusted parameters through.
     def uzenet_params
       params.require(:product).permit(:desc, :game_id)
+    end
+    def muzenet_params
+      params.require(:muzenet).permit(:desc, :game_id)
     end
 end

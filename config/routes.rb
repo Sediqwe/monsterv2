@@ -29,6 +29,7 @@ Rails.application.routes.draw do
   post "file_download", to: "beolvas#file_download"
   post "revizio", to: "beolvas#revizio"
   post "uzenet", to: "uzenets#uzenet"
+  post "muzenet", to: "uzenets#muzenet"
   get "file_download_original", to: "beolvas#file_download_original"
   post "forditas_elmentese", to: "beolvas#translate_save"
   post "forditas_eusave", to: "beolvas#translate_save_eu"

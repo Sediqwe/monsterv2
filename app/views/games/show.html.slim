@@ -6,6 +6,30 @@
                 .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
                     h1.game-data__header
                         =@game.name
+                    button.btn.btn-primary[type="button" data-bs-toggle="modal" data-bs-target="#exampleModal"]
+                        |  Hozzászólás 
+                    #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
+                        .modal-dialog
+                            .modal-content.bg-dark
+                                .modal-header
+                                    h1#exampleModalLabel.modal-title.fs-5
+                                        | Hozzászólás 
+                                    button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
+                                .modal-body
+                                    - if current_user.present?
+                                        = form_for :muzenet, :url => muzenet_path  do |f|
+                                            .field
+                                                = f.label :desc
+                                                = f.text_area :desc
+                                                = f.hidden_field :game_id, value: @user.id
+                                                                                              
+                                                .actions = f.submit "Mentés"  
+                                    -else
+                                        | A hozzászóláshoz kérlek jelentkezz be!
+                                .modal-footer
+                                    button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
+                                        | Bezár
+                                    
                     - if current_user.present?
                         -if current_user.admin? || current_user.moderator?
                             = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
