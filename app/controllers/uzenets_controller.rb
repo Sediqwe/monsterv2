@@ -34,10 +34,6 @@ class UzenetsController < ApplicationController
     end
   end
 
-
-
-
-
   def uzenet
     uzenet = Uzenet.new
     if uzenet_params[:desc].length > 1

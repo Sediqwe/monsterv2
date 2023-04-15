@@ -24,7 +24,7 @@
           .col-sm-12
             .forum-post
               .forum-post__img
-                img.img-fluid[src="imgs/portrait.png" alt=""]
+                img.img-fluid[src="#{asset_path("portrait.png")}" alt=""]
                 p.forum-post__name
                   - if  User.find(m.user_id).alias.present?
                     = User.find(m.user_id).alias
