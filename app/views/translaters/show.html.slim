@@ -9,7 +9,7 @@
           .col-xs-12.col-sm-12.col-md-3
             - if @translater.user.present?
               - if @translater.user.photo.attached?
-                = image_tag @translater.user.photo
+                = image_tag @translater.user.photo , class: "img-fluid"
             -else
               = image_tag("ize/2.svg", class: "img-fluid")
           .col-xs-12.col-sm-12.col-md-9
@@ -21,8 +21,13 @@
                   = @translater.user.desc
               - if @translater.user.tam1.present?
                 |Támogatásod megteheted STEAM játék küldéssel:
-                  br
-                = @translater.user.tam1
+                br
+                = link_to "STEAM Kívánságlista", @translater.user.tam1.to_s, target: "_blank" , class: "btn btn-primary"
+              br
+              - if @translater.user.tam1.present?
+                |Támogatásod megteheted PAYPAL-on keresztül:
+                br
+                = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
             h2
               |Utolsó 10 fordítása:
               br
