@@ -31,7 +31,7 @@
             h2
               |Utolsó 10 fordítása:
               br
-              - Upload.where(translater_id: @translater).order(id: :DESC).first(10).each do |t|
+              - Upload.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
                 = t.name 
                 br
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
