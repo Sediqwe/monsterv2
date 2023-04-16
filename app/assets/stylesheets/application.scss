@@ -788,15 +788,17 @@ textarea {
 }
 .forum-post .forum-post__img img {
     width: 100px;
+    min-width: 120px;
 }
 
 .forum-post .forum-post__name {
-    font-size: 10px;
+    font-size: 13px;
     margin-top: 10px;
 }
 
 .forum-post .forum-post__text {
     padding: 20px;
+   
 }
 
 @media screen and (max-width: 500px) {
