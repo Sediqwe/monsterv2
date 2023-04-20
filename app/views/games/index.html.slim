@@ -6,32 +6,37 @@
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color
             ul.abc
-                
-                a class="abc__all" href="/games"
-                    li 
-                        |Összes
-                        span  
-                            =number_game("")
-                -("A".."Z").each do |letter|
-                    -if params[:q]
-                        a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-light text-dark" if letter. == params[:q][:name_start]}"
-                            li 
-                                =letter
-                    - else
-                        a href="games?q%5Bname_start%5D=#{letter}"
-                            li 
-                                =letter
-                
+                - if @games.any?
+                    a class="abc__all" href="/games"
+                        li 
+                            |Összes
+                            span  
+                                =number_game("")
+                    -("A".."Z").each do |letter|
+                        -if params[:q]
+                            a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-light text-dark" if letter. == params[:q][:name_start]}"
+                                li 
+                                    =letter
+                        - else
+                            a href="games?q%5Bname_start%5D=#{letter}"
+                                li 
+                                    =letter
+                    
             
     
             .step-filter
                 .step-filter__numbers
-                    = paginate @games
+                        = paginate @games
                 
             .row
-               - @games.each do |game|
-                - cache game do
-                    = render game
+                - if @games.empty?
+                    .col-xs-12.col-md-9.col-lg-10.text-center
+                        h1.text-light
+                            |Sajnos nincs találat...
+
+                - @games.each do |game|
+                    - cache game do
+                        = render game
             step-filter
                 .step-filter__numbers
                    = paginate @games       
