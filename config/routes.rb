@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   get 'magyhu/beolvas'
   get 'search/kereses'
   get 'disqus', to: "disqus#index"
+  get 'gmail', to: "gmail#index"
   resources :projects
   resources :howtos
   resources :changers
