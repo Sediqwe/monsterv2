@@ -109,7 +109,7 @@
                         -@mega.each do |t|
                             .game-data__download-section__version
                                 h6.game-data__headline                            
-                            .row.bg-light
+                            div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                 .col-lg-2.col-xs-12
                                     - if File.exist?("file/" + t.link)
                                         - meret = number_to_human_size(File.size("file/" + t.link))
