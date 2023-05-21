@@ -21,9 +21,11 @@
                                     h6 
                                         strong
                                             = pathname.basename.to_s.gsub("-"," ").upcase
-                                    |#{item.description.html_safe}
-                                    .text-primary
-                                        |#{item.dc_creator}
+                                        - szoveg =item.description.gsub("<p>","").gsub("</p>","")
+                                    |#{truncate(szoveg, length: 100, separator: '...')}
+                                    .text-light 
+                                        strong
+                                            |#{item.dc_creator}
                                     -parsed_date = DateTime.parse(item.pubDate.to_s) + 7.hours 
                                     |(
                                     |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
