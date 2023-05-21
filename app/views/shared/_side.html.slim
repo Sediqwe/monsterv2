@@ -21,7 +21,7 @@
                                     h6 
                                         strong
                                             = pathname.basename.to_s.gsub("-"," ").upcase
-                                        - szoveg =item.description.gsub("<p>","").gsub("</p>","")
+                                        - szoveg =item.description.gsub("<p>","").gsub("</p>","").gsub("<br>","")
                                     |#{truncate(szoveg, length: 100, separator: '...')}
                                     .text-light 
                                         strong
