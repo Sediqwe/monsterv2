@@ -5,7 +5,8 @@ p#notice = notice
     p
       strong Name:
       = @user.name
-
+    - if @user.photo.attached?
+      = image_tag @user.photo , class: "img-fluid"
     p
   - else  
     p Ehhez semmi jogod!
