@@ -19,8 +19,9 @@
                                     |#{item.description.html_safe}
                                     .text-primary
                                         |#{item.dc_creator}
+                                    -parsed_date = DateTime.parse(item.pubDate.to_s) + 7.hours 
                                     |(
-                                    |#{item.pubDate.strftime("%Y-%m-%d %H:%M")}
+                                    |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
                                     |)
                         - if index >= 10
                             - break
