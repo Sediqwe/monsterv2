@@ -1,0 +1,9 @@
+production:
+  api_secret: <%= Rails.application.credentials.disqus[:skey]%>
+  api_key: <%= Rails.application.credentials.disqus[:pkey]%>
+  access_token: <%= Rails.application.credentials.disqus[:token]%>
+
+development:
+  api_secret: <%= Rails.application.credentials.disqus[:skey] %>
+  api_key: <%= Rails.application.credentials.disqus[:pkey]%>
+  access_token: <%= Rails.application.credentials.disqus[:token]%>

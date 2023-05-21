@@ -1,6 +1,35 @@
 .side
     .side__header
         h5
+            | Utolsó hozzászólások:
+        
+    
+        -require 'rss'
+        -require 'open-uri'
+
+        -url = 'https://gep-monster.disqus.com/latest.rss'
+        - URI.open(url) do |rss|
+           
+                    - feed = RSS::Parser.parse(rss)
+                    
+                    - feed.items.each_with_index do |item,index|
+                        .side__elements
+                            = link_to  item.link.html_safe
+                                .side__card
+                                    |#{item.description.html_safe}
+                                    .text-primary
+                                        |#{item.dc_creator}
+                                    |(
+                                    |#{item.pubDate.strftime("%Y-%m-%d %H:%M")}
+                                    |)
+                        - if index >= 10
+                            - break
+                
+            
+    
+
+    .side__header
+        h5
             | Utolsó feltöltések:
     -@uploading.each do |t|
         .side__elements

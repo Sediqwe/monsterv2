@@ -23,6 +23,7 @@ gem "meta-tags"
 gem 'fastimage'
 gem 'hash_diff'
 gem 'google-api-client', '~> 0.9', require: 'google/apis/gmail_v1'
+gem 'rss'
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
 

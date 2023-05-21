@@ -4,16 +4,14 @@ class ApplicationController < ActionController::Base
     before_action :set_search
     
 def set_search
+  require 'nokogiri'
+  require 'open-uri'
   @q = Game.ransack(params[:q])
   @download = Download.order("created_at DESC").first(10)
   @uploading = Upload.order("created_at DESC").first(10)
-  @messaging = Uzenet.order("created_at DESC").first(5)
   
   
-  end
-#def default_url_options
-  #{ host: ENV["DOMAIN"] || "https://gep.monster" }
-#end
+end
 
 
 def current_user
