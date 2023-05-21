@@ -26,11 +26,13 @@
               = f.text_field :password, class: "mb-2"
               label for="alias" Alias
               = f.text_field :alias, class: "mb-2"
-              label for="alias" Photo
-              = f.file_field :photo
+             
               - if @user.translater_id?
+                = f.file_field :photo
+                = image_tag @user.photo, class: "mb-2"
                 - if @user.photo.attached?
-                  = image_tag @user.photo, class: "mb-2"
+                  label for="alias" Photo
+                  
                 label for="newGameCoverUpload" Leírás
                 = f.text_area :desc , cols: 26, rows: 10, class: "mb-2"
                 label for="newGameCoverUpload" STEAM kívánságlistád
