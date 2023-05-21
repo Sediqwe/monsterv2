@@ -17,7 +17,7 @@
                             = link_to  item.link.html_safe
                                 - path = URI.parse(item.link.html_safe).path
                                 - pathname = Pathname.new(path)
-                                .side__card
+                                .side__card_two
                                     h6 
                                         strong
                                             = pathname.basename.to_s.gsub("-"," ").upcase
