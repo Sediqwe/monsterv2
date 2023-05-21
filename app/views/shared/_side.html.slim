@@ -6,16 +6,21 @@
     
         -require 'rss'
         -require 'open-uri'
-
         -url = 'https://gep-monster.disqus.com/latest.rss'
         - URI.open(url) do |rss|
            
                     - feed = RSS::Parser.parse(rss)
                     
+    
                     - feed.items.each_with_index do |item,index|
                         .side__elements
                             = link_to  item.link.html_safe
+                                - path = URI.parse(item.link.html_safe).path
+                                - pathname = Pathname.new(path)
                                 .side__card
+                                    h6 
+                                        strong
+                                            = pathname.basename.to_s.gsub("-"," ").upcase
                                     |#{item.description.html_safe}
                                     .text-primary
                                         |#{item.dc_creator}
