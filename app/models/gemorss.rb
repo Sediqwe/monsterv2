@@ -1,0 +1,2 @@
+class Gemorss < ApplicationRecord
+end

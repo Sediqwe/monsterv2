@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   resources :uploads
   resources :games
   resources :forums  
+  get 'rssgemo', to:  'rss#index'
   get 'forum/messages', to:  'forums#messages'
   get 'sessions/new'
   get 'sessions/create'

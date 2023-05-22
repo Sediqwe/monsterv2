@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_03_25_202339) do
+ActiveRecord::Schema[7.0].define(version: 2023_05_22_212340) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -197,6 +197,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_03_25_202339) do
     t.datetime "uploaded_at", precision: nil
     t.index ["slug"], name: "index_games_on_slug", unique: true
     t.index ["user_id"], name: "index_games_on_user_id"
+  end
+
+  create_table "gemorsses", force: :cascade do |t|
+    t.text "user"
+    t.text "desc"
+    t.date "ido"
+    t.boolean "okes"
+    t.text "link"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "special"
+    t.index ["link"], name: "index_gemorsses_on_link", unique: true
   end
 
   create_table "howtos", force: :cascade do |t|

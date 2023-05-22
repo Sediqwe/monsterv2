@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  user: MyText
+  desc: MyText
+  ido: 2023-05-22
+  okes: false
+  link: MyText
+
+two:
+  user: MyText
+  desc: MyText
+  ido: 2023-05-22
+  okes: false
+  link: MyText
