@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'feltoltve/index'
   get 'ipadress/index'
   get 'supports', to: 'support#index'
   get 'openai/index'
@@ -82,6 +83,7 @@ Rails.application.routes.draw do
   resources :games
   resources :forums  
   get 'rssgemo', to:  'rss#index'
+  get 'feltoltve', to:  'feltoltve#index'
   get 'forum/messages', to:  'forums#messages'
   get 'sessions/new'
   get 'sessions/create'
