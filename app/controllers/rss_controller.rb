@@ -7,13 +7,9 @@ class RssController < ApplicationController
         URI.open(url) do |rss|
            
                      feed = RSS::Parser.parse(rss)
-                    
-    
-                     feed.items.each_with_index do |item,index|
+                    feed.items.each_with_index do |item,index|
                         gemo = Gemorss.find_or_create_by(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate )
-                        gemo.save
-                        
-                     end
+                    end
                     end
                     
         adat = Gemorss.where(okes: [false, nil]).first
