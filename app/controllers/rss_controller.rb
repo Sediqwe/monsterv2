@@ -6,9 +6,13 @@ class RssController < ApplicationController
         url = 'https://gep-monster.disqus.com/latest.rss'
         URI.open(url) do |rss|
            
-                     feed = RSS::Parser.parse(rss)
+                    feed = RSS::Parser.parse(rss)
                     feed.items.each_with_index do |item,index|
-                        gemo = Gemorss.find_or_create_by(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate )
+                        gemorss = Gemorss.find_by(link: item.link)
+                        if gemorss.nil?
+                            gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate)
+                        end
+                        
                     end
                     end
                     
