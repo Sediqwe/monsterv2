@@ -64,10 +64,11 @@ $(document).on('turbo:load', function() {
       });
       $('[id^="project_sorvalto"]').on('click', function(){
         let data = $("#sorvalto").val();
+        var id = $(this).attr('data-id');
         $.ajax({
           url: "/project_sorvalto",
           type: "POST",
-          data: { product: { data: data} },
+          data: { product: { data: data, id: id} },
           success: function(data) {
             $('#hatalmas_').val(data.valami);
              },
