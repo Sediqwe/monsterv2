@@ -5,7 +5,9 @@ class MagyhuController < ApplicationController
   def beolvas
     require 'nokogiri'
     @bumm = ""
-    @doc = Nokogiri::HTML(open('https://magyaritasok.hu/games/search?search=0&page=' + params[:oldal]))
+    require 'open-uri'
+    url = 'https://magyaritasok.hu/games/search?search=0&page=' + params[:oldal]
+    @doc = Nokogiri::HTML(URI.open(url))
     #<p class="text-mpGray-100 xl:whitespace-nowrap break-words"><a href="https://magyaritasok.hu/games/3d-formula-racing" class="white-link">3D Formula Racing
  
     # Search for nodes by css
