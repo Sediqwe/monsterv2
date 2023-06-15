@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get 'rssmagyhu', to: 'rssmagyhu#index'
   get 'feltoltve/index'
   get 'ipadress/index'
   get 'supports', to: 'support#index'

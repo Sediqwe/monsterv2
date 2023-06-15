@@ -1,0 +1,2 @@
+class Magyhurss < ApplicationRecord
+end
