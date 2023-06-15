@@ -43,7 +43,7 @@ class RssmagyhuController < ApplicationController
             adat.okes = true
             adat.save
             kata = strip_tags(adat.desc.to_s)
-            render html: (adat.name + "||||Ł" + adat.uploader + "||||Ł" + adat.link + "||||Ł" + kata + "||||Ł" + adat.meret)
+            render html: (adat.name + "||||Ł" + adat.uploader + "||||Ł" + adat.link + "||||Ł" + kata + "||||Ł" + adat.meret + "||||Ł" + adat.ido)
         
         else
         render html: ("")
