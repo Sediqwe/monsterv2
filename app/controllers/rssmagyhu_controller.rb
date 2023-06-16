@@ -1,5 +1,17 @@
 class RssmagyhuController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
+  def kan
+    adat = Magyhurss.where(okes: [false, nil]).order(ido: :ASC).first
+    if adat
+        adat.okes = true
+        adat.save
+        kata = strip_tags(adat.desc.to_s)
+        render html: (adat.name + "||||Ł" + adat.uploader + "||||Ł" + adat.link + "||||Ł" + kata + "||||Ł" + adat.meret.to_s + "||||Ł" + adat.ido.to_s)
+    
+    else
+    render html: ("")
+    end
+  end
   def index
       bumm = ""
       require 'nokogiri'
@@ -38,16 +50,7 @@ class RssmagyhuController < ApplicationController
                           magyhurss = Magyhurss.create(link: link, name: download[:title], desc: download[:desc], ido: date, meret: size, uploader: author )
                         end        
       end
-      adat = Magyhurss.where(okes: [false, nil]).first
-        if adat
-            adat.okes = true
-            adat.save
-            kata = strip_tags(adat.desc.to_s)
-            render html: (adat.name + "||||Ł" + adat.uploader + "||||Ł" + adat.link + "||||Ł" + kata + "||||Ł" + adat.meret.to_s + "||||Ł" + adat.ido.to_s)
-        
-        else
-        render html: ("")
-    end
+      
     
   end
   
