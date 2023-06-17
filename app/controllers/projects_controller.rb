@@ -389,7 +389,7 @@ class ProjectsController < ApplicationController
       valasz = Dataproject.where(file: id).where("data like ?" , "%#{lv}%" )
     end
     if lv && szoveg!=""
-      valasz = Dataproject.where(file: id).where("data like ?" , "%#{szoveg}%" ).where("data like ?" , "%#{lv}%" )
+      valasz = Dataproject.where(file: id).where("data like ?" , "%#{szoveg}\t%" ).where("data like ?" , "%#{lv}%" )
       if szoveg[0]=="#"
           valasz = Dataproject.where(file: id).where.not("data like ?" , "%#{szoveg[1..-1]}%" ).where("data like ?" , "%#{lv}%" )
       end
