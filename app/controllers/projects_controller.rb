@@ -380,7 +380,7 @@ class ProjectsController < ApplicationController
     lv = session[:project_elvalaszto] #Elválasztó karakterek
     lv = lvcontoll(lv)
     if lv == "semmi"
-      lv = ""
+      l v = ""
     end
     szoveg = session[:project_szoveg].to_s #Keresett szöveg
     nemvalto = session[:project_nemvalto].to_i #Mindet(0), Csak a lefordítottat(1), Csak a nem lefordítottakat(2)

@@ -40,7 +40,6 @@ end
     @activity.ip_address = request.env['REMOTE_ADDR']
     @activity.controller = controller_name 
     @activity.action = action_name 
-    @activity.params = params.inspect
     @activity.save
 end
   def record_activity(note)
@@ -50,8 +49,7 @@ end
     @activity.browser = request.env['HTTP_USER_AGENT']
     @activity.ip_address = request.env['REMOTE_ADDR']
     @activity.controller = controller_name 
-    @activity.action = action_name 
-    @activity.params = params.inspect
+    @activity.action = action_name     
     @activity.save
 end
 def autotab
