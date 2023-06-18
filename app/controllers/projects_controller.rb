@@ -251,6 +251,9 @@ class ProjectsController < ApplicationController
     adatok = adat.each_line # Beolvasom soronként
     adatok.each do |adom| # A fájl sorain végig megyünk
     lv = session[:project_elvalaszto]
+    if lv == "\\t" 
+      lv = "\t"
+    end
     oszlop = session[:project_oszlop]
     k = adom.split("#ǝǝ") 
       if k[1].present?
@@ -263,7 +266,8 @@ class ProjectsController < ApplicationController
             string_vege = string_vege[1];
             def_string = string_split[session[:project_oszlop].to_i]
             new_string = string_vege.to_s.sub(def_string,k[1].strip)
-            new_string = string_split[0].to_s + lv + antideepl(new_string.to_s.gsub("ǝ ", "").gsub("ǝ", ""))
+            
+            new_string = string_split[0].to_s + "#{lv}" + antideepl(new_string.to_s.gsub("ǝ ", "").gsub("ǝ", ""))
             if counter(new_string,"\t")<3
               new_string = new_string.gsub("\r\n","\t\r\n")
             end

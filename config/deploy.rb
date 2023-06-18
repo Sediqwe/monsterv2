@@ -5,7 +5,7 @@ set :rbenv_type, :user
 set :rbenv_ruby, '3.2.1'
 set :stages, %w(production)
 set :default_stage, "production"
-
+set :use_sudo, true
 set :application, "monsterv2"
 set :repo_url, "https://github.com/Sediqwe/monsterv2.git"
 set :branch, "main"
