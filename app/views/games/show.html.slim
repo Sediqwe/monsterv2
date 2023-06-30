@@ -66,7 +66,22 @@
                     h4.game-data__headline
                         | Fordítások:
                     .game-data__download-section
+                        div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                            .col-lg-2.col-xs-12
+                                |Letöltés
+                            .col-lg-1.col-xs-12
+                                |Verzió
+                            .col-lg-2.col-xs-12
+                                |Készítő
+                            .col-lg-2.col-xs-12
+                                |Statisztika
+                            .col-lg-3.col-xs-12
+                                |Leírás
+                            .col-lg-2.col-xs-12
+                                |Feltöltés dátuma: 
+                            
                         -@game.uploads.order('created_at DESC').each_with_index do |t,index|
+                        
                             div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                 .col-lg-2.col-xs-12
                                     
@@ -83,12 +98,20 @@
                                             - else
                                                 =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn  btn-success mb-3 text-light"
                                             =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn mb-3 btn-primary text-light"
-                                .col-lg-1.col-xs-12 
-                                    | V: 
-                                    span
-                                        = t.version
-                                .col-lg-3.col-xs-12 
-                                    | Készítő: 
+                                - if t.mauto
+                                    .col-lg-1.col-xs-12.bg-
+                                        span
+                                            .bg-dark
+                                                .btn.btn-warning.mb-3 title="Az AUTO fordítás menet közben, élő internet kapcsolattal tölti le a fordítást!"
+                                                    |AUTO fordítás*
+
+                                - else
+                                    .col-lg-1.col-xs-12 
+                                        span
+                                            | V: 
+                                            = t.version
+                                .col-lg-2.col-xs-12 
+                                     
                                     span
                                      = link_to t.translater.translater_name, translater_path(t.translater), class:"btn btn-link"
                                         
@@ -96,14 +119,12 @@
                                     |Letöltve: 
                                     = Download.where(upload_id: t.id).size 
                                     |X
-                                .col-lg-2.col-xs-12
+                                .col-lg-3.col-xs-12
                                     - if t.description.length > 0
                                         | Leírás:  
                                         span
                                             = t.description
                                 .col-lg-2.col-xs-12
-                                    |Feltöltés dátuma: 
-                                    br
                                     = t.created_at.strftime("%Y-%m-%d %H:%M")
                     .game-data__download-section
                         -@mega.each do |t|

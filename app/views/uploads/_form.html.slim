@@ -27,7 +27,9 @@
                   =f.hidden_field :game_id, value: params[:id]
               .form-group.mb-3
                 = f.text_field :version, class: 'form-control', placeholder: "Verzió"
-            
+              .input-group.mb-3
+                =f.label "Auto magyarítás?"
+                = f.check_box :mauto
               
               .input-group.mb-3
                 =f.select(:translater_id,  Translater.all.order(:translater_name).collect {|u| [u.translater_name, u.id]},{include_blank: "Készítők"}, { class: "form-control" })

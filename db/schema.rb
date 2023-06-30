@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_15_175606) do
+ActiveRecord::Schema[7.0].define(version: 2023_06_30_212339) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -407,6 +407,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_15_175606) do
     t.boolean "bad"
     t.text "link_mega"
     t.boolean "special", default: false
+    t.boolean "mauto", default: false
     t.index ["game_id"], name: "index_uploads_on_game_id"
     t.index ["platform_id"], name: "index_uploads_on_platform_id"
     t.index ["program_id"], name: "index_uploads_on_program_id"
