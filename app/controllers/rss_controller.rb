@@ -8,7 +8,7 @@ class RssController < ApplicationController
            
                     feed = RSS::Parser.parse(rss)
                     feed.items.each_with_index do |item,index|
-                        itemlink = item.link.gsub("gep-monster.translate.goog/","gep.monster")
+                        itemlink = item.link.gsub("gep-monster.translate.goog","gep.monster")
                         itemlink = itemlink.gsub("?_x_tr_sl=hu&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc","")
                         gemorss = Gemorss.find_by(link: itemlink)
                         if gemorss.nil?
