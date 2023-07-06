@@ -10,7 +10,7 @@ class RssController < ApplicationController
                     feed.items.each_with_index do |item,index|
                         itemlink = item.link.gsub("gep-monster.translate.goog/","gep.monster")
                         itemlink = itemlink.gsub("?_x_tr_sl=hu&_x_tr_tl=en&_x_tr_hl=en&_x_tr_pto=sc","")
-                        gemorss = Gemorss.find_by(link: item.link)
+                        gemorss = Gemorss.find_by(link: itemlink)
                         if gemorss.nil?
                             gemorss = Gemorss.create(link: itemlink, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate)
                         end
