@@ -30,10 +30,11 @@
                 = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
             h2
               |Utolsó 10 fordítása:
-              br
-              - Upload.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
-                = t.name 
-                br
+              .row
+                - Upload.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
+                  .col-4
+                    = image_tag(t.game.image.variant(resize_to_limit: [300,300]), class: 'listpage-imgs', title: t.game.name) if t.game.image.attached?
+                
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render 'shared/side' 
