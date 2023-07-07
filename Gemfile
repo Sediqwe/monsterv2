@@ -18,6 +18,7 @@ gem 'active_storage_validations'
 gem "ruby-openai"
 gem "csv"
 gem "chartkick"
+gem 'mini_magick'
 gem 'rmagick'
 gem "meta-tags"
 gem 'fastimage'

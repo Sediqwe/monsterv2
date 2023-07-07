@@ -32,8 +32,11 @@
               |Utolsó 10 fordítása:
               .row
                 - Upload.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
-                  .col-4
-                    = image_tag(t.game.image.variant(resize_to_limit: [300,300]), class: 'listpage-imgs', title: t.game.name) if t.game.image.attached?
+                  .col-6
+                    a.cards href="/games/#{t.game.slug}" 
+                    
+                      = image_tag(t.game.image.variant(resize_to_fill: [616, 353]), class: 'listpage-imgs', title: t.game.name) if t.game.image.attached?
+                      
                 
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
