@@ -1,34 +1,11 @@
 .row
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
         .row
-            
             .game-data
                 .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
                     h1.game-data__header
                         =@game.name
                      
-                    #exampleModal.modal.fade[tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true"]
-                        .modal-dialog
-                            .modal-content.bg-dark
-                                .modal-header
-                                    h1#exampleModalLabel.modal-title.fs-5
-                                        | Hozzászólás 
-                                    button.btn-close[type="button" data-bs-dismiss="modal" aria-label="Close"]
-                                .modal-body
-                                    - if current_user.present?
-                                        = form_for :muzenet, :url => muzenet_path  do |f|
-                                            .field
-                                                = f.label :desc
-                                                = f.text_area :desc
-                                                = f.hidden_field :game_id, value: @user.id
-                                                                                              
-                                                .actions = f.submit "Mentés"  
-                                    -else
-                                        | A hozzászóláshoz kérlek jelentkezz be!
-                                .modal-footer
-                                    button.btn.btn-secondary[type="button" data-bs-dismiss="modal"]
-                                        | Bezár
-                                    
                     - if current_user.present?
                         -if current_user.admin? || current_user.moderator?
                             = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
@@ -69,13 +46,13 @@
                         div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                             .col-lg-2.col-xs-12
                                 |Letöltés
-                            .col-lg-1.col-xs-12
+                            .col-lg-2.col-xs-12
                                 |Verzió
                             .col-lg-2.col-xs-12
                                 |Készítő
                             .col-lg-2.col-xs-12
                                 |Statisztika
-                            .col-lg-3.col-xs-12
+                            .col-lg-2.col-xs-12
                                 |Leírás
                             .col-lg-2.col-xs-12
                                 |Feltöltés dátuma: 
@@ -88,44 +65,33 @@
                                     - if t.bad == false && t.game_files.attached?
                                         - if t.game_files.present?
                                             = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", download_file_path(id: t), class:"btn btn-primary mb-3 "                                        
-                                            
-                                - if current_user.present?
-                                    -if current_user.admin?
-                                        .col-lg-2.col-xs-12
-                                            =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info"
-                                            - if t.bad == false
-                                                =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn btn-danger mb-3  text-light" 
-                                            - else
-                                                =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn  btn-success mb-3 text-light"
-                                            =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn mb-3 btn-primary text-light"
-                                - if t.mauto
-                                    .col-lg-1.col-xs-12.bg-
-                                        span
-                                            .bg-dark
-                                                .btn.btn-warning.mb-3 title="Az AUTO fordítás menet közben, élő internet kapcsolattal tölti le a fordítást!"
-                                                    |AUTO fordítás*
-
-                                - else
-                                    .col-lg-1.col-xs-12 
-                                        span
-                                            | V: 
-                                            = t.version
+                                .col-lg-2.col-xs-12 
+                                    span
+                                        = t.version
                                 .col-lg-2.col-xs-12 
                                      
                                     span
-                                     = link_to t.translater.translater_name, translater_path(t.translater), class:"btn btn-link"
+                                     = link_to t.translater.translater_name, translater_path(t.translater)
                                         
                                 .col-lg-2.col-xs-12 
                                     |Letöltve: 
                                     = Download.where(upload_id: t.id).size 
                                     |X
-                                .col-lg-3.col-xs-12
+                                .col-lg-2.col-xs-12
                                     - if t.description.length > 0
-                                        | Leírás:  
                                         span
                                             = t.description
                                 .col-lg-2.col-xs-12
                                     = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                - if current_user.present?
+                                    -if current_user.admin?
+                                        .col
+                                            =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info text-light m-1"
+                                            - if t.bad == false
+                                                =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-danger  text-light" 
+                                            - else
+                                                =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn m-1  btn-success text-light"
+                                            =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn m-1 btn-primary text-light"
                     .game-data__download-section
                         -@mega.each do |t|
                                                        
