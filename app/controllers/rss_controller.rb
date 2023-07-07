@@ -8,9 +8,11 @@ class RssController < ApplicationController
            
                     feed = RSS::Parser.parse(rss)
                     feed.items.each_with_index do |item,index|
-                        gemorss = Gemorss.find_by(link: item.link)
-                        if gemorss.nil?
-                            gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate)
+                        if item.link.exclude?("gep-monster.translate.goog")
+                            gemorss = Gemorss.find_by(link: item.link)
+                            if gemorss.nil?
+                                gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: item.pubDate)
+                            end
                         end
                         
                     end
