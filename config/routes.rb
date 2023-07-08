@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  constraints(host: 'gep.monster') do
   get 'rssmagyhu', to: 'rssmagyhu#kan'
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'
   get 'feltoltve/index'
@@ -137,11 +136,6 @@ get "jakab", to: "games#jakab"
 get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
 get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
-end
-constraints(host: 'forditas.xyz') do
-  get 'games/index'
-end
-
 
 
 end
