@@ -139,9 +139,7 @@ get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
 end
 constraints(host: 'forditas.xyz') do
-  
-
-  
+  root 'games#index'
 end
 
 
