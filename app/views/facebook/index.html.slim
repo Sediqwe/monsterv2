@@ -17,7 +17,8 @@
                             .list-card__img
                                 
                             .bg-light    
-                                =game.name
+                                b
+                                    =game.name.upcase
                                 br
                                 b Verzió:  
                                 = game.version
@@ -36,7 +37,7 @@
                                     - if game.game_files.filename.to_s.downcase.include? "google"
                                         | Google
                                 br
-                                |Link: 
+                                b Link: 
                                 br
                                 |https://gep.monster/games/#{game.game.slug}
                                 br
