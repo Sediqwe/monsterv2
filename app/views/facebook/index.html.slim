@@ -26,9 +26,9 @@
                                 = game.translater.translater_name
                                 br
                                 b Fordító program:
-                                - if game.game_files.filename.to_s.include? "deepl"
+                                - if game.game_files.filename.downcase.to_s.include? "deepl"
                                     | Deepl
-                                - if game.game_files.filename.to_s.include? "google"
+                                - if game.game_files.filename.downcase.to_s.include? "google"
                                     | Google
                                 br
                                 |Link:
