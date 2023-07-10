@@ -32,8 +32,9 @@
                         | Játék linkek:
                     
                     .gme-data__buy-game
-                        - if @game.link_steam.present?
-                        = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
+                        - if @game.link_steam.present? 
+                            - if @game.link_steam.size > 3
+                                = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
                         - if @game.link_epic.present?
                             = link_to " Epic »", @game.link_epic, target: "_blank" , class: "btn btn-secondary text-light"
                         - if @game.link_other.present?
