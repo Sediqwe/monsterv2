@@ -19,25 +19,27 @@
                             .bg-light    
                                 =game.name
                                 br
-                                b Verzió: 
+                                b Verzió:  
                                 = game.version
                                 br
-                                b Készítő:
+                                b Készítő: 
                                 = game.translater.translater_name
                                 br
-                                b Fordító program:
+                                b Fordító program: 
                                 - if game.mauto
-                                    |Auto fordító
+                                    | Auto fordító
                                 - else 
                                     - if game.game_files.filename.to_s.downcase.include? "deepl"
                                         | Deepl
                                     - if game.game_files.filename.to_s.downcase.include? "google"
                                         | Google
                                 br
-                                |Link:
+                                |Link: 
                                 br
                                 |https://gep.monster/games/#{game.game.slug}
                                 br
+                                = link_to game.game.image, download: true do
+                                    = image_tag game.game.image.variant(resize_to_fill: [413, 237], crop: "413x237+0+0"), class: 'img-fluid'
                                 
                             .list-card__text
                                 h6
