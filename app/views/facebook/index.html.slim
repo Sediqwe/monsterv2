@@ -1,0 +1,54 @@
+.container-fluid
+    - if current_user&.admin? 
+        .row
+            .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
+                    = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light mb-3 ml-3"
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+            .row
+                - if @facebook.empty?
+                    .col-xs-12.col-md-9.col-lg-10.text-center
+                        h1.text-light
+                            |Sajnos nincs találat...
+
+                - @facebook.each do |game|
+                   .col-xs-12.col-sm-6.col-md-6.col-lg-4
+                        .list-card
+                            .list-card__img
+                                
+                            .bg-light    
+                                =game.name
+                                br
+                                b Verzió: 
+                                = game.version
+                                br
+                                b Készítő:
+                                = game.translater.translater_name
+                                br
+                                b Fordító program:
+                                - if game.game_files.filename.to_s.include? "deepl"
+                                    | Deepl
+                                - if game.game_files.filename.to_s.include? "google"
+                                    | Google
+                                br
+                                |Link:
+                                br
+                                |https://gep.monster/games/#{game.game.slug}
+                                br
+                                
+                            .list-card__text
+                                h6
+                                    = game.name 
+                                    |  »
+            step-filter
+                .step-filter__numbers
+                        
+
+
+
+
+
+
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render 'shared/side'   
+                
