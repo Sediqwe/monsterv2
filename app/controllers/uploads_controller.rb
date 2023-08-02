@@ -52,7 +52,12 @@ class UploadsController < ApplicationController
     
     
   end
-  
+  def uploadrendezo
+    upp = Upload.all
+    upp.each do |up2|
+      Uploadtranslater.create(upload_id: up2.id, translater_id: up2.translater_id)
+    end
+  end
   # POST /uploads or /uploads.json
   def create
     @upload = Upload.new(upload_params)
@@ -65,7 +70,7 @@ class UploadsController < ApplicationController
     upd.save
     respond_to do |format|
       if @upload.save
-        record_activity("Sikeres feltöltés: #{ Game.find(@upload.game_id).name} Version: #{@upload.version}")
+        record_activity("Siker:upload][:multi_translater_ids]es feltöltés: #{ Game.find(@upload.game_id).name} Version: #{@upload.version}")
         format.html { redirect_to upload_url(@upload), notice: "Sikeres feltöltés." }
         format.json { render :show, status: :created, location: @upload }
       else
@@ -109,7 +114,8 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :translater_id, :program_id , :platform_id, :link_mega, :mauto )
+      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :translater_id, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :uploadtranslater[] )
+      
     end
     def editor_params
       params.require(:product).permit(:id, :adat )

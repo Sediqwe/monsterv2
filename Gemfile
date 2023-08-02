@@ -50,7 +50,8 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
-# Use Redis adapter to run Action Cable in production
+# Use Redis adapter to run Action Cable in productionb:5: warning: previous definition of BOOTSTRAP_SHA was here
+
 # gem "redis", "~> 4.0"
 
 # Use Kredis to get higher-level data types in Redis [https://github.com/rails/kredis]

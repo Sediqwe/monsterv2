@@ -28,6 +28,9 @@
   <body>
     <%= render 'shared/menu' %>
     <%= yield  %>
+    <%= link_to root_path do %>
+  <i class="fas fa-home"></i> Kezdőlap
+<% end %>
     <%= render 'shared/footer' %>
   </body>
   <script id="dsq-count-scr" src="//gep-monster.disqus.com/count.js" async></script>

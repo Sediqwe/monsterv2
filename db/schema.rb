@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_06_30_212339) do
+ActiveRecord::Schema[7.0].define(version: 2023_08_02_115439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -408,11 +408,21 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_30_212339) do
     t.text "link_mega"
     t.boolean "special", default: false
     t.boolean "mauto", default: false
+    t.boolean "multiuser", default: false
     t.index ["game_id"], name: "index_uploads_on_game_id"
     t.index ["platform_id"], name: "index_uploads_on_platform_id"
     t.index ["program_id"], name: "index_uploads_on_program_id"
     t.index ["translater_id"], name: "index_uploads_on_translater_id"
     t.index ["user_id"], name: "index_uploads_on_user_id"
+  end
+
+  create_table "uploadtranslaters", force: :cascade do |t|
+    t.bigint "upload_id", null: false
+    t.bigint "translater_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["translater_id"], name: "index_uploadtranslaters_on_translater_id"
+    t.index ["upload_id"], name: "index_uploadtranslaters_on_upload_id"
   end
 
   create_table "user2s", force: :cascade do |t|
@@ -480,5 +490,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_06_30_212339) do
   add_foreign_key "uploads", "programs"
   add_foreign_key "uploads", "translaters"
   add_foreign_key "uploads", "users"
+  add_foreign_key "uploadtranslaters", "translaters"
+  add_foreign_key "uploadtranslaters", "uploads"
   add_foreign_key "uzenets", "users"
 end

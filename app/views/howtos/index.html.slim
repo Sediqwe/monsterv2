@@ -3,16 +3,24 @@
     - if current_user&.admin? 
       
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+    
+      - @howtos.each do |howto2|
+        div id="uppp"
+        h3
+          = link_to howto2.title, howtos_path(anchor: "#{howto2.poz}")
+
       - @howtos.each do |howto|
         
         .container-fluid
           .row
             .col-xs-12.col-md-9.col-lg-10.bg-basic-color
               h1.how-to-headline
+                div id="#{howto.poz}"
                 |#
-                = howto.poz 
+                = howto.poz
                 = howto.title
-                
+                i.bi.bi-arrow-90deg-up
+                = link_to "FEL", howtos_path(anchor: "uppp")
               ul.how-to-text
                 = howto.description.to_s.html_safe
                 

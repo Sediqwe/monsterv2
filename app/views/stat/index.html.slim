@@ -25,7 +25,11 @@
                             |FreeSpace: 
                             = number_to_human(FreeDiskSpace.gigabytes('/')) 
                             |   GB
-            .row
+                        .labels__element.labels__element--libafos
+                            |Össz méret: 
+                            = @meretossz.round(2)
+                            |   Mb
+            .row    
                 .col-xs-12.col-sm-4
                     h2.top-header
                         | TOP 10 letöltése

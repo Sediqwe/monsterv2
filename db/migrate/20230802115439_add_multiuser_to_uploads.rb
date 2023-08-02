@@ -1,0 +1,5 @@
+class AddMultiuserToUploads < ActiveRecord::Migration[7.0]
+  def change
+    add_column :uploads, :multiuser, :boolean, default: false
+  end
+end
