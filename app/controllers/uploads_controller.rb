@@ -61,6 +61,7 @@ class UploadsController < ApplicationController
   # POST /uploads or /uploads.json
   def create
     @upload = Upload.new(upload_params)
+    
     @upload.user_id = current_user.id
     @upload.datum = Date.today()
     @upload.name = Game.find(@upload.game_id).name
@@ -114,7 +115,7 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :translater_id, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :uploadtranslater[] )
+      params.require(:upload).permit(:name, :version, :translater_id, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :uploadtranslaters => [] )
       
     end
     def editor_params

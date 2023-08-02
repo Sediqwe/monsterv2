@@ -20,7 +20,7 @@ class StatController < ApplicationController
         meretossz += upload.game_files.blob.byte_size
       end
       end
-      meretossz = (meretossz.to_f / 1024 / 1024)
+      meretossz = (meretossz.to_f / 1024 / 1024 / 1024)
       @meretossz = meretossz
       
   end
