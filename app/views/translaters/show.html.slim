@@ -36,16 +36,16 @@
                     a.cards href="/games/#{t.upload.game.slug}" 
                     
                       = image_tag(t.upload.game.image.variant(resize_to_fit: [492, 282]), class: 'listpage-imgs', title: t.upload.game.name) if t.upload.game.image.attached?
-            .row 
-              
-              - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(100).each do |t|  
-                .col-2
-                  a href="/games/#{t.upload.game.slug}"
-                    - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
+      .row 
+        .col-12
+          - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(100).each do |t|  
+            .mazsi
+              a href="/games/#{t.upload.game.slug}"
+                - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
 
-                    span class="tag tag-#{adatok.sample} tag-sm"
-                      =t.upload.game.name
-                    
+                span class="tag tag-#{adatok.sample} tag-sm"
+                  =t.upload.game.name
+                      
 
 
                 
