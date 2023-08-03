@@ -72,10 +72,12 @@
                                 .col-lg-2.col-xs-12 
                                      
                                     span
-                                        - Uploadtranslater.where(upload_id: t).each do |dorka|
+                                        - adatok = Uploadtranslater.where(upload_id: t)
+                                        - adatok.each_with_index do |dorka,index2|
                                             = link_to dorka.translater.translater_name, translater_path(dorka.translater)
-                                            | , 
-                                        
+                                            - if index2 < adatok.size-1
+                                                | , 
+                                            
                                         
                                         
                                         
