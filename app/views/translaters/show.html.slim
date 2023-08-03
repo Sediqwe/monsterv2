@@ -39,7 +39,7 @@
             .row 
               
               - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(100).each do |t|  
-                .col
+                .col-2
                   a href="/tags/javascript/"
                   - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
 
