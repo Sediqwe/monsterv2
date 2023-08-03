@@ -31,12 +31,23 @@
             h2
               |Utolsó 10 fordítása:
               .row
-                - Upload.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
+                - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
                   .col-6
-                    a.cards href="/games/#{t.game.slug}" 
+                    a.cards href="/games/#{t.upload.game.slug}" 
                     
-                      = image_tag(t.game.image.variant(resize_to_fill: [616, 353]), class: 'listpage-imgs', title: t.game.name) if t.game.image.attached?
-                      
+                      = image_tag(t.upload.game.image.variant(resize_to_fit: [492, 282]), class: 'listpage-imgs', title: t.upload.game.name) if t.upload.game.image.attached?
+            .row 
+              
+              - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(100).each do |t|  
+                .col
+                  a href="/tags/javascript/"
+                  - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
+
+                  span class="tag tag-#{adatok.sample} tag-sm"
+                    =t.upload.game.name
+                    
+
+
                 
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
