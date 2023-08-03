@@ -26,7 +26,12 @@
                                 = game.description
                                 br
                                 b Készítő: 
-                                = game.translater.translater_name
+                                - adatok = Uploadtranslater.where(upload_id: game)
+                                - adatok.each_with_index do |dorka,index2|
+                                    = dorka.translater.translater_name
+                                    - if index2 < adatok.size-1
+                                        | , 
+                                
                                 br
                                 b Fordító program: 
                                 - if game.mauto
