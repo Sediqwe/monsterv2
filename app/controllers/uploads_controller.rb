@@ -61,7 +61,7 @@ class UploadsController < ApplicationController
   # POST /uploads or /uploads.json
   def create
     @upload = Upload.new(upload_params)
-    
+    @upload.translater_id1 = current_user.id
     @upload.user_id = current_user.id
     @upload.datum = Date.today()
     @upload.name = Game.find(@upload.game_id).name
@@ -69,9 +69,13 @@ class UploadsController < ApplicationController
     upd = Game.find(@upload.game_id)
     upd.uploaded_at = DateTime.now
     upd.save
+
     respond_to do |format|
       if @upload.save
-        record_activity("Siker:upload][:multi_translater_ids]es feltöltés: #{ Game.find(@upload.game_id).name} Version: #{@upload.version}")
+        Uploadtranslater.where(upload_id: params[:id]).destroy_all
+        params[:uploadtranslaters].each do |dorka|
+          Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
+        end
         format.html { redirect_to upload_url(@upload), notice: "Sikeres feltöltés." }
         format.json { render :show, status: :created, location: @upload }
       else
@@ -83,10 +87,12 @@ class UploadsController < ApplicationController
 
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
-    record_activity("Sikeres feltöltés módosítás - Előtt: #{ Game.find(@upload.game_id).name} Version: #{@upload.version}, Desc: Version: #{@upload.description}")
     respond_to do |format|
       if @upload.update(upload_params)
-        record_activity("Sikeres feltöltés módosítás - Után: #{ Game.find(@upload.game_id).name} Version: #{@upload.version}, Desc: Version: #{@upload.description}")
+        Uploadtranslater.where(upload_id: params[:id]).destroy_all
+        params[:uploadtranslaters].each do |dorka|
+          Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
+        end
         format.html { redirect_to upload_url(@upload), notice: "A feltöltés módosítva." }
         format.json { render :show, status: :ok, location: @upload }
       else
@@ -115,8 +121,7 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :version, :translater_id, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :uploadtranslaters => [] )
-      
+      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser )
     end
     def editor_params
       params.require(:product).permit(:id, :adat )

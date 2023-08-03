@@ -72,7 +72,12 @@
                                 .col-lg-2.col-xs-12 
                                      
                                     span
-                                     = link_to t.translater.translater_name, translater_path(t.translater)
+                                        - Uploadtranslater.where(upload_id: t).each do |dorka|
+                                            = link_to dorka.translater.translater_name, translater_path(dorka.translater)
+                                            | , 
+                                        
+                                        
+                                        
                                         
                                 .col-lg-2.col-xs-12 
                                     |Letöltve: 

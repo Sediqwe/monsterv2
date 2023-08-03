@@ -33,7 +33,9 @@
               
               .input-group.mb-3
                 = f.label "Multi uploader?"                
-                = f.select :translater_id, Translater.all.order(:translater_name).collect {|u| [u.translater_name, u.id]}
+                = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { include_blank: "Készítők", multiple: true, class: "form-control" } 
+
+
                 .input-group-append
                   = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'    
               .input-group.mb-3
