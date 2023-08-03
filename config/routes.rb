@@ -12,7 +12,6 @@ Rails.application.routes.draw do
   get 'search/kereses'
   get 'disqus', to: "disqus#index"
   get 'gmail', to: "gmail#index"
-  get 'uploadrendezo', to: "uploads#uploadrendezo"
   resources :projects
   resources :howtos
   resources :changers
