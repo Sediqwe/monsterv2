@@ -15,7 +15,7 @@
             
             - if params[:keyword] == session[:randoms]
                 - session[:randoms]= ''
-                = link_to "Letöltés (#{number_to_human_size(@adat.game_files.byte_size)}) »", downloadend_path(id: @adat.id), type: @adat.game_files.content_type, target: :blank, download: @adat.game_files.filename, id: "letoltesvege", class:"btn btn-primary mb-3 "
+                = link_to "Letöltés (#{number_to_human_size(@adat.game_files.byte_size)}) »", downloadend_path(id: @adat.id), type: @adat.game_files.content_type, rel: 'nofollow', target: :blank, download: @adat.game_files.filename, id: "letoltesvege", class:"btn btn-primary mb-3 "
                 .div id="koszi"
             -else
                 br

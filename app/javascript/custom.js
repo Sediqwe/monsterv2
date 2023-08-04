@@ -403,6 +403,7 @@ $(document).on('turbo:load', function() {
         }
       });
       $('a[id^="letoltes_gomb"]').on('click', function(){
+        alert("FCK");
         var adat = $(this).attr('datagame');
         var done = $(this).attr('done');
         $.ajax({

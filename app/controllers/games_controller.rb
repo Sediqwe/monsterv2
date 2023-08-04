@@ -86,7 +86,18 @@ class GamesController < ApplicationController
       end
     end
   end
- 
+  
+  def download
+    i = Download.new
+    i.game_id = je_params[:id]
+    i.upload_id = je_params[:done]
+    if i.save
+      render json: { valami: 'OK' }
+    else
+      render json: { valami: 'NOK' }
+    end
+   end
+
     def downloadend
       ActiveStorage::Blob
       adat = Upload.find(params[:id])
