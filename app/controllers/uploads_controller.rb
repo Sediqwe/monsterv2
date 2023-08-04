@@ -69,12 +69,11 @@ class UploadsController < ApplicationController
     upd = Game.find(@upload.game_id)
     upd.uploaded_at = DateTime.now
     upd.save
-
+    
     respond_to do |format|
       if @upload.save
-        Uploadtranslater.where(upload_id: params[:id]).destroy_all
         params[:uploadtranslaters].each do |dorka|
-          Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
+          Uploadtranslater.create(upload_id: @upload.id , translater_id: dorka )
         end
         format.html { redirect_to upload_url(@upload), notice: "Sikeres feltöltés." }
         format.json { render :show, status: :created, location: @upload }
