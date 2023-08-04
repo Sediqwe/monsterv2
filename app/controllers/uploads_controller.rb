@@ -53,7 +53,7 @@ class UploadsController < ApplicationController
     
   end
   def uploadrendezo
-    upp = Upload.all
+    upp = Upload.all.order(id: :ASC)
     upp.each do |up2|
       Uploadtranslater.create(upload_id: up2.id, translater_id: up2.translater_id)
     end

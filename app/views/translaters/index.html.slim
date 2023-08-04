@@ -2,6 +2,9 @@
   .row 
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
       .row
+        - if current_user.present?
+          - if current_user.admin?
+            = link_to 'Új fordító felvétele', new_translater_path, class:"btn btn-success"
         - @translaters.each do |t|
           .col-sx-12.col-sm-3
             .creator-card
@@ -17,7 +20,5 @@
       = render 'shared/side' 
       
 
-- if current_user.present?
-  - if current_user.admin?
-    = link_to 'New Translater', new_translater_path
+
 
