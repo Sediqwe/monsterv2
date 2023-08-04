@@ -61,7 +61,7 @@ class UploadsController < ApplicationController
   # POST /uploads or /uploads.json
   def create
     @upload = Upload.new(upload_params)
-    @upload.translater_id1 = current_user.id
+    @upload.translater_id = 5
     @upload.user_id = current_user.id
     @upload.datum = Date.today()
     @upload.name = Game.find(@upload.game_id).name
