@@ -51,7 +51,7 @@
                     .btn.btn-success id="mutat"
                             | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Tovább a fordításokhoz
                                 
-                    div class="game-data__download-section #{"elrejt" if @game.done}"
+                    div class="game-data__download-section #{"elrejt" if @game.done.present?}"
                         div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                             .col-lg-2.col-xs-12
                                 |Letöltés
