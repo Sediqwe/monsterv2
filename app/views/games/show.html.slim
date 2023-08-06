@@ -30,7 +30,12 @@
                         = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 30).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
                     h4.game-data__headline
                         | Játék linkek:
-                    
+                    - if @game.done
+                        .mutat.bg-warning.text-dark.rounded.mt-2 id="mutat2"
+                            h1 
+                                | Úgy néz ki, hogy ennek a játéknak elkészült a rendes, nem gépi fordítása is, amely sokkal jobb élményt nyújt!                          A fordítás a magyaritasok.hu odalon keresztül tölthető le:
+                            
+                        
                     .gme-data__buy-game
                         - if @game.link_steam.present? 
                             - if @game.link_steam.size > 3
@@ -42,8 +47,11 @@
                         - if @game.link_hun.present?
                             = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                     h4.game-data__headline
-                        | Fordítások:
-                    .game-data__download-section
+                        | Letölthető fordítások:
+                    .btn.btn-success id="mutat"
+                            | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Tovább a fordításokhoz
+                                
+                    div class="game-data__download-section #{"elrejt" if @game.done}"
                         div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                             .col-lg-2.col-xs-12
                                 |Letöltés

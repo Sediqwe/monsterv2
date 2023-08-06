@@ -402,6 +402,12 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
+      $(".elrejt").hide();
+      $("#mutat").on('click', function(){
+        $(".elrejt").show();
+        $("#mutat").hide();
+        $("#mutat2").hide();
+      });
       $('a[id^="letoltes_gomb"]').on('click', function(){
        
         var adat = $(this).attr('datagame');
