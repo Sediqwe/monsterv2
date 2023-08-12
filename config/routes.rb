@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :autoforditoilists
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'

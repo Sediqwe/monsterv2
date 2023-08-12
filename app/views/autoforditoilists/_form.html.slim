@@ -1,0 +1,42 @@
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
+          - if @autoforditoilist.errors.any?
+      
+            h2 = "#{pluralize(@autoforditoilist.errors.count, "error")} hiba történt a mentés közben:"
+            ul
+              - @autoforditoilist.errors.full_messages.each do |message|
+                li = message
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+          .form
+            h1.form__headline
+              - if @autoforditoilist.persisted?
+                |  Adatlap módosítás
+              - else 
+                |  Új játék adatlap
+              = form_with(model: @autoforditoilist) do |form|
+                - if @autoforditoilist.errors.any?
+                  div style="color: red"
+                    h2 = "#{pluralize(@autoforditoilist.errors.count, "error")} prohibited this autoforditoilist from being saved:"
+                    ul
+                      - @autoforditoilist.errors.each do |error|
+                        li = error.full_message
+
+                = form.text_field :game_id, class: "mb-2",placeholder: "game_id"
+                = form.collection_select :tipus, [["XUnity Auto Translator", 1],["BepInEx Auto Translator", 2],["HÁROM", 3]], :last, :first, prompt: true, class: "mb-2"
+                = form.label :active
+                = form.check_box :active
+                - if @autoforditoilist.persisted?
+                  = form.submit "Módosítás »" , class: "btn btn-primary"
+                - else 
+                  = form.submit "Felvétel »" , class: "btn btn-primary"
+              = link_to "Back to autoforditoilists", autoforditoilists_path, class:"btn btn-primary"
+                
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
+
+
+            

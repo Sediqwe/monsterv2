@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @autoforditoilist
+
+div
+  => link_to "Edit this autoforditoilist", edit_autoforditoilist_path(@autoforditoilist)
+  '|
+  =< link_to "Back to autoforditoilists", autoforditoilists_path
+
+  = button_to "Destroy this autoforditoilist", @autoforditoilist, method: :delete

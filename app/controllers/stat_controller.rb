@@ -1,5 +1,5 @@
 class StatController < ApplicationController
-  
+
   def index
       Download.default_timezone = :utc
       @users = User.all.count
@@ -14,6 +14,7 @@ class StatController < ApplicationController
       @ipad = Download.all.group(:ip_address).where.not(ip_address: nil).order('count_id DESC').limit(10).count('id')    
       uploads = Upload.all
       meretossz = 0
+    
 
       uploads.each do |upload|
       if upload.game_files.attached?
@@ -24,4 +25,5 @@ class StatController < ApplicationController
       @meretossz = meretossz
       
   end
+  
 end
