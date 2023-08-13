@@ -26,14 +26,17 @@
                         li = error.full_message
 
                 = form.text_field :game_id, value: params[:game_id], class: "mb-2",placeholder: "game_id"
-                = form.collection_select :tipus, [["XUnity Auto Translator", 1],["BepInEx Auto Translator", 2],["HÁROM", 3]], :last, :first, prompt: true, class: "mb-2"
+                br
+                = form.collection_select :tipus, [["XUnity", 1],["BepInEx", 2],["XUnity + Font", 3]], :last, :first, prompt: true, class: "block mb-2"
+                br
                 = form.label :active
                 = form.check_box :active
+                br
                 - if @autoforditoilist.persisted?
                   = form.submit "Módosítás »" , class: "btn btn-primary"
                 - else 
                   = form.submit "Felvétel »" , class: "btn btn-primary"
-              = link_to "Back to autoforditoilists", autoforditoilists_path, class:"btn btn-primary"
+          = link_to "Back to autoforditoilists", autoforditoilists_path, class:"btn btn-primary"
                 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render 'shared/side' 
