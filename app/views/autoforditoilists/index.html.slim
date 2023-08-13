@@ -17,10 +17,27 @@
             br
             |A fordító programoknak szükséges ONLINE internet elérés, mert e nélkül nem működik.
             br
-            |Jelenleg 2 féle programot különböztetünk meg: 
-            
-            
-            
+            |Jelenleg 2 féle programot különböztetünk meg.
+            br
+            br
+            .row 
+               = search_form_for @q1 , class: "pityuka", url: @ransack_path do |f|
+                  = f.text_field :gname_cont, placeholder: "Gyors kereső..."
+            - if @autoforditoilists.any?
+              | Találat: 
+              - @autoforditoilists.each do |todor|
+                = todor.game.name
+                - case todor.tipus
+                  -when 1
+                    |(Xunity)
+                  -when 2
+                    |(Bep)
+                  -when 3
+                    |Xunity + Font
+                  -else
+                    |(Hiba)
+                  
+                
             .row 
               .col-4 
                 table class="table table-dark table-striped table-bordered"
@@ -28,15 +45,15 @@
                     tr
                       th 
                         |XUnity 
-                        .btn.btn-primary Letöltöm
+                        = link_to "Letöltés", "/xunity.zip", download: "xunity.zip", class: "btn btn-primary "
 
                   tbody
-                    tr
-                      td Sor 1, Oszlop 1
-                    tr
-                      td Sor 2, Oszlop 1
-                    tr
-                      td Sor 3, Oszlop 1
+                    - @xunity.each do |xu|
+                      tr
+                        td 
+                          = xu.game.name
+                         
+                      
                
               .col-4 
                 table class="table table-dark table-striped table-bordered"
@@ -44,31 +61,25 @@
                     tr
                       th 
                         |XUnity + font 
-                        .btn.btn-primary Letöltöm
+                        = link_to "Letöltés", "/file/xunityfont.zip", download: "xunityfont.zip", class: "btn btn-primary "
 
                   tbody
-                    tr
-                      td Sor 1, Oszlop 1
-                      
-                    tr
-                      td Sor 2, Oszlop 1
-                    tr
-                      td Sor 3, Oszlop 1
+                    - @xunityf.each do |xuf|
+                      tr
+                        td 
+                           = xuf.game.name
+                        
               .col-4 
                 table class="table table-dark table-striped table-bordered"
                   thead
                     tr
                       th 
                         |BepInEx  
-                        .btn.btn-primary Letöltöm
+                        = link_to "Letöltés", "/bep.zip", download: "bep.zip", class: "btn btn-primary "
                   tbody
-                    tr
-                      td Sor 1, Oszlop 1
-                      
-                    tr
-                      td Sor 2, Oszlop 1
-                    tr
-                      td Sor 3, Oszlop 1      
+                    - @bep.each do |bep|
+                      tr
+                        td = bep.game.name
                     
                   
                 

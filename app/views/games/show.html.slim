@@ -66,7 +66,11 @@
                                 |Leírás
                             .col-lg-2.col-xs-12
                                 |Feltöltés dátuma: 
-                            
+                        -@autoforditoilista.each do |auto|
+                            div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                .col-lg-12.col-xs-12.bg-warning.text-dark
+                                    |A játékhoz elérhető egy automatikus fordítói program, amely online fordítja a játék bármelyik verzióját, keresd az auto fordítók menüben
+                                    = link_to "Auto fordítók", autoforditoilists_path, class: "btn btn-primary m-3"
                         -@game.uploads.order('created_at DESC').each_with_index do |t,index|
                         
                             div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "

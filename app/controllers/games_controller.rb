@@ -41,7 +41,7 @@ class GamesController < ApplicationController
     @mega = Mega.where(game: @user.id)
     @uzenetek = Uzenet.where(game_id: @user.id).order(id: :DESC)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
-    
+    @autoforditoilista = Autoforditoilist.where(game_id:  @user.id)
   end
 
 

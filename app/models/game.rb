@@ -2,6 +2,7 @@ class Game < ApplicationRecord
     has_many :uploads , dependent: :delete_all
     has_many_attached :game_files , dependent: :delete_all
     has_one_attached :image , dependent: :delete_all
+    has_many :autoforditoilist
     extend FriendlyId
     friendly_id :name, use: :slugged
     validates :name, uniqueness: true, presence: true, length: {minimum: 2, maximum:100}

@@ -68,6 +68,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_12_104702) do
     t.bigint "game_id", null: false
     t.integer "tipus"
     t.boolean "active", default: true
+    t.text "gname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["game_id"], name: "index_autoforditoilists_on_game_id"

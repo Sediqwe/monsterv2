@@ -1,28 +1,32 @@
 class AutoforditoilistsController < ApplicationController
   before_action :set_autoforditoilist, only: %i[ show edit update destroy ]
-
-  # GET /autoforditoilists or /autoforditoilists.json
   def index
-    @autoforditoilists = Autoforditoilist.all
+    @q1 = Autoforditoilist.ransack(params[:q])
+    if params[:q] && params[:q].fetch(:gname_cont, "").size > 2
+      @autoforditoilists = @q1.result(distinct: true)
+    else      
+      @autoforditoilists = Autoforditoilist.where(id: 0)
+    end
+
+    @xunity = Autoforditoilist.where(tipus: 1)
+    @xunityf = Autoforditoilist.where(tipus: 3)
+    @bep = Autoforditoilist.where(tipus: 2)
+    @ransack_path = autoforditoilists_path
   end
 
-  # GET /autoforditoilists/1 or /autoforditoilists/1.json
   def show
   end
 
-  # GET /autoforditoilists/new
   def new
     @autoforditoilist = Autoforditoilist.new
-  end
+    end
 
-  # GET /autoforditoilists/1/edit
   def edit
   end
 
-  # POST /autoforditoilists or /autoforditoilists.json
   def create
     @autoforditoilist = Autoforditoilist.new(autoforditoilist_params)
-
+    @autoforditoilist.gname = Game.find(autoforditoilist_params[:game_id]).name
     respond_to do |format|
       if @autoforditoilist.save
         format.html { redirect_to autoforditoilist_url(@autoforditoilist), notice: "Autoforditoilist was successfully created." }
@@ -34,15 +38,14 @@ class AutoforditoilistsController < ApplicationController
     end
   end
 
-  # PATCH/PUT /autoforditoilists/1 or /autoforditoilists/1.json
   def update
     respond_to do |format|
       if @autoforditoilist.update(autoforditoilist_params)
         format.html { redirect_to autoforditoilist_url(@autoforditoilist), notice: "Autoforditoilist was successfully updated." }
-        format.json { render :show, status: :ok, location: @autoforditoilist }
+        
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @autoforditoilist.errors, status: :unprocessable_entity }
+        
       end
     end
   end
@@ -65,6 +68,6 @@ class AutoforditoilistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def autoforditoilist_params
-      params.require(:autoforditoilist).permit(:game_id, :upload_id, :tipus, :active)
+      params.require(:autoforditoilist).permit(:game_id, :tipus, :active)
     end
 end

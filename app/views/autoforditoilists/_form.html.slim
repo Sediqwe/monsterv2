@@ -25,7 +25,7 @@
                       - @autoforditoilist.errors.each do |error|
                         li = error.full_message
 
-                = form.text_field :game_id, class: "mb-2",placeholder: "game_id"
+                = form.text_field :game_id, value: params[:game_id], class: "mb-2",placeholder: "game_id"
                 = form.collection_select :tipus, [["XUnity Auto Translator", 1],["BepInEx Auto Translator", 2],["HÁROM", 3]], :last, :first, prompt: true, class: "mb-2"
                 = form.label :active
                 = form.check_box :active
