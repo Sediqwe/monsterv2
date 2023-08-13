@@ -29,13 +29,14 @@
                 = todor.game.name
                 - case todor.tipus
                   -when 1
-                    |(Xunity)
+                    = link_to "XUnity letöltése", "/files/xunity.zip", download: "xunity.zip", class: "btn btn-primary m-3 "
                   -when 2
-                    |(Bep)
+                    = link_to "BepInEx letöltése", "/files/bep.zip", download: "bep.zip", class: "btn btn-primary m-3 "
                   -when 3
-                    |Xunity + Font
+                    = link_to "XUnity + Font letöltése", "/files/xunityfont.zip", download: "xunityfont.zip", class: "btn btn-primary m-3"
                   -else
                     |(Hiba)
+                br
                   
                 
             .row 
@@ -45,7 +46,7 @@
                     tr
                       th 
                         |XUnity 
-                        = link_to "Letöltés", "/files/xunity.zip", download: "xunity.zip", class: "btn btn-primary "
+                       
 
                   tbody
                     - @xunity.each do |xu|
@@ -61,7 +62,7 @@
                     tr
                       th 
                         |XUnity + font 
-                        = link_to "Letöltés", "/files/xunityfont.zip", download: "xunityfont.zip", class: "btn btn-primary "
+                        
 
                   tbody
                     - @xunityf.each do |xuf|
@@ -75,7 +76,7 @@
                     tr
                       th 
                         |BepInEx  
-                        = link_to "Letöltés", "/files/bep.zip", download: "bep.zip", class: "btn btn-primary "
+                        
                   tbody
                     - @bep.each do |bep|
                       tr
