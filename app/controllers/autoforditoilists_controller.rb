@@ -8,9 +8,9 @@ class AutoforditoilistsController < ApplicationController
       @autoforditoilists = Autoforditoilist.where(id: 0)
     end
 
-    @xunity = Autoforditoilist.where(tipus: 1)
-    @xunityf = Autoforditoilist.where(tipus: 3)
-    @bep = Autoforditoilist.where(tipus: 2)
+    @xunity = Autoforditoilist.where(tipus: 1).order(gname: DESC)
+    @xunityf = Autoforditoilist.where(tipus: 3).order(gname: DESC)
+    @bep = Autoforditoilist.where(tipus: 2).order(gname: DESC)
     @ransack_path = autoforditoilists_path
   end
 
