@@ -60,6 +60,7 @@ class GamesController < ApplicationController
     
     @game = Game.new(game_params)
     @game.user_id = current_user.id
+    @game.uploaded_at = DateTime.now
     respond_to do |format|
       if @game.save
         record_activity("Új játék felvéve: #{@game.name}")
