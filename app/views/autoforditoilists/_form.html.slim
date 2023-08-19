@@ -27,7 +27,7 @@
 
                 = form.text_field :game_id, value: params[:game_id], class: "mb-2",placeholder: "game_id"
                 br
-                = form.collection_select :tipus, [["XUnity", 1],["BepInEx", 2],["XUnity + Font", 3]], :last, :first, prompt: true, class: "block mb-2"
+                = form.collection_select :tipus, [["XUnity", 1],["BepInEx", 2],["XUnity + Font", 3],["Bep + Font", 4]], :last, :first, prompt: true, class: "block mb-2"
                 br
                 = form.label :active
                 = form.check_box :active
