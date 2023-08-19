@@ -11,6 +11,7 @@ class AutoforditoilistsController < ApplicationController
     @xunity = Autoforditoilist.where(tipus: 1).order(gname: :ASC)
     @xunityf = Autoforditoilist.where(tipus: 3).order(gname: :ASC)
     @bep = Autoforditoilist.where(tipus: 2).order(gname: :ASC)
+    @bepf = Autoforditoilist.where(tipus: 4).order(gname: :ASC)
     @ransack_path = autoforditoilists_path
   end
 

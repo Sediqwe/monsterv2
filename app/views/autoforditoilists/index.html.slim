@@ -34,13 +34,15 @@
                     = link_to "BepInEx letöltése", "/files/bep.zip", download: "bep.zip", class: "btn btn-primary m-3 "
                   -when 3
                     = link_to "XUnity + Font letöltése", "/files/xunityfont.zip", download: "xunityfont.zip", class: "btn btn-primary m-3"
+                  -when 4
+                    = link_to "BepInEx + Font letöltése", "/files/bepf.zip", download: "bepf.zip", class: "btn btn-primary m-3"
                   -else
                     |(Hiba)
                 br
                   
                 
             .row 
-              .col-4 
+              .col-3 
                 table class="table table-dark table-striped table-bordered"
                   thead
                     tr
@@ -56,7 +58,7 @@
                          
                       
                
-              .col-4 
+              .col-3 
                 table class="table table-dark table-striped table-bordered"
                   thead
                     tr
@@ -70,7 +72,7 @@
                         td 
                            = xuf.game.name
                         
-              .col-4 
+              .col-3 
                 table class="table table-dark table-striped table-bordered"
                   thead
                     tr
@@ -82,7 +84,17 @@
                       tr
                         td = bep.game.name
                     
-                  
+              .col-3 
+                table class="table table-dark table-striped table-bordered"
+                  thead
+                    tr
+                      th 
+                        |BepInEx + Font 
+                        = link_to "Letöltés", "/files/bepf.zip", download: "bepf.zip", class: "btn btn-primary "
+                  tbody
+                    - @bepf.each do |bepf|
+                      tr
+                        td = bepf.game.name  
                 
 
 
