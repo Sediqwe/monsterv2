@@ -107,7 +107,7 @@ class UploadsController < ApplicationController
     @upload.destroy
 
     respond_to do |format|
-      format.html { redirect_to uploads_url, notice: "A feltöltés törölve." }
+      format.html { redirect_to games_url, notice: "A feltöltés törölve." }
       format.json { head :no_content }
     end
   end
