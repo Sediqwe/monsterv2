@@ -21,10 +21,10 @@
                                     =game.name.upcase
                                 br
                                 b Verzió:  
-                                - if game.version.downcase.include?("ismeretlen")
+                                - if game.version.downcase.exclude?("ismeretlen")
                                     = game.version
                                     br
-                                - if game.description.downcase.include?("ismeretlen")
+                                - if game.description.downcase.exclude?("ismeretlen")
                                     = game.description
                                     br
                                 
