@@ -21,9 +21,13 @@
                                     =game.name.upcase
                                 br
                                 b Verzió:  
-                                = game.version
-                                br
-                                = game.description
+                                - if !game.version.downcase.include?("ismeretlen")
+                                    = game.version
+                                    br
+                                - if !game.description.downcase.include?("ismeretlen")
+                                    = game.description
+                                    br
+                                
                                 br
                                 b Készítő: 
                                 - adatok = Uploadtranslater.where(upload_id: game)
