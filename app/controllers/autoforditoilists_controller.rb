@@ -27,8 +27,12 @@ class AutoforditoilistsController < ApplicationController
   def create
     @autoforditoilist = Autoforditoilist.new(autoforditoilist_params)
     @autoforditoilist.gname = Game.find(autoforditoilist_params[:game_id]).name
+  
     respond_to do |format|
       if @autoforditoilist.save
+        game = Game.find(autoforditoilist_params[:game_id])
+        game.uploaded_at = DateTime.now
+        game.save
         format.html { redirect_to autoforditoilist_url(@autoforditoilist), notice: "Autoforditoilist was successfully created." }
         format.json { render :show, status: :created, location: @autoforditoilist }
       else
