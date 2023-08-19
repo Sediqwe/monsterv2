@@ -26,9 +26,6 @@
                                     br
                                 - if game.description.downcase.exclude?("ismeretlen")
                                     = game.description
-                                    br
-                                
-                                br
                                 b Készítő: 
                                 - adatok = Uploadtranslater.where(upload_id: game)
                                 - adatok.each_with_index do |dorka,index2|
