@@ -34,7 +34,7 @@ class AutoforditoilistsController < ApplicationController
         game = Game.find(autoforditoilist_params[:game_id])
         game.uploaded_at = DateTime.now
         game.save
-        format.html { redirect_to game_path(@game), notice: "Autoforditoilist was successfully created." }
+        format.html { redirect_to game_path(game), notice: "Autoforditoilist was successfully created." }
         format.json { render :show, status: :created, location: @autoforditoilist }
       else
         format.html { render :new, status: :unprocessable_entity }
