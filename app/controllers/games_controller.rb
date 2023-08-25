@@ -19,7 +19,7 @@ class GamesController < ApplicationController
     end
     @games = @q.result(distinct: true).order('uploaded_at DESC').page(params[:page]).per(session[:page_n])
     @meta_description = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
-   
+    
   
   end
   def magyhu
@@ -42,6 +42,7 @@ class GamesController < ApplicationController
     @uzenetek = Uzenet.where(game_id: @user.id).order(id: :DESC)
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
     @autoforditoilista = Autoforditoilist.where(game_id:  @user.id)
+    @meta_image = rails_blob_path(@user.image, only_path: true)
   end
 
 
