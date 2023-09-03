@@ -35,8 +35,8 @@ class SearchController < ApplicationController
       translater = Translater.where("lower(translater_name) like ?", "#{para.downcase}").first
       
       if translater.present?
-        trans_count = Upload.where(translater_id: translater.id).count
-        upload = Upload.where(translater_id: translater.id).order(id: :DESC).limit(10)
+        trans_count = Uploadtranslater.where(translater_id: translater.id).count
+        upload = Uploadtranslater.where(translater_id: translater.id).order(id: :DESC).limit(10)
         data = translater.translater_name + "#" + trans_count.to_s + "#"
         upload.each do |uo|
           data += uo.name.gsub("'","") + "@" + uo.game.slug + "\n"

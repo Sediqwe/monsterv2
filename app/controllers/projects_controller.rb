@@ -78,7 +78,7 @@ class ProjectsController < ApplicationController
     cfile.files.each do |t| # A projecthez tartozó fájlokon végig lépkedünk
       filepath = ActiveStorage::Blob.service.send(:path_for, t.key)  #Adatok a fájlról
       data = File.read(filepath) #Beolvassuk a fájlt
-      data = cserelo(data) #Kicseréljük a sortörést és a többi szarságot
+      #data = cserelo(data) #Kicseréljük a sortörést és a többi szarságot
       translation_content = []
       enum_content = data.each_line
       enum_content.each_with_index do |content_line, index| 
