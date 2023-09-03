@@ -39,7 +39,7 @@ class SearchController < ApplicationController
         upload = Uploadtranslater.where(translater_id: translater.id).order(id: :DESC).limit(10)
         data = translater.translater_name + "#" + trans_count.to_s + "#"
         upload.each do |uo|
-          data += uo.name.gsub("'","") + "@" + uo.game.slug + "\n"
+          data += uo.upload.game.name.gsub("'","") + "@" + uo.upload.game.slug + "\n"
         end
       end
       if data.length<1
