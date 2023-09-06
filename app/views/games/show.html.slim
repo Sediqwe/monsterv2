@@ -4,171 +4,171 @@
             .game-data
                 .col-xs-12.col-sm-12.col-md-12.col-lg-8.offset-lg-2
                     h1.game-data__header
-                        =@game.name
-                    - if current_user.present?
-                        -if current_user.admin? || current_user.moderator?
-                            = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
-                        -if current_user.admin?
-                            = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
-                            = link_to "Auto Translater jelölés »", new_autoforditoilist_path(game_id: @game.id) , class: "btn btn-primary text-light"
-                            -if @game.done != true
-                                = link_to "Van KÉSZ Magy.hu", games_magyhu_path(id: @game.id, type: "van"), method: :post, class: "btn btn-success"
-                            -else
-                                = link_to "Nincs kész Magy.hu", games_magyhu_path(id: @game.id, type: "nincs"), method: :post, class: "btn btn-danger"
-                    = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img') if @game.image.attached?
-                    - if @game.done
-                        .green-box.blink
-                            h5
-                            | A játékhoz elérhető kézzel készült fordítás is, kérlek látogass el ide: 
-                            =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-primary"
-                    .grey-box
-                        p
-                        | Letöltésemmel elfogadom, hogy ezek a fordítások GÉPPEL készültek. A fordítás tartalmazhat: félre fordításokat, angolul maradt szövegelemeket, erősen befolyásolhatják a játékélményt! Csak a készítő által megjelölt verzióra használható!
-                    h4.game-data__headline
-                        |Letöltési statisztika
-                    .text-light
-                        = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 30).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
-                    h4.game-data__headline
-                        | Játék linkek:
-                    - if @game.done.present?
-                        .mutat.bg-warning.text-dark.rounded.mt-2 id="mutat2"
-                            h1 
-                                | Úgy néz ki, hogy ennek a játéknak elkészült a rendes, nem gépi fordítása is, amely sokkal jobb élményt nyújt!                          A fordítás a magyaritasok.hu odalon keresztül tölthető le:
-                            
-                        
-                    .gme-data__buy-game
-                        - if @game.link_steam.present? 
-                            - if @game.link_steam.size > 3
-                                = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
-                        - if @game.link_epic.present?
-                            = link_to " Epic »", @game.link_epic, target: "_blank" , class: "btn btn-secondary text-light"
-                        - if @game.link_other.present?
-                            = link_to " Egyéb »", @game.link_other, target: "_blank" , class: "btn btn-secondary text-light"
-                        - if @game.link_hun.present?
-                            = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
-                    h4.game-data__headline
-                        | Letölthető fordítások:
-                    - if @game.done.present?
-                        .btn.btn-success id="mutat"
-                            | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Tovább a fordításokhoz
-                                
-                    div class="game-data__download-section #{"elrejt" if @game.done.present?}"
-                        div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
-                            .col-lg-2.col-xs-12
-                                |Letöltés
-                            .col-lg-2.col-xs-12
-                                |Verzió
-                            .col-lg-2.col-xs-12
-                                |Készítő
-                            .col-lg-2.col-xs-12
-                                |Statisztika
-                            .col-lg-2.col-xs-12
-                                |Leírás
-                            .col-lg-2.col-xs-12
-                                |Feltöltés dátuma: 
-                        -@autoforditoilista.each do |auto|
-                            div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
-                                .col-lg-12.col-xs-12.bg-warning.text-dark
-                                    |A játékhoz elérhető egy automatikus fordítói program, amely online fordítja a játék bármelyik verzióját, keresd az auto fordítók menüben
-                                    = link_to "Auto fordítók", autoforditoilists_path, class: "btn btn-primary m-3"
-                        -@game.uploads.order('created_at DESC').each_with_index do |t,index|
-                        
-                            div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
-                                .col-lg-2.col-xs-12
-                                    - if current_user&.admin? 
-                                        =
-                                        | # 
-                                        = t.id 
+                    .row
+                        .col-12
+                            h1
+                                =@game.name
+                        .col-12
+                            - if current_user.present?
+                                -if current_user.admin? || current_user.moderator?
+                                    = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+                                -if current_user.admin?
+                                    = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+                                    = link_to "Auto Translater jelölés »", new_autoforditoilist_path(game_id: @game.id) , class: "btn btn-primary text-light"
+                                    -if @game.done != true
+                                        = link_to "Van KÉSZ Magy.hu", games_magyhu_path(id: @game.id, type: "van"), method: :post, class: "btn btn-success"
+                                    -else
+                                        = link_to "Nincs kész Magy.hu", games_magyhu_path(id: @game.id, type: "nincs"), method: :post, class: "btn btn-danger"
+                        .col-6
+                            = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img') if @game.image.attached?
+                            - if @game.done
+                                .green-box.blink
+                                    h5
+                                    | A játékhoz elérhető kézzel készült fordítás is: 
+                                    =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-primary"
+                        .col-6
+                            h4.game-data__headline
+                                |Letöltési statisztika
+                            .text-light
+                                = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 10).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
+                            h4.game-data__headline
+                                | Játék linkek:
+    
+                            .gme-data__buy-game
+                                - if @game.link_steam.present? 
+                                    - if @game.link_steam.size > 3
+                                        = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
+                                - if @game.link_epic.present?
+                                    = link_to " Epic »", @game.link_epic, target: "_blank" , class: "btn btn-secondary text-light"
+                                - if @game.link_other.present?
+                                    = link_to " Egyéb »", @game.link_other, target: "_blank" , class: "btn btn-secondary text-light"
+                                - if @game.link_hun.present?
+                                    = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
+                    .row
+                        .col
+                            h4.game-data__headline
+                                | Letölthető fordítások:
+                            - if @game.done.present?
+                                .btn.btn-success id="mutat"
+                                    | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Kattints ide a letöltésekért
                                         
-                                    - if t.bad == false && t.game_files.attached?
-                                        - if t.game_files.present?
-                                            = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
-                                .col-lg-2.col-xs-12 
-                                    span
-                                        = t.version
-                                .col-lg-2.col-xs-12 
-                                     
-                                    span
-                                        - adatok = Uploadtranslater.where(upload_id: t)
-                                        - adatok.each_with_index do |dorka,index2|
-                                            = link_to dorka.translater.translater_name, translater_path(dorka.translater)
-                                            - if index2 < adatok.size-1
-                                                | , 
+                            div class="game-data__download-section #{"elrejt" if @game.done.present?}"
+                                div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                    .col-lg-2.col-xs-12
+                                        |Letöltés
+                                    .col-lg-2.col-xs-12
+                                        |Verzió
+                                    .col-lg-2.col-xs-12
+                                        |Készítő
+                                    .col-lg-2.col-xs-12
+                                        |Statisztika
+                                    .col-lg-2.col-xs-12
+                                        |Leírás
+                                    .col-lg-2.col-xs-12
+                                        |Feltöltés dátuma: 
+                                -@autoforditoilista.each do |auto|
+                                    div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                        .col-lg-12.col-xs-12.bg-warning.text-dark
+                                            |A játékhoz elérhető egy automatikus fordítói program, amely online fordítja a játék bármelyik verzióját, keresd az auto fordítók menüben
+                                            = link_to "Auto fordítók", autoforditoilists_path, class: "btn btn-primary m-3"
+                                -@game.uploads.order('created_at DESC').each_with_index do |t,index|
+                                
+                                    div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                        .col-lg-2.col-xs-12
+                                            - if current_user&.admin? 
+                                                =
+                                                | # 
+                                                = t.id 
+                                                
+                                            - if t.bad == false && t.game_files.attached?
+                                                - if t.game_files.present?
+                                                    = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
+                                        .col-lg-2.col-xs-12 
+                                            span
+                                                = t.version
+                                        .col-lg-2.col-xs-12 
                                             
+                                            span
+                                                - adatok = Uploadtranslater.where(upload_id: t)
+                                                - adatok.each_with_index do |dorka,index2|
+                                                    = link_to dorka.translater.translater_name, translater_path(dorka.translater)
+                                                    - if index2 < adatok.size-1
+                                                        | , 
+                                                    
+                                                
+                                                
+                                                
+                                        .col-lg-2.col-xs-12 
+                                            |Letöltve: 
+                                            = Download.where(upload_id: t.id).size 
+                                            |X
+                                        .col-lg-2.col-xs-12
+                                            - if t.description.length > 0
+                                                span
+                                                    = t.description
+                                        .col-lg-2.col-xs-12
+                                            = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                        - if current_user.present?
+                                            -if current_user.admin?
+                                                .col
+                                                    =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info text-light m-1"
+                                                    - if t.bad == false
+                                                        =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-danger  text-light" 
+                                                    - else
+                                                        =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn m-1  btn-success text-light"
+                                                    =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn m-1 btn-primary text-light"
+                            .game-data__download-section
+                                -@mega.each do |t|
+                                                            
+                                    div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                        .col-lg-2.col-xs-12
+                                            - if File.exist?("file/" + t.link)
+                                                - meret = number_to_human_size(File.size("file/" + t.link))
+                                            = link_to "Letöltés (#{meret}) »" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-primary mb-3"
+                                            
+                                        .col-lg-2.col-xs-12 
+                                            | Verzió: 
+                                            span
+                                                =t.version 
+                                                
+                                        .col-lg-2.col-xs-12 
+                                            | Készítette: 
+                                            span
+                                                |Nézd meg a fájlban található leírást
+                                                
+                                        .col-lg-2.col-xs-12 
+                                            |Letöltve: 
+                                            = t.szamlalo
+                                            |X
+                                        .col-lg-2.col-xs-12
                                         
-                                        
-                                        
-                                .col-lg-2.col-xs-12 
-                                    |Letöltve: 
-                                    = Download.where(upload_id: t.id).size 
-                                    |X
-                                .col-lg-2.col-xs-12
-                                    - if t.description.length > 0
-                                        span
-                                            = t.description
-                                .col-lg-2.col-xs-12
-                                    = t.created_at.strftime("%Y-%m-%d %H:%M")
-                                - if current_user.present?
-                                    -if current_user.admin?
-                                        .col
-                                            =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info text-light m-1"
-                                            - if t.bad == false
-                                                =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-danger  text-light" 
-                                            - else
-                                                =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn m-1  btn-success text-light"
-                                            =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn m-1 btn-primary text-light"
-                    .game-data__download-section
-                        -@mega.each do |t|
-                                                       
-                            div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
-                                .col-lg-2.col-xs-12
-                                    - if File.exist?("file/" + t.link)
-                                        - meret = number_to_human_size(File.size("file/" + t.link))
-                                    = link_to "Letöltés (#{meret}) »" , down_path(id: t.link, mega_id: t.id), method: "post", class: "btn btn-primary mb-3"
-                                    
-                                .col-lg-2.col-xs-12 
-                                    | Verzió: 
-                                    span
-                                        =t.version 
-                                        
-                                .col-lg-2.col-xs-12 
-                                    | Készítette: 
-                                    span
-                                        |Nézd meg a fájlban található leírást
-                                        
-                                .col-lg-2.col-xs-12 
-                                    |Letöltve: 
-                                    = t.szamlalo
-                                    |X
-                                .col-lg-2.col-xs-12
-                                
-                                .col-lg-2.col-xs-12
-                                    |Feltöltés dátuma: 
-                                    br
-                                    = t.created_at.strftime("%Y-%m-%d %H:%M")
-                    .bundi
-                    br
-                    |
-                    
-                        <div id="disqus_thread"></div>
-                        <script>
-                            /**
-                            *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
-                            *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
-                            /*
-                            var disqus_config = function () {
-                            this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
-                            this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
-                            };
-                            */
-                            (function() { // DON'T EDIT BELOW THIS LINE
-                            var d = document, s = d.createElement('script');
-                            s.src = 'https://gep-monster.disqus.com/embed.js';
-                            s.setAttribute('data-timestamp', +new Date());
-                            (d.head || d.body).appendChild(s);
-                            })();
-                        </script>
-                        <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>    
+                                        .col-lg-2.col-xs-12
+                                            |Feltöltés dátuma: 
+                                            br
+                                            = t.created_at.strftime("%Y-%m-%d %H:%M")
+                            .bundi
+                            br
+                            |
+                            
+                                <div id="disqus_thread"></div>
+                                <script>
+                                    /**
+                                    *  RECOMMENDED CONFIGURATION VARIABLES: EDIT AND UNCOMMENT THE SECTION BELOW TO INSERT DYNAMIC VALUES FROM YOUR PLATFORM OR CMS.
+                                    *  LEARN WHY DEFINING THESE VARIABLES IS IMPORTANT: https://disqus.com/admin/universalcode/#configuration-variables    */
+                                    /*
+                                    var disqus_config = function () {
+                                    this.page.url = PAGE_URL;  // Replace PAGE_URL with your page's canonical URL variable
+                                    this.page.identifier = PAGE_IDENTIFIER; // Replace PAGE_IDENTIFIER with your page's unique identifier variable
+                                    };
+                                    */
+                                    (function() { // DON'T EDIT BELOW THIS LINE
+                                    var d = document, s = d.createElement('script');
+                                    s.src = 'https://gep-monster.disqus.com/embed.js';
+                                    s.setAttribute('data-timestamp', +new Date());
+                                    (d.head || d.body).appendChild(s);
+                                    })();
+                                </script>
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>    
               
                 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll

@@ -774,14 +774,25 @@ textarea {
     transition: 0.2s;
 }
 
-.blink {
-    animation: blinker 3s ease-in-out infinite;
-}
 @keyframes blinker {
-    20% {
-        opacity: 0;
+    0% {
+      opacity: 1; /* Kezdeti állapot: látható */
+      background-color: #1b2c30; /* Kezdeti háttérszín */
     }
-}
+    50% {
+      opacity: 1; /* Közepén az elem látható marad */
+      background-color: #0e717e; /* Közepén a háttérszín megváltozik */
+    }
+    100% {
+      opacity: 1; /* Visszaáll az eredeti állapotra */
+      background-color: #1b2c30; /* Visszaáll az eredeti háttérszínre */
+    }
+  }
+  
+  .blink {
+    animation: blinker 5s ease-in-out infinite;
+  }
+  
 .forum-post {
     color: white;
     display: flex;
