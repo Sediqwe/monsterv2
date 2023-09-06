@@ -1,6 +1,6 @@
 class Upload < ApplicationRecord
   belongs_to :game
-  has_one_attached :game_files
+  has_one_attached :game_files, dependent: :destroy
   belongs_to :user
   belongs_to :translater
   belongs_to :program
