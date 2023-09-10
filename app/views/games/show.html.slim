@@ -176,7 +176,7 @@
                             h4.game-data__headline
                                 |Letöltési statisztika
                                 .text-light
-                                    = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 10).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
+                                    = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 30).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
               
                 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
