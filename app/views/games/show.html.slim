@@ -19,7 +19,7 @@
                                         = link_to "Van KÉSZ Magy.hu", games_magyhu_path(id: @game.id, type: "van"), method: :post, class: "btn btn-success"
                                     -else
                                         = link_to "Nincs kész Magy.hu", games_magyhu_path(id: @game.id, type: "nincs"), method: :post, class: "btn btn-danger"
-                        .col-6
+                        .col-lg-6.col-xs-12.col-sm-12.col-md-12
                             = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img') if @game.image.attached?
                             - if @game.done
                                 .green-box.blink
@@ -27,7 +27,7 @@
                                     | A játékhoz elérhető kézzel készült fordítás is: 
                                     =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-primary"
                            
-                        .col-6
+                        .col-lg-6.col-xs-12.col-sm-12.col-md-12
                             .grey-box
                                 p
                                 | Letöltésemmel elfogadom, hogy ezek a fordítások GÉPPEL készültek. A fordítás tartalmazhat: félre fordításokat, angolul maradt szövegelemeket, erősen befolyásolhatják a játékélményt! Csak a készítő által megjelölt verzióra használható!
