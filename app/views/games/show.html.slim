@@ -26,15 +26,15 @@
                                     h5
                                     | A játékhoz elérhető kézzel készült fordítás is: 
                                     =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-primary"
+                           
                         .col-6
-                            h4.game-data__headline
-                                |Letöltési statisztika
-                            .text-light
-                                = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 10).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
-                            h4.game-data__headline
-                                | Játék linkek:
-    
+                            .grey-box
+                                p
+                                | Letöltésemmel elfogadom, hogy ezek a fordítások GÉPPEL készültek. A fordítás tartalmazhat: félre fordításokat, angolul maradt szövegelemeket, erősen befolyásolhatják a játékélményt! Csak a készítő által megjelölt verzióra használható!
                             .gme-data__buy-game
+                                h4.game-data__headline
+                                | Játék linkek:
+                                hr
                                 - if @game.link_steam.present? 
                                     - if @game.link_steam.size > 3
                                         = link_to " Steam »", @game.link_steam, target: "_blank" , class: "btn btn-secondary text-light"
@@ -44,6 +44,10 @@
                                     = link_to " Egyéb »", @game.link_other, target: "_blank" , class: "btn btn-secondary text-light"
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
+                            
+                            
+    
+                            
                     .row
                         .col
                             h4.game-data__headline
@@ -168,7 +172,11 @@
                                     (d.head || d.body).appendChild(s);
                                     })();
                                 </script>
-                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>    
+                                <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>   
+                            h4.game-data__headline
+                                |Letöltési statisztika
+                                .text-light
+                                    = column_chart Download.where(game_id: @game ).group_by_day(:created_at, last: 10).count ,chart: {backgroundColor: "#0f0"} , library: {backgroundColors: "#ffffff"} , title: "Utolsó 30 nap letöltése:", download: {background: "#fff"}
               
                 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
