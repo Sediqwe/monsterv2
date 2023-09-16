@@ -65,13 +65,13 @@
                                     .col-lg-2.col-xs-12
                                         |Készítő
                                     .col-lg-1.col-xs-12
-                                        |Statisztika
+                                        |Letöltve
                                     .col-lg-1.col-xs-12
-                                        | Technika
+                                        |Technika
                                     .col-lg-2.col-xs-12
                                         |Leírás
                                     .col-lg-2.col-xs-12
-                                        |Dátuma: 
+                                        |Dátum: 
                                 -@game.uploads.order('created_at DESC').each_with_index do |t,index|
                                 
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
@@ -92,22 +92,21 @@
                                             span
                                                 - adatok = Uploadtranslater.where(upload_id: t)
                                                 - adatok.each_with_index do |dorka,index2|
-                                                    = link_to dorka.translater.translater_name, translater_path(dorka.translater)
+                                                    = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-link"
                                                     - if index2 < adatok.size-1
                                                         | , 
                                                     
                                                 
                                                 
                                                 
-                                        .col-lg-1.col-xs-12 
-                                            
+                                        .col-lg-1.col-xs-12                                             
                                             = Download.where(upload_id: t.id).size 
                                             |X
                                         .col-lg-1.col-xs-12
                                             
                                             - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
-                                                span class="tag tag-angular tag-lg"
+                                                span class="tag tag-android tag-lg"
                                                     |Google
                                             - if filename.include? "deepl"
                                                 - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
@@ -126,7 +125,7 @@
                                         - if current_user.present?
                                             -if current_user.admin?
                                                 .col
-                                                    =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-info text-light m-1"
+                                                    =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
                                                     - if t.bad == false
                                                         =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-danger  text-light" 
                                                     - else
