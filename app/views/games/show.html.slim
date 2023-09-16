@@ -102,13 +102,13 @@
                                             = Download.where(upload_id: t.id).size 
                                             |X
                                         .col-lg-2.col-xs-12
-                                            - filename = t.game_files.filename.to_s # Az ActiveStorage::Filename-t stringgé alakítjuk.
+                                            - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
-                                                span class="tag tag-pro tag-lg"
+                                                span class="tag tag-angular tag-lg"
                                                     |Google
                                             - if filename.include? "deepl"
                                                 - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
-                                                span class="tag tag-node tag-lg"
+                                                span class="tag tag-javascript tag-lg"
                                                     |Deepl
                             
                                             - if t.description.length > 0
