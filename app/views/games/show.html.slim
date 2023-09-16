@@ -64,12 +64,14 @@
                                         |Verzió
                                     .col-lg-2.col-xs-12
                                         |Készítő
-                                    .col-lg-2.col-xs-12
+                                    .col-lg-1.col-xs-12
                                         |Statisztika
+                                    .col-lg-1.col-xs-12
+                                        | Technika
                                     .col-lg-2.col-xs-12
                                         |Leírás
                                     .col-lg-2.col-xs-12
-                                        |Feltöltés dátuma: 
+                                        |Dátuma: 
                                 -@game.uploads.order('created_at DESC').each_with_index do |t,index|
                                 
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
@@ -97,11 +99,12 @@
                                                 
                                                 
                                                 
-                                        .col-lg-2.col-xs-12 
-                                            |Letöltve: 
+                                        .col-lg-1.col-xs-12 
+                                            
                                             = Download.where(upload_id: t.id).size 
                                             |X
-                                        .col-lg-2.col-xs-12
+                                        .col-lg-1.col-xs-12
+                                            
                                             - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
                                                 span class="tag tag-angular tag-lg"
@@ -110,7 +113,11 @@
                                                 - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
                                                 span class="tag tag-javascript tag-lg"
                                                     |Deepl
-                            
+                                            - if filename.include? "gpt"
+                                                - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
+                                                span class="tag tag-typescript tag-lg"
+                                                    |GPT
+                                        .col-lg-2.col-xs-12
                                             - if t.description.length > 0
                                                 span
                                                     = t.description
