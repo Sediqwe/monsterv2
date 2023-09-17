@@ -3,7 +3,7 @@
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
       .row
         .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
-          = link_to "New hopp", new_hopp_path          
+          = link_to "New hopp", new_hopp_path , class: "btn btn-success"         
       .row
         .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
           
@@ -23,7 +23,7 @@
                 strong Open:
                 =< hopp.open
 
-                        = link_to "Show this hopp", hopp
+                        = link_to "Show this hopp", hopp, class: "btn btn-success"
                       
             
               
