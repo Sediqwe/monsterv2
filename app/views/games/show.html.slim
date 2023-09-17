@@ -55,7 +55,7 @@
                             - if @game.done.present?
                                 .btn.btn-success id="mutat"
                                     | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Kattints ide a letöltésekért
-                            - if @game.size<1
+                            - if @game.game_files.size<1
                                 -@autoforditoilista.each do |auto|
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                         .col-lg-12.col-xs-12.bg-warning.text-dark
