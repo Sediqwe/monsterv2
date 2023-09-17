@@ -55,7 +55,12 @@
                             - if @game.done.present?
                                 .btn.btn-success id="mutat"
                                     | Megértettem, hogy a MAGYARITASOK.HU ról letölthető fordítás sokkal jobb élményt nyújt! Kattints ide a letöltésekért
-                                        
+                            - if @game.size<1
+                                -@autoforditoilista.each do |auto|
+                                    div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
+                                        .col-lg-12.col-xs-12.bg-warning.text-dark
+                                            |A játékhoz elérhető egy automatikus fordítói program, amely online fordítja a játék bármelyik verzióját, keresd az auto fordítók menüben
+                                            = link_to "Auto fordítók", autoforditoilists_path, class: "btn btn-primary m-3"
                             div class="game-data__download-section #{"elrejt" if @game.done.present?}"
                                 div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                     .col-lg-2.col-xs-12
@@ -95,10 +100,6 @@
                                                     = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-link"
                                                     - if index2 < adatok.size-1
                                                         | , 
-                                                    
-                                                
-                                                
-                                                
                                         .col-lg-1.col-xs-12                                             
                                             = Download.where(upload_id: t.id).size 
                                             |X
@@ -131,6 +132,7 @@
                                                     - else
                                                         =link_to "Jó", upload_bad_path(type: "ok", id: t.id, game: @game.id), method: :post, class: "btn m-1  btn-success text-light"
                                                     =link_to "Destroy", t, data: {confirm: "Are you sure?"}, method: :delete, class: "btn m-1 btn-primary text-light"
+                                
                             .game-data__download-section
                                 -@mega.each do |t|
                                                             

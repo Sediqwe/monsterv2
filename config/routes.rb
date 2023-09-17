@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :hopps
   resources :autoforditoilists
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
@@ -139,7 +140,7 @@ get "jakab", to: "games#jakab"
 get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
 get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
-
+get "hopper", to: "hopps#hopper"
 
 end
 

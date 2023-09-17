@@ -1,0 +1,35 @@
+.container-flex
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
+          = link_to "New hopp", new_hopp_path          
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+          
+          h1.form__headline
+          - @hopps.each do |hopp|
+            .col-12.bg-dark.text-light
+              h1.form__headline
+              div id="#{dom_id hopp}"
+              p
+                strong Link:
+                =< hopp.link
+              p
+                strong Új linked:  
+                br
+                = text_field_tag :passkey, "https://gep.monster/hopp/hopp?id=#{hopp.gen}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
+              p
+                strong Open:
+                =< hopp.open
+
+                        = link_to "Show this hopp", hopp
+                      
+            
+              
+              
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
+
+
+

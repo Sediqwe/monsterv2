@@ -1,0 +1,22 @@
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center.text-light
+         
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+          .form
+            h1.form__headline
+              |Új link
+            
+            = form_for @hopp, html: {class: 'form'} do |f|
+              = text_field_tag :passkey, nil, class: 'mb-2', placeholder: 'Passkey'
+              = f.text_field :link, class: "mb-2", placeholder: "Link"
+              = f.submit "Felvétel »" , class: "btn btn-primary"
+              
+              
+              
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
+
