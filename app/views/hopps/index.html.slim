@@ -9,21 +9,20 @@
           
           h1.form__headline
           - @hopps.each do |hopp|
-            .col-12.bg-dark.text-light
-              h1.form__headline
-              div id="#{dom_id hopp}"
-              p
-                strong Name:
+            .col-12.bg-dark.text-light.border.mb-3.border-success.rounded.shadow.p-2
+              h1.form
                 =< hopp.name
+              div id="#{dom_id hopp}"
+                
               p
-                strong Link:
-                =< hopp.link
+                strong Mega link:
+                = text_field_tag :passkey, "#{hopp.link}}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
               p
-                strong Új linked:  
+                strong Hopp link:  
                 br
                 = text_field_tag :passkey, "https://gep.monster/hopper?id=#{hopp.gen}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
               p
-                strong Open:
+                strong Megnyitva:
                 =< hopp.open
 
               = link_to "Show this hopp", hopp, class: "btn btn-success"
