@@ -88,7 +88,7 @@
                                                 
                                             - if t.bad == false && t.game_files.attached?
                                                 - if session[:calm_down]
-                                                    - if  Time.now < session[:calm_down]
+                                                    - if  Time.now > session[:calm_down]
                                                         - if t.game_files.present?
                                                             = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
                                                     - else 
