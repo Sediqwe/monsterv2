@@ -24,6 +24,8 @@ gem "meta-tags"
 gem 'fastimage'
 gem 'hash_diff'
 gem 'byebug'
+gem 'httparty'
+
 gem 'google-api-client', '~> 0.9', require: 'google/apis/gmail_v1'
 gem 'rss'
 #gem "koala"

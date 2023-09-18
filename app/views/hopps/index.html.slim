@@ -16,11 +16,11 @@
                 
               p
                 strong Mega link:
-                = text_field_tag :passkey, "#{hopp.link}}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
+                = text_field_tag :megalink, "#{hopp.link}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
               p
                 strong Hopp link:  
                 br
-                = text_field_tag :passkey, "https://gep.monster/hopper?id=#{hopp.gen}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
+                = text_field_tag :link, "https://gep.monster/hopper?id=#{hopp.gen}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
               p
                 strong Megnyitva:
                 =< hopp.open

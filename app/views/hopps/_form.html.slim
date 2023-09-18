@@ -13,7 +13,7 @@
             = form_for @hopp, html: {class: 'form'} do |f|
               = text_field_tag :passkey, nil, class: 'mb-2', placeholder: 'Passkey'
               = f.text_field :name, class: "mb-2", placeholder: "Játék"
-              = f.text_field :link, class: "mb-2", placeholder: "Link"
+              = f.text_field :link, class: "mb-2", placeholder: "Link", id: "web_link"
               = f.submit "Felvétel »" , class: "btn btn-primary"
               
               

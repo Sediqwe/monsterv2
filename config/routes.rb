@@ -141,7 +141,6 @@ get 'download_ticket/:id', to: 'tickets#download_ticket', as: 'download_ticket'
 get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
 get "hopper", to: "hopps#hopper"
-
 end
 
 

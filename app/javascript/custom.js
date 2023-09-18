@@ -425,5 +425,6 @@ $(document).on('turbo:load', function() {
           }
         })
       });
+      
 });
  

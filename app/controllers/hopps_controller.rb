@@ -22,7 +22,7 @@ class HoppsController < ApplicationController
   def index
     @hopps = Hopp.all.order(id: :DESC)
   end
-
+  
   # GET /hopps/1 or /hopps/1.json
   def show
     
