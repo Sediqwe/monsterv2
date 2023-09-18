@@ -107,6 +107,6 @@ class HoppsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def hopp_params
-      params.require(:hopp).permit(:link, :gen, :open, :passkey)
+      params.require(:hopp).permit(:link, :gen, :open, :passkey, :name)
     end
 end
