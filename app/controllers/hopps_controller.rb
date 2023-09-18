@@ -79,15 +79,21 @@ class HoppsController < ApplicationController
   
   # PATCH/PUT /hopps/1 or /hopps/1.json
   def update
-    respond_to do |format|
-      if @hopp.update(hopp_params)
-        format.html { redirect_to hopp_url(@hopp), notice: "Hopp was successfully updated." }
-        format.json { render :show, status: :ok, location: @hopp }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @hopp.errors, status: :unprocessable_entity }
+    if(params[:passkey] == Rails.application.credentials.km[:password])
+      respond_to do |format|
+        if @hopp.update(hopp_params)
+          format.html { redirect_to hopp_url(@hopp), notice: "Hopp was successfully updated." }
+          format.json { render :show, status: :ok, location: @hopp }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @hopp.errors, status: :unprocessable_entity }
+        end
       end
+    else
+      redirect_to hopps_path    
     end
+      
+    
   end
 
   # DELETE /hopps/1 or /hopps/1.json
