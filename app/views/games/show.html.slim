@@ -87,8 +87,15 @@
                                                 = t.id 
                                                 
                                             - if t.bad == false && t.game_files.attached?
-                                                - if t.game_files.present?
-                                                    = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
+                                                - if session[:calm_down]
+                                                    - if  Time.now < session[:calm_down]
+                                                        - if t.game_files.present?
+                                                            = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
+                                                    - else 
+                                                        | 20 másodpercenként 1 letöltés az engedélyezett
+                                                - else
+                                                    - if t.game_files.present?
+                                                        = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
                                         .col-lg-2.col-xs-12 
                                             span
                                                 = t.version

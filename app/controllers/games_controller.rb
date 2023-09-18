@@ -91,6 +91,7 @@ class GamesController < ApplicationController
   
   def download
     i = Download.new
+    session[:calm_down] = Time.now + 20.seconds
     i.game_id = je_params[:id]
     i.upload_id = je_params[:done]
     if i.save
@@ -100,72 +101,6 @@ class GamesController < ApplicationController
     end
    end
 
-    def downloadend
-      ActiveStorage::Blob
-      adat = Upload.find(params[:id])
-      redirect_to root_path unless adat.game_files.attached?
-      Game.default_timezone = :utc
-      i = Download.new
-      i.game_id = adat.game_id
-      i.upload_id = adat.id
-      i.ip_address = request.remote_ip
-      i.save  
-      send_data adat.game_files.blob.download, type: adat.game_files.content_type
-    end
-    def lobot
-      data = je_params[:id]
-      if data.to_s == session[:randoms].to_s
-        render json: { info: 'ok' }
-      else
-        render json: { info: 'nok' }
-      end
-    end
-    def download_file
-      directory_name = "public/vedelem"
-      Dir.mkdir(directory_name) unless File.exist?(directory_name)
-      o = [('a'..'z'), ('A'..'Z')].map(&:to_a).flatten
-      string = (0...5).map { o[rand(o.length)] }.join
-      if !cookies[:randoms]
-        session[:randoms] = nil
-      end
-      if session[:randoms].blank?
-        #Ha nincs randoms, hozzuk létre
-        session[:randoms] = string
-        cookies[:randoms] = {
-        value: "times",
-        expires: 1.minute.from_now
-        }        
-      end
-      r = rand(0..255)
-      g = rand(0..255)
-      b = rand(0..255)
-      random_color = "rgb(#{r}, #{g}, #{b})"
-      original_color = random_color # Ezt az értéket a valódi színre kell állítani
-      target_color = "rgb(#{g}, #{b}, #{r})"
-      gradient_height = 200
-      gradient = Magick::GradientFill.new(0, 0, 0, gradient_height, original_color, target_color)
-      @adat = Upload.find(params[:id])
-      canvas = Magick::Image.new(300, 100, gradient) { |options| options.background_color = random_color}
-      gc = Magick::Draw.new 
-      gc.pointsize(40)
-      
-      r = rand(0..255)
-      g = rand(0..255)
-      b = rand(0..255)
-      text_color = "rgb(#{r}, #{g}, #{b})"
-      font_styles = [Magick::NormalStyle, Magick::ItalicStyle, Magick::ObliqueStyle]
-      random_font_style = font_styles.sample
-      gc.font_style(random_font_style)
-      gc.fill(text_color)
-      gc.font_size(rand(20..30))
-      gc.text(rand(30..60),rand(30..70), session[:randoms].center(rand(20)))
-      gc.draw(canvas)
-      randi = rand().to_s
-      canvas.write('public/vedelem/' + randi + '.png')
-      session[:random] = randi
-    end
-    
-   
   
   def destroy
     

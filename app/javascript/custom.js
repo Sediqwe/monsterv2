@@ -409,7 +409,7 @@ $(document).on('turbo:load', function() {
         $("#mutat2").hide();
       });
       $('a[id^="letoltes_gomb"]').on('click', function(){
-       
+        $('a[id^="letoltes_gomb"]').hide();
         var adat = $(this).attr('datagame');
         var done = $(this).attr('done');
         $.ajax({
