@@ -1,18 +1,19 @@
-h1.form__headline
-  div id="#{dom_id hopp}"
-   p
-    strong Link:
-    =< hopp.name
+div id="#{dom_id hopp}"
   p
-    strong Link:
-    =< hopp.link
-  p
-    strong Új linked:
-      |https://gep.monster/hopper?id=#{hopp.gen}
-  p
-    strong Open:
-    =< hopp.open
-            
-            
+  strong Name:
+  =< hopp.name
+p
+  strong Link:
+  =< hopp.link
+p
+  strong Új linked:
+p
+  = text_field_tag :passkey, "https://gep.monster/hopper?id=#{hopp.gen}", size: 60, class: 'mb-2', placeholder: 'Passkey', style: 'width: 100%;'
+  
+p
+  strong Open:
+  =< hopp.open
+          
+          
 
 
