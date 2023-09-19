@@ -25,8 +25,10 @@
           tr
             td = mega.title
             td = link_to "Letöltés" , down_path(id: mega.link, mega_id: mega.id), method: "post", class: "btn btn-success text-light m-2"
-            td = mega.version
-            td = mega.szamlalo
+            - if File.exists?("file/" + mega.link)
+              td = mega.version
+            - if File.exists?("file/" + mega.link)
+              td = mega.szamlalo
             td 
               - if File.exists?("file/" + mega.link)
                 = number_to_human_size(File.size("file/" + mega.link))
