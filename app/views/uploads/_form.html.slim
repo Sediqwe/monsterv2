@@ -28,11 +28,11 @@
               .form-group.mb-3
                 = f.text_field :version, class: 'form-control', placeholder: "Verzió"
               .input-group.mb-3
-                =f.label "Auto magyarítás?"
+                = f.label "Auto magyarítás?", class: "p-3"
                 = f.check_box :mauto
               
               .input-group.mb-3
-                = f.label "Multi uploader?"                
+                = f.label "Multi uploader?", class:"p-3"                
                 = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { include_blank: "Készítők", multiple: true, class: "form-control" } 
 
 
@@ -51,8 +51,11 @@
                   = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
               .input-group.mb-3
                 =f.text_area :description, class: 'form-control rows=3'
-              
               .input-group.mb-3
+                = f.label "Demo?", class: "p-3" 
+                =f.check_box :demo, class: ''
+              .input-group.mb-3
+                
                 = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
               
               button.btn.btn-primary Fájl feltöltése »

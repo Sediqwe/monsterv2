@@ -78,7 +78,10 @@
                                     .col-lg-2.col-xs-12
                                         |Dátum: 
                                 -@game.uploads.order('created_at DESC').each_with_index do |t,index|
-                                
+                                    - if t.demo
+                                        .row.bg-info
+                                            .col-12 
+                                                |EZ ITT A DEMO FORDÍTÁSA!
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                         .col-lg-2.col-xs-12
                                             - if current_user&.admin? 

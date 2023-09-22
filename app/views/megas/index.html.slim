@@ -1,51 +1,43 @@
-- if current_user.present?
-  - if current_user.admin? 
-    = link_to 'New Mega', new_mega_path, class: "btn btn-success text-light"
-    - osszeg = 0
-    table.table.table-hover.table-dark.table-striped
-      thead
-        tr
-          th Title
-          th Link
-          th Version
-          th Letöltve
-          th Mérete
-          th Feltöltés dátuma
+= link_to 'New Mega', new_mega_path, class: "btn btn-success text-light"
+- osszeg = 0
+table.table.table-hover.table-dark.table-striped
+  thead
+    tr
+      th Title
+      th Link
+      th Version
+      th Letöltve
+      th Mérete
+      th Feltöltés dátuma
+      th 
+      - if current_user.present?
+          - if current_user.admin?
+          th
           th 
-          - if current_user.present?
-              - if current_user.admin?
-              th
-              th 
-              th
-          
-      tbody
-        - @megas.each do |mega| 
+          th
+      
+  tbody
+    - @megas.each do |mega| 
 
 
-          tr
-            td = mega.title
-            td = link_to "Letöltés" , down_path(id: mega.link, mega_id: mega.id), method: "post", class: "btn btn-success text-light m-2"
-            - if File.exist?("file/" + mega.link)
-              td = mega.version
-            - if File.exist?("file/" + mega.link)
-              td = mega.szamlalo
-            td 
-              - if File.exist?("file/" + mega.link)
-                = number_to_human_size(File.size("file/" + mega.link))
-              - else  
-                h3 Hiba, a file nem érhető el!
-            td = time_ago_in_words(mega.created_at)
-            - if current_user.present?
-              - if current_user.admin?
-                td = Game.find(mega.game).name if mega.game.present?
-                td = select("megalista_", mega.id, Game.all.order(:name).collect {|p| [ p.name, p.id ] }, { include_blank: "--Válassz--", selected: mega.game })
-                td = link_to 'Show', mega 
-                td = link_to 'Edit', edit_mega_path(mega) 
-                td = link_to 'Destroy', mega, method: :delete, data: { confirm: 'Are you sure?'}  
-    hr
-    |Összes letöltés eddig: 
-
-    br
-   
-- else 
-  h2 A MEGA's tartalma integrálva lett az portálba, mostantól ott keresd a MEGA nagy fájlokat!
+      tr
+        td = mega.title
+        td = link_to "Letöltés" , down_path(id: mega.link, mega_id: mega.id), method: "post", class: "btn btn-success text-light m-2"
+        - if File.exist?("file/" + mega.link)
+          td = mega.version
+        - if File.exist?("file/" + mega.link)
+          td = mega.szamlalo
+        td 
+          - if File.exist?("file/" + mega.link)
+            = number_to_human_size(File.size("file/" + mega.link))
+          - else  
+            h3 Hiba, a file nem érhető el!
+        td = time_ago_in_words(mega.created_at)
+        - if current_user.present?
+          - if current_user.admin?
+            td = Game.find(mega.game).name if mega.game.present?
+            td = select("megalista_", mega.id, Game.all.order(:name).collect {|p| [ p.name, p.id ] }, { include_blank: "--Válassz--", selected: mega.game })
+            td = link_to 'Show', mega 
+            td = link_to 'Edit', edit_mega_path(mega) 
+            td = link_to 'Destroy', mega, method: :delete, data: { confirm: 'Are you sure?'}  
+hr

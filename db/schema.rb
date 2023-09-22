@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_18_212339) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_20_172436) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -428,6 +428,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_18_212339) do
     t.boolean "special", default: false
     t.boolean "mauto", default: false
     t.boolean "multiuser", default: false
+    t.boolean "demo", default: false
     t.index ["game_id"], name: "index_uploads_on_game_id"
     t.index ["platform_id"], name: "index_uploads_on_platform_id"
     t.index ["program_id"], name: "index_uploads_on_program_id"

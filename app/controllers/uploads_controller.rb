@@ -120,7 +120,7 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser )
+      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :demo )
     end
     def editor_params
       params.require(:product).permit(:id, :adat )
