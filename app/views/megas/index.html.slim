@@ -1,4 +1,6 @@
-= link_to 'New Mega', new_mega_path, class: "btn btn-success text-light"
+- if current_user.present?
+  - if current_user.admin?
+    = link_to 'New Mega', new_mega_path, class: "btn btn-success text-light"
 - osszeg = 0
 table.table.table-hover.table-dark.table-striped
   thead
