@@ -1,5 +1,4 @@
 require_relative "boot"
-require_relative '../lib/ip_blocker'
 require "rails/all"
 
 # Require the gems listed in Gemfile, including any gems
@@ -14,7 +13,6 @@ module Monsterv2
     config.time_zone = 'Europe/Budapest'
     config.active_record.default_timezone = :local
     config.i18n.default_locale = :hu
-    config.middleware.insert_before 0, IpBlocker
     # Configuration for the application, engines, and railties goes here.
     #
     # These settings can be overridden in specific environments using the files

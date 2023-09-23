@@ -1,6 +1,14 @@
 Rails.application.routes.draw do
   resources :hopps
   resources :autoforditoilists
+  resources :projects
+  resources :howtos
+  resources :changers
+  resources :scanners
+  resources :cars
+  resources :beolvas
+  resources :csvs
+  resources :databeolvas, to: 'beolvas#soronkent'
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'
@@ -14,15 +22,6 @@ Rails.application.routes.draw do
   get 'search/kereses'
   get 'disqus', to: "disqus#index"
   get 'gmail', to: "gmail#index"
-  
-  resources :projects
-  resources :howtos
-  resources :changers
-  resources :scanners
-  resources :cars
-  resources :beolvas
-  resources :csvs
-  resources :databeolvas, to: 'beolvas#soronkent'
   get "kozelito", to: "beolvas#kozelito"
   get 'reinstall/index'
   get 'reinstall/game_up'
@@ -60,7 +59,6 @@ Rails.application.routes.draw do
   get "universal", to: "beolvas#universal"
   post "universal_save", to: "beolvas#universal_save"
   get "delete_uzenet", to:"uzenets#delete_uzenet"
-  #get "forumautomatika", to:"forums#automata"
   get "forumcontroll", to: "forums#controll"
   resources :user2s
   resources :lists
@@ -81,7 +79,7 @@ Rails.application.routes.draw do
   get "recovery", to: "sessions#recovery"
   post "sessions_recovery_mail", to: "sessions#sessions_recovery_mail"
   get "recovery_mail_sent", to: "sessions#recovery_mail_sent"
-  post "recovery_mail", to: "sessions#recovery_mail"
+  get "/recovery_mail", to: "sessions#recovery_mail"
   get "recovery_user", to: "sessions#recovery_user"
   get "new_password_ready", to: "sessions#new_password_ready"
   post 'download', to: "games#download"

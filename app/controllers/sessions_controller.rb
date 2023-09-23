@@ -8,13 +8,13 @@ class SessionsController < ApplicationController
     #Ide jön a mail ből a user
   end
   def recovery_mail
-    user =  User.find(params[:user_id])
-    if user.recovery = params[:recovery_id]
-      user.password = params[:new_password]
+    user =  User.find(params[:session][:user_id])
+    p = "itt"
+    p user.name
+    if user.recovery == params[:session][:recovery_id]
+      user.password = params[:session][:new_password]
+      user.save
       redirect_to new_password_ready_path
-    else
-      sleep 60
-      redirect_to root_path
     end
   end
   def recovery

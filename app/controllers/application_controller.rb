@@ -4,13 +4,11 @@ class ApplicationController < ActionController::Base
     before_action :set_search
     
 def set_search
-  require 'nokogiri'
-  require 'open-uri'
-  @q = Game.ransack(params[:q])
-  @download = Download.order("created_at DESC").first(10)
-  @uploading = Upload.order("created_at DESC").first(10)
-  
-  
+    require 'nokogiri'
+    require 'open-uri'
+    @q = Game.ransack(params[:q]) 
+    @download = Download.order("created_at DESC").first(10)
+    @uploading = Upload.order("created_at DESC").first(10)  
 end
 
 
