@@ -6,7 +6,7 @@
           .form
             h1.form__headline
               | Jelszó visszaállítás
-            = form_for :session, class: "form", url: :sessions_recovery_mail do |f|
+            = form_for :session, class: "form", url: :recovery_mail do |f|
               label for="name" New Password
               = f.hidden_field :recovery, value: params[:recovery_id]
               = f.hidden_field :user_id, value: params[:user_id]
