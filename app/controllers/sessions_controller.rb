@@ -7,11 +7,11 @@ class SessionsController < ApplicationController
   def recovery_mail_sent
   end
   def sessions_recovery_mail
-  user =  User.find_by(name: params[:session][:name].downcase)
-  
+  user =  User.find_by(name: params[:session][:name].downcase)  
   if user
     user.recovery = SecureRandom.urlsafe_base64(20)
     user.save
+    -ApplicationMailer.welcome_email(current_user.id).deliver
     redirect_to recovery_mail_sent_path(id: user.id)
   else
   
