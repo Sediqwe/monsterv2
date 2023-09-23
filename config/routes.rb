@@ -81,6 +81,7 @@ Rails.application.routes.draw do
   get "recovery", to: "sessions#recovery"
   post "sessions_recovery_mail", to: "sessions#sessions_recovery_mail"
   get "recovery_mail_sent", to: "sessions#recovery_mail_sent"
+  get "recovery_mail", to: "sessions#recovery_mail"
   post 'download', to: "games#download"
   post 'editorka', to: "uploads#editorka"
   post 'lista_editor', to: "lists#editorka"
