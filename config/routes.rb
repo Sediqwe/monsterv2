@@ -82,7 +82,7 @@ Rails.application.routes.draw do
   post "sessions_recovery_mail", to: "sessions#sessions_recovery_mail"
   get "recovery_mail_sent", to: "sessions#recovery_mail_sent"
   get "recovery_mail", to: "sessions#recovery_mail"
-  get "recovery_user", to: "session#recovery_user"
+  get "recovery_user", to: "sessions#recovery_user"
   get "new_password_ready", to: "sessions#new_password_ready"
   post 'download', to: "games#download"
   post 'editorka', to: "uploads#editorka"
