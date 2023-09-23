@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_20_172436) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_23_121806) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -469,6 +469,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_20_172436) do
     t.string "tam3"
     t.string "tam4"
     t.bigint "translater_id"
+    t.text "recovery"
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["translater_id"], name: "index_users_on_translater_id"
   end

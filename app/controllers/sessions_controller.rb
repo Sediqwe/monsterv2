@@ -2,7 +2,22 @@ class SessionsController < ApplicationController
   def new
   
   end
+  def recovery
+  end
+  def recovery_mail_sent
+  end
+  def sessions_recovery_mail
+  user =  User.find_by(name: params[:session][:name].downcase)
+  
+  if user
+    user.recovery = SecureRandom.urlsafe_base64(20)
+    user.save
+    redirect_to recovery_mail_sent_path(id: user.id)
+  else
+  
+  end
 
+  end
   def create
     
     user = User.find_by(name: user_params[:name].downcase).try(:authenticate, user_params[:password])

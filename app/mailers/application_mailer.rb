@@ -7,4 +7,9 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(to: @user.email, subject: 'Welcome to our website!')
   end
+  def recovery_email(id)
+    @user = User.find(id)
+
+    mail(to: @user.email, subject: 'Elfelejtet jelszó!')
+  end
 end

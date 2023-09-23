@@ -15,7 +15,8 @@
               button.btn.btn-primary Belépek
             p.mt-2
               | vagy
-            =link_to "Regisztráció", login_reg_path, class: "btn btn-primary"
+            =link_to "Regisztráció", login_reg_path, class: "btn btn-primary mb-4"
+            =link_to "Elfelejtett jelszó", recovery_path, class: "btn btn-info"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'
 

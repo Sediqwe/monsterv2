@@ -62,7 +62,6 @@ Rails.application.routes.draw do
   get "delete_uzenet", to:"uzenets#delete_uzenet"
   #get "forumautomatika", to:"forums#automata"
   get "forumcontroll", to: "forums#controll"
-  #resources :uzenets
   resources :user2s
   resources :lists
   resources :megas
@@ -79,6 +78,9 @@ Rails.application.routes.draw do
   resources :platforms
   resources :users
   get "user", to: "user2s#index"
+  get "recovery", to: "sessions#recovery"
+  post "sessions_recovery_mail", to: "sessions#sessions_recovery_mail"
+  get "recovery_mail_sent", to: "sessions#recovery_mail_sent"
   post 'download', to: "games#download"
   post 'editorka', to: "uploads#editorka"
   post 'lista_editor', to: "lists#editorka"

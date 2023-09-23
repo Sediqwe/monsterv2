@@ -1,0 +1,18 @@
+-if current_user.admin?
+  .container-fluid
+    .row
+      .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+        .row
+          .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+            .form
+              h1.form__headline
+                | Jelszó visszaállítás
+              = form_for :session, class: "form", url: :sessions_recovery_mail do |f|
+                label for="name" Username
+                = f.text_field :name,  class: "mb-2"              
+                button.btn.btn-primary Jelszó visszaállítás
+              p.mt-2            
+      .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+        = render'shared/side'
+
+            
