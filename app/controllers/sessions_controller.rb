@@ -2,6 +2,18 @@ class SessionsController < ApplicationController
   def new
   
   end
+  def new_password_ready
+  end
+  def recovery_user
+    user =  User.find(params[:user_id])
+    if user.recovery = params[:recovery_id]
+      user.password = params[:new_password]
+      redirect_to new_password_ready_path
+    else
+      sleep 60
+      redirect_to root_path
+    end
+  end
   def recovery
   end
   def recovery_mail_sent
