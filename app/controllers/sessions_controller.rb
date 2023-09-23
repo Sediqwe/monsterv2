@@ -5,6 +5,7 @@ class SessionsController < ApplicationController
   def new_password_ready
   end
   def recovery_user
+    #Ide jön a mail ből a user
   end
   def recovery_mail
     user =  User.find(params[:user_id])
@@ -17,10 +18,13 @@ class SessionsController < ApplicationController
     end
   end
   def recovery
+    #Első oldal, ahol kéred a jelszó visszaállítást
   end
   def recovery_mail_sent
+    #El lett küldve az adat, itt jelzem ki, utolsó oldal
   end
   def sessions_recovery_mail
+    #Itt adod meg a mail adatait
   user =  User.find_by(name: params[:session][:name].downcase)  
   if user
     user.recovery = SecureRandom.urlsafe_base64(20)
