@@ -3,19 +3,20 @@ class SessionsController < ApplicationController
   
   end
   def new_password_ready
+    #itt lesz a végállomás
   end
   def recovery_user
     #Ide jön a mail ből a user
   end
   def recovery_mail
     user =  User.find(params[:session][:user_id])
-    p = "itt"
-    p user.name
     if user.recovery == params[:session][:recovery_id]
       user.password = params[:session][:new_password]
+      user.recovery = nil
       user.save
       redirect_to new_password_ready_path
     end
+    
   end
   def recovery
     #Első oldal, ahol kéred a jelszó visszaállítást
