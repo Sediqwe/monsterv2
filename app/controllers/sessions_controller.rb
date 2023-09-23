@@ -11,7 +11,7 @@ class SessionsController < ApplicationController
   if user
     user.recovery = SecureRandom.urlsafe_base64(20)
     user.save
-    -ApplicationMailer.recovery_email(current_user.id).deliver
+    -ApplicationMailer.recovery_email(user.id).deliver
     redirect_to recovery_mail_sent_path(id: user.id)
   else
   
