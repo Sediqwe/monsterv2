@@ -6,15 +6,15 @@
           .form
             h1.form__headline
               | Jelszó visszaállítás
-              |(
+              |( 
               = User.find(params[:user_id]).name
-              |)
+              | )
             = form_for :session, class: "form", url: :recovery_mail, method: :get do |f|
-              label for="name" New Password
+              label for="name" Add meg az új jelszót
               = f.hidden_field :recovery_id, value: params[:recovery_id]
               = f.hidden_field :user_id, value: params[:user_id]
               = f.password_field :new_password,  class: "mb-2"              
-              = f.submit
+              = f.submit "Új jelszó", class: "btn btn-success"
             p.mt-2            
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'
