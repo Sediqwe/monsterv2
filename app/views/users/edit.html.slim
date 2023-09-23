@@ -1,4 +1,7 @@
 -if current_user.id == @user.id or current_user.admin?
     == render 'form'
 - else
-    |Ehez semmi jogod!    
+    |Ehez semmi jogod!
+-if current_user.admin?
+    |ITT
+    -ApplicationMailer.welcome_email(current_user.id).deliver   
