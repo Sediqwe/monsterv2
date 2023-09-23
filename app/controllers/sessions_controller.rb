@@ -5,6 +5,8 @@ class SessionsController < ApplicationController
   def new_password_ready
   end
   def recovery_user
+  end
+  def recovery_mail
     user =  User.find(params[:user_id])
     if user.recovery = params[:recovery_id]
       user.password = params[:new_password]
