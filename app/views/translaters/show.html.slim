@@ -30,6 +30,15 @@
                   |Támogatásod megteheted PAYPAL-on keresztül:
                   br
                   = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
+          h2 Top 10 letöltése: 
+          - top_uploads = Uploadtranslater.where(translater_id: @translater).group(:upload_id).order('count_upload_id DESC').limit(10).count(:upload_id)
+          - top_uploads.each do |upload_id, count|
+            - upload = Upload.find(upload_id)
+            = upload.game.name
+            |(
+            = count
+            |)
+            br
           h2
             |Utolsó 10 fordítása:
             .row
