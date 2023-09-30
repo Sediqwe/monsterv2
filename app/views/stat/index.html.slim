@@ -72,6 +72,19 @@
 
                                 h5
                                     = top[1]
+                .col-xs-12.col-sm-4
+                    h2.top-header
+                        | TOP 10 fordító
+                    .top-download
+                        -  @top_translaters.each do |top2, top1|
+                            a[href="/translaters/#{top2}"]
+                                h5
+                                    = Translater.find(top2).translater_name
+                                    |(
+                                    = top1
+                                    |)
+                                h5
+                                    
                 - if current_user.present?
                     -if current_user.admin?
                         .col-xs-12.col-sm-4
