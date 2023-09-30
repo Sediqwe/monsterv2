@@ -36,9 +36,11 @@
             - upload = Upload.find(upload_id)
             = upload.game.name
             |(
-            = Uploadtranslater.where(upload_id: upload.id).size
+            =  Download.where(upload_id: upload.id).size
             |)
             br
+          br
+          br
           h2
             |Utolsó 10 fordítása:
             .row
