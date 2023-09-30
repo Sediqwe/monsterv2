@@ -36,7 +36,7 @@
             - upload = Upload.find(upload_id)
             = upload.game.name
             |(
-            = Uploadtransleter.where(upload_id: upload_id).size
+            = Uploadtranslater.where(upload_id: upload_id).size
             |)
             br
           h2
