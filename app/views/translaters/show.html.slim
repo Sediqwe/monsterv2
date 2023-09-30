@@ -46,7 +46,10 @@
                   - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
 
                   span class="tag tag-#{adatok.sample} tag-lg"
-                    =t.upload.game.name
+                    =t.upload.game.name 
+                    |(
+                    = Download.where(upload_id: t.upload_id).size
+                    |)
                   
 
 
