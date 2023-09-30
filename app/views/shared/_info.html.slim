@@ -1,0 +1,9 @@
+- if !cookies[:news]
+  - cookiess[:news] = { value: Kuki.last.ertek, expires: 1.year.from_now }
+  - ok = 1
+- if cookies[:news] != Kuki.last.kuki
+  - cookiess[:news] = { value: Kuki.all.last.ertek , expires: 1.year.from_now }
+  - ok = 1
+- if ok
+  .bg-warning.text-dark
+    = Kuki.last.desc

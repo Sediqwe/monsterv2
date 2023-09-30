@@ -22,7 +22,7 @@ class BlogsController < ApplicationController
   # POST /blogs or /blogs.json
   def create
     @blog = Blog.new(blog_params)
-
+    @blog.kuki = "1234"
     respond_to do |format|
       if @blog.save
         format.html { redirect_to blog_url(@blog), notice: "Blog was successfully created." }

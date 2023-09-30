@@ -1,4 +1,7 @@
 Rails.application.routes.draw do
+  get 'kuki/index'
+  get 'kuki/new'
+  get 'kuki/create'
   resources :hopps
   resources :autoforditoilists
   resources :projects

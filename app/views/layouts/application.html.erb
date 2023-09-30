@@ -28,7 +28,11 @@
     </head>
   <body>
     <%= render 'shared/menu' %>
+    
+    <%= render 'shared/info' if cookies[:news] != Kuki.all.last.ertek if Kuki.all.last.present? %>
+    
     <%= yield  %>
+
    
     <%= render 'shared/footer' %>
   </body>

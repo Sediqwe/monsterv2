@@ -1,0 +1,2 @@
+class Kuki < ApplicationRecord
+end
