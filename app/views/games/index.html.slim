@@ -34,7 +34,7 @@
                         h1.text-light
                             |Sajnos nincs találat...
 
-                - @games.each do |game|
+                - @games.each_with_index do |game, index|
                     - cache game do
                         = render game
             step-filter
