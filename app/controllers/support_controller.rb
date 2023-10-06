@@ -1,5 +1,5 @@
 class SupportController < ApplicationController
   def index
-    @supporters = Supporter.all
+    @supporters = Supporter.all.order(id: :DESC)
   end
 end
