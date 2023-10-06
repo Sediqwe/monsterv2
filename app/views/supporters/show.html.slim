@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @supporter
+
+div
+  => link_to "Edit this supporter", edit_supporter_path(@supporter)
+  '|
+  =< link_to "Back to supporters", supporters_path
+
+  = button_to "Destroy this supporter", @supporter, method: :delete

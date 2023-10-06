@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_09_23_163055) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_06_195712) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -408,6 +408,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_09_23_163055) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["beolva_id"], name: "index_scanners_on_beolva_id"
+  end
+
+  create_table "supporters", force: :cascade do |t|
+    t.string "name"
+    t.string "datum"
+    t.integer "euro"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "translaters", force: :cascade do |t|

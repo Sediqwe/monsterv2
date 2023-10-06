@@ -1,0 +1,11 @@
+p style="color: green" = notice
+
+h1 Supporters
+
+#supporters
+  - @supporters.each do |supporter|
+    == render supporter
+    p
+      = link_to "Show this supporter", supporter
+
+= link_to "New supporter", new_supporter_path
