@@ -25,7 +25,7 @@ class TranslatersController < ApplicationController
   # GET /translaters/1/edit
   def edit
   end
-
+  
   # POST /translaters or /translaters.json
   def create
     @translater = Translater.new(translater_params)

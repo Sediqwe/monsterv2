@@ -5,7 +5,7 @@ class Upload < ApplicationRecord
   belongs_to :translater
   belongs_to :program
   belongs_to :platform
-  has_many :download, dependent: :destroy
+  has_many :downloads, dependent: :destroy
   has_many :uploadtranslaters, dependent: :destroy
   def self.default_timezone
     :utc
