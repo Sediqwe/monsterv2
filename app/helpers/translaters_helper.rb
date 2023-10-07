@@ -9,8 +9,9 @@ module TranslatersHelper
         intem = 1
         top_downloads = Download.group(:upload_id).count.sort_by { |_, count| -count }
         top_downloads.each do |upload_id, count|
+            upload = Upload.find(upload_id)            
           if Uploadtranslater.exists?(upload_id: upload_id, translater_id: translater_id)
-            ingwer += "#{intem}. #{Upload.find(upload_id).game.name} (#{count}) <br>"
+            ingwer += " <a href=\"/games/#{upload.game.slug}\" class=\"btn bg-dark bg-gradient text-light\" style=\"text-decoration: none; color: #333;\"> #{intem}. #{upload.game.name} (#{count}) »</a> <br>"
             intem += 1
             break if intem > 10  # Kilépés a ciklusból, ha intem értéke 10
           end
