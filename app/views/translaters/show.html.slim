@@ -30,6 +30,11 @@
                   |Támogatásod megteheted PAYPAL-on keresztül:
                   br
                   = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
+          h2  Top10
+          
+          =transtop(params[:id]).html_safe
+
+
           h2
             |Utolsó 10 fordítása:
             .row
