@@ -22,12 +22,7 @@ class StatController < ApplicationController
       end
       end
       meretossz = (meretossz.to_f / 1024 / 1024 / 1024)
-      @meretossz = meretossz
-      top_uploads = Download.joins(upload: :translaters).where(translaters: { id: @translater.id }).group(:upload_id).order('count_upload_id DESC').limit(10).count(:upload_id)
-      @top_translaters = download_counts.sort_by { |_, count| -count }.first(10)
-
-
-
+      @meretossz = meretossz   
   end
   
 end
