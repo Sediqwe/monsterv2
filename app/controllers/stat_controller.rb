@@ -22,7 +22,10 @@ class StatController < ApplicationController
       end
       end
       meretossz = (meretossz.to_f / 1024 / 1024 / 1024)
-      @meretossz = meretossz   
+      @meretossz = meretossz
+      @downloads_by_day = Download.select("DATE(created_at) as download_date, upload_id, COUNT(*) as download_count")
+                           .group("download_date, upload_id").order("download_date, download_count DESC, upload_id").limit(10)
+                             
   end
   
 end

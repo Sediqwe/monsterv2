@@ -28,7 +28,7 @@
                         .labels__element.labels__element--libafos
                             |Össz méret: 
                             = @meretossz.round(2)
-                            |   Mb
+                            |   GB
             .row    
                 .col-xs-12.col-sm-4
                     h2.top-header
@@ -90,6 +90,11 @@
                 .col-xs-12.col-sm-12.bg-secondary
                     = line_chart Download.group_by_day(:created_at, last: 100).count , title: "Utolsó 100 nap letöltései:",  colors: ["white", "white"],library: {backgroundColor: "#eee"} , download: {background: "#ffffff"}
             br
-            br
+            
+            .row
+                .col-xs-12.col-sm-12.bg-secondary
+                    = line_chart Upload.group_by_month(:created_at, last: 24, format: "%Y-%B").count , title: "Feltöltések havonta:", colors: ["white", "white"], library: {backgroundColor: "#eee"} , download: {background: "#ffffff"}
+
+
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
             = render'shared/side'
