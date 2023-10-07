@@ -30,15 +30,6 @@
                   |Támogatásod megteheted PAYPAL-on keresztül:
                   br
                   = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
-          h2 Top 10 letöltése: 
-          - top_translaters = Translater.joins(:uploadtranslaters).select("translaters.id, translaters.translater_name, COUNT(*) as download_count").group("translaters.id, translaters.translater_name").order("download_count DESC").limit(10)
-          -top_translaters.each_with_index do |tt, index|
-            -translater = Translater.find(tt.id)
-             = "Helyezés: #{index + 1}"
-             = "Fordító neve: #{tt.translater_name}"
-             = "Letöltések száma: #{tt.download_count}"
-            br
-          br
           h2
             |Utolsó 10 fordítása:
             .row
