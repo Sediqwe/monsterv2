@@ -87,8 +87,7 @@
                                             - if current_user&.admin? 
                                                 =
                                                 | # 
-                                                = t.id 
-                                                
+                                                = t.id                                                 
                                             - if t.bad == false && t.game_files.attached?
                                                 - if session[:calm_down]
                                                     - if  Time.now > session[:calm_down]
@@ -108,13 +107,15 @@
                                                 - adatok = Uploadtranslater.where(upload_id: t)
                                                 - adatok.each_with_index do |dorka,index2|
                                                     = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-link"
+                                                    - mikka = User.find_by(translater_id: dorka)
+                                                    - if mikka 
+                                                        = link_to "Támogatás »", translater_path(dorka.translater), class:"btn btn-primary"
                                                     - if index2 < adatok.size-1
                                                         | , 
                                         .col-lg-1.col-xs-12                                             
                                             = Download.where(upload_id: t.id).size 
                                             |X
                                         .col-lg-1.col-xs-12
-                                            
                                             - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
                                                 span class="tag tag-vue tag-lg"
@@ -205,12 +206,3 @@
                 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
         = render'shared/side'
-
-
-
-
-        
-        
-        
-    
-               
