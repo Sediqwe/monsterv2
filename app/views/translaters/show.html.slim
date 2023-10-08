@@ -40,8 +40,7 @@
             .row
               - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.first(10).each do |t|
                 .col-6
-                  a.cards href="/games/#{t.upload.game.slug}" 
-                  
+                  a.cards href="/games/#{t.upload.game.slug}"                  
                     = image_tag(t.upload.game.image.variant(resize_to_fit: [492, 282]), class: 'listpage-imgs', title: t.upload.game.name) if t.upload.game.image.attached?
           main role="main"
           
