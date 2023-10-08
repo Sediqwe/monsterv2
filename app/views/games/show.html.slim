@@ -107,7 +107,7 @@
                                                 - adatok = Uploadtranslater.where(upload_id: t)
                                                 - adatok.each_with_index do |dorka,index2|
                                                     = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-link"
-                                                    - mikka = User.find_by(translater_id: dorka)
+                                                    - mikka = User.find_by(translater_id: dorka.translater)
                                                     - if mikka 
                                                         = link_to "Támogatás »", translater_path(dorka.translater), class:"btn btn-primary"
                                                     - if index2 < adatok.size-1
