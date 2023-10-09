@@ -2,6 +2,7 @@ source "https://rubygems.org"
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 ruby "3.2.1"
 gem "bootstrap"
+gem 'bootstrap-icons'
 gem 'google-analytics-rails', '1.1.1'
 gem 'kaminari'
 gem 'free_disk_space'
