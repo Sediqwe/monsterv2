@@ -29,8 +29,8 @@
              
               - if @user.translater_id?
                 = f.file_field :photo
-                = image_tag @user.photo, class: "mb-2"
                 - if @user.photo.attached?
+                  = image_tag @user.photo, class: "mb-2"
                   label for="alias" Photo
                   
                 label for="newGameCoverUpload" Leírás
