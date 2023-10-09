@@ -12,27 +12,35 @@
                 .col-xs-12.col-sm-12.col-md-6.offset-md-10.col-lg-8.offset-lg-2.d-flex.flex-column.align-content-center
                     .row
                         .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-7.offset-lg-0.d-flex.flex-column.align-content-center
-                             - if current_user&.admin?
-                                .form
-                                    h1.form__headline
-                                        |Támogatás
-                                    |Az oldalon keresztül kölönböző módokon tudod támogatni a fordítás készítőit.: 
-                                    br
-                                    |Létezik a direkt támogatás, ez esetben az oldalon megadott módokon, PayPal,Revolut, Steam kívánságlista 
-                                    br
-                                    |vagy direkt a GM oldalon keresztül, a saját számládról bizonyos összeget felajánlva.
-                                    br
-                                    |Szóval, hívj meg minket bátran egy kávéra :)
-                                    br
-                                    | Egyszeri:
-                                    br
-                                    =link_to "BuyMeACoffee", "https://www.buymeacoffee.com/gepmonster", target: "_blank" , class: "btn btn-secondary text-light btn-block"
-                                    br
-                                    hr
-                                    br
-                                    | Folyamatos:
-                                    br
-                                    = link_to "Patreon", "https://www.patreon.com/user?u=92038027", target: "_blank" , class: "btn btn-secondary text-light"
+                            .form
+                                h1.form__headline
+                                    |Támogatás - Készítők
+                                - index = 1
+                                - @users.each_with_index do |user|
+                                    = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
+                                        = user.name.downcase.capitalize 
+                                        - if user.tam2.include?("pay")
+                                            i class="bi bi-paypal p-2"
+                                        - if user.tam1.include?("steam")
+                                            i class="bi bi-steam p-2"
+                                        
+                                       
+
+                            .form
+                                h1.form__headline
+                                    |Támogatás - Weboldal
+                                |Az oldalt kölönböző módokon tudod támogatni, e támogatás az oldal készítőjét támogatja, segíti fenttartani a weboldalt, a domaint és az egyéb keletkező díjjakat, pl DEEPL Pro account.
+                                |Szóval, hívj meg minket bátran egy kávéra :)
+                                br
+                                | Egyszeri:
+                                br
+                                br
+                                =link_to "BuyMeACoffee", "https://www.buymeacoffee.com/gepmonster", target: "_blank" , class: "btn btn-secondary text-light btn-block"
+                                hr
+                                | Folyamatos:
+                                br
+                                br
+                                = link_to "Patreon", "https://www.patreon.com/user?u=92038027", target: "_blank" , class: "btn btn-secondary text-light"
                         .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-5.offset-lg-0.d-flex.flex-column.align-content-center
                             .form
                                 h1.form__headline
