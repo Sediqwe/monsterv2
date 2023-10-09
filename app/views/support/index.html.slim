@@ -17,15 +17,16 @@
                                     |Támogatás - Készítők
                                 - index = 1
                                 - @users.shuffle.each do |user|
-                                    = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
-                                        - if user.alias.size>1
-                                            = user.alias.downcase.capitalize 
-                                        - else
-                                            = user.name.downcase.capitalize 
-                                        - if user.tam2.include?("pay")
-                                            i class="bi bi-paypal p-2"
-                                        - if user.tam1.include?("steam")
-                                            i class="bi bi-steam p-2"
+                                    - if user.tam2.include?("pay") || user.tam1.include?("steam")
+                                        = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
+                                            - if user.alias.size>1
+                                                = user.alias.downcase.capitalize 
+                                            - else
+                                                = user.name.downcase.capitalize 
+                                            - if user.tam2.include?("pay")
+                                                i class="bi bi-paypal p-2"
+                                            - if user.tam1.include?("steam")
+                                                i class="bi bi-steam p-2"
                                         
                                        
 
