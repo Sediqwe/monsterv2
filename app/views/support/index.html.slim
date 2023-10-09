@@ -16,7 +16,7 @@
                                 h1.form__headline
                                     |Támogatás - Készítők
                                 - index = 1
-                                - @users.each_with_index do |user|
+                                - @users.shuffle.each do |user|
                                     = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
                                         = user.name.downcase.capitalize 
                                         - if user.tam2.include?("pay")
