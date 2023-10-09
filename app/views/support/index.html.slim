@@ -18,7 +18,10 @@
                                 - index = 1
                                 - @users.shuffle.each do |user|
                                     = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
-                                        = user.alias.downcase.capitalize || user.name.downcase.capitalize 
+                                        - if user.alias.size>1
+                                            = user.alias.downcase.capitalize 
+                                        - else
+                                            = user.name.downcase.capitalize 
                                         - if user.tam2.include?("pay")
                                             i class="bi bi-paypal p-2"
                                         - if user.tam1.include?("steam")
@@ -29,7 +32,7 @@
                             .form
                                 h1.form__headline
                                     |Támogatás - Weboldal
-                                |Az oldalt kölönböző módokon tudod támogatni, e támogatás az oldal készítőjét támogatja, segíti fenttartani a weboldalt, a domaint és az egyéb keletkező díjjakat, pl DEEPL Pro account.
+                                |Az oldalt kölönböző módokon tudod támogatni, e támogatás az oldal készítőjét támogatja, segíti fenttartani a weboldalt, a domaint és az egyéb keletkező díjakat, pl DEEPL Pro account.
                                 |Szóval, hívj meg minket bátran egy kávéra :)
                                 br
                                 | Egyszeri:
