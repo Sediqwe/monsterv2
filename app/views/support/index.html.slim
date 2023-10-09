@@ -20,7 +20,7 @@
                                     - if user.tam2.include?("pay") || user.tam1.include?("steam")
                                         = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
                                             - if user.alias.size>1
-                                                = user.alias.downcase.capitalize 
+                                                = user.alias 
                                             - else
                                                 = user.name.downcase.capitalize 
                                             - if user.tam2.include?("pay")
