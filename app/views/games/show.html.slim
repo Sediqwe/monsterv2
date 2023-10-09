@@ -112,10 +112,10 @@
                                                         - if mikka
                                                             -if mikka.tam2.include?("pay")
                                                                 
-                                                                = link_to translater_path(dorka.translater) do |link|
+                                                                = link_to mikka.tam2, target: "_blank" do |link|
                                                                     i class="bi bi-paypal btn btn-secondary m-2"    »
                                                             -if mikka.tam1.include?("steam")
-                                                                = link_to translater_path(dorka.translater) do |link|
+                                                                = link_to mikka.tam1, target: "_blank" do |link|
                                                                     i class="bi bi-steam btn btn-secondary m-2"    »                                                 
                                         .col-lg-1.col-xs-12                                             
                                             = Download.where(upload_id: t.id).size 
