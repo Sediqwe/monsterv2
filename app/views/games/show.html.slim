@@ -67,16 +67,14 @@
                                         |Letöltés
                                     .col-lg-2.col-xs-12
                                         |Verzió
-                                    .col-lg-2.col-xs-12
+                                    .col-lg-3.col-xs-12
                                         |Készítő/támogatás
                                     .col-lg-1.col-xs-12
                                         |Letöltve
                                     .col-lg-1.col-xs-12
                                         |Technika
                                     .col-lg-2.col-xs-12
-                                        |Leírás
-                                    .col-lg-2.col-xs-12
-                                        |Dátum: 
+                                        |Leírás                                    
                                 -@game.uploads.order('created_at DESC').each_with_index do |t,index|
                                     - if t.demo
                                         .row.bg-info
@@ -92,13 +90,16 @@
                                                 - if session[:calm_down]
                                                     - if  Time.now > session[:calm_down]
                                                         - if t.game_files.present?
-                                                            = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
+                                                            = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary"
                                                     - else 
                                                         | 20 másodpercenként 1 letöltés az engedélyezett
                                                 - else
                                                     - if t.game_files.present?
-                                                        = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary mb-3"
-                                        .col-lg-1.col-xs-12 
+                                                        = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary"
+                                                br
+                                                |Feltöltve:
+                                                = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                        .col-lg-2.col-xs-12 
                                             span
                                                 = t.version
                                         .col-lg-3.col-xs-12 
@@ -137,8 +138,7 @@
                                             - if t.description.length > 0
                                                 span
                                                     = t.description
-                                        .col-lg-2.col-xs-12
-                                            = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                        
                                         - if current_user.present?
                                             -if current_user.admin?
                                                 .col
