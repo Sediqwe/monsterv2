@@ -18,7 +18,7 @@
                                 - index = 1
                                 - @users.shuffle.each do |user|
                                     = link_to  translater_path(user.translater_id), class:"btn btn-secondary " do |link|
-                                        = user.name.downcase.capitalize 
+                                        = user.alias.downcase.capitalize || user.name.downcase.capitalize 
                                         - if user.tam2.include?("pay")
                                             i class="bi bi-paypal p-2"
                                         - if user.tam1.include?("steam")
