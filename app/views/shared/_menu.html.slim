@@ -6,8 +6,10 @@
       a.logo.text-dark[href="/"]
         |G M 2023
   
-    a.btn.btn-primary[href="/supports"]
+    a.btn.btn-primary.m-1[href="/supports"]
       | Támogatás »
+    - if current_user&.admin || current_user&.moderator
+      = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light"
   ul.links
     = search_form_for @q, class:"search", url: games_path do |f|
       = f.text_field :name_cont, placeholder: "Gyors kereső..."

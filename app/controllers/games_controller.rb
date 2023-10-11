@@ -50,8 +50,16 @@ class GamesController < ApplicationController
     @game = Game.new
     
   end
-
-
+  def check_name
+    name = params[:name].downcase
+    game = Game.find_by('LOWER(name) = ?', name)
+    render json: { exists: !game.nil? }
+  end
+  def check_steam
+    name = params[:name]
+    game = Game.find_by(link_steam: name)
+    render json: { exists: !game.nil? }
+  end
   def edit
    
   end

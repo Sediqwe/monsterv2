@@ -14,7 +14,6 @@
 
             .form
               h2 Új fájl feltöltés
-            
               p
               - if params[:id].nil?
                 = f.label "Válassz játékot"
@@ -26,31 +25,37 @@
                   
                   =f.hidden_field :game_id, value: params[:id]
               .form-group.mb-3
-                = f.text_field :version, class: 'form-control', placeholder: "Verzió"
+                .row
+                  .col-2
+                    = f.label :version, "Verzió", class: "p-3 text-start"
+                  .col-8
+                    = f.text_field :version, class: 'form-control', value: "Ismeretlen"
               .input-group.mb-3
-                = f.label "Auto magyarítás?", class: "p-3"
-                = f.check_box :mauto
-              
-              .input-group.mb-3
-                = f.label "Multi uploader?", class:"p-3"                
-                = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { include_blank: "Készítők", multiple: true, class: "form-control" } 
-
+                = f.label "Uploader:", class:"p-3"                
+                = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { multiple: true, class: "form-control", size: 10 }
 
                 .input-group-append
                   = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'    
               .input-group.mb-3
-                =f.select(:program_id,  Program.all.order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
+                = f.label "Program:", class:"p-3"                
+                =f.select(:program_id,  Program.all .order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
                 
                 .input-group-append
+                  
                   = link_to "+", new_program_path(), class: 'btn btn-primary append-btn'
               
               .input-group.mb-3
+                = f.label "Platform:", class:"p-3" 
                 =f.select(:platform_id,  Platform.all.collect {|u| [u.platform_name, u.id]},{include_blank: "Platform", selected: 1}, { class: "form-control" })
                 
                 .input-group-append
                   = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
               .input-group.mb-3
-                =f.text_area :description, class: 'form-control rows=3'
+                = f.label "Leírás:", class:"p-4" 
+                = f.text_area :description, class: 'form-control', rows: 5
+                .input-group-append
+                  .btn.btn-link.append-btn.p-3
+                  
               .input-group.mb-3
                 = f.label "Demo?", class: "p-3" 
                 =f.check_box :demo, class: ''
@@ -61,5 +66,5 @@
               button.btn.btn-primary Fájl feltöltése »
               
 
-        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-          = render 'shared/side'          
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side'          

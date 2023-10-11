@@ -407,6 +407,36 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
+      $('#game_name').on('change', function() {
+        var gameName = $(this).val();
+        if (gameName) {
+          $.ajax({
+            url: '/games/check_name', // Az elérési út a nevellenőrzéshez
+            method: 'GET',
+            data: { name: gameName },
+            success: function(response) {
+              if (response.exists) {
+                alert('Ez a játék már létezik!');
+              }
+            }
+          });
+        }
+      });
+      $('#game_link_steam').on('change', function() {
+        var gameName = $(this).val();
+        if (gameName) {
+          $.ajax({
+            url: '/games/check_steam', // Az elérési út a nevellenőrzéshez
+            method: 'GET',
+            data: { name: gameName },
+            success: function(response) {
+              if (response.exists) {
+                alert('Ez a játék már létezik!');
+              }
+            }
+          });
+        }
+      });
       $(".elrejt").hide();
       $("#mutat").on('click', function(){
         $(".elrejt").show();

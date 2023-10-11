@@ -1,7 +1,7 @@
 class UploadsController < ApplicationController
   before_action :set_upload, only: %i[ show edit update destroy ]
   before_action :authorized?
-  before_action :admin?
+  
   # GET /uploads or /uploads.json
   def index
    @q = Upload.joins(:translater).order(game_id: :asc).ransack(params[:q])
@@ -75,7 +75,7 @@ class UploadsController < ApplicationController
         params[:uploadtranslaters].each do |dorka|
           Uploadtranslater.create(upload_id: @upload.id , translater_id: dorka )
         end
-        format.html { redirect_to upload_url(@upload), notice: "Sikeres feltöltés." }
+        format.html { redirect_to game_url(@upload.game_id), notice: "Sikeres feltöltés." }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { render :new, status: :unprocessable_entity }
