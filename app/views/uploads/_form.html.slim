@@ -29,7 +29,10 @@
                   .col-2
                     = f.label :version, "Verzió", class: "p-3 text-start"
                   .col-8
-                    = f.text_field :version, class: 'form-control', value: "Ismeretlen"
+                    - if @upload.persisted?
+                      = f.text_field :version, class: 'form-control'
+                    - else
+                      = f.text_field :version, class: 'form-control', value: "Ismeretlen"
               .input-group.mb-3
                 = f.label "Uploader:", class:"p-3"                
                 = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { multiple: true, class: "form-control", size: 10 }
