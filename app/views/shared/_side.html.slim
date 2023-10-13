@@ -2,29 +2,38 @@
     .side__header
         h5
             | Utolsó hozzászólások:
-            - feed = Gemorss.all.last(10)
-            - feed.each_with_index do |item,index|
-                - path = URI.parse(item.link.html_safe).path
-                - pathname = Pathname.new(path)
-                - if item.link.exclude?("gep-monster.translate.goog")
-                    .side__elements
-                        = link_to  item.link.html_safe
-                            
-                            .side__card_two
-                                h6 
-                                    strong
-                                        = pathname.basename.to_s.gsub("-"," ").upcase
-                                    - szoveg = truncate(strip_tags(item.desc), length: 100, separator: '...')
-                                = szoveg
-                                .text-light 
-                                    strong
-                                        |#{item.user}
-                                -parsed_date = DateTime.parse(item.created_at.to_s)
-                                |(
-                                |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
-                                |)
-                    - if index >= 10
-                        - break
+        
+    
+        -require 'rss'
+        -require 'open-uri'
+        -url = 'https://gep-monster.disqus.com/latest.rss'
+        - URI.open(url) do |rss|
+           
+                    - feed = RSS::Parser.parse(rss)
+                    
+    
+                    - feed.items.each_with_index do |item,index|
+                        - path = URI.parse(item.link.html_safe).path
+                        - pathname = Pathname.new(path)
+                        - if item.link.exclude?("gep-monster.translate.goog")
+                            .side__elements
+                                = link_to  item.link.html_safe
+                                    
+                                    .side__card_two
+                                        h6 
+                                            strong
+                                                = pathname.basename.to_s.gsub("-"," ").upcase
+                                            - szoveg = truncate(strip_tags(item.description), length: 100, separator: '...')
+                                        = szoveg
+                                        .text-light 
+                                            strong
+                                                |#{item.dc_creator}
+                                        -parsed_date = DateTime.parse(item.pubDate.to_s) + 6.hours 
+                                        |(
+                                        |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
+                                        |)
+                            - if index >= 10
+                                - break
                 
             
     
