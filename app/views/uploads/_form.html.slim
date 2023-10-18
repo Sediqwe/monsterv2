@@ -38,21 +38,22 @@
                 = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { multiple: true, class: "form-control", size: 10 }
 
                 .input-group-append
-                  = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'    
-              .input-group.mb-3
-                = f.label "Program:", class:"p-3"                
-                =f.select(:program_id,  Program.all .order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
-                
-                .input-group-append
+                  = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'
+              - if current_user.admin?   
+                .input-group.mb-3
+                  = f.label "Program:", class:"p-3"                
+                  =f.select(:program_id,  Program.all .order(:program_name).collect {|u| [u.program_name, u.id]},{include_blank: "Program", selected: 2}, { class: "form-control" })
                   
-                  = link_to "+", new_program_path(), class: 'btn btn-primary append-btn'
-              
-              .input-group.mb-3
-                = f.label "Platform:", class:"p-3" 
-                =f.select(:platform_id,  Platform.all.collect {|u| [u.platform_name, u.id]},{include_blank: "Platform", selected: 1}, { class: "form-control" })
+                  .input-group-append
+                    
+                    = link_to "+", new_program_path(), class: 'btn btn-primary append-btn'
                 
-                .input-group-append
-                  = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
+                .input-group.mb-3
+                  = f.label "Platform:", class:"p-3" 
+                  =f.select(:platform_id,  Platform.all.collect {|u| [u.platform_name, u.id]},{include_blank: "Platform", selected: 1}, { class: "form-control" })
+                  
+                  .input-group-append
+                    = link_to "+", new_platform_path(), class: 'btn btn-primary append-btn'
               .input-group.mb-3
                 = f.label "Leírás:", class:"p-4" 
                 = f.text_area :description, class: 'form-control', rows: 5
