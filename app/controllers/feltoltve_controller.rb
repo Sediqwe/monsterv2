@@ -17,7 +17,7 @@ class FeltoltveController < ApplicationController
           end
           adat.special = true
           adat.save
-          render html: (adat.name + "||||Ł" + adat.version + "||||Ł" + game.slug + "||||Ł" + trn  )
+          render html: (adat.name + "||||Ł" + adat.version + "||||Ł" + game.slug + "||||Ł" + trn  + "||||Ł" + url_for(game.image) )
       else
       render html: ("")
       end
