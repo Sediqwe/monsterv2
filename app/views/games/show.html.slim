@@ -75,8 +75,10 @@
                                     .col-lg-1.col-xs-12
                                         |Technika
                                     .col-lg-3.col-xs-12
-                                        |Leírás                                    
-                                -@game.uploads.order('created_at DESC').each_with_index do |t,index|
+                                        |Leírás
+                                
+                                - uploads = @game.uploads.sort_by { |upload| [upload.bad ? 1 : 0, upload.created_at] }.reverse                               
+                                - uploads.each_with_index do |t, index|
                                     - if t.demo
                                         .row.bg-info
                                             .col-12 
