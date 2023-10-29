@@ -76,7 +76,8 @@ end
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_translater
-      @translater = Translater.find(params[:id])
+      @translater = Translater.friendly.find(params[:id])
+      
     end
 
     # Only allow a list of trusted parameters through.
