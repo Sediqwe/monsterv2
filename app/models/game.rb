@@ -15,7 +15,8 @@ class Game < ApplicationRecord
     end
     def self.ransackable_associations(auth_object = nil)
         [ "name", "slug"]
-        end
+    end
+   
     
     
 end

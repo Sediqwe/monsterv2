@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_06_195712) do
+ActiveRecord::Schema[7.0].define(version: 2023_10_29_072939) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -422,6 +422,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_06_195712) do
     t.text "translater_name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["slug"], name: "index_translaters_on_slug", unique: true
   end
 
   create_table "uploads", force: :cascade do |t|

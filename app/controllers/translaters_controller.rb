@@ -63,7 +63,16 @@ class TranslatersController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def regen
+    translaters = Translater.all
 
+    # Iterál a rekordokon és hívja meg a generate_and_save_slug methodot mindegyikre
+    translaters.each do |translater|
+    translater.generate_and_save_slug
+  end
+end
+
+#Ex:- :default =>''
   private
     # Use callbacks to share common setup or constraints between actions.
     def set_translater

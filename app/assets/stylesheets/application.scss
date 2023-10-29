@@ -264,7 +264,21 @@ textarea {
 .bg-grey-color {
     background-color: #DBDBDB;
 }
-
+.game-image-with-border {
+    position: relative;
+    max-width: 900px; /* Válaszd meg a kívánt maximális szélességet */
+  }
+  
+  .game-image-with-border::before {
+    content: "";
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    right: 20px;
+    bottom: 20px;
+    background: linear-gradient(to bottom, transparent 0%, #1b2c30 20px);
+    z-index: -1;
+  }
 .abc {
     list-style-type: none;
     text-decoration: none;
@@ -520,15 +534,14 @@ textarea {
         flex-direction: row;
     }
 }
-
-
-
 .game-data__header {
     margin: 15px 0;
 }
 
 .game-data__img {
     width: 100%;
+    background-image: linear-gradient(to right, transparent, #1b2c30, #1b2c30 100%);
+    background-size: cover;
 }
 
 .green-box {
