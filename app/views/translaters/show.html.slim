@@ -21,15 +21,17 @@
           
                 - if @translater.user.desc.present?
                   = @translater.user.desc
+                br
                 - if @translater.user.tam1.present?
                   |Támogatásod megteheted STEAM játék küldéssel:
-                  br
-                  = link_to "STEAM Kívánságlista", @translater.user.tam1.to_s, target: "_blank" , class: "btn btn-primary"
+                  = link_to @translater.user.tam1, target: "_blank" do |link|
+                    i class="bi bi-steam btn btn-secondary m-2"    »
                 br
                 - if @translater.user.tam2.present?
                   |Támogatásod megteheted PAYPAL-on keresztül:
-                  br
-                  = link_to "PAYPAL link", @translater.user.tam2.to_s, target: "_blank" , class: "btn btn-primary"
+                  = link_to @translater.user.tam2, target: "_blank" do |link|
+                    i class="bi bi-paypal btn btn-secondary m-2"    »
+                  
           h2  Top10
           
           =transtop(@translater).html_safe
