@@ -46,7 +46,11 @@
                                 br
                                 b Támogatás:
                                 br
-                                |https://gep.monster/supports
+                                - adatok.each_with_index do |dorka,index2|
+                                    |https://gep.monster/translaters/#{dorka.translater.slug}
+                                    - if index2 < adatok.size-1
+                                        | , 
+                                
                                 br
                                 b Link: 
                                 br
