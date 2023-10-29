@@ -110,7 +110,7 @@
                                             span
                                                 - adatok = Uploadtranslater.where(upload_id: t)
                                                 - adatok.each_with_index do |dorka,index2|
-                                                    = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-secondary"
+                                                    = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-secondary m-1"
                                                     - mikka = User.find_by(translater_id: dorka.translater)
                                                     - if mikka
                                                         - if mikka.tam2
