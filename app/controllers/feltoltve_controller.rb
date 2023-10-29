@@ -12,7 +12,7 @@ class FeltoltveController < ApplicationController
             trn_name = Translater.find(dorka.translater_id)
             if index < translater.size-1
               trn += trn_name.translater_name + ", "
-              trn_link += "https://gep.monster/translaters/" + trn_name.slug + ",\n "
+              trn_link += "https://gep.monster/translaters/" + trn_name.slug + "\n "
             else
               trn +=  trn_name.translater_name
               trn_link += "https://gep.monster/translaters/" + trn_name.slug  
