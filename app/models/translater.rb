@@ -9,7 +9,7 @@ class Translater < ApplicationRecord
         name_changed?
     end
     def generate_and_save_slug
-        self.slug = self.name.parameterize
+        self.slug = self.translater_name.parameterize
         self.save
     end
 end
