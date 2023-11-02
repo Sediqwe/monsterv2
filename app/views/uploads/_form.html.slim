@@ -13,7 +13,10 @@
 
 
             .form
-              h2 Új fájl feltöltés
+              - if @upload.persisted?
+                |  Fájl módosítás
+              - else 
+                |  Új fájl feltöltés
               p
               - if params[:id].nil?
                 = f.label "Válassz játékot"
@@ -34,6 +37,8 @@
                     - else
                       = f.text_field :version, class: 'form-control', value: "Ismeretlen"
               .input-group.mb-3
+                - if @upload.persisted?
+                  h2.bg-warning Jelöld be újra a feltöltőket! Mindet! Máskülönben hibába fut az oldal!
                 = f.label "Uploader:", class:"p-3"                
                 = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { multiple: true, class: "form-control", size: 10 }
 
@@ -59,15 +64,22 @@
                 = f.text_area :description, class: 'form-control', rows: 5
                 .input-group-append
                   .btn.btn-link.append-btn.p-3
-                  
+              .input-group.mb3 
+                = f.label "Képek", class: "p-3" 
+                = f.file_field :pictures, class: 'form-control' , multiple: true    
               .input-group.mb-3
                 = f.label "Demo?", class: "p-3" 
                 =f.check_box :demo, class: ''
               .input-group.mb-3
-                
-                = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
-              
-              button.btn.btn-primary Fájl feltöltése »
+                - if @upload.persisted?
+                  - if current_user.admin?
+                    = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
+                - else
+                  = f.file_field :game_files, class: 'form-control', id: "newGameCoverUpload"
+              - if @upload.persisted?
+                button.btn.btn-primary Adatok módosítása »
+              - else
+                button.btn.btn-primary Fájl feltöltése »
               
 
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll

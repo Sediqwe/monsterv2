@@ -9,6 +9,7 @@ class Upload < ApplicationRecord
   has_many :uploadtranslaters, dependent: :destroy
   validates :game_files, presence: true
   validates :version, presence: true
+  has_many_attached :pictures, dependent: :destroy
   def self.default_timezone
     :utc
   end

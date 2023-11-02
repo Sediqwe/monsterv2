@@ -85,6 +85,8 @@
                                                 |EZ ITT A DEMO FORDÍTÁSA!
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                         .col-lg-2.col-xs-12
+                                            
+
                                             - if current_user&.admin? 
                                                 =
                                                 | # 
@@ -143,8 +145,15 @@
                                             - if t.description.length > 0
                                                 span
                                                     = t.description
+                                            - if t.pictures.present?
+                                                -t.pictures.each do |pic|
+                                                    =link_to pic, target: "_blank"
+                                                        = image_tag pic, style: "width: 10%;" 
                                         
                                         - if current_user.present?
+                                            - if t.user == current_user
+                                                .col
+                                                    =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
                                             -if current_user.admin?
                                                 .col
                                                     =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
