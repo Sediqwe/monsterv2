@@ -104,6 +104,7 @@
                                                 br
                                                 |Feltöltve:
                                                 = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                                br
                                                 - if t.pictures.present?
                                                     -t.pictures.each_with_index do |pic, index|
                                                         span id="ikon_#{index}" class="p-1"
@@ -111,7 +112,7 @@
 
                                                         // Bootstrap modális ablak
                                                         .modal.fade id="kepModal_#{index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                                            .modal-dialog.modal-dialog-centered
+                                                            .modal-dialog.modal-dialog-centered..modal-lg
                                                                 .modal-content
                                                                     .modal-body
                                                                         img src="#{url_for(pic)}" style="max-width: 100%"
