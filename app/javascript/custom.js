@@ -407,6 +407,17 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
+      $('[id^="ikon_"]').hover(
+        
+        function() {
+          let id = $(this).attr('id').replace("ikon_", "")
+          $('#kepModal_' + id).modal('show'); // Amikor az egeret az ikonra viszed, a modális ablak megjelenik.
+        },
+        function() {
+          let id = $(this).attr('id').replace("ikon_", "")
+          $('#kepModal_' + id).modal('hide'); // Amikor az egeret eltávolítod az ikonról, a modális ablak eltűnik.
+        }
+      );
       $('#game_name').on('change', function() {
         var gameName = $(this).val();
         if (gameName) {

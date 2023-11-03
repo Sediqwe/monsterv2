@@ -104,6 +104,17 @@
                                                 br
                                                 |Feltöltve:
                                                 = t.created_at.strftime("%Y-%m-%d %H:%M")
+                                                - if t.pictures.present?
+                                                    -t.pictures.each_with_index do |pic, index|
+                                                        span id="ikon_#{index}" class="p-1"
+                                                            i.bi.bi-card-image 
+
+                                                        // Bootstrap modális ablak
+                                                        .modal.fade id="kepModal_#{index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
+                                                            .modal-dialog.modal-dialog-centered
+                                                                .modal-content
+                                                                    .modal-body
+                                                                        img src="#{url_for(pic)}" style="max-width: 100%"
                                         .col-lg-2.col-xs-12 
                                             span
                                                 = t.version
@@ -145,11 +156,8 @@
                                             - if t.description.length > 0
                                                 span
                                                     = t.description
-                                            - if t.pictures.present?
-                                                -t.pictures.each do |pic|
-                                                    =link_to pic, target: "_blank"
-                                                        = image_tag pic, style: "width: 10%;" 
-                                        
+                                          
+
                                         - if current_user.present?
                                             - if t.user == current_user
                                                 .col
