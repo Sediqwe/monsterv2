@@ -10,8 +10,8 @@ class RssController < ApplicationController
                     feed.items.each_with_index do |item,index|
                         if item.link.exclude?("gep-monster.translate.goog")
                             gemorss = Gemorss.find_by(link: item.link)
-                            p item.pubDate
-                            rfc822_date = "Sat, 04 Nov 2023 06:39:10 -0000"
+                            
+                            rfc822_date = item.pubDate
                             parsed_parts = rfc822_date.match(/(\w{3}), (\d{2}) (\w{3}) (\d{4}) (\d{2}):(\d{2}):(\d{2}) (.+)/)
                             
                             if parsed_parts
