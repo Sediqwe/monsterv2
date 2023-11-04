@@ -11,23 +11,9 @@ class RssController < ApplicationController
                         if item.link.exclude?("gep-monster.translate.goog")
                             gemorss = Gemorss.find_by(link: item.link)
                             
-                            rfc822_date = item.pubDate.to_s
-                            parsed_parts = rfc822_date.match(/(\w{3}), (\d{2}) (\w{3}) (\d{4}) (\d{2}):(\d{2}):(\d{2}) (.+)/)
-                            
-                            if parsed_parts
-                              day, day_of_month, month, year, hour, minute, second, utc_offset = parsed_parts.captures
-                              month_number = Date::ABBR_MONTHNAMES.index(month)
-                            
-                              parsed_date = Time.new(year.to_i, month_number, day_of_month.to_i, hour.to_i + 5, minute.to_i, second.to_i, utc_offset)
-                              
-                            else
-                              puts "Nem sikerült feldolgozni a dátumot."
-                            end
-
-                            new_time = Time.new(year, parsed_date.month, parsed_date.day, parsed_date.hour, parsed_date.min)
-                            formatted_time = new_time.strftime("%Y.%m.%d %H:%M")
+                            parsed_date = DateTime.parse(item.pubDate.to_s) + 5.hours 
                             if gemorss.nil?
-                                gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, idouj: formatted_time)
+                                gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, idouj: parsed_date.strftime("%Y-%m-%d %H:%M") )
                             end
                         end
                         

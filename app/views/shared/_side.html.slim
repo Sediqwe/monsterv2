@@ -28,7 +28,7 @@
                                         .text-light 
                                             strong
                                                 |#{item.dc_creator}
-                                        -parsed_date = DateTime.parse(item.pubDate.to_s) + 6.hours 
+                                        -parsed_date = DateTime.parse(item.pubDate.to_s) + 5.hours 
                                         |(
                                         |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
                                         |)
