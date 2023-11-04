@@ -18,7 +18,7 @@ class RssController < ApplicationController
                               day, day_of_month, month, year, hour, minute, second, utc_offset = parsed_parts.captures
                               month_number = Date::ABBR_MONTHNAMES.index(month)
                             
-                              parsed_date = Time.new(year.to_i, month_number, day_of_month.to_i, hour.to_i, minute.to_i, second.to_i, utc_offset)
+                              parsed_date = Time.new(year.to_i, month_number, day_of_month.to_i, hour.to_i + 5, minute.to_i, second.to_i, utc_offset)
                               
                             else
                               puts "Nem sikerült feldolgozni a dátumot."
