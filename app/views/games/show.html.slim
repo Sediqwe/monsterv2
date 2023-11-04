@@ -80,9 +80,19 @@
                                 - uploads = @game.uploads.sort_by { |upload| [upload.bad ? 0 : 1, upload.created_at] }.reverse                               
                                 - uploads.each_with_index do |t, index|
                                     - if t.demo
-                                        .row.bg-info
-                                            .col-12 
-                                                |EZ ITT A DEMO FORDÍTÁSA!
+                                        .row
+                                            .col-12.text-light.m-2.position-relative
+                                               
+                                                div class="position-absolute top-50 start-50 translate-middle bg-success text-dark "
+                                                    h4
+                                                        i.bi.bi-arrow-down
+                                                        i.bi.bi-arrow-down
+                                                        i.bi.bi-arrow-down
+                                                        |EZ ITT A DEMO FORDÍTÁSA!
+                                                        i.bi.bi-arrow-down
+                                                        i.bi.bi-arrow-down
+                                                        i.bi.bi-arrow-down
+                                                    
                                     div class="row bg-dark  rounded mt-2 pt-2 border-success border-right border-bottom "
                                         .col-lg-2.col-xs-12
                                             
