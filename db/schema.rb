@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_04_105916) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_124541) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -220,6 +220,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_105916) do
     t.datetime "updated_at", null: false
     t.text "special"
     t.string "idouj"
+    t.time "idouj2"
+    t.datetime "idouj3"
     t.index ["link"], name: "index_gemorsses_on_link", unique: true
   end
 
