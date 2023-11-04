@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_10_29_072939) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_04_105916) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -213,12 +213,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_10_29_072939) do
   create_table "gemorsses", force: :cascade do |t|
     t.text "user"
     t.text "desc"
-    t.date "ido"
+    t.string "ido"
     t.boolean "okes"
     t.text "link"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "special"
+    t.string "idouj"
     t.index ["link"], name: "index_gemorsses_on_link", unique: true
   end
 

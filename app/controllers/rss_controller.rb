@@ -10,11 +10,24 @@ class RssController < ApplicationController
                     feed.items.each_with_index do |item,index|
                         if item.link.exclude?("gep-monster.translate.goog")
                             gemorss = Gemorss.find_by(link: item.link)
-                            raw_date = "Wed, 01 Nov 2023 15:57:04 -0000"
-                            parsed_date = Time.parse(item.pubDate)
-                            formatted_date = parsed_date.strftime("%Y.%m.%d %H:%M")
+                            p item.pubDate
+                            rfc822_date = "Sat, 04 Nov 2023 06:39:10 -0000"
+                            parsed_parts = rfc822_date.match(/(\w{3}), (\d{2}) (\w{3}) (\d{4}) (\d{2}):(\d{2}):(\d{2}) (.+)/)
+                            
+                            if parsed_parts
+                              day, day_of_month, month, year, hour, minute, second, utc_offset = parsed_parts.captures
+                              month_number = Date::ABBR_MONTHNAMES.index(month)
+                            
+                              parsed_date = Time.new(year.to_i, month_number, day_of_month.to_i, hour.to_i, minute.to_i, second.to_i, utc_offset)
+                              
+                            else
+                              puts "Nem sikerült feldolgozni a dátumot."
+                            end
+
+                            new_time = Time.new(year, parsed_date.month, parsed_date.day, parsed_date.hour, parsed_date.min)
+                            formatted_time = new_time.strftime("%Y.%m.%d %H:%M")
                             if gemorss.nil?
-                                gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, ido: formatted_date)
+                                gemorss = Gemorss.create(link: item.link, user: item.dc_creator.to_s, desc: item.description, idouj: formatted_time)
                             end
                         end
                         
@@ -26,7 +39,7 @@ class RssController < ApplicationController
             adat.okes = true
             adat.save
             kata = strip_tags(adat.desc.to_s)
-            render html: (adat.user + "||||Ł" + adat.link + "||||Ł" + kata+ "||||Ł" + adat.ido)
+            render html: (adat.user + "||||Ł" + adat.link + "||||Ł" + kata+ "||||Ł" + adat.idouj.to_s)
         
         else
         render html: ("")
