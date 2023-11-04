@@ -11,7 +11,7 @@ class RssController < ApplicationController
                         if item.link.exclude?("gep-monster.translate.goog")
                             gemorss = Gemorss.find_by(link: item.link)
                             
-                            rfc822_date = item.pubDate
+                            rfc822_date = item.pubDate.to_s
                             parsed_parts = rfc822_date.match(/(\w{3}), (\d{2}) (\w{3}) (\d{4}) (\d{2}):(\d{2}):(\d{2}) (.+)/)
                             
                             if parsed_parts
