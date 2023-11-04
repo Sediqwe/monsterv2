@@ -26,7 +26,7 @@ class RssController < ApplicationController
             adat.okes = true
             adat.save
             kata = strip_tags(adat.desc.to_s)
-            render html: (adat.user + "||||Ł" + adat.link + "||||Ł" + kata)
+            render html: (adat.user + "||||Ł" + adat.link + "||||Ł" + kata+ "||||Ł" + adat.ido)
         
         else
         render html: ("")
