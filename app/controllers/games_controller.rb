@@ -4,6 +4,7 @@ class GamesController < ApplicationController
   require 'rmagick'
   
   def index
+    Game.where("hatarido IS NOT NULL").where("hatarido + INTERVAL '3 days' > ?", Time.now).update_all(hidden: false, stipi: false)
     if current_user
       if current_user.admin? || current_user.moderator?
         @q = Game.ransack(params[:q])
