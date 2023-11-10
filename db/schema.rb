@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_10_171215) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_224014) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -416,6 +416,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_171215) do
     t.index ["beolva_id"], name: "index_scanners_on_beolva_id"
   end
 
+  create_table "stipis", force: :cascade do |t|
+    t.text "desc"
+    t.bigint "user_id", null: false
+    t.bigint "game_id", null: false
+    t.boolean "okes", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_stipis_on_game_id"
+    t.index ["user_id"], name: "index_stipis_on_user_id"
+  end
+
   create_table "supporters", force: :cascade do |t|
     t.string "name"
     t.string "datum"
@@ -531,6 +542,8 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_10_171215) do
   add_foreign_key "projects", "users"
   add_foreign_key "regexadatoks", "projects"
   add_foreign_key "scanners", "beolvas"
+  add_foreign_key "stipis", "games"
+  add_foreign_key "stipis", "users"
   add_foreign_key "uploads", "games"
   add_foreign_key "uploads", "platforms"
   add_foreign_key "uploads", "programs"

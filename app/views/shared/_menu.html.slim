@@ -9,7 +9,8 @@
     a.btn.btn-primary.m-1[href="/supports"]
       | Támogatás »
     - if current_user&.admin || current_user&.moderator
-      = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light"
+      = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light m-1"
+      = link_to 'Foglalt »', bel_path, class: "btn btn-info text-dark m-1"
   ul.links
     = search_form_for @q, class:"search", url: games_path do |f|
       = f.text_field :name_cont, placeholder: "Gyors kereső..."

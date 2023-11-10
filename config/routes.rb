@@ -95,6 +95,7 @@ Rails.application.routes.draw do
   post 'megas_editor', to: "megas#editorka"
   post 'upload_bad', to: "uploads#bad"
   post 'games_magyhu', to: "games#magyhu"
+  get 'feloldas', to: "games#feloldas"
   resources :uploads
   resources :games
   resources :forums  

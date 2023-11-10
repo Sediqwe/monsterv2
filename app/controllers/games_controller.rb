@@ -44,7 +44,12 @@ class GamesController < ApplicationController
     game.save
 
   end
-
+  def feloldas
+    game = Game.find(params[:id])
+    game.stipi = false  
+    game.save
+    redirect_to game_url(game)
+  end
 
   def show
     Game.default_timezone = :utc

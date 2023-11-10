@@ -23,16 +23,22 @@
                     table.table.table-success.text-light
                         thead
                             tr
+                                - if current_user&.moderator? || current_user&.admin? 
+                                    th Link 
                                 th Játék
                                 th Ki
                                 th Meddig
                         tbody
                             - @games.each_with_index do |game, index|
                                 tr
+                                    - if current_user&.moderator? || current_user&.admin? 
+                                        td 
+                                            = link_to game.name, game_path(game), class: "btn btn-primary"
+
                                     td = game.name
                                     td = game.user.alias || game.user.name
-                                    td = game.hatarido
-                
+                                    td = game.hatarido    
+                    
                     
                     
                     
