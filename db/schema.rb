@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_04_124541) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_10_171215) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -206,6 +206,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_04_124541) do
     t.string "link_hun"
     t.boolean "done"
     t.datetime "uploaded_at", precision: nil
+    t.boolean "stipi", default: false
+    t.boolean "hidden", default: false
+    t.datetime "hatarido"
     t.index ["slug"], name: "index_games_on_slug", unique: true
     t.index ["user_id"], name: "index_games_on_user_id"
   end
