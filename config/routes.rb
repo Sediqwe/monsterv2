@@ -13,6 +13,7 @@ Rails.application.routes.draw do
   resources :beolvas
   resources :csvs
   resources :databeolvas, to: 'beolvas#soronkent'
+  get "bel", to: "games#features"
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'

@@ -26,6 +26,15 @@
               = f.text_field :link_epic, class: "mb-2", placeholder: "Epic Link"
               = f.text_field :link_other, class: "mb-2", placeholder: "Egyéb Link" 
               = f.text_field :link_hun, class: "mb-2", placeholder: "Magyarítások.hu Link"
+              - if !@game.persisted?
+                .input-group.mb-3
+                  = f.label "Foglalod?", class: "p-3" 
+                  =f.check_box :stipi, class: ''
+                  |(3 napig csak te tudod feltölteni ezt)
+
+
+                  
+                
               p.text-start.mt-1
                 | Boritókép:
               = f.file_field :image , class: "myFile p-0 mb-2"

@@ -1,0 +1,67 @@
+.container-fluid
+    
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+            - if current_user&.admin? 
+                .row
+                    .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
+                            
+            ul.abc
+                - if @games.any?
+                    a class="abc__all" href="/games"
+                        li 
+                            |Összes
+                            span  
+                                =number_game("")
+                    -("A".."Z").each do |letter|
+                        -if params[:q]
+                            a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-light text-dark" if letter. == params[:q][:name_start]}"
+                                li 
+                                    =letter
+                        - else
+                            a href="games?q%5Bname_start%5D=#{letter}"
+                                li 
+                                    =letter
+                    
+            
+    
+            .step-filter
+                .step-filter__numbers
+                        
+                
+            .row
+                - if @games.empty?
+                    .col-xs-12.col-md-9.col-lg-10.text-center
+                        h1.text-light
+                            |Egyelőre nincs lefoglalva semmi...
+                - else
+                    table.table.table-success.text-light
+                        thead
+                            tr
+                                th Játék
+                                th Ki
+                                th Meddig
+                        tbody
+                            - @games.each_with_index do |game, index|
+                                tr
+                                    td = game.name
+                                    td = game.user.alias || game.user.name
+                                    td = game.hatarido
+                
+                    
+                    
+                    
+                    
+                    
+            step-filter
+                .step-filter__numbers
+                   
+
+
+
+
+
+
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render 'shared/side'   
+                

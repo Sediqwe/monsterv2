@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   require 'rmagick'
   
   def index
-    @q = Game.ransack(params[:q])
+    @q = Game.where(stipi: false).ransack(params[:q])
     if params[:page_n].present?
       number = params[:page_n]
       session[:page_n] = number
@@ -70,6 +70,9 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user_id = current_user.id
     @game.uploaded_at = DateTime.now
+    if game_params[:stipi]
+      @game.hatarido = DateTime.now + 3.days
+    end
     respond_to do |format|
       if @game.save
         record_activity("Új játék felvéve: #{@game.name}")
@@ -120,7 +123,9 @@ class GamesController < ApplicationController
       
     end
   end
-
+  def features
+    @games = Game.where(stipi: true).where("hatarido + INTERVAL '3 days' > ?", Time.now)
+  end
   private
     
     def set_game
@@ -129,7 +134,7 @@ class GamesController < ApplicationController
 
     
     def game_params
-      params.require(:game).permit(:name, :link_steam, :link_epic, :link_other, :description, :image, :link_hun)
+      params.require(:game).permit(:name, :link_steam, :link_epic, :link_other, :description, :image, :link_hun, :stipi)
     end
 
     def je_params
