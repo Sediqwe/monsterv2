@@ -4,7 +4,7 @@ class LoginController < ApplicationController
   end
   
   def create
-  
+    Game.update(hidden: false, stipi: false).where("hatarido + INTERVAL '3 days' > ?", Time.now)
     @user = User.create(user_params)
     if @user.save
      redirect_to :sessions_new

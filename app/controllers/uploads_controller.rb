@@ -68,6 +68,8 @@ class UploadsController < ApplicationController
     @upload.bad = false
     upd = Game.find(@upload.game_id)
     upd.uploaded_at = DateTime.now
+    upd.hidden = false
+    upd.stipi = false
     upd.save
     
     respond_to do |format|

@@ -4,7 +4,17 @@ class GamesController < ApplicationController
   require 'rmagick'
   
   def index
-    @q = Game.where(stipi: false).ransack(params[:q])
+    if current_user
+      if current_user.admin? || current_user.moderator?
+        @q = Game.ransack(params[:q])
+      else
+        @q = Game.where(hidden: false).ransack(params[:q])
+        
+      end
+    else
+      @q = Game.where(hidden: false).ransack(params[:q])
+    end
+  
     if params[:page_n].present?
       number = params[:page_n]
       session[:page_n] = number
@@ -20,7 +30,7 @@ class GamesController < ApplicationController
     @games = @q.result(distinct: true).order('uploaded_at DESC').page(params[:page]).per(session[:page_n])
     @meta_description = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
     @meta_image = "https://gep.monster/1.png"
-  
+    
   end
   def magyhu
     game = Game.find(params[:id])
@@ -70,6 +80,7 @@ class GamesController < ApplicationController
     @game = Game.new(game_params)
     @game.user_id = current_user.id
     @game.uploaded_at = DateTime.now
+    @game.hidden = true
     if game_params[:stipi]
       @game.hatarido = DateTime.now + 3.days
     end

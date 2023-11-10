@@ -6,22 +6,7 @@
                 .row
                     .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
                             
-            ul.abc
-                - if @games.any?
-                    a class="abc__all" href="/games"
-                        li 
-                            |Összes
-                            span  
-                                =number_game("")
-                    -("A".."Z").each do |letter|
-                        -if params[:q]
-                            a href="games?q%5Bname_start%5D=#{letter}" class=" #{"bg-light text-dark" if letter. == params[:q][:name_start]}"
-                                li 
-                                    =letter
-                        - else
-                            a href="games?q%5Bname_start%5D=#{letter}"
-                                li 
-                                    =letter
+            
                     
             
     

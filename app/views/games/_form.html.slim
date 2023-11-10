@@ -27,13 +27,14 @@
               = f.text_field :link_other, class: "mb-2", placeholder: "Egyéb Link" 
               = f.text_field :link_hun, class: "mb-2", placeholder: "Magyarítások.hu Link"
               - if !@game.persisted?
-                .input-group.mb-3
-                  = f.label "Foglalod?", class: "p-3" 
-                  =f.check_box :stipi, class: ''
-                  |(3 napig csak te tudod feltölteni ezt)
-
-
-                  
+                - szam = Game.where(user_id: current_user.id, stipi: true).size
+                - if szam< 3
+                  .input-group.mb-3
+                    = f.label "Foglalod?", class: "p-3" 
+                    =f.check_box :stipi, class: ''
+                    |(3 napig csak te tudod feltölteni ezt)
+                - else 
+                  |Már 3 játékot lefoglaltál!
                 
               p.text-start.mt-1
                 | Boritókép:
