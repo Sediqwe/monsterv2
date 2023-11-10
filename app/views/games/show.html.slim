@@ -14,10 +14,13 @@
                                     -if @game.stipi && @game.user_id == current_user.id
                                         = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
                                         = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
-                                    -else
-                                        - !@game.stipi
-                                            = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
-                                            = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+                                    - if @game.stipi && @game.user_id != current_user.id
+                                        | a játék le van foglalva 
+                                        = @game.hatarido
+                                    - if !@game.stipi
+                                        = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+                                        = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+                                    
                                 -if current_user&.admin?
                                     
                                     = link_to "Auto Translater jelölés »", new_autoforditoilist_path(game_id: @game.id) , class: "btn btn-primary text-light"
