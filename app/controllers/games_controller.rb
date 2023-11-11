@@ -46,10 +46,14 @@ class GamesController < ApplicationController
   end
   def feloldas
     game = Game.find(params[:id])
+    teszt = Upload.where(game_id: params[:id]).first
     game.stipi = false  
     game.save
     stipi = Stipi.new(user_id: current_user.id, game_id: params[:id].to_i, desc: params[:adat])
     stipi.save
+    if !teszt
+      game.destroy
+    end
   end
 
   def show
@@ -83,7 +87,6 @@ class GamesController < ApplicationController
 
   
   def create
-    
     @game = Game.new(game_params)
     @game.user_id = current_user.id
     @game.uploaded_at = DateTime.now
@@ -132,7 +135,6 @@ class GamesController < ApplicationController
 
   
   def destroy
-    
       record_activity("Játék eltávolítva: #{@game.name}")
       @game.destroy
 
