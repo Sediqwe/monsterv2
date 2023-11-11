@@ -35,12 +35,10 @@
                     =f.check_box :stipi, class: ''
                     .elrejtve
                       |
-                        <input type="text" id="datetimerange-input1" size="24" style="text-align:center">
-                        <script>
-                          window.addEventListener("load", function (event) {
-                            new DateRangePicker('datetimerange-input1');
-                          });
-                        </script>
+
+                        # for a simple_form field just do something like this and include the above javascript
+
+                      input class="daterange"
                     
 
 

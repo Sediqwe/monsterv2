@@ -11,7 +11,3 @@ import "trix"
 import "@rails/actiontext"
 import "chartkick"
 import "Chart.bundle"
-
-
-   
-
