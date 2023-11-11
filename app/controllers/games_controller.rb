@@ -49,7 +49,7 @@ class GamesController < ApplicationController
     teszt = Upload.where(game_id: params[:id]).first
     game.stipi = false  
     game.save
-    stipi = Stipi.new(user_id: current_user.id, game_id: 30 ,gamename: game.name, desc: params[:adat])
+    stipi = Stipi.new(user_id: current_user.id ,gamename: game.name, desc: params[:adat])
     stipi.save
     if teszt.nil?
       game.destroy      
