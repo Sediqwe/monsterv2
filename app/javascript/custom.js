@@ -1,9 +1,11 @@
 $(document).on('turbo:load', function() {
+  
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt
     modal.modal('show');
-  }); 
+  });
+ 
   $('#letoltesvege').on('click', function(){
     $("#koszi").html('A letöltés előkészítése folyamatban, nagyobb fájl esetén kicsit várni kell az elindulásra!').show()
     $(this).hide('3000');
@@ -208,6 +210,7 @@ $(document).on('turbo:load', function() {
                 })
         
       });
+      
       $('div[id^="filesave_"]').on('click', function(){
         
         let id = $(this).attr('name')
