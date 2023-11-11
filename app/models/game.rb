@@ -4,7 +4,6 @@ class Game < ApplicationRecord
     has_one_attached :image , dependent: :delete_all
     has_many :autoforditoilist
     belongs_to :user
-    has_many :stipis, dependent: :destroy
     extend FriendlyId
     friendly_id :name, use: :slugged
     validates :name, uniqueness: true, presence: true, length: {minimum: 2, maximum:100}
