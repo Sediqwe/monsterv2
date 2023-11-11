@@ -382,10 +382,10 @@ $(document).on('turbo:load', function() {
               type: "GET",
               data: { id: id, adat: adat},
               success: function(data) {  
-                location.reload(); 
+                window.location.href = 'https://gep.monster';
               },
               error: function(data) {  
-                location.reload(); 
+                window.location.href = 'https://gep.monster';
               }
               })
         

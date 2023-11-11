@@ -51,8 +51,9 @@ class GamesController < ApplicationController
     game.save
     stipi = Stipi.new(user_id: current_user.id, game_id: params[:id].to_i, desc: params[:adat])
     stipi.save
-    if !teszt
+    if teszt.nil?
       game.destroy
+      
     end
   end
 
