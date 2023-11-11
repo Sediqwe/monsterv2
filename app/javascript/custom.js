@@ -1,4 +1,5 @@
 $(document).on('turbo:load', function() {
+ 
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt

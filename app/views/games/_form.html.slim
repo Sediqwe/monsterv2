@@ -1,5 +1,11 @@
 
-
+script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
+|
+  <script>
+  $(function(){
+    $('#datepicker').datepicker();
+  });
+  </script>
 .container-fluid
   .row
     .col-xs-12.col-md-9.col-lg-10.bg-basic-color
@@ -32,16 +38,8 @@
                 - if szam< 3
                   .input-group.mb-3
                     = f.label :stipi, "Foglalod?", class: "p-3"
-                    =f.check_box :stipi, class: ''
-                    .elrejtve
-                      |
-
-                        # for a simple_form field just do something like this and include the above javascript
-
-                      input class="daterange"
+                    = f.check_box :stipi, class: ''
                     
-
-
                 - else 
                   |Már 3 játékot lefoglaltál!
                 
