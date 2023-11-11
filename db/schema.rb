@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_11_145148) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_11_172121) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -165,6 +165,13 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_145148) do
     t.string "ip_address"
     t.index ["game_id"], name: "index_downloads_on_game_id"
     t.index ["upload_id"], name: "index_downloads_on_upload_id"
+  end
+
+  create_table "errorvans", force: :cascade do |t|
+    t.string "page"
+    t.string "desc"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "forums", force: :cascade do |t|

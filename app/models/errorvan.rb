@@ -1,0 +1,2 @@
+class Errorvan < ApplicationRecord
+end

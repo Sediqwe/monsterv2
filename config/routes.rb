@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  
   get 'lemondva', to: "lemondva#index"
   get 'lefoglalva', to: "lefoglalva#index"
   resources :supporters
@@ -156,6 +157,7 @@ get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
 get "hopper", to: "hopps#hopper"
 get "regenerated", to: "translaters#regen"
+get '*path', to: 'errors#hiba404'
 end
 
 
