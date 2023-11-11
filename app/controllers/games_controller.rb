@@ -49,7 +49,7 @@ class GamesController < ApplicationController
     teszt = Upload.where(game_id: params[:id]).first
     game.stipi = false  
     game.save
-    stipi = Stipi.new(user_id: current_user.id, gamename: game.name, desc: params[:adat])
+    stipi = Stipi.new(user_id: current_user.id, game_id: 30 ,gamename: game.name, desc: params[:adat])
     stipi.save
     if teszt.nil?
       game.destroy      
@@ -91,7 +91,7 @@ class GamesController < ApplicationController
     @game.user_id = current_user.id
     @game.uploaded_at = DateTime.now
     @game.hidden = true
-    if game_params[:stipi]
+    if !game_params[:stipi].nil?
       @game.hatarido = DateTime.now + 3.days
     end
     respond_to do |format|
