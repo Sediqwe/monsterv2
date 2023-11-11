@@ -149,7 +149,9 @@ class GamesController < ApplicationController
   private
     
     def set_game
-      @game = Game.friendly.find(params[:id])
+      if params[:id]!="favicon"
+        @game = Game.friendly.find(params[:id])
+      end
     end
 
     
