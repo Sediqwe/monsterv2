@@ -21,6 +21,7 @@ Rails.application.routes.draw do
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'
   get 'feltoltve/index'
   get 'ipadress/index'
+  get 'feltoltve', to:  'feltoltve#index'
   get 'supports', to: 'support#index'
   get 'openai/index'
   get 'regexp', to: 'games#regexp'
