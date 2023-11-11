@@ -373,6 +373,23 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
+      $('div#felold').on('click', function(){
+        let id = $(this).attr('name');
+        let adat = $('#lemondom').val();
+        
+        $.ajax({
+              url: "/feloldas",
+              type: "GET",
+              data: { id: id, adat: adat},
+              success: function(data) {  
+                location.reload(); 
+              },
+              error: function(data) {  
+                location.reload(); 
+              }
+              })
+        
+      });
       $('div#revizio').on('click', function(){
         let id = $(this).attr('name');
         let adat = "GotrabiGO";

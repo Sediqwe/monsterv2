@@ -48,7 +48,8 @@ class GamesController < ApplicationController
     game = Game.find(params[:id])
     game.stipi = false  
     game.save
-    redirect_to game_url(game)
+    stipi = Stipi.new(user_id: current_user.id, game_id: params[:id].to_i, desc: params[:adat])
+    stipi.save
   end
 
   def show

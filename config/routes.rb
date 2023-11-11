@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'lemondva', to: "lemondva#index"
+  get 'lefoglalva', to: "lefoglalva#index"
   resources :supporters
   get 'kuki/index'
   get 'kuki/new'
@@ -95,12 +97,12 @@ Rails.application.routes.draw do
   post 'megas_editor', to: "megas#editorka"
   post 'upload_bad', to: "uploads#bad"
   post 'games_magyhu', to: "games#magyhu"
-  get 'feloldas', to: "games#feloldas"
+  get 'feloldas', to: 'games#feloldas'
   resources :uploads
   resources :games
   resources :forums  
   get 'rssgemo', to:  'rss#index'
-  get 'feltoltve', to:  'feltoltve#index'
+  get 'lemondva', to:  'lemondva#index'
   get 'forum/messages', to:  'forums#messages'
   get 'sessions/new'
   get 'sessions/create'
