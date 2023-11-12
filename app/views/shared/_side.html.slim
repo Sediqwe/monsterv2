@@ -2,41 +2,25 @@
     .side__header
         h5
             | Utolsó hozzászólások:
-        
-    
-        -require 'rss'
-        -require 'open-uri'
-        -url = 'https://gep-monster.disqus.com/latest.rss'
-        - URI.open(url) do |rss|
-           
-                    - feed = RSS::Parser.parse(rss)
-                    
-    
-                    - feed.items.each_with_index do |item,index|
-                        - path = URI.parse(item.link.html_safe).path
-                        - pathname = Pathname.new(path)
-                        - if item.link.exclude?("gep-monster.translate.goog")
-                            .side__elements
-                                = link_to  item.link.html_safe
-                                    
-                                    .side__card_two
-                                        h6 
-                                            strong
-                                                = pathname.basename.to_s.gsub("-"," ").upcase
-                                            - szoveg = truncate(strip_tags(item.description), length: 100, separator: '...')
-                                        = szoveg
-                                        .text-light 
-                                            strong
-                                                |#{item.dc_creator}
-                                        -parsed_date = DateTime.parse(item.pubDate.to_s) + 5.hours 
-                                        |(
-                                        |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
-                                        |)
-                            - if index >= 10
-                                - break
-                
-            
-    
+    - @rss.each do |rss|
+        .side__elements
+            = link_to  rss.link
+                - path = URI.parse(rss.link.html_safe).path
+                - pathname = Pathname.new(path)
+                - if rss.link.exclude?("gep-monster.translate.goog")
+                    .side__card_two
+                        h6 
+                            strong
+                                = pathname.basename.to_s.gsub("-"," ").upcase
+                            - szoveg = truncate(strip_tags(rss.desc), length: 100, separator: '...')
+                        = szoveg
+                        .text-light 
+                            strong
+                                |#{rss.user}
+                        -parsed_date = DateTime.parse(rss.idouj3.to_s) + 5.hours 
+                        |(
+                        |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
+                        |)   
 
     .side__header
         h5
@@ -71,7 +55,7 @@
                         -if current_user&.admin?
                             -begin
                                 - dimensions = t.game.image.blob.metadata
-                                -arany =  (dimensions["width"].to_f / dimensions["height"].to_f )*16/9
+                                - arany =  (dimensions["width"].to_f / dimensions["height"].to_f )*16/9
                                 - if arany < 3
                                     .buzi.btn-success.btn   
                                         |Javítandó!!!!!

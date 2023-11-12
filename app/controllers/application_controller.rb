@@ -8,7 +8,8 @@ def set_search
     require 'open-uri'
     @q = Game.ransack(params[:q]) 
     @download = Download.order("created_at DESC").first(10)
-    @uploading = Upload.order("created_at DESC").first(10)  
+    @uploading = Upload.order("created_at DESC").first(10)
+    @rss = Gemorss.last(10)
 end
 
 
