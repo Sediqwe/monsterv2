@@ -46,11 +46,17 @@ class GamesController < ApplicationController
   end
   def feloldas
     game = Game.find(params[:id])
+    p game.inspect
+    stipi = Stipi.new(user_id: current_user.id, gamename: game.name, desc: params[:adat])
+    stipi.save
+    p stipi.errors.full_messages.join(', ')
+    p "IIIIIIIIIIIIIIIIIIIII"
     teszt = Upload.where(game_id: params[:id]).first
     game.stipi = false  
     game.save
-    stipi = Stipi.new(user_id: current_user.id, gamename: game.name, desc: params[:adat])
-    stipi.save
+    
+    
+    p "STIPI MENTVE"
     if teszt.nil?
       game.destroy      
     end
