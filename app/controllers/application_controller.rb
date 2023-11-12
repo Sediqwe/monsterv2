@@ -9,7 +9,7 @@ def set_search
     @q = Game.ransack(params[:q]) 
     @download = Download.order("created_at DESC").first(10)
     @uploading = Upload.order("created_at DESC").first(10)
-    @rss = Gemorss.order(idouj3: :DESC).last(10)
+    @rss = Gemorss.order(idouj3: :DESC).first(10)
 end
 
 
