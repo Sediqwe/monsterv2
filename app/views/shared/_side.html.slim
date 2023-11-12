@@ -17,7 +17,7 @@
                         .text-light 
                             strong
                                 |#{rss.user}
-                        -parsed_date = DateTime.parse(rss.idouj3.to_s) + 5.hours 
+                        -parsed_date = DateTime.parse(rss.idouj3.to_s) 
                         |(
                         |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
                         |)   

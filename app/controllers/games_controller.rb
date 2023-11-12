@@ -4,18 +4,7 @@ class GamesController < ApplicationController
   require 'rmagick'
   
   def index
-    Game.where("hatarido IS NOT NULL").where("hatarido + INTERVAL '3 days' < ?", Time.now).update_all(stipi: false)
-    if current_user
-      if current_user.admin? || current_user.moderator?
-        @q = Game.ransack(params[:q])
-      else
-        @q = Game.where(hidden: false).ransack(params[:q])
-        
-      end
-    else
-      @q = Game.where(hidden: false).ransack(params[:q])
-    end
-  
+    @q = Game.where(hidden: false).ransack(params[:q])
     if params[:page_n].present?
       number = params[:page_n]
       session[:page_n] = number
@@ -46,17 +35,11 @@ class GamesController < ApplicationController
   end
   def feloldas
     game = Game.find(params[:id])
-    p game.inspect
     stipi = Stipi.new(user_id: current_user.id, gamename: game.name, desc: params[:adat])
     stipi.save
-    p stipi.errors.full_messages.join(', ')
-    p "IIIIIIIIIIIIIIIIIIIII"
     teszt = Upload.where(game_id: params[:id]).first
     game.stipi = false  
     game.save
-    
-    
-    p "STIPI MENTVE"
     if teszt.nil?
       game.destroy      
     end
@@ -150,6 +133,7 @@ class GamesController < ApplicationController
     end
   end
   def features
+    Game.where("hatarido IS NOT NULL").where("hatarido + INTERVAL '3 days' < ?", Time.now).update_all(stipi: false)
     @games = Game.where(stipi: true).where("hatarido + INTERVAL '3 days' > ?", Time.now)
   end
   private
