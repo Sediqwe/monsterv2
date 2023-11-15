@@ -12,7 +12,7 @@
                 h6
                     = game.name 
                     |  »
-                    - if game.stipi
+                    - if game.stipi && current_user&.admin? 
                         p.text-warning
                             |Foglalt 
         
