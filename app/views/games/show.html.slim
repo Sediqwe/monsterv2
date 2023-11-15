@@ -136,13 +136,18 @@
                                                 = t.created_at.strftime("%Y-%m-%d %H:%M")
                                                 br
                                                 - if t.pictures.present?
+                                                    =t.pictures.size
                                                     div id="ex_#{t.id}" class="modal bg-dark"
                                                        
                                                         div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"
                                                             .carousel-inner
                                                                 -t.pictures.each_with_index do |pic, index|
-                                                                    div class="carousel-item active"
-                                                                        img src="#{url_for(pic)}" class="d-block w-100" alt="..."
+                                                                    - if index==0
+                                                                        div class="carousel-item active"
+                                                                            img src="#{url_for(pic)}" class="d-block w-150" alt="..."
+                                                                    -else
+                                                                        div class="carousel-item"
+                                                                            img src="#{url_for(pic)}" class="d-block w-150" alt="..."
                                                                     
                                                                 
                                                             
