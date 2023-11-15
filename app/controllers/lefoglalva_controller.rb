@@ -3,9 +3,10 @@ class LefoglalvaController < ApplicationController
     adat = Game.where(stipi: true).where(okes:false).first
     if adat
         adat.okes = true
-        adat.save
-        name = adat.user.alias || adat.user.name
-        render html: (name + "||||Ł" + adat.name + "||||Ł" + adat.slug + "||||Ł" + url_for(adat.image) + "||||Ł" + adat.hatarido.to_s )
+        adat.save        
+        username = User.find(adat.stipiusername.to_i)
+        username = username.alias || username.name
+        render html: (username + "||||Ł" + adat.name + "||||Ł" + adat.slug + "||||Ł" + url_for(adat.image) + "||||Ł" + adat.hatarido.to_s )
     else
     render html: ("")
     end

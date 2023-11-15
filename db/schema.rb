@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_11_172121) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_15_163654) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -217,6 +217,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_11_172121) do
     t.boolean "hidden", default: false
     t.datetime "hatarido"
     t.boolean "okes", default: false
+    t.string "stipiusername"
     t.index ["slug"], name: "index_games_on_slug", unique: true
     t.index ["user_id"], name: "index_games_on_user_id"
   end

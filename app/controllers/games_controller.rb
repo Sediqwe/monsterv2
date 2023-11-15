@@ -82,6 +82,8 @@ class GamesController < ApplicationController
     @game.hidden = true
     if !game_params[:stipi].nil?
       @game.hatarido = DateTime.now + 3.days
+      ck = User.find(current_user.id)
+      @game.stipiusername =ck.alias || ck.name
     end
     respond_to do |format|
       if @game.save
@@ -102,6 +104,8 @@ class GamesController < ApplicationController
     respond_to do |format|
       record_activity("Játék módosítva - Előtte: #{@game.name}")
       if @game.update(game_params)
+        @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
+        
         record_activity("Játék módosítva - Utána: #{@game.name}")
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }        
       else

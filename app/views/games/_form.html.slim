@@ -33,7 +33,7 @@ script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
               = f.text_field :link_epic, class: "mb-2", placeholder: "Epic Link"
               = f.text_field :link_other, class: "mb-2", placeholder: "Egyéb Link" 
               = f.text_field :link_hun, class: "mb-2", placeholder: "Magyarítások.hu Link"
-              - if !@game.persisted?
+              - if !@game.stipi?
                 - szam = Game.where(user_id: current_user.id, stipi: true).size
                 - if szam< 3
                   .input-group.mb-3
@@ -42,6 +42,8 @@ script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
                     
                 - else 
                   |Már 3 játékot lefoglaltál!
+              - else 
+                |Ez a játék már le van foglalva
                 
               p.text-start.mt-1
                 | Boritókép:
