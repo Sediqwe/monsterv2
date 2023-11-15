@@ -1,0 +1,22 @@
+p style="color: green" = notice
+.container-fluid
+    .row
+       
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
+            - if current_user&.admin? 
+                .row
+                    .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
+                        =link_to "Új ötlet", new_todo_path, class: "btn btn-secondary text-light btn-block"
+           
+            .row
+                .col-xs-12.col-sm-12.col-md-6.offset-md-10.col-lg-8.offset-lg-2.d-flex.flex-column.align-content-center
+                    .row
+                        .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-7.offset-lg-0.d-flex.flex-column.align-content-center
+                            .form
+                                h1.form__headline
+                                    |Fejlesztési ötletek
+                                - index = 1
+                                - @todos.each do |todo|
+                                  == render todo
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render 'shared/side'   

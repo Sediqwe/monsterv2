@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  resources :todos
   
   get 'lemondva', to: "lemondva#index"
   get 'lefoglalva', to: "lefoglalva#index"

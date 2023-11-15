@@ -1,0 +1,15 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  name: MyString
+  desc: MyText
+  user: one
+  prio: 1
+  kesz: false
+
+two:
+  name: MyString
+  desc: MyText
+  user: two
+  prio: 1
+  kesz: false
