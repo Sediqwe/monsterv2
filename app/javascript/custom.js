@@ -431,6 +431,8 @@ $(document).on('turbo:load', function() {
           $('#kepModal_' + id).modal('show'); // Amikor az egeret az ikonra viszed, a modális ablak megjelenik.
         
       });
+
+    
       $('#game_name').on('change', function() {
         var gameName = $(this).val();
         if (gameName) {
@@ -446,6 +448,7 @@ $(document).on('turbo:load', function() {
           });
         }
       });
+      
       $('#game_link_steam').on('change', function() {
         var gameName = $(this).val();
         if (gameName) {

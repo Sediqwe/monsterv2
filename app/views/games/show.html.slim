@@ -1,3 +1,5 @@
+|
+   
 .row
     .col-xs-12.col-md-10.col-lg-10.bg-basic-color
         .row
@@ -134,16 +136,29 @@
                                                 = t.created_at.strftime("%Y-%m-%d %H:%M")
                                                 br
                                                 - if t.pictures.present?
-                                                    -t.pictures.each_with_index do |pic, index|
-                                                        span id="ikon_#{index}" class="p-1"
-                                                            i.bi.bi-card-image 
+                                                    div id="ex_#{t.id}" class="modal bg-dark"
+                                                       
+                                                        div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"
+                                                            .carousel-inner
+                                                                -t.pictures.each_with_index do |pic, index|
+                                                                    div class="carousel-item active"
+                                                                        img src="#{url_for(pic)}" class="d-block w-100" alt="..."
+                                                                    
+                                                                
+                                                            
+                                                        button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+                                                            span class="carousel-control-prev-icon" aria-hidden="true"
+                                                            span class="visually-hidden" Previous
+                                                        
+                                                        button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next"
+                                                            span class="carousel-control-next-icon" aria-hidden="true"
+                                                            span class="visually-hidden" Next
+                                                            
+                                                            
 
-                                                        // Bootstrap modális ablak
-                                                        .modal.fade id="kepModal_#{index}" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true"
-                                                            .modal-dialog.modal-dialog-centered.modal-lg
-                                                                .modal-content
-                                                                    .modal-body
-                                                                        img src="#{url_for(pic)}" style="max-width: 100%"
+                                                    a href="#ex_#{t.id}" rel="modal:open" 
+                                                        i.bi.bi-card-image
+                                             
                                         .col-lg-2.col-xs-12 
                                             span
                                                 = t.version
