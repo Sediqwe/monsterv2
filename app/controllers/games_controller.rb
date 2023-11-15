@@ -82,8 +82,7 @@ class GamesController < ApplicationController
     @game.hidden = true
     if !game_params[:stipi].nil?
       @game.hatarido = DateTime.now + 3.days
-      ck = User.find(current_user.id)
-      @game.stipiusername =ck.alias || ck.name
+      @game.stipiusername = current_user.id
     end
     respond_to do |format|
       if @game.save
