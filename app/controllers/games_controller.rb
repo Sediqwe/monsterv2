@@ -103,8 +103,11 @@ class GamesController < ApplicationController
     respond_to do |format|
       record_activity("Játék módosítva - Előtte: #{@game.name}")
       if @game.update(game_params)
-        @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
-        
+          if game_params[:stipi]
+            @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id, okes: false )    
+          else
+            @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
+          end
         record_activity("Játék módosítva - Utána: #{@game.name}")
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }        
       else
