@@ -1,5 +1,9 @@
 $(document).on('turbo:load', function() {
- 
+  var myCarousel = document.getElementById('carouselExampleControls');
+  var carousel = new bootstrap.Carousel(myCarousel, {
+    interval: false
+  });
+
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt

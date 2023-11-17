@@ -137,10 +137,9 @@
                                                 = t.created_at.strftime("%Y-%m-%d %H:%M")
                                                 br
                                                 - if t.pictures.present?
-                                                    =t.pictures.size
                                                     div id="ex_#{t.id}" class="modal bg-dark"
                                                        
-                                                        div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel"
+                                                        div id="carouselExampleControls" data-bs-interval="false" class="carousel slide" data-bs-ride="carousel"
                                                             .carousel-inner
                                                                 -t.pictures.each_with_index do |pic, index|
                                                                     - if index==0
@@ -164,7 +163,8 @@
 
                                                     a href="#ex_#{t.id}" rel="modal:open" 
                                                         i.bi.bi-card-image
-                                             
+                                                        
+                                                    
                                         .col-lg-2.col-xs-12 
                                             span
                                                 = t.version
