@@ -1,6 +1,5 @@
 - if current_user.admin? || current_user.moderator?
-    - if current_user.id == @game.user_id || current_user.admin?
-        == render 'form'
+    == render 'form'
 
 => link_to 'Show', @game, class: "btn btn-success  text-light"
 '|
