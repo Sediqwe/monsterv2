@@ -58,7 +58,7 @@
                                     textarea#lemondom name="lemondom" rows="6"
                                     .btn.btn-primary name="#{@game.id}" id="felold"
                                         |Feloldás
-                                - if @game.stipi && @game.user_id != current_user.id
+                                - if @game.stipi && @game.stipiusername.to_i != current_user.id
                                     .bg-warning.text-dark.rounded.p-4.m-1
                                         | Ez a játék le van foglalva.                                        
                                         
@@ -69,8 +69,9 @@
                                             - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
 
                                             p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
-                                        b Foglaló:   
-                                        = @game.user.alias || @game.user.name
+                                        b Foglaló:
+                                        - foglaloadatai =  User.find(stipiusername.to_i)
+                                        = foglaloadatai.alias || foglaloadatai.name
 
 
                             
