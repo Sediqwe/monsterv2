@@ -54,7 +54,7 @@
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                             .gme-data__buy-game
-                                -if @game.stipi && @game.user_id == current_user.id
+                                -if @game.stipi && @game.stipiusername.to_i == current_user.id
                                     textarea#lemondom name="lemondom" rows="6"
                                     .btn.btn-primary name="#{@game.id}" id="felold"
                                         |Feloldás
