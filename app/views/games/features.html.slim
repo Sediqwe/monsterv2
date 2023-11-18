@@ -36,7 +36,8 @@
                                             = link_to game.name, game_path(game), class: "btn btn-primary"
 
                                     td = game.name
-                                    
+                                    - named = User.find(game.stipiusername.to_i)
+                                    td = named.alias || name.name
                                     td = game.hatarido    
                     
                     
