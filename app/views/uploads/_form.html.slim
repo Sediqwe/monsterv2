@@ -72,8 +72,10 @@
                   -if @upload.pictures.present?
                     | A képre kattintva törölheted a képeket.
                     br
+                    hr
                     -@upload.pictures.each do |kep|
                       =image_tag kep, class: "w-50 delete-image", data: { image_id: kep.id, upload_id: @upload.id }
+                      br
 
               .input-group.mb-3
                 = f.label "Demo?", class: "p-3" 
