@@ -1,2 +1,2 @@
-- if current_user.&admin? || current_user.moderator?
+- if current_user&.admin? || current_user.moderator?
     == render 'form'
