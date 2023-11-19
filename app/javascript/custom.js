@@ -1,4 +1,24 @@
 $(document).on('turbo:load', function() {
+  $('.delete-image').on('click', function() {
+    var uploadId = $(this).data('upload-id');
+    var imageId = $(this).data('image-id');
+    if (confirm('Biztosan törölni szeretnéd ezt a képet?')) {
+      $.ajax({
+        url: '/pictures/' +uploadId + '/pictures/' + imageId, // Az endpoint, ahol a kép törlését kezelik a szerveren
+        method: 'DELETE',
+        success: function(response) {
+          // Sikeres törlés esetén a kép eltűntetése a felületről
+          $('img[data-image-id="' + imageId + '"]').hide(); // vagy $(this).remove(); attól függően, hogyan szeretnéd eltávolítani          
+        },
+        error: function(error) {
+          alert('Hiba történt a kép törlése közben.');
+          console.error(error);
+        }
+      });
+    }
+  });
+
+
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt

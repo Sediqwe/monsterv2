@@ -115,6 +115,21 @@ class UploadsController < ApplicationController
       format.json { head :no_content }
     end
   end
+  def picturesdelete
+    if current_user.uploader? || current_user.admin?
+      @upload = Upload.find(params[:upload_id]) # Vagy ahogyan a feltöltésed azonosítottad
+
+      # Ellenőrizni kell, hogy a kép létezik-e a feltöltéshez kapcsolódva
+      picture = @upload.pictures.find_by(id: params[:image_id])
+
+      if picture.present?
+        picture.purge # A kép törlése az aktuális feltöltéshez kapcsolódóan
+        head :no_content # Válasz elküldése, nincs tartalommal
+      else
+        head :not_found # Ha a kép nem található, 404-es hibakód visszaküldése
+      end
+    end
+  end
 
   private
     # Use callbacks to share common setup or constraints between actions.

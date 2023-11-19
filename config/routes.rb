@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
   resources :todos
-  
+  delete '/pictures/:upload_id/pictures/:image_id', to: 'uploads#picturesdelete', as: 'delete_picture'
   get 'lemondva', to: "lemondva#index"
   get 'lefoglalva', to: "lefoglalva#index"
   resources :supporters
