@@ -69,6 +69,10 @@ class UploadsController < ApplicationController
     upd = Game.find(@upload.game_id)
     upd.uploaded_at = DateTime.now
     upd.hidden = false
+    if upd.stipi
+      stipi = Stipi.new(user_id: current_user.id, gamename: upd.name, desc: "A játék elkészült, az adatlap feloldva.")
+      stipi.save
+    end
     upd.stipi = false
     upd.save
     

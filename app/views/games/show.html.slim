@@ -54,24 +54,25 @@
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                             .gme-data__buy-game
-                                -if @game.stipi && @game.stipiusername.to_i == current_user.id
-                                    textarea#lemondom name="lemondom" rows="6"
-                                    .btn.btn-primary name="#{@game.id}" id="felold"
-                                        |Feloldás
-                                - if @game.stipi && @game.stipiusername.to_i != current_user.id
-                                    .bg-warning.text-dark.rounded.p-4.m-1
-                                        | Ez a játék le van foglalva.                                        
-                                        
-                                        - if @game.hatarido.present?
-                                            - remaining_time = @game.hatarido - Time.now
-                                            - days = (remaining_time / 1.day).to_i
-                                            - hours = ((remaining_time % 1.day) / 1.hour).to_i
-                                            - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
+                                -if current_user
+                                    -if @game.stipi && @game.stipiusername.to_i == current_user.id
+                                        textarea#lemondom name="lemondom" rows="6"
+                                        .btn.btn-primary name="#{@game.id}" id="felold"
+                                            |Feloldás
+                                    - if @game.stipi && @game.stipiusername.to_i != current_user.id
+                                        .bg-warning.text-dark.rounded.p-4.m-1
+                                            | Ez a játék le van foglalva.                                        
+                                            
+                                            - if @game.hatarido.present?
+                                                - remaining_time = @game.hatarido - Time.now
+                                                - days = (remaining_time / 1.day).to_i
+                                                - hours = ((remaining_time % 1.day) / 1.hour).to_i
+                                                - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
 
-                                            p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
-                                        b Foglaló:
-                                        - foglaloadatai =  User.find(stipiusername.to_i)
-                                        = foglaloadatai.alias || foglaloadatai.name
+                                                p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
+                                            b Foglaló:
+                                            - foglaloadatai =  User.find(stipiusername.to_i)
+                                            = foglaloadatai.alias || foglaloadatai.name
 
 
                             
