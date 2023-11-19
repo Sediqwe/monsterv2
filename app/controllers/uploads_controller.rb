@@ -99,10 +99,8 @@ class UploadsController < ApplicationController
           Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
         end
         format.html { redirect_to upload_url(@upload), notice: "A feltöltés módosítva." }
-        format.json { render :show, status: :ok, location: @upload }
-      else
-        format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @upload.errors, status: :unprocessable_entity }
+        else
+        format.html { render :edit, status: :unprocessable_entity }       
       end
     end
   end
@@ -126,7 +124,7 @@ class UploadsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def upload_params
-      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :demo, pictures: [] )
+      params.require(:upload).permit(:name, :version, :description, :game_id, :game_files, :program_id , :platform_id, :link_mega, :mauto , :multiuser, :demo, pictures: [])
     end
     def editor_params
       params.require(:product).permit(:id, :adat )
