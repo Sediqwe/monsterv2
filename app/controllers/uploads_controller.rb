@@ -116,7 +116,7 @@ class UploadsController < ApplicationController
     end
   end
   def picturesdelete
-    if current_user.uploader? || current_user.admin?
+    if current_user.moderator? || current_user.admin?
       @upload = Upload.find(params[:upload_id]) # Vagy ahogyan a feltöltésed azonosítottad
 
       # Ellenőrizni kell, hogy a kép létezik-e a feltöltéshez kapcsolódva
