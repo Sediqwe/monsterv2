@@ -10,13 +10,11 @@
                 ul
                   - @upload.errors.full_messages.each do |message|
                     li = message
-
-
             .form
               - if @upload.persisted?
-                |  Fájl módosítás
+                h1  Fájl módosítás
               - else 
-                |  Új fájl feltöltés
+                h1  Új fájl feltöltés
               p
               - if params[:id].nil?
                 = f.label "Válassz játékot"
