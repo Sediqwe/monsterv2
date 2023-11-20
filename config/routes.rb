@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  post "new_yt", to: "games#new_yt"
   resources :todos
   delete '/pictures/:upload_id/pictures/:image_id', to: 'uploads#picturesdelete', as: 'delete_picture'
   get 'lemondva', to: "lemondva#index"

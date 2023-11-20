@@ -44,7 +44,14 @@ class GamesController < ApplicationController
       game.destroy      
     end
   end
-
+  
+  def new_yt
+    yt = Youtubevideo.create(game_id: je_params[:id], link: je_params[:done])
+    yt.save
+  
+  end
+  
+  
   def show
     Game.default_timezone = :utc
     @user = Game.friendly.find(params[:id])
@@ -53,6 +60,7 @@ class GamesController < ApplicationController
     @meta_description = @user.name + " gépi fordítása \n Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
     @autoforditoilista = Autoforditoilist.where(game_id:  @user.id)
     @meta_image = rails_blob_path(@user.image, only_path: true)
+    @ytvideo = Youtubevideo.where(game_id: @user.id)
   end
 
 

@@ -54,7 +54,16 @@
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                             .gme-data__buy-game
-                                -if current_user
+                                -@ytvideo.each do |yt|
+                                    - video_id = Rack::Utils.parse_query(URI(yt.link).query)["v"]
+                                    iframe  width="560" height="315"  src='https://www.youtube.com/embed/#{video_id}?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreen>
+                                br
+                                -if current_user&.admin?                                    
+                                    |Új YT videó beküldése
+                                    = text_field_tag (:ytvideo) 
+                                    .btn.btn-success id="new_yt" data-id="#{@game.id}"
+                                        |BEKÜLDÉS
+                                -if current_user&.admin? || current_user&.moderator?
                                     -if @game.stipi && @game.stipiusername.to_i == current_user.id
                                         textarea#lemondom name="lemondom" rows="6"
                                         .btn.btn-primary name="#{@game.id}" id="felold"
@@ -73,6 +82,7 @@
                                             b Foglaló:
                                             - foglaloadatai =  User.find(stipiusername.to_i)
                                             = foglaloadatai.alias || foglaloadatai.name
+                                    
 
 
                             

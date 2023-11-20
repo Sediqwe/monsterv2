@@ -17,8 +17,23 @@ $(document).on('turbo:load', function() {
       });
     }
   });
+  $('#new_yt').on('click', function () {
+    var adat = $('#ytvideo').val();
+    var id = $(this).data('id');
+    $.ajax({
+      url: "/new_yt",
+      type: "POST",
+      data: { product: {done: adat, id: id } },
+      success: function(data) {
+       alert("Köszönjük! A linket ellenörzés után itt megtalálod!");
+       location.reload(); 
+      },
+      error: function(data) {
+        // alert("ERROR" + data.valami);
 
-
+      }
+    })
+  }); 
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt
