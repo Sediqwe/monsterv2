@@ -56,7 +56,7 @@
                             .gme-data__buy-game
                                 -@ytvideo.each do |yt|
                                     - video_id = Rack::Utils.parse_query(URI(yt.link).query)["v"]
-                                    iframe  width="560" height="315"  src='https://www.youtube.com/embed/#{video_id}?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreenallowfullscreen="allowfullscreen"     mozallowfullscreen="mozallowfullscreen"         msallowfullscreen="msallowfullscreen"         oallowfullscreen="oallowfullscreen"         webkitallowfullscreen="webkitallowfullscreen"
+                                    iframe  width="560" height="315" allowfullscreen="allowfullscreen" src='https://www.youtube.com/embed/#{video_id}?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreenallowfullscreen="allowfullscreen"     mozallowfullscreen="mozallowfullscreen"         msallowfullscreen="msallowfullscreen"         oallowfullscreen="oallowfullscreen"         webkitallowfullscreen="webkitallowfullscreen"
                                 br
                                 -if current_user&.admin?  || current_user&.moderator?                                  
                                     |Új gépi magyarítást használó YT videó beküldés:
