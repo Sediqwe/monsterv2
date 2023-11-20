@@ -58,8 +58,8 @@
                                     - video_id = Rack::Utils.parse_query(URI(yt.link).query)["v"]
                                     iframe  width="560" height="315"  src='https://www.youtube.com/embed/#{video_id}?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreen>
                                 br
-                                -if current_user&.admin?                                    
-                                    |Új YT videó beküldése
+                                -if current_user&.admin?  || current_user&.moderator?                                  
+                                    |Új gépi magyarítást használó YT videó beküldés:
                                     = text_field_tag (:ytvideo) 
                                     .btn.btn-success id="new_yt" data-id="#{@game.id}"
                                         |BEKÜLDÉS

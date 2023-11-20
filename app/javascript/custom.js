@@ -25,7 +25,6 @@ $(document).on('turbo:load', function() {
       type: "POST",
       data: { product: {done: adat, id: id } },
       success: function(data) {
-       alert("Köszönjük! A linket ellenörzés után itt megtalálod!");
        location.reload(); 
       },
       error: function(data) {
