@@ -46,11 +46,17 @@ class GamesController < ApplicationController
   end
   
   def new_yt
-    yt = Youtubevideo.create(game_id: je_params[:id], link: je_params[:done])
-    yt.save
+    if current_user&.admin? || current_user&.moderator?
+      yt = Youtubevideo.create(game_id: je_params[:id], link: je_params[:done])
+      yt.save
+    end
   
   end
-  
+  def edit_yt
+    if current_user&.admin? || current_user&.moderator?
+      Youtubevideo.where(id: je_params[:id]).update(link: je_params[:done])
+    end
+  end
   
   def show
     Game.default_timezone = :utc

@@ -63,15 +63,27 @@
                                     - video_id = Rack::Utils.parse_query(URI(yt.link).query)["v"]
                                     - if index <1
                                         iframe  width="560" height="315" allowfullscreen="allowfullscreen" src='https://www.youtube.com/embed/#{video_id}?rel=0&autoplay=<%= params[:autoplay] || 0 %>' frameborder='0' allowfullscreenallowfullscreen="allowfullscreen"     mozallowfullscreen="mozallowfullscreen"         msallowfullscreen="msallowfullscreen"         oallowfullscreen="oallowfullscreen"         webkitallowfullscreen="webkitallowfullscreen"
+                                        .row
+                                            -if current_user&.admin? || current_user&.moderator?
+                                                .col-6
+                                                    = text_field_tag ("edit_#{yt.id}"), yt.link , size:45
+                                                .col-5
+                                                    .btn.btn-success id="edit_yt" data-id="#{yt.id}"
+                                                        |URL CSERE
                                     -else
                                         - if index == 1
-                                        br 
-                                        
+                                            br 
                                             |Egyéb YT videók:
                                         
-                                        br
-                                        = link_to yt.link , target: "_blank" do 
+                                            br
+                                        = link_to yt.link , target: "_blank"  do 
                                             button class="youtube-button" YouTube #{index}
+                                        -if current_user&.admin? || current_user&.moderator?
+                                            .col-6
+                                                = text_field_tag ("edit_#{yt.id}"), yt.link , size:45
+                                            .col-5
+                                                .btn.btn-success id="edit_yt" data-id="#{yt.id}"
+                                                    |URL CSERE
                                 -if current_user&.admin? || current_user&.moderator?
                                     -if @game.stipi && @game.stipiusername.to_i == current_user.id
                                         textarea#lemondom name="lemondom" rows="6"

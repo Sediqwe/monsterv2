@@ -37,7 +37,31 @@ $(document).on('turbo:load', function() {
     {
       alert("Nem jó a formátum!")
     }
-  }); 
+  });
+  $('[id^=edit_').on('click', function () {
+    
+    var id = $(this).data('id');
+    var adat = $('#edit_'+ id).val();
+    
+    if (adat.includes('watch')) {
+      $.ajax({
+        url: "/edit_yt",
+        type: "POST",
+        data: { product: {done: adat, id: id } },
+        success: function(data) {
+        location.reload(); 
+        },
+        error: function(data) {
+          // alert("ERROR" + data.valami);
+
+        }
+      })}
+    else
+    {
+      alert("Nem jó a formátum!")
+    }
+  });
+
   $('#modal').on('click', function () {
     var modal = $('#banModal');
 // Megjeleníti a modalt
