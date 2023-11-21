@@ -81,6 +81,22 @@
         width: 40px;
         height: 48px;
     }
+    .youtube-button {
+        background-color: #ff0000;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        width: 100px;
+        cursor: pointer;
+      }
+      
+      .youtube-button:hover {
+        background-color: #ff7777;
+        color: #ffffff;
+      }
 .orulet{
     background-color: var(--bs-cyan);
     border-radius: 10px;
