@@ -92,7 +92,17 @@
         width: 100px;
         cursor: pointer;
       }
-      
+      .youtube-button-index {
+        background-color: #ff0000;
+        border: 1px solid #000000;
+        border-radius: 5px;
+        color: #ffffff;
+        font-size: 16px;
+        font-weight: bold;
+        height: 40px;
+        width: 40px;
+        cursor: pointer;
+      }
       .youtube-button:hover {
         background-color: #ff7777;
         color: #ffffff;
