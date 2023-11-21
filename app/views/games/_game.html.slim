@@ -15,5 +15,9 @@
                     - if game.stipi && current_user&.admin? 
                         p.text-warning
                             |Foglalt 
+                    - yt =  Youtubevideo.where(game_id: game.id).size
+                    - if yt>0
+                        button class="youtube-button" YouTube
+                
         
 
