@@ -451,7 +451,16 @@ textarea {
     color: #1b2c30;
     border-radius: 5px;
 }
-
+.list-card .list-card__label2 {
+    position: absolute;
+    top: 10px;
+    left: 50px;
+    padding: 1px;
+    padding-right: 2px;
+    background-color: white;
+    color: #1b2c30;
+    border-radius: 5px;
+}
 .list-card .list-card__hun-text {
     position: absolute;
     bottom: 0;
