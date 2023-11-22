@@ -36,8 +36,7 @@
                             |Sajnos nincs találat...
 
                 - @games.each_with_index do |game, index|
-                    - cache game do
-                        = render 'games/game', game: game, index: index
+                    = render 'games/game', game: game, index: index
             step-filter
                 .step-filter__numbers
                    = paginate @games       
