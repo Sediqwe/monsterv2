@@ -101,7 +101,7 @@
 
                                                 p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
                                             b Foglaló:
-                                            - foglaloadatai =  User.find(stipiusername.to_i)
+                                            - foglaloadatai =  User.find(@game.stipiusername.to_i)
                                             = foglaloadatai.alias || foglaloadatai.name
                                     
 
