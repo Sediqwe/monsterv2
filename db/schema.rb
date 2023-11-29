@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_111006) do
+ActiveRecord::Schema[7.0].define(version: 2023_11_29_155551) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -547,7 +547,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_111006) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.boolean "ready", default: true
+    t.bigint "user_id", default: 1, null: false
     t.index ["game_id"], name: "index_youtubevideos_on_game_id"
+    t.index ["user_id"], name: "index_youtubevideos_on_user_id"
   end
 
   add_foreign_key "active_storage_attachments", "active_storage_blobs", column: "blob_id"
@@ -582,4 +584,5 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_111006) do
   add_foreign_key "uploadtranslaters", "translaters"
   add_foreign_key "uploadtranslaters", "uploads"
   add_foreign_key "uzenets", "users"
+  add_foreign_key "youtubevideos", "users"
 end

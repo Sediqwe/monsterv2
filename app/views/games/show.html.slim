@@ -67,9 +67,19 @@
                                             -if current_user&.admin? || current_user&.moderator?
                                                 .col-6
                                                     = text_field_tag ("edit_#{yt.id}"), yt.link , size:45
-                                                .col-5
-                                                    .btn.btn-success id="edit_yt" data-id="#{yt.id}"
-                                                        |URL CSERE
+                                                -if yt.user_id == current_user.id
+                                                    .col-2
+                                                        .btn.btn-success id="edit_yt" data-id="#{yt.id}"
+                                                            |Csere
+                                                    .col-2
+                                                        .btn.btn-danger id="delete_yt_#{yt.id}" data-id="#{yt.id}"
+                                                            |Törlés
+                                                - else
+                                                    .col-3
+                                                        = yt.user.alias || yt.user.name 
+                                                        |  töltötte fel.
+                                                        br 
+                                                        br
                                     -else
                                         - if index == 1
                                             br 
@@ -79,11 +89,16 @@
                                         = link_to yt.link , target: "_blank"  do 
                                             button class="youtube-button" YouTube #{index}
                                         -if current_user&.admin? || current_user&.moderator?
-                                            .col-6
-                                                = text_field_tag ("edit_#{yt.id}"), yt.link , size:45
-                                            .col-5
-                                                .btn.btn-success id="edit_yt" data-id="#{yt.id}"
-                                                    |URL CSERE
+                                            .row
+                                                .col-6
+                                                    = text_field_tag ("edit_#{yt.id}"), yt.link , size:45
+                                                -if yt.user_id == current_user.id
+                                                    .col-2
+                                                        .btn.btn-success id="edit_yt" data-id="#{yt.id}"
+                                                            |Csere
+                                                    .col-2
+                                                        .btn.btn-danger id="delete_yt_#{yt.id}" data-id="#{yt.id}"
+                                                            |Törlés
                                 -if current_user&.admin? || current_user&.moderator?
                                     -if @game.stipi && @game.stipiusername.to_i == current_user.id
                                         textarea#lemondom name="lemondom" rows="6"

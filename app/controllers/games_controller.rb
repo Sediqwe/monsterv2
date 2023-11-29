@@ -47,14 +47,31 @@ class GamesController < ApplicationController
   
   def new_yt
     if current_user&.admin? || current_user&.moderator?
-      yt = Youtubevideo.create(game_id: je_params[:id], link: je_params[:done])
+      yt = Youtubevideo.create(game_id: je_params[:id], link: je_params[:done], user_id: current_user.id)
       yt.save
     end
   
   end
   def edit_yt
-    if current_user&.admin? || current_user&.moderator?
-      Youtubevideo.where(id: je_params[:id]).update(link: je_params[:done])
+    id = je_params[:id]
+    ytvideo = Youtubevideo.find(je_params[:id])
+    if ytvideo.user == current_user
+      if current_user&.admin? || current_user&.moderator?
+        Youtubevideo.where(id: je_params[:id]).update(link: je_params[:done])
+      end
+    end
+  end
+
+  def delete_yt
+    id = je_params[:id]
+    p id
+    ytvideo = Youtubevideo.find(id)
+    p ytvideo.inspect
+    if ytvideo.user_id == current_user.id
+      if current_user&.admin? || current_user&.moderator?
+        Youtubevideo.where(id: id).update(ready: false)
+        p "||||||||||||||||||||||||||||||||||||||||||"
+      end
     end
   end
   

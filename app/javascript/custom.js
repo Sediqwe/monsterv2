@@ -38,6 +38,20 @@ $(document).on('turbo:load', function() {
       alert("Nem jó a formátum!")
     }
   });
+  $('[id^=delete_yt_').on('click', function () {
+      var id = $(this).data('id');
+      $.ajax({
+        url: "/delete_yt",
+        type: "POST",
+        data: { product: {id: id, done: "Adat" } },
+        success: function(data) {
+        location.reload(); 
+        },
+        error: function(data) {
+        }
+      })
+    
+  });
   $('[id^=edit_').on('click', function () {
     
     var id = $(this).data('id');
