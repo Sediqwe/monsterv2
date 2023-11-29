@@ -4,7 +4,7 @@
             .list-card__img
                 .list-card__label
                     |  PC
-                - yt = Youtubevideo.where(game_id: game.id).where.not(okes: true).size
+                - yt = Youtubevideo.where(game_id: game.id).where.not(ready: true).size
                 - if yt>0
                     .list-card__label2
                         img src="yt.png"
