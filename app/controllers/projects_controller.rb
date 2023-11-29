@@ -2,6 +2,7 @@ class ProjectsController < ApplicationController
   before_action :set_project, only: %i[ show edit update destroy ]
   require 'zip'
   include BeolvasHelper
+  include ProjectsHelper
   def index
     @projects = Project.all.order(id: :DESC)
   end
@@ -78,7 +79,7 @@ class ProjectsController < ApplicationController
     cfile.files.each do |t| # A projecthez tartozó fájlokon végig lépkedünk
       filepath = ActiveStorage::Blob.service.send(:path_for, t.key)  #Adatok a fájlról
       data = File.read(filepath) #Beolvassuk a fájlt
-      #data = cserelo(data) #Kicseréljük a sortörést és a többi szarságot
+      data = cserelo(data) #Kicseréljük a sortörést és a többi szarságot
       translation_content = []
       enum_content = data.each_line
       enum_content.each_with_index do |content_line, index| 
@@ -190,7 +191,19 @@ class ProjectsController < ApplicationController
     redirect_to project_finish_path(id: product_params[:id], adat: product_params[:adat])
   end
   def filem
-    send_file(params[:file])
+    file_id = params[:id] # Itt azonosítod meg a kívánt fájlt
+
+    # Projekt keresése az azonosító alapján
+    project = Project.find(params[:p_id])
+
+    # Fájl keresése az azonosító alapján
+    file = project.files.find_by(id: file_id)
+
+    # Fájl letöltése, ha megtalálható
+    if file.present?
+      send_data file.download, filename: file.filename.to_s, type: file.content_type
+    end
+
   end
   def project_file_zip
     projectem = Project.find(params[:id])

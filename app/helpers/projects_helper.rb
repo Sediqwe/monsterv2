@@ -7,10 +7,12 @@ module ProjectsHelper
         Dataproject.where(file: file).where.not(tdata: [nil, ""]).size        
     end
     def project_cserelo(str)
+        str = str.gsub("\r\n","-<RN>-")
         str = str.gsub("\n","-<N>-")
         str = str.gsub("\r","-<R>-")
         str = str.gsub('""', "⇝")
-        str = str.gsub('"', "✞")        
+        str = str.gsub('"', "✞")      
+        str = str.gsub("-<RN>-","\r\n")  
     end
     def compare_sections(data, tdata )
         distance = Text::Levenshtein.distance(data, tdata).to_f
