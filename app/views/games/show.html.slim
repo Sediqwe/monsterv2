@@ -75,11 +75,12 @@
                                                         .btn.btn-danger id="delete_yt_#{yt.id}" data-id="#{yt.id}"
                                                             |Törlés
                                                 - else
-                                                    .col-3
-                                                        = yt.user.alias || yt.user.name 
-                                                        |  töltötte fel.
-                                                        br 
-                                                        br
+                                                    .row
+                                                        .col-3
+                                                            = yt.user.alias || yt.user.name 
+                                                            |  töltötte fel.
+                                                            br 
+                                                            br
                                     -else
                                         - if index == 1
                                             br 
