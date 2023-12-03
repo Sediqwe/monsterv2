@@ -188,7 +188,7 @@
                                                 - if t.pictures.present?
                                                     div id="ex_#{t.id}" class="modal bg-dark"
                                                        
-                                                        div id="carouselExampleControls" data-bs-interval="10000000000000000" data-bs-autoplay="false" class="carousel slide" data-bs-ride="carousel"
+                                                        div id="carouselExampleControls_#{t.id}" data-bs-interval="10000000000000000" data-bs-autoplay="false" class="carousel slide" data-bs-ride="carousel"
                                                             .carousel-inner
                                                                 -t.pictures.each_with_index do |pic, index|
                                                                     - if index==0
@@ -200,11 +200,11 @@
                                                                     
                                                                 
                                                             
-                                                            button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev"
+                                                            button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="prev"
                                                                 span class="carousel-control-prev-icon" aria-hidden="true"
                                                                 span class="visually-hidden" Previous
                                                             
-                                                            button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next"
+                                                            button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="next"
                                                                 span class="carousel-control-next-icon" aria-hidden="true"
                                                                 span class="visually-hidden" Next
                                                             
