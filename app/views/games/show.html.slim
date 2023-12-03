@@ -199,14 +199,14 @@
                                                                             img src="#{url_for(pic)}" class="d-block w-100" alt="..."
                                                                     
                                                                 
-                                                            
-                                                            button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="prev"
-                                                                span class="carousel-control-prev-icon" aria-hidden="true"
-                                                                span class="visually-hidden" Previous
-                                                            
-                                                            button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="next"
-                                                                span class="carousel-control-next-icon" aria-hidden="true"
-                                                                span class="visually-hidden" Next
+                                                            -if t.pictures.size >1
+                                                                button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="prev"
+                                                                    span class="carousel-control-prev-icon" aria-hidden="true"
+                                                                    span class="visually-hidden" Previous
+                                                                
+                                                                button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="next"
+                                                                    span class="carousel-control-next-icon" aria-hidden="true"
+                                                                    span class="visually-hidden" Next
                                                             
                                                             
 
