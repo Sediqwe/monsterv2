@@ -2,8 +2,6 @@
     .list-card
         a[href="/games/#{game.slug}"]
             .list-card__img
-                .list-card__label
-                    |  PC
                 - yt = Youtubevideo.where(game_id: game.id).where(ready: true).size
                 - if yt>0
                     - vagyok = 1
