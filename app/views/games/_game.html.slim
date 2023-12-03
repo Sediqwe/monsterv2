@@ -8,6 +8,11 @@
                 - if yt>0
                     .list-card__label2
                         img src="yt.png"
+                - game = Game.find(game.id)
+                
+                - if game.uploads.joins(:pictures_attachments).exists?
+                    .list-card__label3.bg-secondary
+                        i.bi.bi-card-image.text-light
                 = image_tag(game.image.variant(resize_to_fill: [413, 237], crop: "413x237+0+0"), class: 'img-fluid')
                 -if game.done
                     .list-card__hun-text.blink

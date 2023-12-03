@@ -20,7 +20,11 @@ class GamesController < ApplicationController
     @games = @q.result(distinct: true).order('uploaded_at DESC').page(params[:page]).per(session[:page_n])
     @meta_description = "A gépi fordítások oldala! Közvetlen elérés a legnagyobb fordítás fájlokhoz is! Már #{Game.all.size} játékhoz, #{(Upload.all.size + Mega.all.size)} fordítás érhető el."
     @meta_image = "https://gep.monster/1.png"
-    
+   
+  end
+  def has_images_upload?(game_id)
+    game = Game.find(game_id)
+    game.uploads.joins(:pictures).exists?
   end
   def magyhu
     game = Game.find(params[:id])
