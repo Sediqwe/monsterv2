@@ -210,8 +210,12 @@
                                                             
                                                             
 
-                                                    a href="#ex_#{t.id}" rel="modal:open" 
-                                                        i.bi.bi-card-image
+                                                    div.position-relative
+                                                        a href="#ex_#{t.id}" rel="modal:open" 
+                                                            i.bi.bi-card-image
+                                                            span.position-absolute.top-0.badge.bg-danger
+                                                                = t.pictures.size
+
                                                         
                                                     
                                         .col-lg-2.col-xs-12 
