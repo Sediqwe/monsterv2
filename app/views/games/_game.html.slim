@@ -13,11 +13,11 @@
                 
                 - if game.uploads.joins(:pictures_attachments).exists?
                     - if vagyok == 1
-                        .list-card__label3.bg-secondary
-                            i.bi.bi-card-image.text-light
+                        .list-card__label3
+                            i.bi.bi-card-image.text-dark
                     -else
-                        .list-card__label4.bg-secondary
-                            i.bi.bi-card-image.text-light
+                        .list-card__label4
+                            i.bi.bi-card-image.text-dark
 
                     
                 = image_tag(game.image.variant(resize_to_fill: [413, 237], crop: "413x237+0+0"), class: 'img-fluid')
