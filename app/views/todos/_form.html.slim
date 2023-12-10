@@ -15,11 +15,11 @@
                 = simple_form_for @todo, html: { class: 'form' } do |f|
                   = f.error_notification
                   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present? 
-                  = f.input :name, label: 'Név'
-                  = f.input :desc, label: 'Leírás'
+                  = f.input :name, label: 'Ötlet megnevezése'
+                  = f.input :desc, label: 'Ötlet leírása'
               
                   .form-actions
-                    = f.button :submit ,"Beküld", class:"btn btn-success text-light"
+                    = f.button :submit ,"Beküldöm", class:"btn btn-success text-light"
               
               
               

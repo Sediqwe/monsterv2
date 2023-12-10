@@ -26,7 +26,7 @@ class TodosController < ApplicationController
     @todo.user_id = current_user.id
     respond_to do |format|
       if @todo.save
-        format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
+        format.html { redirect_to todos_path}
       else
         format.html { render :new, status: :unprocessable_entity }
       end
