@@ -1,16 +1,61 @@
-div id="#{dom_id todo}"
-  p
-    strong Name:
-    =< todo.name
-  p
-    strong Desc:
-    =< todo.desc
-  p
-    strong User:
-    =< todo.user_id
-  p
-    strong Prio:
-    =< todo.prio
-  p
-    strong Kesz:
-    =< todo.kesz
+.row.justify-content-center
+  .col
+    .card-hover-shadow-2x.mb-3.card
+      .card-header-tab.card-header.bg-dark
+        .card-header-title.font-size-lg.text-capitalize.font-weight-normal
+          i.fa.fa-tasks
+          | \&nbsp; Teendők listája
+      .scroll-area
+        perfect-scrollbar.ps-show-limits
+          .ps.ps--active-y style=("position: static;") 
+            .ps-content
+              ul.list-group.list-group-flush
+                
+                  
+                li class=(todo.kesz? ? 'list-group-item bg-success' : 'list-group-item bg-secondary text-light')
+                  - if todo.kesz?
+                    .todo-indicator.bg-success
+                  - else
+                    -case todo.prio
+                      -when 0
+                        .todo-indicator.bg-danger
+                      -when 1
+                        .todo-indicator.bg-warning
+                      -when 2
+                        .todo-indicator.bg-primary
+                      -when 3
+                        .todo-indicator.bg-secondary                            
+                  .widget-content.p-0
+                    .widget-content-wrapper
+                      .widget-content-left.mr-2
+                        .custom-checkbox.custom-control
+                          input id="mino_#{todo.id}" type="checkbox" class="custom-control-input"
+                          label.custom-control-label for="mino_#{todo.id}"  &nbsp;
+                      .widget-content-left
+                        .widget-heading
+                          |Name:
+                          = todo.name
+                          br                            
+                          = simple_format(todo.desc)
+                          
+                          |User: 
+                          = todo.user.alias.capitalize || todo.user.name.capitalize
+                        
+                        .widget-subheading
+                      .widget-content-right
+                        - if current_user.present? 
+                          - if current_user.id == todo.user_id
+                            = link_to edit_todo_path(todo), class:" border-0 btn btn-outline-success" do 
+                              i.fa.fa-edit
+                          - if current_user.admin? 
+                            -if todo.kesz?
+                              = link_to done_todo_path(id: todo.id, done:false), class:" border-0 btn-transition btn btn-outline-danger text-light" do 
+                                i.fa.fa-check.text-danger
+                            -else 
+                              = link_to done_todo_path(id: todo.id, done:true), class:" border-0 btn-transition btn btn-outline-success" do 
+                                i.fa.fa-check
+
+                            = button_to todo_path(todo), data: { confirm: 'Biztos vagy benne hogy törlöd??' }, class: "border-0 btn-transition btn btn-outline-danger", method: :delete do 
+                              i.fa.fa-trash  
+  
+        

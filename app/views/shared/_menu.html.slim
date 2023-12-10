@@ -6,17 +6,22 @@
       a.logo.text-dark[href="/"]
         |G M 2023
   
-    a.btn.btn-primary.m-1[href="/supports"]
+    a.btn.btn-primary[href="/supports"]
       | Támogatás »
-    - if current_user&.admin || current_user&.moderator
-      = link_to 'Új játék »', new_game_path, class: "btn btn-primary text-light m-1"
-      = link_to 'Foglalt »', bel_path, class: "btn btn-info text-dark m-1"
+    
   ul.links
     = search_form_for @q, class:"search", url: games_path do |f|
       = f.text_field :name_cont, placeholder: "Gyors kereső..."
     - if current_user&.admin?
       li
         = link_to " Projects", projects_path
+    - if current_user&.admin || current_user&.moderator
+      li
+        = link_to 'Új játék »', new_game_path
+      li  
+        = link_to 'Foglalt »', bel_path
+      li
+        = link_to 'Ötletek', todos_path
     - if current_user
       li
         = link_to " Beállítások", edit_user_path(current_user)

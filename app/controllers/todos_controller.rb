@@ -9,7 +9,8 @@ class TodosController < ApplicationController
   # GET /todos/1 or /todos/1.json
   def show
   end
-
+  def done
+  end
   # GET /todos/new
   def new
     @todo = Todo.new
@@ -22,14 +23,12 @@ class TodosController < ApplicationController
   # POST /todos or /todos.json
   def create
     @todo = Todo.new(todo_params)
-
+    @todo.user_id = current_user.id
     respond_to do |format|
       if @todo.save
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully created." }
-        format.json { render :show, status: :created, location: @todo }
       else
         format.html { render :new, status: :unprocessable_entity }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -39,10 +38,8 @@ class TodosController < ApplicationController
     respond_to do |format|
       if @todo.update(todo_params)
         format.html { redirect_to todo_url(@todo), notice: "Todo was successfully updated." }
-        format.json { render :show, status: :ok, location: @todo }
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @todo.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -53,7 +50,6 @@ class TodosController < ApplicationController
 
     respond_to do |format|
       format.html { redirect_to todos_url, notice: "Todo was successfully destroyed." }
-      format.json { head :no_content }
     end
   end
 
@@ -65,6 +61,6 @@ class TodosController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def todo_params
-      params.require(:todo).permit(:name, :desc, :user_id, :prio, :kesz)
+      params.require(:todo).permit(:name, :desc)
     end
 end
