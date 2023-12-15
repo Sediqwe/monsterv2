@@ -74,7 +74,7 @@ class GamesController < ApplicationController
     if ytvideo.user_id == current_user.id
       if current_user&.admin? || current_user&.moderator?
         Youtubevideo.where(id: id).update(ready: false)
-        p "||||||||||||||||||||||||||||||||||||||||||"
+        
       end
     end
   end
