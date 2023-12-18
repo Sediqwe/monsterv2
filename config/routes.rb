@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "discord", to: "games#discord"
   get 'done_todo', to: 'todos#done'
   post "new_yt", to: "games#new_yt"
   post "edit_yt", to: "games#edit_yt"

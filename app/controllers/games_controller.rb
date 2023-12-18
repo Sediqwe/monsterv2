@@ -131,7 +131,9 @@ class GamesController < ApplicationController
       end
     end
   end
-
+def discord
+  
+end
   
   def update
     upd = @game.updated_at
