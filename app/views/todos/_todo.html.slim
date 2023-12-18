@@ -1,15 +1,17 @@
 
 .accordion-item
   h2 id="heading_#{todo.id}" class="accordion-header"
-    button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_#{todo.id}" aria-expanded="true" aria-controls="collapse_#{todo.id}"
+    button class="accordion-button #{" bg-dark text-success " if todo.kesz}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_#{todo.id}" aria-expanded="true" aria-controls="collapse_#{todo.id}"
       = todo.name 
-  div id="collapse_#{todo.id}" class="accordion-collapse collapse  #{index == 0 ? 'show' : 'collapse'}" aria-labelledby="heading_#{todo.id}" data-bs-parent="#accordionExample"
+      = " (KÉSZ) " if todo.kesz
+  div id="collapse_#{todo.id}" class="accordion-collapse collapse #{" bg-secondary text-light " if todo.kesz} #{index == 0 ? 'show' : 'collapse'} " aria-labelledby="heading_#{todo.id}" data-bs-parent="#accordionExample"
     .accordion-body
       strong
         = simple_format(todo.desc)
         = index
       br
       hr
+      
       = todo.user.alias.capitalize || todo.user.name.capitalize
             
           
