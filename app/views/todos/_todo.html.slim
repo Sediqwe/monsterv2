@@ -1,14 +1,19 @@
 
 .accordion-item
   h2 id="heading_#{todo.id}" class="accordion-header"
-    button class="accordion-button #{" bg-dark text-success " if todo.kesz}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_#{todo.id}" aria-expanded="true" aria-controls="collapse_#{todo.id}"
+    button class="accordion-button #{" bg-success text-dark " if todo.kesz}" type="button" data-bs-toggle="collapse" data-bs-target="#collapse_#{todo.id}" aria-expanded="true" aria-controls="collapse_#{todo.id}"
       = todo.name 
       = " (KÉSZ) " if todo.kesz
   div id="collapse_#{todo.id}" class="accordion-collapse collapse #{" bg-secondary text-light " if todo.kesz} #{index == 0 ? 'show' : 'collapse'} " aria-labelledby="heading_#{todo.id}" data-bs-parent="#accordionExample"
     .accordion-body
       strong
         = simple_format(todo.desc)
-        = index
+        - if current_user&.admin?
+          - if todo.kesz
+            =link_to "NOK", todo_nok_path(id: todo.id), class: "btn btn-danger"
+          - else
+            =link_to "OK", todo_ok_path(id: todo.id), class:"btn btn-success"
+            
       br
       hr
       

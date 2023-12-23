@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.order(kesz: :desc, id: :desc).all
+    @todos = Todo.order(kesz: :desc, id: :asc).all
   end
 
   # GET /todos/1 or /todos/1.json
@@ -15,7 +15,26 @@ class TodosController < ApplicationController
   def new
     @todo = Todo.new
   end
-
+  def ok
+    if current_user&.admin?
+      id = params[:id]    
+      todo = Todo.find(id)
+      todo.kesz = true
+      if todo.save
+        redirect_to todos_path
+      end
+    end
+  end
+  def nok
+    if current_user&.admin?
+      id = params[:id]    
+      todo = Todo.find(id)
+      todo.kesz = false
+      if todo.save
+        redirect_to todos_path
+      end
+    end
+  end
   # GET /todos/1/edit
   def edit
   end
