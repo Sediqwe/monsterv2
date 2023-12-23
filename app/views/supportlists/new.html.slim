@@ -2,7 +2,7 @@
     .row
       .col-xs-12.col-md-9.col-lg-10.bg-basic-color
         .row
-          .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-4.offset-lg-4.d-flex.flex-column.align-content-center
+          .col.d-flex.flex-column.align-content-center
             == render "form", supportlist: @supportlist
             = link_to "Vissza", supportlists_path, class: "btn btn-success"
       .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
