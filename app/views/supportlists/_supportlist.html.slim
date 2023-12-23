@@ -9,6 +9,6 @@ div id="#{dom_id supportlist}" class="form"
     strong Iconbootstrap:
     = raw(supportlist.iconbootstrap)
     
-  = link_to "Edit", edit_supportlist_path(supportlist.id), class: "btn btn-warning btn-big"
+  = link_to "Módosítás", edit_supportlist_path(supportlist.id), class: "btn btn-warning btn-big"
   = link_to "Törlés", supportlist, method: :delete, class: "btn btn-danger mt-4", data: { confirm: "Biztosan törölni akarod?" }
 
