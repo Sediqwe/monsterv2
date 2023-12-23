@@ -27,6 +27,7 @@
       - adatok.each do |adat|
         = raw(adat.iconbootstrap.gsub('"></', ' m-1"></')) 
         =    adat.iconbootstrap
+        br
       .form-actions
         - if @supportlist.persisted?
           = f.submit "Módosítás »" , class:"btn btn-success text-light m-2"
