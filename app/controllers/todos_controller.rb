@@ -3,7 +3,7 @@ class TodosController < ApplicationController
 
   # GET /todos or /todos.json
   def index
-    @todos = Todo.all
+    @todos = Todo.order(kesz: :asc, id: :desc).all
   end
 
   # GET /todos/1 or /todos/1.json

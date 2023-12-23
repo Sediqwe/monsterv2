@@ -1,1 +1,10 @@
-h1 Discord
+.container-fluid
+    
+    .row
+        .col-xs-12.col-md-10.col-lg-10.bg-basic-color
+            - if current_user&.admin? 
+                .row
+                    .col-xs-12.col-md-12.col-lg-12.bg-basic-color
+                        = link_to "Discord" , "https://discord.gg/uhADYMbD5j" , class="btn btn-success" ,  target: "_blank"
+        .col-xs-12.col-md-2.col-lg-2.bg-grey-color.side-scroll
+            = render 'shared/side' 
