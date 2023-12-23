@@ -1,19 +1,10 @@
 Rails.application.routes.draw do
-  get "todo_ok", to: "todos#ok"
-  get "todo_nok", to: "todos#nok"
-  get "discord", to: "games#discord"
-  get 'done_todo', to: 'todos#done'
-  post "new_yt", to: "games#new_yt"
-  post "edit_yt", to: "games#edit_yt"
-  post "delete_yt", to: "games#delete_yt"
-  resources :todos
-  delete '/pictures/:upload_id/pictures/:image_id', to: 'uploads#picturesdelete', as: 'delete_picture'
-  get 'lemondva', to: "lemondva#index"
-  get 'lefoglalva', to: "lefoglalva#index"
+  resources :supportlists
   resources :supporters
-  get 'kuki/index'
-  get 'kuki/new'
-  get 'kuki/create'
+  resources :uploads
+  resources :games
+  resources :todos
+  resources :forums
   resources :hopps
   resources :autoforditoilists
   resources :projects
@@ -24,6 +15,29 @@ Rails.application.routes.draw do
   resources :beolvas
   resources :csvs
   resources :databeolvas, to: 'beolvas#soronkent'
+  resources :news
+  resources :blogs
+  resources :programs
+  resources :translaters
+  resources :platforms
+  resources :users
+  resources :user2s
+  resources :lists
+  resources :megas
+  root 'games#index'
+  get "todo_ok", to: "todos#ok"
+  get "todo_nok", to: "todos#nok"
+  get "discord", to: "games#discord"
+  get 'done_todo', to: 'todos#done'
+  post "new_yt", to: "games#new_yt"
+  post "edit_yt", to: "games#edit_yt"
+  post "delete_yt", to: "games#delete_yt"  
+  delete '/pictures/:upload_id/pictures/:image_id', to: 'uploads#picturesdelete', as: 'delete_picture'
+  get 'lemondva', to: "lemondva#index"
+  get 'lefoglalva', to: "lefoglalva#index"  
+  get 'kuki/index'
+  get 'kuki/new'
+  get 'kuki/create'
   get "bel", to: "games#features"
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
@@ -77,9 +91,7 @@ Rails.application.routes.draw do
   post "universal_save", to: "beolvas#universal_save"
   get "delete_uzenet", to:"uzenets#delete_uzenet"
   get "forumcontroll", to: "forums#controll"
-  resources :user2s
-  resources :lists
-  resources :megas
+
   get 'lista', to: 'lists#friss'
   get 'mega', to: 'mega#index'
   get 'stat', to: 'stat#index'
@@ -88,12 +100,7 @@ Rails.application.routes.draw do
   get 'games/check_name', to: 'games#check_name'
   get 'games/check_steam', to: 'games#check_steam'
   get 'download_file', to: 'games#download_file'
-  resources :news
-  resources :blogs
-  resources :programs
-  resources :translaters
-  resources :platforms
-  resources :users
+ 
   get "user", to: "user2s#index"
   get "recovery", to: "sessions#recovery"
   post "sessions_recovery_mail", to: "sessions#sessions_recovery_mail"
@@ -108,9 +115,7 @@ Rails.application.routes.draw do
   post 'upload_bad', to: "uploads#bad"
   post 'games_magyhu', to: "games#magyhu"
   get 'feloldas', to: 'games#feloldas'
-  resources :uploads
-  resources :games
-  resources :forums  
+  
   get 'rssgemo', to:  'rss#index'
   get 'lemondva', to:  'lemondva#index'
   get 'forum/messages', to:  'forums#messages'
@@ -122,7 +127,7 @@ Rails.application.routes.draw do
   get 'tomb', to: 'lists#tomb'
   post 'tomb', to: 'lists#tomb_feldolgozo'
   get 'lists_update', to: 'lists#lista_frissites'
-root 'games#index'
+
 post 'login/create'
 post 'sessions/create'
 get 'login/create', to: 'login#reg'
@@ -165,7 +170,7 @@ get 'filem', to: "projects#filem"
 post 'lobot', to: "games#lobot"
 get "hopper", to: "hopps#hopper"
 get "regenerated", to: "translaters#regen"
-#get '*path', to: 'errors#hiba404'
+
 end
 
 

@@ -1,0 +1,10 @@
+p style="color: green" = notice
+
+== render @supportlist
+
+div
+  => link_to "Edit this supportlist", edit_supportlist_path(@supportlist)
+  '|
+  =< link_to "Back to supportlists", supportlists_path
+
+  = button_to "Destroy this supportlist", @supportlist, method: :delete

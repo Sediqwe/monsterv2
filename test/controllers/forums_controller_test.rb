@@ -17,7 +17,7 @@ class ForumsControllerTest < ActionDispatch::IntegrationTest
 
   test "should create forum" do
     assert_difference("Forum.count") do
-      post forums_url, params: { forum: { active: @forum.active, desc: @forum.desc, readonly: @forum.readonly, title: @forum.title, user_id: @forum.user_id } }
+      post forums_url, params: { forum: { al: @forum.al, desc: @forum.desc, fo_forum: @forum.fo_forum, online: @forum.online, title: @forum.title, user_id: @forum.user_id } }
     end
 
     assert_redirected_to forum_url(Forum.last)
@@ -34,7 +34,7 @@ class ForumsControllerTest < ActionDispatch::IntegrationTest
   end
 
   test "should update forum" do
-    patch forum_url(@forum), params: { forum: { active: @forum.active, desc: @forum.desc, readonly: @forum.readonly, title: @forum.title, user_id: @forum.user_id } }
+    patch forum_url(@forum), params: { forum: { al: @forum.al, desc: @forum.desc, fo_forum: @forum.fo_forum, online: @forum.online, title: @forum.title, user_id: @forum.user_id } }
     assert_redirected_to forum_url(@forum)
   end
 

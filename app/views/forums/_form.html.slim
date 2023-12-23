@@ -1,33 +1,14 @@
-= form_with(model: @forum) do |form|
-  - if @forum.errors.any?
-    div style="color: red"
-      h2 = "#{pluralize(@forum.errors.count, "error")} prohibited this forum from being saved:"
-      ul
-        - @forum.errors.each do |error|
-          li = error.full_message
+= simple_form_for(@forum) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 
-  div
-    = form.label :title, style: "display: block"
-    = form.text_field :title
+  .form-inputs
+    = f.input :title
+    = f.input :desc
+    = f.association :user
+    = f.input :online
+    = f.input :al
+    = f.input :fo_forum
 
-  div
-    = form.label :desc, style: "display: block"
-    = form.text_area :desc
-
-  div
-    = form.label :readonly, style: "display: block"
-    = form.check_box :olvashato
-  div
-    = form.label :games, style: "display: block"
-    = form.select("gameid", Game.all.order(:name).collect {|p| [ p.name, p.id ] }, { include_blank: "--Válassz--"})
-  div
-    = form.radio_button :forumtype, "0"
-    = form.label :fo, "FŐ"
-    = form.radio_button :forumtype, "1"
-    = form.label :al, "AL"
-  div
-    = form.label :forumpoint, style: "display: block"
-    = form.select("forumpoint", Forum.all.order(:id).collect {|p| [ p.title, p.id ] }, { include_blank: "--Válassz--"})
-
-  div
-    = form.submit
+  .form-actions
+    = f.button :submit

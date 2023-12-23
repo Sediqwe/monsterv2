@@ -43,6 +43,7 @@
                 = f.text_field :tam3, class: "mb-2"
                 label for="newGameCoverUpload" Egyéb 2 link
                 = f.text_field :tam4, class: "mb-2"
+                = link_to "Támogatások »", supportlists_path, class: "btn btn-warning"
               - if current_user.present? 
                 - if current_user.admin?
                   = f.label "Moderator:"

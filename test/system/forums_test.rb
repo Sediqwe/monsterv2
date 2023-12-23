@@ -14,9 +14,10 @@ class ForumsTest < ApplicationSystemTestCase
     visit forums_url
     click_on "New forum"
 
-    check "Active" if @forum.active
+    check "Al" if @forum.al
     fill_in "Desc", with: @forum.desc
-    check "Readonly" if @forum.readonly
+    fill_in "Fo forum", with: @forum.fo_forum
+    check "Online" if @forum.online
     fill_in "Title", with: @forum.title
     fill_in "User", with: @forum.user_id
     click_on "Create Forum"
@@ -29,9 +30,10 @@ class ForumsTest < ApplicationSystemTestCase
     visit forum_url(@forum)
     click_on "Edit this forum", match: :first
 
-    check "Active" if @forum.active
+    check "Al" if @forum.al
     fill_in "Desc", with: @forum.desc
-    check "Readonly" if @forum.readonly
+    fill_in "Fo forum", with: @forum.fo_forum
+    check "Online" if @forum.online
     fill_in "Title", with: @forum.title
     fill_in "User", with: @forum.user_id
     click_on "Update Forum"

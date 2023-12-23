@@ -1,9 +1,8 @@
 h1 New forum
-- if current_user.present?
-  -if current_user.admin?
-    == render "form", forum: @forum
+
+== render "form", forum: @forum
 
 br
 
 div
-  = link_to "Back to forums", forums_path, class:"btn btn-primary"
+  = link_to "Back to forums", forums_path

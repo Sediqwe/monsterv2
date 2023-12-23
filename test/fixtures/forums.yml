@@ -4,12 +4,14 @@ one:
   title: MyString
   desc: MyText
   user: one
-  active: false
-  readonly: false
+  online: false
+  al: false
+  fo_forum: 1
 
 two:
   title: MyString
   desc: MyText
   user: two
-  active: false
-  readonly: false
+  online: false
+  al: false
+  fo_forum: 1

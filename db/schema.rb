@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_11_29_155551) do
+ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -178,13 +178,11 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_155551) do
     t.string "title"
     t.text "desc"
     t.bigint "user_id", null: false
-    t.boolean "active", default: true
-    t.boolean "olvashato"
+    t.boolean "online", default: true
+    t.boolean "al"
+    t.integer "fo_forum"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.boolean "forumtype", default: false
-    t.integer "gameid"
-    t.integer "forumpoint"
     t.index ["user_id"], name: "index_forums_on_user_id"
   end
 
@@ -443,6 +441,17 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_155551) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "supportlists", force: :cascade do |t|
+    t.string "link"
+    t.string "name"
+    t.bigint "user_id", null: false
+    t.boolean "active", default: true
+    t.string "iconbootstrap"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["user_id"], name: "index_supportlists_on_user_id"
+  end
+
   create_table "todos", force: :cascade do |t|
     t.string "name"
     t.text "desc"
@@ -575,6 +584,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_11_29_155551) do
   add_foreign_key "regexadatoks", "projects"
   add_foreign_key "scanners", "beolvas"
   add_foreign_key "stipis", "users"
+  add_foreign_key "supportlists", "users"
   add_foreign_key "todos", "users"
   add_foreign_key "uploads", "games"
   add_foreign_key "uploads", "platforms"

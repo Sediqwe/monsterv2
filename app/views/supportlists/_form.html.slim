@@ -1,0 +1,36 @@
+.form
+  h1.form__headline
+    - if @supportlist.persisted?
+      |Támogatási forma módosítása
+      
+    - else
+      |Új támogatási forma
+  = form_for @supportlist, html: {class: 'form'} do |f|
+    .form-inputs
+      = f.label :Link
+      = f.text_field :link, class:"m-2"
+      br
+      = f.label :Neve
+      = f.text_field :name, class:"m-2"
+      br
+      = f.label :Aktív?
+      = f.check_box :active, class:"m-2"
+      br
+      = f.label "Ikon: "
+      = f.text_field :iconbootstrap, class:"m-2"
+      br
+      i class="bi bi-paypal btn btn-secondary m-2"
+        
+      = '<i class="bi bi-paypal btn btn-secondary m-2">'
+      br
+      i class="bi bi-steam btn btn-secondary m-2"
+      = '<i class="bi bi-steam btn btn-secondary m-2">'
+      br
+      i class="bi bi-0-circle btn btn-secondary m-2"
+      = '<i class="bi bi-cup-hot-fill">'
+      .form-actions
+        - if @supportlist.persisted?
+          = f.submit "Módosítás »" , class:"btn btn-success text-light m-2"
+        - else 
+          = f.submit "Felvétel »" , class:"btn btn-success text-light m-2"
+     

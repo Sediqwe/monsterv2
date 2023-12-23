@@ -1,57 +1,10 @@
-.container-fluid
-  .row
-    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
-      h1.forum-headline
-        | Forum
-      nav[aria-label="breadcrumb"]
-        ol.breadcrumb
-          li.breadcrumb-item
-            = link_to "Home", forums_path
-          li.breadcrumb-item.text-light
-            = @tip.title
-      
-      .forum
-      
-        .forum-card
-          .forum-card--template.forum-card__header
-            p
-              | Title
-            p.hidden-xs
-              | Post
-           
-            p
-              | Last
-          step-filter
-            .step-filter__numbers
-              = paginate @forum1
-          -@forum1.each do |f|
-            = link_to forum_messages_path(forumid: f.id)
-              .forum-card--template.forum-card__card
-                p
-                  - if f.gameid
-                    = Game.find(f.gameid).name 
-                  -else 
-                    = f.title 
-                  
-                
-                p.hidden-xs
-                  = Uzenet.where(game_id: f.gameid).size
-                p
-                  - adat =  Uzenet.where(game_id: f.gameid).last
-                  - if adat.present?
-                    - if  User.find(adat.user_id).alias.present?
-                      = User.find(adat.user_id).alias
-                    - else
-                      = User.find(adat.user_id).name                
-                    | (
-                    = adat.created_at.strftime("%Y-%m-%d %H:%M") 
-                    | )
-                -if current_user.present?
-                  -if current_user.admin?
-                    p 
-                      = link_to "EDIT", edit_forum_path(f.id)
-        step-filter
-          .step-filter__numbers
-            = paginate @forum1
-    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-      = render'shared/side' 
+p style="color: green" = notice
+
+== render @forum
+
+div
+  => link_to "Edit this forum", edit_forum_path(@forum)
+  '|
+  =< link_to "Back to forums", forums_path
+
+  = button_to "Destroy this forum", @forum, method: :delete

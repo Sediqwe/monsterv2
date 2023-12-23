@@ -1,42 +1,11 @@
-.container-fluid
-  .row
-    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
-      - if current_user.present?
-        -if current_user.admin?
-          = link_to new_forum_path do |de|
-            button.btn.btn-shadow.btn-wide.btn-primary type="button" 
-               
-              | Új téma
-      h1.forum-headline
-        | Forum
-      nav[aria-label="breadcrumb"]
-        ol.breadcrumb
-          li.breadcrumb-item
-            = link_to "Home", forums_path
-      .forum   
-        .forum-card
-          .forum-card--template.forum-card__header
-            p
-              | Title
-            p.hidden-xs
-              | Topic
-            
-            -if current_user.present?
-              -if current_user.admin?
-                p 
-                  | Editor
-          - @forums.each do |forum|
-            = link_to forum_path(forum.id) do
-              .forum-card--template.forum-card__card
-                p
-                  = forum.title
-               
-                p.hidden-xs
-                  = Forum.where(forumpoint: forum.id).size
-                
-                -if current_user.present?
-                  -if current_user.admin?
-                    p 
-                      = link_to "EDIT", edit_forum_path(forum.id)
-    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-      = render'shared/side'
+p style="color: green" = notice
+
+h1 Forums
+
+#forums
+  - @forums.each do |forum|
+    == render forum
+    p
+      = link_to "Show this forum", forum
+
+= link_to "New forum", new_forum_path

@@ -1,0 +1,17 @@
+div id="#{dom_id supportlist}" class="form"
+  p
+    strong Link:
+    =< supportlist.link
+  p
+    strong Name:
+    =< supportlist.name
+  p
+    strong User:
+    =< supportlist.user_id
+  p
+    strong Active:
+    =< supportlist.active
+  p
+    strong Iconbootstrap:
+    =< supportlist.iconbootstrap
+  = link_to "Edit", edit_supportlist_path(supportlist.id), class: "btn btn-warning"
