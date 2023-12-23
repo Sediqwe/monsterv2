@@ -17,18 +17,15 @@
                                     |Támogatás - Készítők
                                 - index = 1
                                 - @users.shuffle.each do |user|
-                                    - if user.tam2.present? || user.tam1.present?
-                                        - if user.tam2.include?("pay") || user.tam1.include?("steam")
-                                            = link_to  translater_path(user.translater), class:"btn btn-secondary " do |link|
-                                                - if user.alias.size>1
-                                                    = user.alias 
-                                                - else
-                                                    = user.name.downcase.capitalize 
-                                                -supportlist = Supportlist.where(user_id: user)
-                                                - supportlist.each do |support|
-                                                    = raw(support.iconbootstrap) 
-                                        
-                                       
+                                
+                                    = link_to  translater_path(user.translater), class:"btn btn-secondary " do |link|
+                                        - if user.alias.size>1
+                                            = user.alias 
+                                        - else
+                                            = user.name.downcase.capitalize 
+                                        -supportlist = Supportlist.where(user_id: user)
+                                        -supportlist.each do |support|
+                                            = raw(support.iconbootstrap.gsub('"></', ' m-1"></'))
 
                             .form
                                 h1.form__headline

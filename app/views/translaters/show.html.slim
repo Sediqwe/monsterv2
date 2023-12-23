@@ -26,9 +26,9 @@
                   |Támogasd a munkám, ha megteheted:
                   br
                   -@supportlist.each do |support|
-                    = link_to support.link, target: "_blank" do |link|
-                      = raw(support.iconbootstrap)
-                    = support.name
+                    = link_to support.link,class:"btn btn-secondary mt-3", target: "_blank" do |link|
+                      = raw(support.iconbootstrap.gsub('"></', ' m-1"></'))
+                      = support.name
                     br
                   
                 
