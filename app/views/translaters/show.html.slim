@@ -22,15 +22,19 @@
                 - if @translater.user.desc.present?
                   = @translater.user.desc
                 br
-                - if @translater.user.tam1.present? || @translater.user.tam2.present?
+                - if @supportlist
                   |Támogasd a munkám, ha megteheted:
-                - if @translater.user.tam1.present?                  
-                  = link_to @translater.user.tam1, target: "_blank" do |link|
-                    i class="bi bi-steam btn btn-secondary m-2"    »
+                  br
+                  -@supportlist.each do |support|
+                    = link_to support.link, target: "_blank" do |link|
+                      = raw(support.iconbootstrap)
+                    = support.name
+                    br
+                  
                 
-                - if @translater.user.tam2.present?                  
-                  = link_to @translater.user.tam2, target: "_blank" do |link|
-                    i class="bi bi-paypal btn btn-secondary m-2"    »
+                
+                
+                
                   
           h2  Top10
           = transtop(@translater).html_safe

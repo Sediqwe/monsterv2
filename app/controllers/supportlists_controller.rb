@@ -38,7 +38,7 @@ class SupportlistsController < ApplicationController
   def update
     respond_to do |format|
       if @supportlist.update(supportlist_params)
-        format.html { redirect_to supportlist_url(@supportlist), notice: "Supportlist was successfully updated." }
+        format.html { redirect_to supportlists_path, notice: "Supportlist was successfully updated." }
         format.json { render :show, status: :ok, location: @supportlist }
       else
         format.html { render :edit, status: :unprocessable_entity }

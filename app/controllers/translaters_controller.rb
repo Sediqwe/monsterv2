@@ -12,9 +12,15 @@ class TranslatersController < ApplicationController
 
   # GET /translaters/1 or /translaters/1.json
   def show
+    
     @feltoltesek = Upload.where(translater_id: params[:id]).order(id: :DESC)
     @upload = Upload.order("created_at DESC").first(10)
     @download = Download.order("created_at DESC").first(10)
+    translater = Translater.where(slug: params[:id]).first
+    user = User.where(translater_id: translater.id).first
+    if user      
+      @supportlist = Supportlist.where(user_id: user)
+    end
   end
 
   # GET /translaters/new
