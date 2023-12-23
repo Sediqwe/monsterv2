@@ -229,15 +229,11 @@
                                                     = link_to dorka.translater.translater_name, translater_path(dorka.translater), class:"btn btn-secondary m-1"
                                                     - mikka = User.find_by(translater_id: dorka.translater)
                                                     - if mikka
-                                                        - if mikka.tam2
-                                                            -if mikka.tam2.include? "pay"
-                                                                
-                                                                = link_to mikka.tam2, target: "_blank" do |link|
-                                                                    i class="bi bi-paypal btn btn-secondary m-2"    »
-                                                        - if mikka.tam1
-                                                            -if mikka.tam1.include?("steam")
-                                                                = link_to mikka.tam1, target: "_blank" do |link|
-                                                                    i class="bi bi-steam btn btn-secondary m-2"    »                                                 
+                                                        -supportlist = Supportlist.where(user_id: mikka)
+                                                        - supportlist.each do |support|
+                                                            = link_to support.link, target: "_blank" do |link|
+                                                                = raw(support.iconbootstrap)
+
                                                     br
                                         .col-lg-1.col-xs-12                                             
                                             = Download.where(upload_id: t.id).size 
