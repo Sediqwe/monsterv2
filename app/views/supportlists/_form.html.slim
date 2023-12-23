@@ -21,15 +21,12 @@
       br
       =link_to "Bootstrap Icons", "https://icons.getbootstrap.com/" , target: "blank", class: "btn-primary btn"
       br
-      i class="bi bi-paypal btn btn-secondary"
-        
-      = '<i class="bi bi-paypal  "></i>'
+      |Eddigi ikonok a rendszerben:
       br
-      i class="bi bi-steam btn btn-secondary "
-      = '<i class="bi bi-steam "></i>'
-      br
-      i class="bi  bi-cup-hot-fill btn btn-secondary "
-      = '<i class="bi bi-cup-hot-fill"></i>'
+      - adatok = Supportlist.select(:iconbootstrap).distinct
+      - adatok.each do |adat|
+        = raw(adat.iconbootstrap.gsub('"></', ' m-1"></')) 
+        =    adat.iconbootstrap
       .form-actions
         - if @supportlist.persisted?
           = f.submit "Módosítás »" , class:"btn btn-success text-light m-2"
