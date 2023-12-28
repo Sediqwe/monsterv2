@@ -1,4 +1,8 @@
 $(document).on('turbo:load', function() {
+  $('#uploadtranslaters_').on('click', function () {
+    $("#upika").removeAttr("hidden");
+});
+
   $('.delete-image').on('click', function() {
     var uploadId = $(this).data('upload-id');
     var imageId = $(this).data('image-id');
@@ -38,6 +42,8 @@ $(document).on('turbo:load', function() {
       alert("Nem jó a formátum!")
     }
   });
+
+  
   $('[id^=delete_yt_').on('click', function () {
       var id = $(this).data('id');
       $.ajax({
