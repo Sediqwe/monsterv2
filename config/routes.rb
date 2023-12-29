@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  get "backup", to: 'backup#index'
   resources :supportlists
   resources :supporters
   resources :uploads

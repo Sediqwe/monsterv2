@@ -1,0 +1,31 @@
+.container-fluid
+    
+    .row
+        .col-xs-12.col-md-9.col-lg-10.bg-basic-color.bg-dark.text-light
+            
+            -@backup.each do |index|
+                = index.name
+                -sanitized_filename = windows_compatible_file_name(index.name.to_s)
+                = link_to sanitized_filename, rails_blob_url(index.image, disposition: 'attachment', filename: sanitized_filename + '.jpg')
+                - Upload.where(game_id: index.id).each do |upload|
+                    br
+                    = link_to upload.game_files.filename, upload.game_files
+                    
+                
+                br     
+                    
+                    
+                    
+                    
+                    
+            
+                   
+
+
+
+
+
+
+        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+            = render 'shared/side'   
+                
