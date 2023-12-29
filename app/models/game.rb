@@ -18,6 +18,13 @@ class Game < ApplicationRecord
     def self.ransackable_associations(auth_object = nil)
         [ "name", "slug"]
     end
+    def windows_compatible_file_name(filename)
+        filename = filename.gsub(":", "_")
+        filename = filename.gsub(" ", "_")
+        filename = filename.gsub(".", "_")
+        filename = filename.gsub("__", "_")
+        return filename
+      end
    
     
     

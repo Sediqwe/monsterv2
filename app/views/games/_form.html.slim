@@ -47,6 +47,7 @@ script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
                 
               p.text-start.mt-1
                 | Boritókép:
+                | támogatott format: .png, .jpg, .jpeg, .webp
               = f.file_field :image , class: "myFile p-0 mb-2"
               br
               - if @game.persisted?
