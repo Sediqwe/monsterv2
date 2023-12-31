@@ -44,7 +44,6 @@ Rails.application.routes.draw do
   get 'facebook', to: "facebook#index"
   get 'rssmagyhu', to: 'rssmagyhu#kan'
   get 'rssmagyhurefresh', to: 'rssmagyhu#index'
-  get 'feltoltve/index'
   get 'ipadress/index'
   get 'feltoltve', to:  'feltoltve#index'
   get 'supports', to: 'support#index'

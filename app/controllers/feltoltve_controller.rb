@@ -1,7 +1,8 @@
 class FeltoltveController < ApplicationController
   include ActionView::Helpers::SanitizeHelper
   def index
-       adat = Upload.where(special: [false, nil]).first
+      
+      adat = Upload.where('created_at <= ?', 3.minutes.ago).where(special: [false, nil]).first
       if adat
           game = Game.find(adat.game_id)
           translater = Uploadtranslater.where(upload_id: adat.id)
