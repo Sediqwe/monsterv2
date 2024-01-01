@@ -1,11 +1,20 @@
 .side
     .side__header
         .side__elements
-            = link_to "https://discord.gg/uhADYMbD5j", target: "_blank", class: 'btn btn-secondary full' do
-              
-                h4 
+            h5 
+                | Csatlakozz hozzánk!
+            = link_to "https://discord.gg/uhADYMbD5j", target: "_blank", class: 'btn btn-primary m-2  full ' do
+                h4
                     i.bi.bi-discord
-                    |  Discord
+                    br
+                    | Discord
+                    
+            = link_to "https://www.facebook.com/groups/2366748376888214", target: :_blank, class: 'm-2 btn btn-primary full' do
+                h4
+                    i.bi.bi-facebook
+                    br
+                    | Facebook
+            
 
 
     .side__header
