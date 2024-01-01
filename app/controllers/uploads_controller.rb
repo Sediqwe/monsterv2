@@ -81,7 +81,7 @@ class UploadsController < ApplicationController
         params[:uploadtranslaters].each do |dorka|
           Uploadtranslater.create(upload_id: @upload.id , translater_id: dorka )
         end
-        format.html { redirect_to game_url(@upload.game_id), notice: "Sikeres feltöltés." }
+        format.html { redirect_to game_url(@upload.game.slug), notice: "Sikeres feltöltés." }
         format.json { render :show, status: :created, location: @upload }
       else
         format.html { render :new, status: :unprocessable_entity }
@@ -98,7 +98,7 @@ class UploadsController < ApplicationController
         params[:uploadtranslaters].each do |dorka|
           Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
         end
-        format.html { redirect_to game_url(@upload.game_id), notice: "A feltöltés módosítva." }
+        format.html { redirect_to game_url(@upload.game.slug), notice: "A feltöltés módosítva." }
         else
         format.html { render :edit, status: :unprocessable_entity }       
       end

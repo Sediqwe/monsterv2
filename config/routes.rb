@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "backup", to: 'backup#index'
-  get "backup_egyszer", to: 'backup#egyszer' 
+  get "backup_egyszer", to: 'backup#egyszer'
+  get "bot_reset", to: "games#bot_reset" 
   resources :supportlists
   resources :supporters
   resources :uploads

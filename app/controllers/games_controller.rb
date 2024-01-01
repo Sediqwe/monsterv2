@@ -139,6 +139,11 @@ class GamesController < ApplicationController
 def discord
   
 end
+def bot_reset
+  adat = Upload.find(params[:id])
+  adat.update(special: false)
+  redirect_to game_path(adat.game.slug)
+end
 def windows_compatible_file_name(filename)
   filename = filename.gsub(":", "_")
   filename = filename.gsub(" ", "_")

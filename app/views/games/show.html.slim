@@ -261,6 +261,10 @@
                                             - if t.user == current_user
                                                 .col
                                                     =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
+                                                    -utolso10 = Upload.last(10)
+                                                    -feltoltes = utolso10.find { |upload| upload.id == t.id }
+                                                    -if feltoltes && t.special == true
+                                                        =  link_to "Bot Reset" , bot_reset_path(id: t.id), class: "btn btn-warning text-light m-1"
                                             -if current_user.admin?
                                                 .col
                                                     =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
