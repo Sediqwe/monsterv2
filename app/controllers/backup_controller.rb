@@ -9,6 +9,7 @@ class BackupController < ApplicationController
     filename = filename.gsub(":", "_")
     filename = filename.gsub(" ", "_")
     filename = filename.gsub(".", "_")
+    filename = filename.gsub("'", "")
     filename = filename.gsub("__", "_")
     return filename
   end

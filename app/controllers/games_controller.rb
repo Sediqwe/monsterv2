@@ -148,6 +148,7 @@ def windows_compatible_file_name(filename)
   filename = filename.gsub(":", "_")
   filename = filename.gsub(" ", "_")
   filename = filename.gsub(".", "_")
+  filename = filename.gsub("'", "")
   filename = filename.gsub("__", "_")
   return filename
 end
