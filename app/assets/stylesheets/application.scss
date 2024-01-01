@@ -14,9 +14,13 @@
  *= require_self
  */
  @import "bootstrap";
- 
+ .modosit{
+    margin: auto;
+ }
  .full{
     width: 45%;
+    margin-right: 2px;
+    
  }
  .img-size{
     /* 	padding: 0;
