@@ -89,7 +89,14 @@ class UploadsController < ApplicationController
       end
     end
   end
-
+  def plus_upload
+    Upload.find(params[:id]).increment!(:sorrend)
+    redirect_to game_path(Upload.find(params[:id]).game.slug)
+  end
+  def minus_upload
+    Upload.find(params[:id]).decrement!(:sorrend)
+    redirect_to game_path(Upload.find(params[:id]).game.slug)
+  end
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|

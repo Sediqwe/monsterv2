@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
+ActiveRecord::Schema[7.0].define(version: 2024_01_01_172705) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -68,9 +68,9 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.bigint "game_id", null: false
     t.integer "tipus"
     t.boolean "active", default: true
-    t.text "gname"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.string "gname"
     t.index ["game_id"], name: "index_autoforditoilists_on_game_id"
   end
 
@@ -157,6 +157,20 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.index ["project_id"], name: "index_dataprojects_on_project_id"
   end
 
+  create_table "datatranslates", force: :cascade do |t|
+    t.bigint "beolva_id", null: false
+    t.bigint "databeolva_id", null: false
+    t.text "data"
+    t.integer "row"
+    t.integer "col"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["beolva_id"], name: "index_datatranslates_on_beolva_id"
+    t.index ["databeolva_id"], name: "index_datatranslates_on_databeolva_id"
+    t.index ["user_id"], name: "index_datatranslates_on_user_id"
+  end
+
   create_table "downloads", force: :cascade do |t|
     t.bigint "game_id", null: false
     t.datetime "created_at", null: false
@@ -230,7 +244,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.datetime "updated_at", null: false
     t.text "special"
     t.string "idouj"
-    t.time "idouj2"
     t.datetime "idouj3"
     t.index ["link"], name: "index_gemorsses_on_link", unique: true
   end
@@ -238,7 +251,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
   create_table "hopps", force: :cascade do |t|
     t.text "link"
     t.string "gen"
-    t.integer "open"
+    t.integer "open", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "name"
@@ -276,13 +289,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.index ["impressionable_type", "impressionable_id", "session_hash"], name: "poly_session_index"
     t.index ["impressionable_type", "message", "impressionable_id"], name: "impressionable_type_message_index"
     t.index ["user_id"], name: "index_impressions_on_user_id"
-  end
-
-  create_table "kukacs", force: :cascade do |t|
-    t.string "title"
-    t.text "desc"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
   end
 
   create_table "kukis", force: :cascade do |t|
@@ -349,18 +355,6 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.datetime "updated_at", null: false
     t.integer "szamlalo"
     t.integer "game"
-  end
-
-  create_table "messages", force: :cascade do |t|
-    t.string "title"
-    t.string "desc"
-    t.bigint "user_id", null: false
-    t.boolean "active"
-    t.bigint "forumal_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["forumal_id"], name: "index_messages_on_forumal_id"
-    t.index ["user_id"], name: "index_messages_on_user_id"
   end
 
   create_table "news", force: :cascade do |t|
@@ -492,6 +486,7 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
     t.boolean "mauto", default: false
     t.boolean "multiuser", default: false
     t.boolean "demo", default: false
+    t.integer "sorrend", default: 0
     t.index ["game_id"], name: "index_uploads_on_game_id"
     t.index ["platform_id"], name: "index_uploads_on_platform_id"
     t.index ["program_id"], name: "index_uploads_on_program_id"
@@ -573,12 +568,14 @@ ActiveRecord::Schema[7.0].define(version: 2023_12_23_140837) do
   add_foreign_key "databeolvas", "beolvas"
   add_foreign_key "databeolvas", "users"
   add_foreign_key "dataprojects", "projects"
+  add_foreign_key "datatranslates", "beolvas"
+  add_foreign_key "datatranslates", "databeolvas"
+  add_foreign_key "datatranslates", "users"
   add_foreign_key "downloads", "games"
   add_foreign_key "downloads", "uploads"
   add_foreign_key "forums", "users"
   add_foreign_key "games", "users"
   add_foreign_key "lemurs", "projects"
-  add_foreign_key "messages", "users"
   add_foreign_key "news", "users"
   add_foreign_key "projects", "users"
   add_foreign_key "regexadatoks", "projects"

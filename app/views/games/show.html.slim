@@ -147,7 +147,10 @@
                                     .col-lg-3.col-xs-12
                                         |Leírás
                                 
-                                - uploads = @game.uploads.sort_by { |upload| [upload.bad ? 0 : 1, upload.created_at] }.reverse                               
+                                - uploads = @game.uploads.sort_by { |upload| [upload.bad ? 0 : 1, upload.sorrend, upload.created_at] }.reverse
+
+
+                           
                                 - uploads.each_with_index do |t, index|
                                     - if t.demo
                                         .row
@@ -267,6 +270,10 @@
                                                         =  link_to "Bot Reset" , bot_reset_path(id: t.id), class: "btn btn-warning text-light m-1"
                                             -if current_user.admin?
                                                 .col
+                                                    .btn.btn-success
+                                                        = t.sorrend
+                                                    = link_to "+", plus_upload_path(id: t.id), class: "btn btn-success text-light m-1"
+                                                    = link_to "-", minus_upload_path(id: t.id), class: "btn btn-success text-light m-1"
                                                     =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
                                                     - if t.bad == false
                                                         =link_to "Hibás", upload_bad_path(type: "nok",id: t.id, game: @game.id), method: :post, class: "btn m-1 btn-danger  text-light" 
