@@ -100,7 +100,9 @@ class UploadsController < ApplicationController
   # PATCH/PUT /uploads/1 or /uploads/1.json
   def update
     respond_to do |format|
+      record_activity("Feltöltés módosítva - Előtte: #{@upload.inspect}")
       if @upload.update(upload_params)
+        record_activity("Feltöltés módosítva - Utánna: #{@upload.inspect}, módosító: #{current_user.name}")        
         Uploadtranslater.where(upload_id: params[:id]).destroy_all
         params[:uploadtranslaters].each do |dorka|
           Uploadtranslater.create(upload_id: params[:id] , translater_id: dorka )
