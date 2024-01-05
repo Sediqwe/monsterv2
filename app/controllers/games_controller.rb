@@ -137,7 +137,18 @@ class GamesController < ApplicationController
     end
   end
 def yttodiscord
+  yt = Youtubevideo.where(discord: false).order(id: :asc).limit(1).first;
   
+  if yt
+    yt.discord = true
+    yt.save
+    yt_user = User.find(yt.user_id)
+    ytuser = yt_user.alias || yt_user.name
+    yt_game = Game.find(yt.game_id)
+    render html: (yt.link + "||||Ł" + yt_game.name.to_s + "||||Ł" + ytuser.to_s )
+  else
+    render html: ("")
+  end
 end
 def discord
   
