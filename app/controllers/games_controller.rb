@@ -145,7 +145,7 @@ def yttodiscord
     yt_user = User.find(yt.user_id)
     ytuser = yt_user.alias || yt_user.name
     yt_game = Game.find(yt.game_id)
-    render html: (yt.link + "||||Ł" + yt_game.name.to_s + "||||Ł" + ytuser.to_s )
+    render html: (yt.link + "||||Ł" + yt_game.name.to_s + "||||Ł" + "https://gep.monster/games/" + yt_game.slug.to_s )
   else
     render html: ("")
   end
