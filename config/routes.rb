@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   get "bot_reset", to: "games#bot_reset"
   get "plus_upload", to: "uploads#plus_upload"
   get "minus_upload", to: "uploads#minus_upload"
+  get "yttodiscord", to: "games#yttodiscord"
   resources :supportlists
   resources :supporters
   resources :uploads

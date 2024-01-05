@@ -136,6 +136,9 @@ class GamesController < ApplicationController
       end
     end
   end
+def yttodiscord
+  
+end
 def discord
   
 end
