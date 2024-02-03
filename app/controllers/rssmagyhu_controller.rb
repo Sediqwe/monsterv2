@@ -18,12 +18,13 @@ class RssmagyhuController < ApplicationController
       require 'open-uri'
       url = 'https://magyaritasok.hu'
       doc = Nokogiri::HTML(URI.open(url))
-  
-
       # Adatok kinyerése
       downloads = []
-      doc.css('.content.flex.items-center.pt-6.text-white.font-light').each do |item|
+      
+      doc.css('.content.flex.items-start.pt-6.text-white.font-light').each do |item|
+
         download = {}
+        p item
         download[:title] = item.css('a.white-link.font-medium').text.strip
         download[:desc] = item.css('.text-mpGray-300').text.strip
         download[:size] = item.css('span')[0].text.strip
@@ -33,9 +34,9 @@ class RssmagyhuController < ApplicationController
         
         downloads << download
       end
-
+      p downloads
       # Eredmény kiíratása
-      downloads.each do |download|
+      downloads.reverse.each do |download|
         data_without_linebreaks = download[:size].gsub("\n", "")
         # Szétválasztja az adatokat a | jel alapján
         separated_data = data_without_linebreaks.split("|").map(&:strip)
