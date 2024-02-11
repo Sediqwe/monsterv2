@@ -6,4 +6,5 @@ class User < ApplicationRecord
     has_many :game
     belongs_to :translater
     has_one_attached :photo , dependent: :delete_all
+    has_many :supportlists, foreign_key: "user_id"
 end
