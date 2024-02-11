@@ -2,19 +2,40 @@
 .container-fluid
     .row
        
-        .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
+        .col-xs-12.col-md-10.col-lg-10.col-xl-10.bg-basic-color.text-light
             - if current_user&.admin? 
                 .row
                     .col-xs-12.col-md-9.col-lg-10.bg-basic-color.text-light
                         =link_to "Új támogató", new_supporter_path, class: "btn btn-secondary text-light btn-block"
-           
             .row
-                .col-xs-12.col-sm-12.col-md-6.offset-md-10.col-lg-8.offset-lg-2.d-flex.flex-column.align-content-center
+                .col-xs-12.col-sm-12.col-md-10.offset-md-1.col-lg-9.offset-lg-1.d-flex.flex-column.align-content-center
                     .row
-                        .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-7.offset-lg-0.d-flex.flex-column.align-content-center
+                        .col.rounded.border.border-2.border-info.p-4.m-2 style="text-align: center; background-color: #344b57;" 
+                            h2
+                                | Tisztelt támogatónk!  
+                                br
+                                h4
+                                    | A
+                                    =link_to "GM", "https://gep.monster", class:"p-2 font-weight-bold", style: "text-decoration: none;"
+                                    
+                                    | weboldal több féle lehetőséget kínál a fordításokat 
+                                    b készítők
+                                    |   támogatására.
+                                    br
+                                    | Amennyiban van lehetőséged, és az adott fordítást használod, támogasd a készítőjét.
+                                    br
+                                    | Természetesen a weboldalt is támogathatod, ez esetben az oldal fentmaradását, fejlődését támogatod.
+
+                                
+
+                             
+            .row
+                .col-xs-12.col-sm-12.col-md-12.offset-md-0.col-lg-11.offset-lg-1.d-flex.flex-column.align-content-center
+                    .row
+                        .col-xs-12.col-sm-12.col-md-5.offset-md-5.col-lg-5.offset-lg-0.d-flex.flex-column.align-content-center
                             .form
-                                h1.form__headline
-                                    |Támogatás - Készítők
+                                h2.form__headline
+                                    |Fordítások készítőinek támogatása:
                                 - index = 1
                                 - @users.shuffle.each do |user|
                                 
@@ -27,10 +48,12 @@
                                         -supportlist.each do |support|
                                             = raw(support.iconbootstrap.gsub('"></', ' m-1"></'))
 
+                            
+                        .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-5.offset-lg-0.d-flex.flex-column.align-content-center
                             .form
-                                h1.form__headline
-                                    |Támogatás - Weboldal
-                                |A weboldalt, és ezen keresztül a készítőt kölönböző módokon tudod támogatni.
+                                h2.form__headline
+                                    | Weboldal fejlesztésének támogatása:
+                                |A weboldalt kölönböző módokon tudod támogatni.
                                 br
                                 |A következőkre lesz felhasználva a támogatás:
                                 ul
@@ -41,7 +64,16 @@
                                 br
                                 br
                                 |Szóval, hívj meg bátran egy kávéra :)
+
                                 br
+                                h3.bg-warning.text-dark 
+                                    |Ez 
+                                    u nem
+                                    |   újabb játékok fordítására lesz felhasználva! 
+                                    br 
+                                    |Ezzel a weboldal fejlesztését támogatod! (ráfér :D)
+
+
                                 | Egyszeri:
                                 br
                                 br
@@ -54,23 +86,6 @@
                                 br
                                 br
                                 = link_to "Patreon", "https://www.patreon.com/user?u=92038027", target: "_blank" , class: "btn btn-secondary text-light"
-                        .col-xs-12.col-sm-12.col-md-6.offset-md-6.col-lg-5.offset-lg-0.d-flex.flex-column.align-content-center
-                            .form
-                                h2.form__headline
-                                    |Támogatóink(weboldal):
-                                h4 
-                                    |Köszönjük a támogatásokat!
-                                    br
-                                    
-                                .side
-                                    .side__header
-                                        .side__elements
-                                            - @supporters.each do |supporter|
-                                                .side__card
-                                                    p
-                                                        = supporter.name 
-                                                        br
-                                                        = supporter.datum
                                     
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
             = render 'shared/side'   
