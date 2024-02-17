@@ -1,80 +1,78 @@
 .container-fluid
-    
-    .row
-        .col-xs-12.col-md-9.col-lg-10.bg-basic-color
-            - if current_user&.admin? 
-                .row
-                    .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
-                            
-            
-                    
-            
-    
-            .step-filter
-                .step-filter__numbers
+    - if current_user&.moderator? || current_user&.admin? 
+        .row
+            .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+                - if current_user&.admin? 
+                    .row
+                        .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
+                                
+                
                         
                 
-            .row
-                - if @games.empty?
-                    .col-xs-12.col-md-9.col-lg-10.text-center
-                        h1.text-light
-                            |Egyelőre nincs lefoglalva semmi...
-                - else
-                    table.table.table-success.text-light
-                        thead
-                            tr
-                                - if current_user&.moderator? || current_user&.admin? 
-                                    th Link 
-                                th Játék
-                                th Ki
-                                th Meddig
-                        tbody
-                            - @games.each_with_index do |game, index|
-                                tr
-                                    - if current_user&.moderator? || current_user&.admin? 
-                                        td 
-                                            = link_to game.name, game_path(game), class: "btn btn-primary"
-
-                                    td = game.name
-                                    - named = User.find(game.stipiusername.to_i)
-                                    td = named.alias || name.name
-                                    td = game.hatarido
-            .row
-                - if @hiddens.empty?
-                    .col-xs-12.col-md-9.col-lg-10.text-center
-                        h1.text-light
-                            |Egyelőre nincs elrejtett adatlap
-                - else
-                    table.table.table-success.text-light
-                        thead
-                            tr
-                                - if current_user&.moderator? || current_user&.admin? 
-                                    th Link 
-                                th Játék
+        
+                .step-filter
+                    .step-filter__numbers
+                            
                                 
-                        tbody
-                            - @hiddens.each_with_index do |game, index|
+                .row
+                    - if @games.empty?
+                        .col-xs-12.col-md-9.col-lg-10.text-center
+                            h1.text-light
+                                |Egyelőre nincs lefoglalva semmi...
+                    - else
+                        table.table.table-success.text-light
+                            thead
                                 tr
-                                    - if current_user&.moderator? || current_user&.admin? 
+                                    th Link 
+                                    th Játék
+                                    th Ki
+                                    th Meddig
+                            tbody
+                                
+                                - @games.each_with_index do |game, index|
+                                    tr
                                         td 
                                             = link_to game.name, game_path(game), class: "btn btn-primary"
+                                        td = game.name
+                                        - named = User.find(game.stipiusername.to_i)
+                                        td = named.alias || name.name
+                                        td = game.hatarido
+                .row
+                    - if @hiddens.empty?
+                        .col-xs-12.col-md-9.col-lg-10.text-center
+                            h1.text-light
+                                |Egyelőre nincs elrejtett adatlap
+                    - else
+                        table.table.table-success.text-light
+                            thead
+                                tr
+                                    - if current_user&.moderator? || current_user&.admin? 
+                                        th Link 
+                                    th Játék
+                                    
+                            tbody
+                                - @hiddens.each_with_index do |game, index|
+                                    tr
+                                        - if current_user&.moderator? || current_user&.admin? 
+                                            td 
+                                                = link_to game.name, game_path(game), class: "btn btn-primary"
 
-                                     
+                                        
+                        
+                        
+                        
+                        
+                        
+                        
+                step-filter
+                    .step-filter__numbers
                     
-                    
-                    
-                    
-                    
-                    
-            step-filter
-                .step-filter__numbers
-                   
 
 
 
 
 
 
-        .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
-            = render 'shared/side'   
+            .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+                = render 'shared/side'   
                 
