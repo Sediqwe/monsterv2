@@ -50,14 +50,14 @@
                                 b Támogatás:
                                 br
                                 - adatok.each_with_index do |dorka,index2|
-                                    =link_to "Link", "https://gep.monster/translaters/#{dorka.translater.slug}" 
+                                    =link_to "https://gep.monster/translaters/#{dorka.translater.slug}", "https://gep.monster/translaters/#{dorka.translater.slug}" 
                                     - if index2 < adatok.size-1
                                         | , 
                                 
                                 br
                                 b Hozzászólás / Letöltés: 
                                 br
-                                =link_to "Link", "https://gep.monster/games/#{game.game.slug}" 
+                                =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
                                 
                                 br 
                                 h3 
