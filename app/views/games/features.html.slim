@@ -38,7 +38,28 @@
                                     td = game.name
                                     - named = User.find(game.stipiusername.to_i)
                                     td = named.alias || name.name
-                                    td = game.hatarido    
+                                    td = game.hatarido
+            .row
+                - if @hiddens.empty?
+                    .col-xs-12.col-md-9.col-lg-10.text-center
+                        h1.text-light
+                            |Egyelőre nincs elrejtett adatlap
+                - else
+                    table.table.table-success.text-light
+                        thead
+                            tr
+                                - if current_user&.moderator? || current_user&.admin? 
+                                    th Link 
+                                th Játék
+                                
+                        tbody
+                            - @hiddens.each_with_index do |game, index|
+                                tr
+                                    - if current_user&.moderator? || current_user&.admin? 
+                                        td 
+                                            = link_to game.name, game_path(game), class: "btn btn-primary"
+
+                                     
                     
                     
                     

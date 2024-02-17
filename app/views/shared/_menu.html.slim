@@ -19,9 +19,10 @@
       li
         = link_to 'Új játék »', new_game_path
       li  
-        = link_to 'Foglalt »', bel_path
+        = link_to 'Foglalt / Rejtett »', bel_path
       li
         = link_to 'Ötletek', todos_path
+     
     - if current_user
       li
         = link_to " Beállítások", edit_user_path(current_user)

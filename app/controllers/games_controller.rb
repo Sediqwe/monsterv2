@@ -213,6 +213,7 @@ end
   def features
     Game.where("hatarido IS NOT NULL").where("hatarido + INTERVAL '3 days' < ?", Time.now).update_all(stipi: false)
     @games = Game.where(stipi: true).where("hatarido + INTERVAL '3 days' > ?", Time.now)
+    @hiddens = Game.where(hidden: true)
   end
   private
     
