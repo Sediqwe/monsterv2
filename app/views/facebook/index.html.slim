@@ -47,19 +47,22 @@
                                     - if game.game_files.filename.to_s.downcase.include? "google"
                                         | Google
                                 br
+                                
+                                b Hozzászólás / Letöltés: 
+                                br
+                                =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
+                                =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
+                                br 
                                 b Támogatás:
                                 br
                                 - adatok.each_with_index do |dorka,index2|
+                                    =link_to "https://gep.monster/translaters/#{dorka.translater.slug}", "https://gep.monster/translaters/#{dorka.translater.slug}" 
                                     =link_to "https://gep.monster/translaters/#{dorka.translater.slug}", "https://gep.monster/translaters/#{dorka.translater.slug}" 
                                     - if index2 < adatok.size-1
                                         | , 
                                 
                                 br
-                                b Hozzászólás / Letöltés: 
-                                br
-                                =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
                                 
-                                br 
                                 h3 
                                     b A Facebook oldalon a hozzászólás le van tiltva, ha szeretnél ehhez a játékhoz hozzászólni vagy kérdezni, azt a linkre kattintva megteheted.
                                 br
