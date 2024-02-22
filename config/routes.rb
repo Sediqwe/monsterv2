@@ -41,6 +41,7 @@ Rails.application.routes.draw do
   delete '/pictures/:upload_id/pictures/:image_id', to: 'uploads#picturesdelete', as: 'delete_picture'
   get 'lemondva', to: "lemondva#index"
   get 'lefoglalva', to: "lefoglalva#index"  
+  get 'statisztikabot', to: "stat#bot"
   get 'kuki/index'
   get 'kuki/new'
   get 'kuki/create'

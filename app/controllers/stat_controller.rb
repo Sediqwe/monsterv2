@@ -27,5 +27,10 @@ class StatController < ApplicationController
                            .group("download_date, upload_id").order("download_date, download_count DESC, upload_id").limit(10)
                              
   end
+  def bot
+    stat = params[:stat]
+    render html: (stat + "||||Ł")
+
+  end
   
 end
