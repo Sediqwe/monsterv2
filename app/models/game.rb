@@ -12,6 +12,7 @@ class Game < ApplicationRecord
     ransack do
         field :name, fuzzy_search: true
         field :slug, fuzzy_search: true
+        field :name, autocomplete: true
     end
     def should_generate_new_friendly_id?
         name_changed?
