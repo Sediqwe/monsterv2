@@ -1,0 +1,33 @@
+canvas id="myChart" width="400" height="400"
+
+|
+    <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        fetch('/stat/random_data')
+        .then(response => response.json())
+        .then(data => {
+            var ctx = document.getElementById('myChart').getContext('2d');
+            var myChart = new Chart(ctx, {
+            type: 'pie',
+            data: {
+                labels: ['KM', 'GEMO', 'Yellow', 'Green', 'Purple', 'Orange'],
+                datasets: [{
+                data: data.data,
+                backgroundColor: [
+                    'red',
+                    'black',
+                    'yellow',
+                    'beige',
+                    'pink',
+                    'orange'
+                ]
+                }]
+            },
+            options: {
+                responsive: false,
+                maintainAspectRatio: false
+            }
+            });
+        });
+    });
+    </script>

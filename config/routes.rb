@@ -42,6 +42,8 @@ Rails.application.routes.draw do
   get 'lemondva', to: "lemondva#index"
   get 'lefoglalva', to: "lefoglalva#index"  
   get 'statisztikabot', to: "stat#bot"
+  get 'statisztika', to: "stat#sanyi"
+  get 'stat/random_data'
   get 'kuki/index'
   get 'kuki/new'
   get 'kuki/create'

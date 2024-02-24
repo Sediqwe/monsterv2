@@ -1,5 +1,5 @@
 class StatController < ApplicationController
-
+  require 'googlecharts'
   def index
       Download.default_timezone = :utc
       @users = User.all.count
@@ -27,8 +27,16 @@ class StatController < ApplicationController
                            .group("download_date, upload_id").order("download_date, download_count DESC, upload_id").limit(10)
                              
   end
+  def sanyi
+
+  end
+  def random_data
+    data = Array.new(6) { rand(1..10) }
+    render json: { data: data }
+  end
   def bot
     stat = params[:stat]
+    
     render html: (stat + "||||Ł")
 
   end
