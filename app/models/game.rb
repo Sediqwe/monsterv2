@@ -9,6 +9,9 @@ class Game < ApplicationRecord
     friendly_id :name, use: :slugged
     validates :name, uniqueness: true, presence: true, length: {minimum: 2, maximum:100}
     validates :image, presence: true, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']    
+    ransack do
+        field :name, fuzzy_search: true
+    end
     def should_generate_new_friendly_id?
         name_changed?
     end
