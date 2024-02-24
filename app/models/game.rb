@@ -11,6 +11,7 @@ class Game < ApplicationRecord
     validates :image, presence: true, content_type: ['image/png', 'image/jpg', 'image/jpeg', 'image/webp']    
     ransack do
         field :name, fuzzy_search: true
+        field :slug, fuzzy_search: true
     end
     def should_generate_new_friendly_id?
         name_changed?
