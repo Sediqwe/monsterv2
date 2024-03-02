@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_01_05_163539) do
+ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -373,6 +373,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_163539) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "pms", force: :cascade do |t|
+    t.string "subject"
+    t.integer "user"
+    t.integer "sender"
+    t.boolean "read"
+    t.boolean "torolt"
+    t.boolean "warn"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "prochartos", force: :cascade do |t|
     t.integer "file"
     t.integer "char"
@@ -462,7 +473,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_163539) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
-    t.integer "user_id", default: 0
+    t.boolean "pm", default: false
     t.index ["slug"], name: "index_translaters_on_slug", unique: true
   end
 
@@ -529,21 +540,11 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_163539) do
     t.string "tam4"
     t.bigint "translater_id"
     t.text "recovery"
+    t.boolean "pm", default: false
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["name"], name: "index_users_on_name", unique: true
     t.index ["slug"], name: "index_users_on_slug", unique: true
     t.index ["translater_id"], name: "index_users_on_translater_id"
-  end
-
-  create_table "uzenets", force: :cascade do |t|
-    t.text "desc"
-    t.bigint "user_id", null: false
-    t.boolean "active"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.bigint "game_id"
-    t.index ["game_id"], name: "index_uzenets_on_game_id"
-    t.index ["user_id"], name: "index_uzenets_on_user_id"
   end
 
   create_table "youtubevideos", force: :cascade do |t|
@@ -595,6 +596,5 @@ ActiveRecord::Schema[7.0].define(version: 2024_01_05_163539) do
   add_foreign_key "uploads", "users"
   add_foreign_key "uploadtranslaters", "translaters"
   add_foreign_key "uploadtranslaters", "uploads"
-  add_foreign_key "uzenets", "users"
   add_foreign_key "youtubevideos", "users"
 end
