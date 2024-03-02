@@ -15,9 +15,10 @@ class FacebookController < ApplicationController
                        ""
                      end
   
-    #tamogatas = adatok.map { |dorka| link_to(dorka.translater.translater_name, "https://gep.monster/translaters/#{dorka.translater.slug}") }.join(", ")
+    tamogatas = adatok.map { |dorka| view_context.link_to(dorka.translater.translater_name, "https://gep.monster/translaters/#{dorka.translater.slug}") }.join(", ")
+
   
-    #komment_letoltes = link_to("https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}")
+    komment_letoltes = view_context.link_to("https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}")
   
     facebook_ment = "Nincs megadva fordító" if facebook_ment.blank?
     fordito_program = "Nincs megadva fordító program" if fordito_program.blank?
@@ -29,7 +30,7 @@ class FacebookController < ApplicationController
                   <b>Készítő:</b> #{facebook_ment}<br>
                   <b>Fordító program:</b> #{fordito_program}<br>
                   <b>Támogatás:</b> #{tamogatas}<br>
-                  
+                  <b>Hozzászólás / Letöltés:</b> #{komment_letoltes}<br>
                   <h3><b>A Facebook oldalon a hozzászólás le van tiltva, ha szeretnél ehhez a játékhoz hozzászólni vagy kérdezni, azt a linkre kattintva megteheted.</b></h3>".html_safe
   end
 end
