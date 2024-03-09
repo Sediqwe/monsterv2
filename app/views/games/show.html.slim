@@ -266,8 +266,8 @@
                                                     =  link_to "Szerkesztés" , edit_upload_path(t.id), class: "btn btn-success text-light m-1"
                                                     -utolso10 = Upload.last(10)
                                                     -feltoltes = utolso10.find { |upload| upload.id == t.id }
-                                                    -if feltoltes && t.special == true
-                                                        =  link_to "Bot Reset" , bot_reset_path(id: t.id), class: "btn btn-warning text-light m-1"
+                                                    -if feltoltes && t.special
+                                                        =  link_to "Bot Reset" , bot_reset_path(id: t.id), data: { confirm: "Biztosan törölni szeretnéd?" },  class: "btn btn-warning text-light m-1"
                                             -if current_user.admin?
                                                 .col
                                                     .btn.btn-success
