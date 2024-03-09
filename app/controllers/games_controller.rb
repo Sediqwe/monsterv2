@@ -154,9 +154,13 @@ def discord
   
 end
 def bot_reset
+  
   adat = Upload.find(params[:id])
-  adat.update(special: false)
-  redirect_to game_path(adat.game.slug)
+  if current_user.id == adat.user_id && adat.special
+    adat.update(special: false)
+    record_activity("BOT RESET: #{adat.game_id} , #{adat.user.name}")
+    redirect_to game_path(adat.game.slug)
+  end
 end
 def windows_compatible_file_name(filename)
   filename = filename.gsub(":", "_")
