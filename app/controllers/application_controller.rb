@@ -2,11 +2,7 @@ class ApplicationController < ActionController::Base
     helper_method :current_user  
     add_flash_types :info, :error, :warning
     before_action :set_search
-  rescue_from ActionController::RoutingError, with: :not_found
-
-  def not_found
-    redirect_to "/games?q%5Bname_cont%5D=nincstalálat", allow_other_host: true
-  end
+ 
 def set_search
     require 'nokogiri'
     require 'open-uri'

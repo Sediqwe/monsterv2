@@ -2,11 +2,6 @@ class GamesController < ApplicationController
   before_action :set_game, only: %i[ show edit update destroy ]
   before_action :authorized?, only: %i[new edit update destroy]
   require 'rmagick'
-  rescue_from ActionController::RoutingError, with: :not_found
-
-  def not_found
-    redirect_to "/games?q%5Bname_cont%5D=nincstalálat", allow_other_host: true
-  end
   def index
     @q = Game.where(hidden: false).ransack(params[:q])
     if params[:page_n].present?
@@ -226,14 +221,11 @@ end
   private
     
     def set_game
-      if params[:id] != "favicon" # Biztonsági ellenőrzés faviconhoz
-        @game = Game.friendly.find_by(slug: params[:id])
-        unless @game
-          # Ha nem található a játék, kezeld a helyzetet, például átirányítással vagy hibaoldali nézettel
-          redirect_to "/games?q%5Bname_cont%5D=nincstalálat" , allow_other_host: true
-        end
+      if params[:id]!="favicon"
+        @game = Game.friendly.find(params[:id])
       end
     end
+
     
     def game_params
       params.require(:game).permit(:name, :link_steam, :link_epic, :link_other, :description, :image, :link_hun, :stipi)

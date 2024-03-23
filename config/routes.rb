@@ -179,9 +179,6 @@ post 'lobot', to: "games#lobot"
 get "hopper", to: "hopps#hopper"
 get "regenerated", to: "translaters#regen"
 
-match '*path', to: 'application#not_found', via: :all
-
-
 end
 
 
