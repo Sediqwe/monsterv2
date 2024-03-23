@@ -227,7 +227,7 @@ end
     
     def set_game
       if params[:id] != "favicon" # Biztonsági ellenőrzés faviconhoz
-        @game = Game.friendly.find_by(id: params[:id])
+        @game = Game.friendly.find_by(slug: params[:id])
         unless @game
           # Ha nem található a játék, kezeld a helyzetet, például átirányítással vagy hibaoldali nézettel
           redirect_to "/games?q%5Bname_cont%5D=nincstalálat" , allow_other_host: true
