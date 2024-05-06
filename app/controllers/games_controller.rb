@@ -64,7 +64,34 @@ class GamesController < ApplicationController
       end
     end
   end
-
+  def forumaccept
+    if current_user.admin?
+      gamemessage = Gamemessage.find(params[:id])
+      gamemessage.accept = true
+      gamemessage.save
+      game = Game.find(gamemessage.game_id)
+      name = gamemessage.user.alias || gamemessage.user.name
+      gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: gamemessage.message, idouj3:gamemessage.created_at.strftime("%Y.%m.%d %H:%M"))
+      redirect_to game_path(gamemessage.game_id)
+    end
+  end
+  def forumdelete
+    if current_user.admin?
+      gamemessage = Gamemessage.find(params[:id])
+      gamemessage.destroy()
+      redirect_to game_path(gamemessage.game_id)
+    end
+  end
+  def forum
+    duma = params[:duma] # Az űrlapból kapott duma_ID
+    id = params[:id] 
+    game = Game.find(id)# Az űrlapból kapott id
+    if current_user
+        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)
+        adatok.save        
+      
+    end
+  end
   def delete_yt
     id = je_params[:id]
     p id
@@ -87,7 +114,7 @@ class GamesController < ApplicationController
     @autoforditoilista = Autoforditoilist.where(game_id:  @user.id)
     @meta_image = rails_blob_path(@user.image, only_path: true)
     @ytvideo = Youtubevideo.where(game_id: @user.id).where(ready: true).order("RANDOM()")
-    
+    @gamemessage = Gamemessage.where(game_id: @user.id).order(id: :DESC)
   end
 
 

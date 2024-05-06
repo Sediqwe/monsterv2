@@ -21,6 +21,29 @@ $(document).on('turbo:load', function() {
       });
     }
   });
+  $('#forumsubmit').on('click', function () {
+    
+    var id = $('#forumsubmit').data('id');
+    var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
+    if(dumaData.length > 10){
+
+    
+    $.ajax({
+        type: 'POST',
+        url: '/gameforum', // A szerveroldali útvonal
+        data: { duma: dumaData, id: id }, // Az adatok elküldése a szervernek
+        success: function(response) {
+          window.location.href = window.location.href; 
+        },
+        error: function(xhr, status, error) {
+            // Hibakezelés
+        }
+    });
+  }
+  else{
+    alert("Legalább 10 karakterben fogalmazd meg!");
+  }
+  });
   $('#new_yt').on('click', function () {
     var adat = $('#ytvideo').val();
     var id = $(this).data('id');

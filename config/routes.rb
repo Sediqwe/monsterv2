@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get "plus_upload", to: "uploads#plus_upload"
   get "minus_upload", to: "uploads#minus_upload"
   get "yttodiscord", to: "games#yttodiscord"
+  post "gameforum", to: "games#forum"
+  get "gameforumdelete", to: "games#forumdelete"
+  get "gameforumaccept", to: "games#forumaccept"
   resources :supportlists
   resources :supporters
   resources :uploads

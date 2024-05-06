@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_06_184632) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -188,6 +188,43 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "forum_categories", id: :serial, force: :cascade do |t|
+    t.string "name", null: false
+    t.string "slug", null: false
+    t.string "color", default: "000000"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+  end
+
+  create_table "forum_posts", id: :serial, force: :cascade do |t|
+    t.integer "forum_thread_id"
+    t.integer "user_id"
+    t.text "body"
+    t.boolean "solved", default: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+  end
+
+  create_table "forum_subscriptions", id: :serial, force: :cascade do |t|
+    t.integer "forum_thread_id"
+    t.integer "user_id"
+    t.string "subscription_type"
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+  end
+
+  create_table "forum_threads", id: :serial, force: :cascade do |t|
+    t.integer "forum_category_id"
+    t.integer "user_id"
+    t.string "title", null: false
+    t.string "slug", null: false
+    t.integer "forum_posts_count", default: 0
+    t.boolean "pinned", default: false
+    t.boolean "solved", default: false
+    t.datetime "created_at", precision: nil
+    t.datetime "updated_at", precision: nil
+  end
+
   create_table "forums", force: :cascade do |t|
     t.string "title"
     t.text "desc"
@@ -209,6 +246,20 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
     t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
     t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
+  end
+
+  create_table "gamemessages", force: :cascade do |t|
+    t.text "message"
+    t.bigint "user_id", null: false
+    t.boolean "accept"
+    t.bigint "game_id", null: false
+    t.boolean "reply"
+    t.bigint "gamemessage_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_gamemessages_on_game_id"
+    t.index ["gamemessage_id"], name: "index_gamemessages_on_gamemessage_id"
+    t.index ["user_id"], name: "index_gamemessages_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -246,6 +297,22 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
     t.string "idouj"
     t.datetime "idouj3"
     t.index ["link"], name: "index_gemorsses_on_link", unique: true
+  end
+
+  create_table "gmessages", force: :cascade do |t|
+    t.bigint "user_id", null: false
+    t.string "title"
+    t.bigint "game_id", null: false
+    t.bigint "gmessage_id"
+    t.boolean "warn"
+    t.bigint "senduser_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.text "description"
+    t.index ["game_id"], name: "index_gmessages_on_game_id"
+    t.index ["gmessage_id"], name: "index_gmessages_on_gmessage_id"
+    t.index ["senduser_id"], name: "index_gmessages_on_senduser_id"
+    t.index ["user_id"], name: "index_gmessages_on_user_id"
   end
 
   create_table "hopps", force: :cascade do |t|
@@ -473,6 +540,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "slug"
+    t.integer "user_id", default: 0
     t.boolean "pm", default: false
     t.index ["slug"], name: "index_translaters_on_slug", unique: true
   end
@@ -547,6 +615,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
     t.index ["translater_id"], name: "index_users_on_translater_id"
   end
 
+  create_table "uzenets", force: :cascade do |t|
+    t.text "desc"
+    t.bigint "user_id", null: false
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "game_id"
+    t.index ["game_id"], name: "index_uzenets_on_game_id"
+    t.index ["user_id"], name: "index_uzenets_on_user_id"
+  end
+
   create_table "youtubevideos", force: :cascade do |t|
     t.string "link"
     t.text "desc"
@@ -579,8 +658,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
   add_foreign_key "datatranslates", "users"
   add_foreign_key "downloads", "games"
   add_foreign_key "downloads", "uploads"
+  add_foreign_key "forum_posts", "forum_threads"
+  add_foreign_key "forum_posts", "users"
+  add_foreign_key "forum_subscriptions", "forum_threads"
+  add_foreign_key "forum_subscriptions", "users"
+  add_foreign_key "forum_threads", "forum_categories"
+  add_foreign_key "forum_threads", "users"
   add_foreign_key "forums", "users"
+  add_foreign_key "gamemessages", "gamemessages"
+  add_foreign_key "gamemessages", "games"
+  add_foreign_key "gamemessages", "users"
   add_foreign_key "games", "users"
+  add_foreign_key "gmessages", "games"
+  add_foreign_key "gmessages", "gmessages"
+  add_foreign_key "gmessages", "users"
+  add_foreign_key "gmessages", "users", column: "senduser_id"
   add_foreign_key "lemurs", "projects"
   add_foreign_key "news", "users"
   add_foreign_key "projects", "users"
@@ -596,5 +688,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_02_04_132439) do
   add_foreign_key "uploads", "users"
   add_foreign_key "uploadtranslaters", "translaters"
   add_foreign_key "uploadtranslaters", "uploads"
+  add_foreign_key "uzenets", "users"
   add_foreign_key "youtubevideos", "users"
 end
