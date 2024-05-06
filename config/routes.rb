@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   post "gameforum", to: "games#forum"
   get "gameforumdelete", to: "games#forumdelete"
   get "gameforumaccept", to: "games#forumaccept"
+  get "gameforumaccept2", to: "games#forumaccept2"
   resources :supportlists
   resources :supporters
   resources :uploads

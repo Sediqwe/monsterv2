@@ -1,4 +1,5 @@
 class DisqusController < ApplicationController
     def index
-    end
+        @gamemessage = Gamemessage.where(accept: nil)
+        end
 end

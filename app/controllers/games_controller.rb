@@ -75,6 +75,17 @@ class GamesController < ApplicationController
       redirect_to game_path(gamemessage.game_id)
     end
   end
+  def forumaccept2
+    if current_user.admin?
+      gamemessage = Gamemessage.find(params[:id])
+      gamemessage.accept = true
+      gamemessage.save
+      game = Game.find(gamemessage.game_id)
+      name = gamemessage.user.alias || gamemessage.user.name
+      gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: gamemessage.message, idouj3:gamemessage.created_at.strftime("%Y.%m.%d %H:%M"))
+      redirect_to disqous_path
+    end
+  end
   def forumdelete
     if current_user.admin?
       gamemessage = Gamemessage.find(params[:id])
