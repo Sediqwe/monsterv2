@@ -341,7 +341,7 @@
                                                     =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
                                                 br
                                         -if mes.accept || current_user.admin?
-                                            - if mes.user_id
+                                            - if mes.user_id.present?
                                                 = mes.user.alias || mes.user.name
                                             - if mes.username
                                                 =mes.username
