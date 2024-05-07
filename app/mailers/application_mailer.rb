@@ -12,4 +12,7 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(to: @user1.email, subject: 'Elfelejtett jelszó!')
   end
+  def new_email()
+    mail(to: "sediqwe@gmail.com", subject: 'Új üzenet')
+  end
 end

@@ -138,13 +138,13 @@ class GamesController < ApplicationController
       if current_user.present?
         adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)
         adatok.save
+        ApplicationMailer.new_email().deliver
       else
         p game.id
         adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
         adatok.save
-        adatok.errors.full_messages.each do |msg|
-          puts "- #{msg}"
-        end
+        
+        
       end
       
     
