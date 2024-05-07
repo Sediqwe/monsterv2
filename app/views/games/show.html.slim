@@ -336,7 +336,7 @@
                                                 |Ez az üzenet még elfogadás alatt van, beküldő: >
                                                 -if mes.user_id.present?
                                                     = mes.user.alias||mes.user.name
-                                                 - if mes.username.present?
+                                                - if mes.username.present?
                                                     = mes.username
                                         -if current_user 
                                             -if current_user.admin?
