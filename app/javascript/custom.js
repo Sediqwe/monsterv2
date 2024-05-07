@@ -23,8 +23,7 @@ $(document).on('turbo:load', function() {
   });
 
   $('#username').on('keyup', function() {
-    var username = $(this).val();
-    
+    var username = $(this).val().trim();
     // AJAX kérés küldése a szervernek
     $.ajax({
       type: 'GET',
