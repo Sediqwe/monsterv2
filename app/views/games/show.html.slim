@@ -312,9 +312,17 @@
                                             = t.created_at.strftime("%Y-%m-%d %H:%M")
                             
                             br
-                            - if current_user.present?
+                            
                                 .game-data__download-section.bg-dark.col-6.offset-3
-                                    |Duma :)
+                                    - if !current_user.present?
+                                        =label_tag(:username, "Felhasználónév:")
+                                        =text_field_tag(:username, nil, class: "col-12")
+                                    - if current_user
+                                        =label_tag(:username, "Felhasználónév:")
+                                        - name = current_user.alias || current_user.name
+                                        = text_field_tag(:username, name, class: "col-12", readonly: true)
+
+                                    =label_tag(:duma, "Üzenet:")
                                     textarea id="duma_#{@game.id}"
                                     div class="btn btn-success btn-block col-12" data-id= "#{@game.id}" id="forumsubmit"
                                         |Beküldés
@@ -333,7 +341,10 @@
                                                     =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
                                                 br
                                         -if mes.accept || current_user.admin?
-                                            = mes.user.alias || mes.user.name
+                                            - if mes.user_id
+                                                = mes.user.alias || mes.user.name
+                                            - if mes.username
+                                                =mes.username
                                             |   üzente (#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
                                             hr
                                         

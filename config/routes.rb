@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   get "gameforumdelete", to: "games#forumdelete"
   get "gameforumaccept", to: "games#forumaccept"
   get "gameforumaccept2", to: "games#forumaccept2"
+  get "check_username", to: "games#check_username"
   resources :supportlists
   resources :supporters
   resources :uploads

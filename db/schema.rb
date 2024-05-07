@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_06_184632) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_07_165657) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -250,13 +250,14 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_06_184632) do
 
   create_table "gamemessages", force: :cascade do |t|
     t.text "message"
-    t.bigint "user_id", null: false
     t.boolean "accept"
     t.bigint "game_id", null: false
     t.boolean "reply"
     t.bigint "gamemessage_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "user_id"
+    t.string "username"
     t.index ["game_id"], name: "index_gamemessages_on_game_id"
     t.index ["gamemessage_id"], name: "index_gamemessages_on_gamemessage_id"
     t.index ["user_id"], name: "index_gamemessages_on_user_id"
@@ -296,7 +297,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_06_184632) do
     t.text "special"
     t.string "idouj"
     t.datetime "idouj3"
-    t.index ["link"], name: "index_gemorsses_on_link", unique: true
+    t.index ["link"], name: "index_gemorsses_on_link"
   end
 
   create_table "gmessages", force: :cascade do |t|
@@ -667,7 +668,6 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_06_184632) do
   add_foreign_key "forums", "users"
   add_foreign_key "gamemessages", "gamemessages"
   add_foreign_key "gamemessages", "games"
-  add_foreign_key "gamemessages", "users"
   add_foreign_key "games", "users"
   add_foreign_key "gmessages", "games"
   add_foreign_key "gmessages", "gmessages"

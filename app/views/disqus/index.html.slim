@@ -5,7 +5,7 @@
           |Szólj hozzánk!
       h3.text-light
         | 2024.05.06 -> részben elindult a hozzászólás lehetőség, egyelőre csak a játékok alatt lehet cseverészni, csak bejelentkezve...
-        br
+        br  
         | 2024.04.22 -> Az oldalon jelenleg megszünt a DISQUS féle hozzászólás.
       .game-data__download-section.col-6.offset-3
         -if current_user 
@@ -16,17 +16,19 @@
               div class="bg-dark p-3 m-5 border-success rounded border-bottom text-light"
                 -if !mes.accept
                   
-                    =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
-                    -if !mes.accept
-                        =link_to "OK", gameforumaccept2_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
-                    br
-            
+                  =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
+                  -if !mes.accept
+                      =link_to "OK", gameforumaccept2_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
+                  br
+                  -if mes.user_id.present?
                     = mes.user.alias || mes.user.name
-                    |   üzente (#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
-                    hr
-                
-                    = mes.message
-          
+                  - else 
+                    = mes.username
+                  |   üzente (#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
+                  hr
+              
+                  = mes.message
+        
                         
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'

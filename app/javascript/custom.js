@@ -21,27 +21,71 @@ $(document).on('turbo:load', function() {
       });
     }
   });
+
+  $('#username').on('keyup', function() {
+    var username = $(this).val();
+    
+    // AJAX kérés küldése a szervernek
+    $.ajax({
+      type: 'GET',
+      url: '/check_username', // A szerveroldali útvonal
+      data: { username: username }, // Az adatok elküldése a szervernek
+      success: function(response) {
+        if (response.exists) {
+          $("#username").removeClass();
+          $("#username").addClass(' col-12 bg-danger font-white ');
+        } else {
+          $("#username").removeClass("bg-danger");
+          
+        }
+      },
+      error: function(xhr, status, error) {
+        
+      }
+  });
+});
+
   $('#forumsubmit').on('click', function () {
     
     var id = $('#forumsubmit').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
-    if(dumaData.length > 10){
-
+    var username = $('#username').val(); 
     
-    $.ajax({
-        type: 'POST',
-        url: '/gameforum', // A szerveroldali útvonal
-        data: { duma: dumaData, id: id }, // Az adatok elküldése a szervernek
+    if(dumaData.length > 5 && username.length >0){
+      $.ajax({
+        type: 'GET',
+        url: '/check_username', // A szerveroldali útvonal
+        data: { username: username }, // Az adatok elküldése a szervernek
         success: function(response) {
-          window.location.href = window.location.href; 
+          if (response.exists) {
+            $("#username").removeClass();
+            $("#username").addClass(' col-12 bg-danger font-white ');
+          } else {
+            $("#username").removeClass("bg-danger");
+            $.ajax({
+              type: 'POST',
+              url: '/gameforum', // A szerveroldali útvonal
+              data: { duma: dumaData, id: id, username: username }, // Az adatok elküldése a szervernek
+              success: function(response) {
+                //window.location.href = window.location.href; 
+                alert("OK");
+              },
+              error: function(xhr, status, error) {
+                  // Hibakezelés
+              }
+          });
+          }
         },
         error: function(xhr, status, error) {
-            // Hibakezelés
+          
         }
     });
+
+
+    
   }
   else{
-    alert("Legalább 10 karakterben fogalmazd meg!");
+    alert("Legalább 5 karakterben fogalmazd meg az üzeneted, és a felhasználói neved legyen kitöltve!");
   }
   });
   $('#new_yt').on('click', function () {

@@ -64,26 +64,61 @@ class GamesController < ApplicationController
       end
     end
   end
+  def check_username
+    username = params[:username].downcase
+    user = User.find_by("LOWER(name) = :username OR LOWER(alias) = :username", username: username)
+    ban = false
+    if user
+      ban = true
+    else
+      ban = false
+    end
+    if username == "admin" || username == "moderator"
+      ban = true
+    end
+    if current_user.present?
+      ban = false
+    end
+    if ban==false
+      render json: { exists: false }
+    else
+      render json: { exists: true }
+    end
+  end
+
+
+
+ 
   def forumaccept
+    
     if current_user.admin?
       gamemessage = Gamemessage.find(params[:id])
       gamemessage.accept = true
       gamemessage.save
       game = Game.find(gamemessage.game_id)
-      name = gamemessage.user.alias || gamemessage.user.name
+      if  gamemessage.user_id
+        name = gamemessage.user.alias || gamemessage.user.name
+      else
+        name = gamemessage.username
+      end
       gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: gamemessage.message, idouj3:gamemessage.created_at.strftime("%Y.%m.%d %H:%M"))
       redirect_to game_path(gamemessage.game_id)
     end
   end
+  #Azért van kettő, mert egyik a game#SHOW a másik a DISQUS#index ből jön, és oda is tér vissza
   def forumaccept2
     if current_user.admin?
       gamemessage = Gamemessage.find(params[:id])
       gamemessage.accept = true
       gamemessage.save
       game = Game.find(gamemessage.game_id)
-      name = gamemessage.user.alias || gamemessage.user.name
+      if  gamemessage.user_id
+        name = gamemessage.user.alias || gamemessage.user.name
+      else
+        name = gamemessage.username
+      end
       gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: gamemessage.message, idouj3:gamemessage.created_at.strftime("%Y.%m.%d %H:%M"))
-      redirect_to disqous_path
+      redirect_to disqus_path
     end
   end
   def forumdelete
@@ -94,14 +129,25 @@ class GamesController < ApplicationController
     end
   end
   def forum
+    
     duma = params[:duma] # Az űrlapból kapott duma_ID
     id = params[:id] 
-    game = Game.find(id)# Az űrlapból kapott id
-    if current_user
+    username = params[:username] 
+    
+      game = Game.find(id)# Az űrlapból kapott id
+      if current_user.present?
         adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)
-        adatok.save        
+        adatok.save
+      else
+        p game.id
+        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
+        adatok.save
+        adatok.errors.full_messages.each do |msg|
+          puts "- #{msg}"
+        end
+      end
       
-    end
+    
   end
   def delete_yt
     id = je_params[:id]
