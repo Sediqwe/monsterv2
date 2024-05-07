@@ -336,7 +336,7 @@
                                                 |Ez az üzenet még elfogadás alatt van, beküldő: >
                                                 -if mes.user_id.present?
                                                     = mes.user.alias||mes.user.name
-                                                 - if mes.username
+                                                 - if mes.username.present?
                                                     = mes.username
                                         -if current_user 
                                             -if current_user.admin?
@@ -347,8 +347,8 @@
                                         -if mes.accept || current_user&.admin?
                                             - if mes.user_id.present?
                                                 = mes.user.alias || mes.user.name
-                                            - if mes.username
-                                                =mes.username
+                                            - if mes.username.present?
+                                                = mes.username
                                             |   üzente (#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
                                             hr
                                         
