@@ -143,7 +143,7 @@ class GamesController < ApplicationController
         p game.id
         adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
         adatok.save
-        
+        ApplicationMailer.new_email(1).deliver
         
       end
       
