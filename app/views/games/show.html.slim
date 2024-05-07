@@ -336,7 +336,7 @@
                                                 |Ez az üzenet még elfogadás alatt van, beküldő: >
                                                 -if mes.user_id.present?
                                                     = mes.user.alias||mes.user.name
-                                                - else
+                                                 - if mes.username
                                                     = mes.username
                                         -if current_user 
                                             -if current_user.admin?
@@ -344,7 +344,7 @@
                                                 -if !mes.accept
                                                     =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
                                                 br
-                                        -if mes.accept || current_user.admin?
+                                        -if mes.accept || current_user&.admin?
                                             - if mes.user_id.present?
                                                 = mes.user.alias || mes.user.name
                                             - if mes.username
