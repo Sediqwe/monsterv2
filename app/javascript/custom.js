@@ -67,8 +67,8 @@ $(document).on('turbo:load', function() {
               url: '/gameforum', // A szerveroldali útvonal
               data: { duma: dumaData, id: id, username: username }, // Az adatok elküldése a szervernek
               success: function(response) {
-                //window.location.href = window.location.href; 
-                alert("OK");
+                window.location.href = window.location.href; 
+                
               },
               error: function(xhr, status, error) {
                   // Hibakezelés
