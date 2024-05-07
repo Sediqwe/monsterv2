@@ -96,7 +96,7 @@ class GamesController < ApplicationController
       gamemessage.accept = true
       gamemessage.save
       game = Game.find(gamemessage.game_id)
-      if  gamemessage.user_id
+      if  gamemessage.user_id.present?
         name = gamemessage.user.alias || gamemessage.user.name
       else
         name = gamemessage.username
