@@ -348,7 +348,7 @@
                                             - if mes.user_id.present?
                                                 = mes.user.alias || mes.user.name
                                                 -if mes.user.moderator?
-                                                    span class="badge text-bg-info b-2 " Fordító
+                                                    span class="badge text-bg-info m-1 " Fordító
                                                 -if mes.user.admin?
                                                     span class="badge text-bg-danger m-1" Admin
                                                 -if mes.user_id.present? && current_user&.admin?
