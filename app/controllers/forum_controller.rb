@@ -1,6 +1,6 @@
 class ForumController < ApplicationController
   def index
-    @unique_game_messages = Gamemessage.select("DISTINCT ON (game_id) game_id").order(game_id: :asc, created_at: :desc)
+    @unique_game_messages =  Gamemessage.latest_messages_per_game
 
     
   end

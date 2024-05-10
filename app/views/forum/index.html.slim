@@ -16,14 +16,13 @@
                                         | #{message.game_id} »
                                     
                                     br
-                                    - userdata = user_where_last(message.game_id)
-                                    - if userdata.user_id.present?
-
-                                        | #{userdata.user.alias || userdata.user.name}
+                                    - if message.user_id.present?
+                        
+                                        | #{message.user.alias || message.user.name}
                                     -else 
-                                        | #{userdata.username}
+                                        | #{message.username}
                                     br
-                                    |  #{userdata.created_at.strftime("%Y-%m-%d %H:%M")}
+                                    |  #{message.created_at.strftime("%Y-%m-%d %H:%M")}
                                     br
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render 'shared/side' 
