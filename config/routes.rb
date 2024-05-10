@@ -1,6 +1,6 @@
 Rails.application.routes.draw do
-  get 'forum', to: "forum#index"
-  get 'forum/:id', to: 'forum#indexketto', as: 'index_ketto_forum'
+  get 'qc', to: "forum#index"
+  get 'qc/:id', to: 'forum#indexketto', as: 'qct'
   get "backup", to: 'backup#index'
   get "backup_egyszer", to: 'backup#egyszer'
   get "bot_reset", to: "games#bot_reset"

@@ -9,7 +9,7 @@
                        
 
                         - @unique_game_messages.each do |message|
-                            = link_to index_ketto_forum_path(id: message.game_id), class:"btn btn-primary col-lg-10 col-xs-12 offset-lg-2 text-center m-2 p-3 rounded" do |link|
+                            = link_to qct_path(id: message.game_id), class:"btn btn-primary col-lg-10 col-xs-12 offset-lg-2 text-center m-2 p-3 rounded" do |link|
                                     h3
                                         | #{message.game.name} »                                                                           
                                     
