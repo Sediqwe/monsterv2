@@ -329,8 +329,9 @@
                             .game-data__download-section.col-6.offset-3
 
                                 - @gamemessage.each do |mes|
-                                        
+                                    
                                     div class="bg-dark p-3 m-5 border-success rounded border-bottom"
+                                        
                                         -if !mes.accept
                                             h3.bg-info 
                                                 |Ez az üzenet még elfogadás alatt van, beküldő: >
@@ -344,10 +345,13 @@
                                                 -if !mes.accept
                                                     =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
                                                 br
+                                        
                                         -if mes.accept || current_user&.admin?
+
                                             - if mes.user_id.present?
+                                                
                                                 -if mes.user.photo.present?
-                                                    -image_tag mes.user.photo, size: "100x100"
+                                                    =image_tag mes.user.photo, size: "100x100"
                                                 = mes.user.alias || mes.user.name
                                                 -if mes.user.moderator?
                                                     span class="badge text-bg-info m-1 " Fordító

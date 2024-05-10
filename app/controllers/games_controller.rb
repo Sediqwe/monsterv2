@@ -133,10 +133,12 @@ class GamesController < ApplicationController
     duma = params[:duma] # Az űrlapból kapott duma_ID
     id = params[:id] 
     username = params[:username] 
-    
-      game = Game.find(id)# Az űrlapból kapott id
+    game = Game.find(id)# Az űrlapból kapott id
       if current_user.present?
-        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)
+        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)        
+        if current_user.admin || current_user.moderator
+          adatok.accept= true
+        end
         adatok.save
         ApplicationMailer.new_email(1).deliver
       else
