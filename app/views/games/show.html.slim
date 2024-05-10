@@ -346,6 +346,8 @@
                                                 br
                                         -if mes.accept || current_user&.admin?
                                             - if mes.user_id.present?
+                                                -if mes.user.photo.present?
+                                                    -image_tag mes.user.photo, size: "100x100"
                                                 = mes.user.alias || mes.user.name
                                                 -if mes.user.moderator?
                                                     span class="badge text-bg-info m-1 " Fordító
