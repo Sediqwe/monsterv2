@@ -352,6 +352,7 @@
                                                 
                                                 -if mes.user.photo.present?
                                                     =image_tag mes.user.photo, size: "100x100"
+                                                    br
                                                 = mes.user.alias || mes.user.name
                                                 -if mes.user.moderator?
                                                     span class="badge text-bg-info m-1 " Fordító
