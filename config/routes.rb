@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'forum', to: "forum#index"
+  get 'forum/:id', to: 'forum#indexketto', as: 'index_ketto_forum'
   get "backup", to: 'backup#index'
   get "backup_egyszer", to: 'backup#egyszer'
   get "bot_reset", to: "games#bot_reset"
@@ -103,7 +105,7 @@ Rails.application.routes.draw do
   get "universal", to: "beolvas#universal"
   post "universal_save", to: "beolvas#universal_save"
   get "delete_uzenet", to:"uzenets#delete_uzenet"
-  get "forumcontroll", to: "forums#controll"
+  
 
   get 'lista', to: 'lists#friss'
   get 'mega', to: 'mega#index'
@@ -131,7 +133,7 @@ Rails.application.routes.draw do
   
   get 'rssgemo', to:  'rss#index'
   get 'lemondva', to:  'lemondva#index'
-  get 'forum/messages', to:  'forums#messages'
+  
   get 'sessions/new'
   get 'sessions/create'
   get 'login/signin', to: 'sessions#new'

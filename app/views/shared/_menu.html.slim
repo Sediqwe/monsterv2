@@ -34,8 +34,11 @@
       = link_to " Wiki.Monster", "https://wiki.gep.monster", target: "Blank"
     li
       = link_to " Statisztika", stat_path
+    - if !current_user&.admin?
+      li
+        = link_to " Kérések", disqus_path
     li
-      = link_to " Kérések", disqus_path
+        = link_to " QuickChat", forum_path
     - if !current_user
       li
         = link_to "Belépés", login_signin_path()
