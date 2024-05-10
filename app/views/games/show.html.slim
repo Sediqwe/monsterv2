@@ -313,18 +313,20 @@
                             
                             br
                             
-                                .game-data__download-section.bg-dark.col-6.offset-3
+                                .game-data__download-section.bg-dark.col-4.offset-4.p-2.rounded-3.text-center
+                                    
                                     - if !current_user.present?
-                                        =label_tag(:username, "Felhasználónév:")
-                                        =text_field_tag(:username, nil, class: "col-12")
+                                        =label_tag(:username, "Felhasználónév")
+                                        =text_field_tag(:username, nil, class: "col-12 ")
+                                    
                                     - if current_user
-                                        =label_tag(:username, "Felhasználónév:")
+                                        =label_tag(:username, "Felhasználónév")
                                         - name = current_user.alias || current_user.name
                                         = text_field_tag(:username, name, class: "col-12", readonly: true)
 
-                                    =label_tag(:duma, "Üzenet:")
-                                    textarea id="duma_#{@game.id}"
-                                    div class="btn btn-success btn-block col-12" data-id= "#{@game.id}" id="forumsubmit"
+                                    =label_tag(:duma, "Üzenet" ,class:"m-2")
+                                    textarea id="duma_#{@game.id}" rows = "5" class= "m-2"
+                                    div class="btn btn-success btn-block col-11" data-id= "#{@game.id}" id="forumsubmit"
                                         |Beküldés
                             .game-data__download-section.col-6.offset-3
 
