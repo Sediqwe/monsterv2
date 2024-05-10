@@ -325,7 +325,7 @@
                                         = text_field_tag(:username, name, class: "col-12", readonly: true)
 
                                     =label_tag(:duma, "Üzenet" ,class:"m-2")
-                                    textarea id="duma_#{@game.id}" rows = "5" class= "m-2"
+                                    textarea id="duma_#{@game.id}" rows = "5"
                                     div class="btn btn-success btn-block col-11" data-id= "#{@game.id}" id="forumsubmit"
                                         |Beküldés
                             .game-data__download-section.col-6.offset-3
