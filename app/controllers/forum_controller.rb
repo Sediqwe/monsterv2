@@ -1,6 +1,6 @@
 class ForumController < ApplicationController
   def index
-    @unique_game_messages = Gamemessage.select('DISTINCT ON (game_id) *').order('game_id, created_at DESC').reverse    
+    @unique_game_messages = Gamemessage.select('DISTINCT ON (game_id) *').order('game_id, created_at ASC').reverse    
     
   end
   def indexketto
