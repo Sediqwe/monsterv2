@@ -330,42 +330,53 @@
 
                                 - @gamemessage.each do |mes|
                                     
-                                    div class="bg-dark p-3 m-5 border-success rounded border-bottom"
-                                        
-                                        -if !mes.accept
-                                            h3.bg-info 
-                                                |Ez az üzenet még elfogadás alatt van, beküldő: >
-                                                -if mes.user_id.present?
-                                                    = mes.user.alias||mes.user.name
+                                    div class="bg-dark p-3 m-5 border-success rounded border-bottom col-12"
+                                        .col-4
+                                            -if mes.accept || current_user&.admin?
+
+                                                - if mes.user_id.present?
+                                                    
+                                                    -if mes.user.photo.present?
+                                                        =image_tag mes.user.photo, size: "100x100"
+                                                        br
+                                                    = mes.user.alias || mes.user.name
+                                                    br
+                                                    -if mes.user.moderator?
+                                                        span class="badge text-bg-info m-1 " Fordító
+                                                        br
+                                                    -if mes.user.admin?
+                                                        span class="badge text-bg-danger m-1" Admin
+                                                        br
+                                                    -if mes.user_id.present? && !mes.user.admin? && !mes.user.moderator?
+                                                        span class="badge text-bg-success m-1" Regisztrált
+                                                        br
                                                 - if mes.username.present?
                                                     = mes.username
-                                        -if current_user 
-                                            -if current_user.admin?
-                                                =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
-                                                -if !mes.accept
-                                                    =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"                                                
                                                 br
-                                        
-                                        -if mes.accept || current_user&.admin?
+                                                |(#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
 
-                                            - if mes.user_id.present?
-                                                
-                                                -if mes.user.photo.present?
-                                                    =image_tag mes.user.photo, size: "100x100"
-                                                    br
-                                                = mes.user.alias || mes.user.name
-                                                -if mes.user.moderator?
-                                                    span class="badge text-bg-info m-1 " Fordító
-                                                -if mes.user.admin?
-                                                    span class="badge text-bg-danger m-1" Admin
-                                                -if mes.user_id.present? && current_user&.admin?
-                                                    span class="badge text-bg-success m-1" Regisztrált
-                                            - if mes.username.present?
-                                                = mes.username
-                                            |   üzente (#{mes.created_at.strftime("%Y-%m-%d %H:%M")}): 
-                                            hr
-                                        
+                                        .col-8
+                                            -if current_user 
+                                                -if current_user.admin?
+                                                    =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
+                                                    -if !mes.accept
+                                                        =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
                                             = mes.message
+                                        -if !mes.accept
+                                            .col-12
+                                                h3.bg-info 
+                                                    |Ez az üzenet még elfogadás alatt van, beküldő: >
+                                                    -if mes.user_id.present?
+                                                        = mes.user.alias||mes.user.name
+                                                    - if mes.username.present?
+                                                        = mes.username
+                                                                                  
+                                              
+                                        
+                                        
+                                            
+                                        
+                                            
                             h4.game-data__headline
                                 |Letöltési statisztika
                                 .text-light
