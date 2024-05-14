@@ -313,7 +313,7 @@
                             
                             br
                             
-                                .game-data__download-section.bg-dark.col-4.offset-4.p-2.rounded-3.text-center
+                                .game-data__download-section.bg-dark.col-lg-4.offset-lg-4.p-2.rounded-3.text-center
                                     
                                     - if !current_user.present?
                                         =label_tag(:username, "Felhasználónév")
@@ -328,11 +328,11 @@
                                     textarea id="duma_#{@game.id}" rows = "5"
                                     div class="btn btn-success btn-block col-11" data-id= "#{@game.id}" id="forumsubmit"
                                         |Beküldés
-                            .game-data__download-section.col-6.offset-3
+                            .game-data__download-section.col-lg-6.offset-lg-3
 
                                 - @gamemessage.each do |mes|
                                     
-                                    div class="bg-dark p-3 m-5 border-success rounded border-bottom col-12"
+                                    div class="bg-dark mb-5 border-success rounded border-bottom col-12"
                                         .row
                                             .col-3.border-right.border-success  style="text-align: center; border-right: 1px solid #28a745; overflow: hidden;"
                                                 -if mes.accept || current_user&.admin?
