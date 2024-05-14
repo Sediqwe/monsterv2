@@ -6,8 +6,9 @@
           
             
           .game-data__download-section.col-lg-12.col-xs-12.rounded-3.text-center
-            = link_to "Vissza", qc_path, class:"btn btn-secondary col-4" 
-            br
+            = link_to "« Vissza", qc_path, class:"btn btn-secondary col-4" 
+
+            = link_to "A játék oldala »", game_path(params[:id]), class:"btn m-2 btn-warning col-4" 
             hr.text-light
             .game-data__download-section.bg-dark.col-8.offset-2.p-2.rounded-3.text-center.text-light
                                   
