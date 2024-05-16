@@ -336,7 +336,6 @@
                                         .row
                                             .col-3.border-right.border-success  style="text-align: center; border-right: 1px solid #28a745; overflow: hidden;"
                                             
-
                                                 - if mes.user_id.present?
                                                     
                                                     -if mes.user.photo.present?
@@ -364,7 +363,7 @@
                                                         =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
                                                         -if !mes.accept
                                                             =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
-                                                -if mes.accept
+                                                -if mes.accept || current_user&.admin?
                                                     = mes.message
                                             -if !mes.accept
                                                 .col-12
