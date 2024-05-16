@@ -335,28 +335,28 @@
                                     div class="bg-dark mb-5 border-success rounded border-bottom col-12"
                                         .row
                                             .col-3.border-right.border-success  style="text-align: center; border-right: 1px solid #28a745; overflow: hidden;"
-                                                -if mes.accept || current_user&.admin?
+                                            
 
-                                                    - if mes.user_id.present?
-                                                        
-                                                        -if mes.user.photo.present?
-                                                            =image_tag mes.user.photo, size: "100x100"
-                                                            br
-                                                        = mes.user.alias || mes.user.name
+                                                - if mes.user_id.present?
+                                                    
+                                                    -if mes.user.photo.present?
+                                                        =image_tag mes.user.photo, size: "100x100"
                                                         br
-                                                        -if mes.user.moderator?
-                                                            span class="badge text-bg-info  " Fordító
-                                                            br
-                                                        -if mes.user.admin?
-                                                            span class="badge text-bg-danger " Admin
-                                                            br
-                                                        -if mes.user_id.present? && !mes.user.admin? && !mes.user.moderator?
-                                                            span class="badge text-bg-success" Regisztrált
-                                                            br
-                                                    - if mes.username.present?
-                                                        = mes.username
+                                                    = mes.user.alias || mes.user.name
+                                                    br
+                                                    -if mes.user.moderator?
+                                                        span class="badge text-bg-info  " Fordító
                                                         br
-                                                    |#{mes.created_at.strftime("%Y-%m-%d %H:%M")}
+                                                    -if mes.user.admin?
+                                                        span class="badge text-bg-danger " Admin
+                                                        br
+                                                    -if mes.user_id.present? && !mes.user.admin? && !mes.user.moderator?
+                                                        span class="badge text-bg-success" Regisztrált
+                                                        br
+                                                - if mes.username.present?
+                                                    = mes.username
+                                                    br
+                                                |#{mes.created_at.strftime("%Y-%m-%d %H:%M")}
 
                                             .col-8.m-3
                                                 -if current_user 
