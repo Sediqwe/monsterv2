@@ -585,7 +585,7 @@ $(document).on('turbo:load', function() {
         var gameName = $(this).val();
         if (gameName) {
           $.ajax({
-            url: '/games/check_name', // Az elérési út a nevellenőrzéshez
+            url: '/check_name', // Az elérési út a nevellenőrzéshez
             method: 'GET',
             data: { name: gameName },
             success: function(response) {
@@ -601,7 +601,7 @@ $(document).on('turbo:load', function() {
         var gameName = $(this).val();
         if (gameName) {
           $.ajax({
-            url: '/games/check_steam', // Az elérési út a nevellenőrzéshez
+            url: '/check_steam', // Az elérési út a nevellenőrzéshez
             method: 'GET',
             data: { name: gameName },
             success: function(response) {

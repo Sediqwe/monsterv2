@@ -1,5 +1,5 @@
 class GamesController < ApplicationController
-  before_action :set_game, only: %i[ show edit update destroy ]
+  before_action :set_game, only: %i[show edit update destroy]
   before_action :authorized?, only: %i[new edit update destroy]
   require 'rmagick'
   def index
@@ -309,7 +309,7 @@ end
   private
     
     def set_game
-      if params[:id]!="favicon"
+      if params[:id]!="favicon" && params[:id]!="check_name"
         @game = Game.friendly.find(params[:id])
       end
     end
