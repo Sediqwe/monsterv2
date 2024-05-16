@@ -364,7 +364,8 @@
                                                         =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
                                                         -if !mes.accept
                                                             =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
-                                                = mes.message
+                                                -if mes.accept
+                                                    = mes.message
                                             -if !mes.accept
                                                 .col-12
                                                     h3.bg-info 
