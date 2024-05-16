@@ -582,7 +582,7 @@ $(document).on('turbo:load', function() {
 
     
       $('#game_name').on('change', function() {
-        var gameName = $(this).val();
+        var gameName = $(this).val().trim();
         if (gameName) {
           $.ajax({
             url: '/check_name', // Az elérési út a nevellenőrzéshez
