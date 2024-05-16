@@ -12,6 +12,9 @@
               br
               label for="password" Password
               = f.password_field :password,  class: "mb-2"
+              br
+              label for="remember_me" Emlékezz rám
+              = f.check_box :remember_me, class: "mb-2"
               button.btn.btn-primary Belépek
             p.mt-2
               | vagy

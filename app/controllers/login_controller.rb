@@ -18,6 +18,8 @@ class LoginController < ApplicationController
   
   def signout
     session[:user_id] = nil
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
     redirect_to root_url, notice: "Kilépés OK!"
   end
 
@@ -28,7 +30,7 @@ class LoginController < ApplicationController
 
   private
   def user_params
-   params.require(:user).permit(:name, :password, :password_confirmation, :email, :alias)
+   params.require(:user).permit(:name, :password, :password_confirmation, :email, :alias, :remember_me)
   end
 
 end

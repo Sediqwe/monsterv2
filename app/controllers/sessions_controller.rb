@@ -42,20 +42,41 @@ class SessionsController < ApplicationController
     user = User.find_by(name: user_params[:name].downcase).try(:authenticate, user_params[:password])
     if user
       session[:user_id] = user.id
+
       record_activity("Beléptetve: #{user.name} (ID:##{user.id})")
+      if user_params[:remember_me]
+        ensure_remember_token(user)
+        cookies.permanent.signed[:user_id] = user.id
+        cookies.permanent[:remember_token] = user.remember_token
+      else
+        cookies.delete(:user_id)
+        cookies.delete(:remember_token)
+      end
       redirect_to root_url, notice: "Belépve!"
     else
+      flash.now[:alert] = "Email or password is invalid"
       sleep 10
       record_attempts("Hibás belépés")
       number = ActivityLog.find_by(ip_address: request.env['REMOTE_ADDR'])
-     flash.now[:login_error] = "Hibás felhasználó / jelszó páros"
+      flash.now[:login_error] = "Hibás felhasználó / jelszó páros"
      
      render 'new'
     end
    end
+   def destroy
+    session[:user_id] = nil
+    cookies.delete(:user_id)
+    cookies.delete(:remember_token)
+    redirect_to root_path, notice: "Logged out!"
+  end
    
    private
     def user_params
-     params.require(:session).permit(:name, :password)
+     params.require(:session).permit(:name, :password, :remember_me)
+    end
+    def ensure_remember_token(user)
+      if user.remember_token.nil?
+        user.update(remember_token: SecureRandom.urlsafe_base64)
+      end
     end
 end
