@@ -598,7 +598,7 @@ $(document).on('turbo:load', function() {
       });
       
       $('#game_link_steam').on('change', function() {
-        var gameName = $(this).val();
+        var gameName = $(this).val().trim();
         if (gameName) {
           $.ajax({
             url: '/check_steam', // Az elérési út a nevellenőrzéshez
