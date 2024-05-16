@@ -1,7 +1,8 @@
 class Game < ApplicationRecord
+    before_save :trim_name
     has_many :uploads , dependent: :delete_all
     has_many_attached :game_files , dependent: :delete_all
-    has_one_attached :image , dependent: :delete_all
+    has_one_attached :image , dependent: :delete_all    
     has_many :autoforditoilist
     belongs_to :user
     has_many :stipis
@@ -29,7 +30,10 @@ class Game < ApplicationRecord
         filename = filename.gsub(".", "_")
         filename = filename.gsub("__", "_")
         return filename
-      end
+    end
+    def trim_name
+        self.name.strip! if name.present?
+    end
    
     
     
