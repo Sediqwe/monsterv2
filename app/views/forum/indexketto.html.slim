@@ -59,7 +59,7 @@
                       =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
                       -if !mes.accept
                         =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
-                  -if mes.accept
+                  -if mes.accept || current_user&.admin?
                     = mes.message
                 -if !mes.accept
                   .col-12

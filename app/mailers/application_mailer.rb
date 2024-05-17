@@ -12,8 +12,10 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(to: @user1.email, subject: 'Elfelejtett jelszó!')
   end
-  def new_email(id)
-    @user1 = User.find(1)
-    mail(to: @user1.email, subject: 'Új üzenet')
+  def new_email(slug,name,duma)
+    @slug = slug
+    @name = name
+    @duma = duma
+    mail(to: 'sediqwe@gmail.com', subject: 'Új üzenet')
   end
 end

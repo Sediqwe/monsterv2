@@ -142,7 +142,7 @@ class GamesController < ApplicationController
           gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
         end
         adatok.save
-        ApplicationMailer.new_email(1).deliver
+        ApplicationMailer.new_email(game.slug, name, duma).deliver
       else
         p game.id
         adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
