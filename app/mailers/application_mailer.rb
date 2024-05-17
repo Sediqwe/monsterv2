@@ -12,10 +12,16 @@ class ApplicationMailer < ActionMailer::Base
 
     mail(to: @user1.email, subject: 'Elfelejtett jelszó!')
   end
-  def new_email(slug,name,duma)
-    @slug = slug
-    @name = name
-    @duma = duma
+  def new_email(id)
+    message = Gamemessage.last
+    @slug = Game.find(message.game_id).slug
+    if message.user_id.present?
+      @name = message.user.alias || message.user.name
+    else
+      @name = message.username
+    end
+
+    @duma = message.message
     mail(to: 'sediqwe@gmail.com', subject: 'Új üzenet')
   end
 end
