@@ -138,11 +138,11 @@ class GamesController < ApplicationController
         adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)        
         if current_user.admin || current_user.moderator
           adatok.accept= true
-          name = current_user.alias || current_user.name
-          gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: name , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
+          username = current_user.alias || current_user.name
+          gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: username , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
         end
         adatok.save
-        ApplicationMailer.new_email(game.slug, name, duma).deliver
+        ApplicationMailer.new_email(game.slug, username, duma).deliver
       else
         p game.id
         adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
