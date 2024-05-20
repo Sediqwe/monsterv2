@@ -11,20 +11,31 @@
             = link_to "A játék oldala »", game_path(params[:id]), class:"btn m-2 btn-warning col-4" 
             hr.text-light
             .game-data__download-section.bg-dark.col-8.offset-2.p-2.rounded-3.text-center.text-light
-                                  
-              - if !current_user.present?
-                  =label_tag(:username, "Felhasználónév")
-                  =text_field_tag(:username, nil, class: "col-12 ")
-              
-              - if current_user
-                =label_tag(:username, "Felhasználónév")
-                - name = current_user.alias || current_user.name
-                = text_field_tag(:username, name, class: "col-12", readonly: true)
+                .row
+                  .col.lg-9
+                    - if !current_user.present?
+                        =label_tag(:username, "Felhasználónév")
+                        =text_field_tag(:username, nil, class: "col-12 ")
+                        =label_tag(:duma, "Üzenet" ,class:"m-2")
+                        textarea id="duma_#{params[:id]}" rows = "5"
+                        div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                          |Beküldés
+                    
+                    -if current_user && !current_user.mute?
+                      =label_tag(:username, "Felhasználónév")
+                      - name = current_user.alias || current_user.name
+                      = text_field_tag(:username, name, class: "col-12", readonly: true)
+                      =label_tag(:duma, "Üzenet" ,class:"m-2")
+                      textarea id="duma_#{params[:id]}" rows = "5"
+                      div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                        |Beküldés
+                    -if current_user && current_user.mute?
+                      .col-12.bg-danger
+                        |Hozzászólási jogod megvonva, keress meg a discordon(hunatbaf.hu_sediqwe) ha úgy véled, hogy hibáztunk a jog elvételekor.
+                  .col-lg-12.bg-info.text-dark.rounded.border-1.m-3.border-light.border
+                    |Bejelentkezett tagként automatikusan elfogadásra kerül a hozzászólásod.
+                    
 
-              =label_tag(:duma, "Üzenet" ,class:"m-2")
-              textarea id="duma_#{params[:id]}" rows = "5"
-              div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
-                |Beküldés
             
             - @game_messages.each do |mes|
               
@@ -53,12 +64,22 @@
                     br
                   |#{mes.created_at.strftime("%Y-%m-%d %H:%M")}
 
-                .col-8
                   -if current_user 
                     -if current_user.admin?
-                      =link_to "X", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
+                      br
+                      =link_to "Üzenet törlése", gameforumdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
                       -if !mes.accept
                         =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
+                      br
+                      
+                      -if mes.user.present?
+                        -if !User.find(mes.user_id).mute?
+                          =link_to "MUTE", gameforumusermute_path(id: mes.user_id), data: {confirm: "Kussoltatod??"}, method: "post", class: "btn btn-success"
+                        -if User.find(mes.user_id).mute?                          
+                          =link_to "UNMUTE", gameforumuserunmute_path(id: mes.user_id), data: {confirm: "Visszakuss??"}, method: "post", class: "btn btn-success"
+
+                .col-8
+                  
                   -if mes.accept || current_user&.admin?
                     = mes.message
                 -if !mes.accept

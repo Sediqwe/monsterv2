@@ -128,6 +128,18 @@ class GamesController < ApplicationController
       redirect_to game_path(gamemessage.game_id)
     end
   end
+  def mute
+    if current_user&.admin?
+      user = User.find(params[:id])
+      user.update(mute: true)     
+    end
+  end
+  def unmute
+    if current_user&.admin?
+      user = User.find(params[:id])
+      user.update(mute: false)      
+    end
+  end
   def forum
     
     duma = params[:duma] # Az űrlapból kapott duma_ID
@@ -136,7 +148,7 @@ class GamesController < ApplicationController
     game = Game.find(id)# Az űrlapból kapott id
       if current_user.present?
         adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)        
-        if current_user.admin || current_user.moderator
+        if current_user && current_user.mute = false
           adatok.accept= true
           username = current_user.alias || current_user.name
           gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: username , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))

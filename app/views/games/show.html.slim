@@ -315,19 +315,29 @@
                             
                                 .game-data__download-section.bg-dark.col-lg-4.offset-lg-4.p-2.rounded-3.text-center
                                     
-                                    - if !current_user.present?
-                                        =label_tag(:username, "Felhasználónév")
-                                        =text_field_tag(:username, nil, class: "col-12 ")
-                                    
-                                    - if current_user
-                                        =label_tag(:username, "Felhasználónév")
-                                        - name = current_user.alias || current_user.name
-                                        = text_field_tag(:username, name, class: "col-12", readonly: true)
-
-                                    =label_tag(:duma, "Üzenet" ,class:"m-2")
-                                    textarea id="duma_#{@game.id}" rows = "5"
-                                    div class="btn btn-success btn-block col-11" data-id= "#{@game.id}" id="forumsubmit"
-                                        |Beküldés
+                                    .row
+                                        .col.lg-9
+                                            - if !current_user.present?
+                                                =label_tag(:username, "Felhasználónév")
+                                                =text_field_tag(:username, nil, class: "col-12 ")
+                                                =label_tag(:duma, "Üzenet" ,class:"m-2")
+                                                textarea id="duma_#{params[:id]}" rows = "5"
+                                                div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                                                    |Beküldés
+                                            
+                                            -if current_user && !current_user.mute?
+                                                =label_tag(:username, "Felhasználónév")
+                                                - name = current_user.alias || current_user.name
+                                                = text_field_tag(:username, name, class: "col-12", readonly: true)
+                                                =label_tag(:duma, "Üzenet" ,class:"m-2")
+                                                textarea id="duma_#{params[:id]}" rows = "5"
+                                                div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                                                    |Beküldés
+                                            -if current_user && current_user.mute?
+                                                .col-12.bg-danger
+                                                    |Hozzászólási jogod megvonva, keress meg a discordon(hunatbaf.hu_sediqwe) ha úgy véled, hogy hibáztunk a jog elvételekor.
+                                        .col-lg-11.bg-info.text-dark.rounded.border-1.m-3.border-light.border
+                                            |Bejelentkezett tagként automatikusan elfogadásra kerül a hozzászólásod.
                             .game-data__download-section.col-lg-6.offset-lg-3
 
                                 - @gamemessage.each do |mes|

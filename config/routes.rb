@@ -105,7 +105,8 @@ Rails.application.routes.draw do
   get "universal", to: "beolvas#universal"
   post "universal_save", to: "beolvas#universal_save"
   get "delete_uzenet", to:"uzenets#delete_uzenet"
-  
+  post "gameforumusermute", to: "games#mute"
+  post "gameforumuserunmute", to: "games#unmute"
 
   get 'lista', to: 'lists#friss'
   get 'mega', to: 'mega#index'
