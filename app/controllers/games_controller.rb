@@ -148,7 +148,7 @@ class GamesController < ApplicationController
     game = Game.find(id)# Az űrlapból kapott id
       if current_user.present?
         adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)        
-        if current_user && current_user.mute = false
+        if current_user.present? && current_user.mute == false
           adatok.accept= true
           username = current_user.alias || current_user.name
           gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: username , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
