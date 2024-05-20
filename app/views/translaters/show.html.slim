@@ -6,7 +6,7 @@
       - if current_user&.admin?
         -if !current_user.active?
           = link_to "Aktív", translateractive_path(id: @translater.id),method: "post", class:"btn btn-success"
-        -if current_user.active?
+        -if !current_user.active?
           = link_to "Nem Aktív", translaterdeactive_path(id: @translater.id), method: "post", class:"btn btn-success"
       .row
         .col-xs-12.col-sm-12.col-md-3
