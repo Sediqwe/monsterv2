@@ -13,9 +13,6 @@
             .creator-card
               = link_to translater_path(t.slug)
                 .creator-card__img
-                  -if current_user&.admin?
-                    -if t.active?
-                      h1 AKTÍV
                   = image_tag("ize/2.svg", class: "img-fluid")
                 h4
                   = t.translater_name

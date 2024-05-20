@@ -321,8 +321,8 @@
                                                 =label_tag(:username, "Felhasználónév")
                                                 =text_field_tag(:username, nil, class: "col-12 ")
                                                 =label_tag(:duma, "Üzenet" ,class:"m-2")
-                                                textarea id="duma_#{params[:id]}" rows = "5"
-                                                div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                                                textarea id="duma_#{@game.id}" rows = "5"
+                                                div class="btn btn-primary btn-block col-5" data-id= "#{@game.id}" id="forumsubmit"
                                                     |Beküldés
                                             
                                             -if current_user && !current_user.mute? 
@@ -330,8 +330,8 @@
                                                 - name = current_user.alias || current_user.name
                                                 = text_field_tag(:username, name, class: "col-12", readonly: true)
                                                 =label_tag(:duma, "Üzenet" ,class:"m-2")
-                                                textarea id="duma_#{params[:id]}" rows = "5"
-                                                div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
+                                                textarea id="duma_#{@game.id}" rows = "5"
+                                                div class="btn btn-primary btn-block col-5" data-id= "#{@game.id}" id="forumsubmit"
                                                     |Beküldés
                                             -if current_user && current_user.mute?
                                                 .col-12.bg-danger
