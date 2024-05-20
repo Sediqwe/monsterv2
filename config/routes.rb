@@ -101,6 +101,8 @@ Rails.application.routes.draw do
   get "duplikalo", to: "beolvas#duplikalo"
   get "duplikalo_delete", to: "beolvas#duplikalo_delete"
   get "fordsor", to: "beolvas#fordsor"
+  post "translateractive", to: "translaters#active"
+  post "translaterdeactive", to: "translaters#deactive"
   get "mutasd", to: "beolvas#mutasd"
   get "universal", to: "beolvas#universal"
   post "universal_save", to: "beolvas#universal_save"

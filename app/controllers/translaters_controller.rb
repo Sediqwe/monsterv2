@@ -4,12 +4,25 @@ class TranslatersController < ApplicationController
   
   # GET /translaters or /translaters.json
   def index
-    @translaters = Translater.where(active: true).order(translater_name: :ASC)
+    @translaters = Translater.where(active: true).all.order(translater_name: :ASC)
+    @translaters_rest = Translater.where(active: false).order(translater_name: :ASC)
+    
     @upload = Upload.order("created_at DESC").first(10)
     @download = Download.order("created_at DESC").first(10)
    
   end
-
+  def active
+    if current_user.admin?
+      trans = Translater.find(params[:id])
+      trans.update(active: true)
+    end
+  end
+  def deactive
+    if current_user.admin?
+      trans = Translater.find(params[:id])
+      trans.update(active: false)
+    end
+  end
   # GET /translaters/1 or /translaters/1.json
   def show
     
