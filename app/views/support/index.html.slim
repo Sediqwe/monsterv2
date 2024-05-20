@@ -40,10 +40,7 @@
                                 - @users.shuffle.each do |user|
                                 
                                     = link_to  translater_path(user.translater), class:"btn btn-secondary " do |link|
-                                        - if user.alias.size>1
-                                            = user.alias 
-                                        - else
-                                            = user.name.downcase.capitalize 
+                                        = user.alias || user.name.downcase.capitalize
                                         -supportlist = Supportlist.where(user_id: user)
                                         -supportlist.each do |support|
                                             = raw(support.iconbootstrap.gsub('"></', ' m-1"></'))
