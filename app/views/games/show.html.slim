@@ -325,7 +325,7 @@
                                                 div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit"
                                                     |Beküldés
                                             
-                                            -if current_user && !current_user.mute?
+                                            -if current_user && !current_user.mute? 
                                                 =label_tag(:username, "Felhasználónév")
                                                 - name = current_user.alias || current_user.name
                                                 = text_field_tag(:username, name, class: "col-12", readonly: true)

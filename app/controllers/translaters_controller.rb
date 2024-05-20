@@ -4,7 +4,7 @@ class TranslatersController < ApplicationController
   
   # GET /translaters or /translaters.json
   def index
-    @translaters = Translater.all.order(translater_name: :ASC)
+    @translaters = Translater.where(active: true).order(translater_name: :ASC)
     @upload = Upload.order("created_at DESC").first(10)
     @download = Download.order("created_at DESC").first(10)
    
