@@ -10,7 +10,11 @@
     <meta name="viewport" content="width=device-width,initial-scale=1">
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <link rel="icon" type="image/png" href="favicon.png" />
+    <%= favicon_link_tag 'favicon-16x16.png', rel: 'icon', sizes: '16x16' %>
+    <%= favicon_link_tag 'favicon-32x32.png', rel: 'icon', sizes: '32x32' %>
+    <%= favicon_link_tag 'favicon.ico', rel: 'icon', sizes: '48x48' %>
+
+
     <%= stylesheet_link_tag "application", "data-turbo-track": "load" %>
     <%= javascript_importmap_tags   %>
     
