@@ -1,0 +1,11 @@
+.image-container {
+    position: relative; /* A vízjel pozicionálásához */
+  }
+  
+  .watermark {
+    position: absolute; /* A vízjel pozicionálása a konténeren belül */
+    top: 0px; /* A vízjel távolsága a konténer tetejétől */
+    left: 0px; /* A vízjel távolsága a konténer bal szélétől */
+    width: 100%; /* Vízjel szélessége azonos az eredeti képével */
+    height: 100%; /* Vízjel magassága azonos az eredeti képével */
+  }
