@@ -1,0 +1,13 @@
+= simple_form_for(@gamereq) do |f|
+  = f.error_notification
+  = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+  .form-inputs
+    = f.input :gamename, label: "Játék neve"
+    = f.input :gamelink, label: "Játék link(Steam, Epic...)"
+    = f.input :username, label: "Neved", input_html: {disabled:  current_user ? true : false, value: current_user ? current_user.name : '' } 
+    = f.input :desc, label: "Kérés:"
+   
+
+  .form-actions
+    = f.button :submit , "Beküldés", class:"btn btn-success"

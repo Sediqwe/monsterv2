@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  resources :gamereqs
+  
   get 'qc', to: "forum#index"
   get 'qc/:id', to: 'forum#indexketto', as: 'qct'
   get "backup", to: 'backup#index'
@@ -8,8 +10,11 @@ Rails.application.routes.draw do
   get "minus_upload", to: "uploads#minus_upload"
   get "yttodiscord", to: "games#yttodiscord"
   post "gameforum", to: "games#forum"
+  
   get "gameforumdelete", to: "games#forumdelete"
   get "gameforumaccept", to: "games#forumaccept"
+  get "gamereqsdelete", to: "gamereqs#reqsdelete"
+  get "gamereqsaccept", to: "gamereqs#reqsaccept"
   get "gameforumaccept2", to: "games#forumaccept2"
   get "check_username", to: "games#check_username"
   resources :supportlists

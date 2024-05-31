@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_20_180532) do
+ActiveRecord::Schema[7.0].define(version: 2024_05_31_184210) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -261,6 +261,21 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_180532) do
     t.index ["game_id"], name: "index_gamemessages_on_game_id"
     t.index ["gamemessage_id"], name: "index_gamemessages_on_gamemessage_id"
     t.index ["user_id"], name: "index_gamemessages_on_user_id"
+  end
+
+  create_table "gamereqs", force: :cascade do |t|
+    t.text "gamename"
+    t.text "gamelink"
+    t.bigint "user_id"
+    t.text "username"
+    t.bigint "game_id"
+    t.text "desc"
+    t.boolean "oke", default: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.integer "valasz"
+    t.index ["game_id"], name: "index_gamereqs_on_game_id"
+    t.index ["user_id"], name: "index_gamereqs_on_user_id"
   end
 
   create_table "games", force: :cascade do |t|
@@ -672,6 +687,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_20_180532) do
   add_foreign_key "forums", "users"
   add_foreign_key "gamemessages", "gamemessages"
   add_foreign_key "gamemessages", "games"
+  add_foreign_key "gamereqs", "games"
+  add_foreign_key "gamereqs", "users"
   add_foreign_key "games", "users"
   add_foreign_key "gmessages", "games"
   add_foreign_key "gmessages", "gmessages"

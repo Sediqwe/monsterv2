@@ -1,0 +1,26 @@
+.container-flex
+  .row 
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+        
+        .row
+            .col-lg-7.col-xs-12.offset-lg-2
+                .bg-dark.rounded.m-2
+                    .game-data__download-section.bg-dark.col-lg-8.col-xs-12.offset-lg-2.p-2.rounded-3.text-center
+                       
+
+                        - @gamereqs.each do |message|
+                            = link_to gamereq_path(id: message), class:"btn btn-primary col-12 col-lg-8 offset-lg-2 text-center mb-4 p-3 rounded" do |link|
+                                    h3
+                                        | #{message.gamename} »                                                                           
+                                    
+                                    - if message.user_id.present?
+                        
+                                        | #{message.user.alias || message.user.name}
+                                    -else 
+                                        | #{message.username}
+                                    br
+                                    |  #{message.created_at.strftime("%Y-%m-%d %H:%M")}
+                                    br
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
+

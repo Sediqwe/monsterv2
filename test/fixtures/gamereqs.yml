@@ -1,0 +1,19 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  gamename: MyText
+  gamelink: MyText
+  user: one
+  username: MyText
+  game: one
+  desc: MyText
+  oke: false
+
+two:
+  gamename: MyText
+  gamelink: MyText
+  user: two
+  username: MyText
+  game: two
+  desc: MyText
+  oke: false

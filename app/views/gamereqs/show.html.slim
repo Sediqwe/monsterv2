@@ -1,0 +1,108 @@
+.container-flex
+  .row 
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-lg-7.col-xs-12.offset-lg-2
+          
+            
+          .game-data__download-section.col-lg-12.col-xs-12.rounded-3.text-center
+            = link_to "« Vissza", gamereqs_path, class:"btn btn-secondary col-4" 
+            - if  @gamereq.game_id.present?
+              = link_to "A játék oldala »", game_path(@gamereq.game.slug), class:"btn m-2 btn-warning col-4" 
+            hr.text-light
+            .game-data__download-section.bg-dark.col-8.offset-2.p-2.rounded-3.text-center.text-light
+                .row
+                  .col.lg-9
+                    - if !current_user.present?
+                        =label_tag(:username, "Felhasználónév")
+                        =text_field_tag(:username, nil, class: "col-12 ")
+                        =label_tag(:duma, "Üzenet" ,class:"m-2")
+                        textarea id="duma_#{params[:id]}" rows = "5"
+                        div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit2"
+                          |Beküldés
+                    
+                    -if current_user && !current_user.mute?
+                      =label_tag(:username, "Felhasználónév")
+                      - name = current_user.alias || current_user.name
+                      = text_field_tag(:username, name, class: "col-12", readonly: true)
+                      =label_tag(:duma, "Üzenet" ,class:"m-2")
+                      textarea id="duma_#{params[:id]}" rows = "5"
+                      div class="btn btn-primary btn-block col-5" data-id= "#{params[:id]}" id="forumsubmit2"
+                        |Beküldés
+                    -if current_user && current_user.mute?
+                      .col-12.bg-danger
+                        |Hozzászólási jogod megvonva, keress meg a discordon(hunatbaf.hu_sediqwe) ha úgy véled, hogy hibáztunk a jog elvételekor.
+                  .col-lg-12.bg-info.text-dark.rounded.border-1.m-3.border-light.border
+                    |Bejelentkezett tagként automatikusan elfogadásra kerül a hozzászólásod.
+                    
+
+            
+            - @gamereqs.each do |mes|
+              
+              .row.bg-dark.mb-4.rounded.text-light
+                .col-3.border-right.border-success.p-2 style="text-align: center; border-right: 1px solid #28a745; overflow: hidden;"
+                  -if mes.oke || current_user&.admin?
+
+                    - if mes.user_id.present?
+                        
+                      -if mes.user.photo.present?
+                        =image_tag mes.user.photo, size: "100x100"
+                        br
+                      = mes.user.alias || mes.user.name
+                      br
+                      -if mes.user.moderator?
+                        span class="badge text-bg-info  " Fordító
+                        br
+                      -if mes.user.admin?
+                        span class="badge text-bg-danger " Admin
+                        br
+                      -if mes.user_id.present? && !mes.user.admin? && !mes.user.moderator?
+                        span class="badge text-bg-success" Regisztrált
+                        br
+                  - if mes.username.present?
+                    = mes.username
+                    br
+                  |#{mes.created_at.strftime("%Y-%m-%d %H:%M")}
+
+                  -if current_user 
+                    -if current_user.admin?
+                      br
+                      = button_to "Destroy this gamereq", @gamereq, method: :delete
+                      =link_to "Üzenet törlése", gamereqsdelete_path(id: mes.id), data: {confirm: "Törlöd??"}, class: "btn btn-danger"
+                      -if !mes.oke
+                        =link_to "OK", gamereqsaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
+                      br
+                      
+                      -if mes.user.present?
+                        -if !User.find(mes.user_id).mute?
+                          =link_to "MUTE", gameforumusermute_path(id: mes.user_id), data: {confirm: "Kussoltatod??"}, method: "post", class: "btn btn-success"
+                        -if User.find(mes.user_id).mute?                          
+                          =link_to "UNMUTE", gameforumuserunmute_path(id: mes.user_id), data: {confirm: "Visszakuss??"}, method: "post", class: "btn btn-success"
+
+                .col-8
+                  
+                  -if mes.oke || current_user&.admin?
+                    = mes.desc
+                -if !mes.oke
+                  .col-12
+                    h3.bg-info 
+                      |Ez az üzenet még elfogadás alatt van, beküldő: >
+                      -if mes.user_id.present?
+                        = mes.user.alias||mes.user.name
+                      - if mes.username.present?
+                        = mes.username
+            = link_to "Vissza", qc_path, class:"btn btn-secondary col-lg-4"
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render 'shared/side' 
+
+
+
+    
+    
+
+
+
+
+
+
+  

@@ -141,7 +141,6 @@ class GamesController < ApplicationController
     end
   end
   def forum
-    
     duma = params[:duma] # Az űrlapból kapott duma_ID
     id = params[:id] 
     username = params[:username] 
