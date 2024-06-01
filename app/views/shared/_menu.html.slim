@@ -8,9 +8,11 @@
   
     a.btn.btn-primary[href="/supports"]
       | Támogatás »
-    = search_form_for @q, class:"search pb", url: games_path do |f|
-      = f.text_field :name_cont, placeholder: "Gyors kereső..." , class: "search-field"
+    
   ul.links
+    li 
+      = search_form_for @q, class:"search pb", url: games_path do |f|
+        = f.text_field :name_cont, placeholder: "Gyors kereső..." , class: "search-field"
     
     - if current_user&.admin?
       li
@@ -26,14 +28,7 @@
     - if current_user
       li
         = link_to " Beállítások", edit_user_path(current_user)
-    li
-      = link_to " Fordítások", games_path
-    Li 
-      = link_to " AUTO fordítók", autoforditoilists_path
-    Li 
-      = link_to " Wiki.Monster", "https://wiki.gep.monster", target: "Blank"
-    li
-      = link_to " Statisztika", stat_path
+    
     - if current_user&.admin?
       li
         = link_to " Kérések", disqus_path
