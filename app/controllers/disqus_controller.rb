@@ -10,5 +10,10 @@ class DisqusController < ApplicationController
         .where(created_at: egy_honapja..Date.today)
         .distinct
         .count
+
+        @egyedi_beleptetesek2 = ActivityLog
+        .where("note LIKE 'Beléptetve:%'")
+        .where(created_at: egy_honapja..Date.today)
+        .count
     end
 end
