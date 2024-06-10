@@ -31,8 +31,9 @@
                         .col-lg-6.col-xs-12.col-sm-12.col-md-12
                             div class="image-container"
                                 = image_tag(@game.image.variant(resize_to_limit: [900, 900]), class: 'img-fluid game-data__img rounded rounded-3 ') if @game.image.attached?
-                                - images = ["overlay2.png", "overlay.png"]
-                                = image_tag images.sample, class: "watermark"
+                                - if current_user&.admin?
+                                    - images = ["overlay2.png", "overlay.png"]
+                                    = image_tag images.sample, class: "watermark"
                             
                             - if @game.done
                                 .green-box.blink
