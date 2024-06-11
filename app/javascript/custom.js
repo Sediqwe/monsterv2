@@ -1,4 +1,5 @@
 $(document).on('turbo:load', function() {
+  let uzenetKuldesFolyamatban = false;
   $('#uploadtranslaters_').on('click', function () {
     $("#upika").removeAttr("hidden");
 });
@@ -44,8 +45,14 @@ $(document).on('turbo:load', function() {
   });
 });
 
-  $('#forumsubmit').on('click', function () {
+  $('#forumsubmit').on('click', function (event) {
     
+    if (uzenetKuldesFolyamatban) {
+      return; // Ha már folyamatban van kérés, ne csinálj semmit
+  }
+    event.preventDefault(); 
+    uzenetKuldesFolyamatban = true;
+    $(this).prop('disabled', true); 
     var id = $('#forumsubmit').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
     var username = $('#username').val(); 
@@ -66,6 +73,7 @@ $(document).on('turbo:load', function() {
               url: '/gameforum', // A szerveroldali útvonal
               data: { duma: dumaData, id: id, username: username }, // Az adatok elküldése a szervernek
               success: function(response) {
+                uzenetKuldesFolyamatban = false;
                 window.location.href = window.location.href; 
                 
               },
