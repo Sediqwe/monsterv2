@@ -273,7 +273,7 @@ def windows_compatible_file_name(filename)
 end
 def gupdate
   @all = Gupdate.where(active: [false, nil]).first
-  render html: @all.content + "||||Ł" + url_for(@all.game.image)
+  render html: @all.content + "||||Ł" + url_for(@all.game.image) + "||||Ł" + Game.find(@all.game_id).slug
 end
   def update
     upd = @game.updated_at
