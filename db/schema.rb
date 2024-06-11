@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_05_31_184210) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_11_174849) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -188,6 +188,12 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_31_184210) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "felveszems", force: :cascade do |t|
+    t.text "content"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "forum_categories", id: :serial, force: :cascade do |t|
     t.string "name", null: false
     t.string "slug", null: false
@@ -258,6 +264,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_05_31_184210) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.string "username"
+    t.string "azon"
+    t.index ["azon"], name: "index_gamemessages_on_azon", unique: true
     t.index ["game_id"], name: "index_gamemessages_on_game_id"
     t.index ["gamemessage_id"], name: "index_gamemessages_on_gamemessage_id"
     t.index ["user_id"], name: "index_gamemessages_on_user_id"

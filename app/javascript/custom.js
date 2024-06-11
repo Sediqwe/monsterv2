@@ -45,17 +45,11 @@ $(document).on('turbo:load', function() {
   });
 });
 
-  $('#forumsubmit').on('click', function (event) {
-    
-    if (uzenetKuldesFolyamatban) {
-      return; // Ha már folyamatban van kérés, ne csinálj semmit
-  }
-    event.preventDefault(); 
-    uzenetKuldesFolyamatban = true;
-    $(this).prop('disabled', true); 
+  $('#forumsubmit').on('click', function () {
     var id = $('#forumsubmit').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
     var username = $('#username').val(); 
+    var azon = $('#azon').val(); 
     
     if(dumaData.length > 5 && username.length >0){
       $.ajax({
@@ -71,7 +65,7 @@ $(document).on('turbo:load', function() {
             $.ajax({
               type: 'POST',
               url: '/gameforum', // A szerveroldali útvonal
-              data: { duma: dumaData, id: id, username: username }, // Az adatok elküldése a szervernek
+              data: { duma: dumaData, id: id, username: username, azon: azon }, // Az adatok elküldése a szervernek
               success: function(response) {
                 uzenetKuldesFolyamatban = false;
                 window.location.href = window.location.href; 
@@ -106,6 +100,8 @@ $(document).on('turbo:load', function() {
     var id = $('#forumsubmit2').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
     var username = $('#username').val(); 
+    var azon = $('#azon').val(); 
+    alert(azon);
     if(dumaData.length > 5 && username.length >0){
       $.ajax({
         type: 'GET',
@@ -120,7 +116,7 @@ $(document).on('turbo:load', function() {
             $.ajax({
               type: 'POST',
               url: '/gamereqs', // A szerveroldali útvonal
-              data: { duma: dumaData, id: id, username: username }, // Az adatok elküldése a szervernek
+              data: { duma: dumaData, id: id, username: username, azon: azon }, // Az adatok elküldése a szervernek
               success: function(response) {
                 uzenetKuldesFolyamatban = false;
                 window.location.href = window.location.href; 

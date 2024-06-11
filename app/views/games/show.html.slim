@@ -325,6 +325,7 @@
                                             - if !current_user.present?
                                                 =label_tag(:username, "Felhasználónév")
                                                 =text_field_tag(:username, nil, class: "col-12 ")
+                                                = hidden_field_tag(:azon , Time.now.strftime("%Y%m%d%H%M%S")) 
                                                 =label_tag(:duma, "Üzenet" ,class:"m-2")
                                                 textarea id="duma_#{@game.id}" rows = "5"
                                                 div class="btn btn-primary btn-block col-5" data-id= "#{@game.id}" id="forumsubmit"
@@ -334,6 +335,7 @@
                                                 =label_tag(:username, "Felhasználónév")
                                                 - name = current_user.alias || current_user.name
                                                 = text_field_tag(:username, name, class: "col-12", readonly: true)
+                                                = hidden_field_tag(:azon , Time.now.strftime("%Y%m%d%H%M%S")) 
                                                 =label_tag(:duma, "Üzenet" ,class:"m-2")
                                                 textarea id="duma_#{@game.id}" rows = "5"
                                                 div class="btn btn-primary btn-block col-5" data-id= "#{@game.id}" id="forumsubmit"

@@ -143,26 +143,29 @@ class GamesController < ApplicationController
   def forum
     duma = params[:duma] # Az űrlapból kapott duma_ID
     id = params[:id] 
+    azon = params[:azon]
     username = params[:username] 
     game = Game.find(id)# Az űrlapból kapott id
+    van = Gamemessage.find_by(azon: azon)
+    if !van
       if current_user.present?
-        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id)        
-        if current_user.present? && current_user.mute == false
-          adatok.accept= true
-          username = current_user.alias || current_user.name
-          gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: username , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
+        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id, azon: username + azon)        
+        adatok.accept= true
+        if adatok.save
+          if current_user.mute == false
+            
+            username = current_user.alias || current_user.name
+            gemorss = Gemorss.create(link: "https://gep.monster/games/" + game.slug, user: username , desc: duma, idouj3:DateTime.now.strftime("%Y.%m.%d %H:%M"))
+            ApplicationMailer.new_email(1).deliver
+          end
         end
-        adatok.save
-        ApplicationMailer.new_email(1).deliver
       else
-        p game.id
-        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil)
-        adatok.save
+        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil, azon: username + azon)
+        if adatok.save
         ApplicationMailer.new_email(1).deliver
-        
+        end
       end
-      
-    
+    end
   end
   def delete_yt
     id = je_params[:id]
