@@ -271,11 +271,19 @@ def windows_compatible_file_name(filename)
   filename = filename.gsub("__", "_")
   return filename
 end
+def gupdate
+  @all = Gupdate.where(active: [false, nil]).first
+  render html: @all.content + "||||Ł" + url_for(@all.game.image)
+end
   def update
     upd = @game.updated_at
+    
     respond_to do |format|
       record_activity("Játék módosítva - Előtte: #{@game.name}")
       if @game.update(game_params)
+        if game_params[:image].present?
+          Gupdate.create(content: "Új kép lett feltöltve", user_id: current_user.id, game_id: @game.id)
+        end
           image = @game.image
           filename, extension = image.filename.to_s.split('.')
           image.filename = windows_compatible_file_name(@game.name.to_s) + "." + extension.to_s

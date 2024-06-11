@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_11_174849) do
+ActiveRecord::Schema[7.0].define(version: 2024_06_11_184618) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -338,6 +338,17 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_174849) do
     t.index ["gmessage_id"], name: "index_gmessages_on_gmessage_id"
     t.index ["senduser_id"], name: "index_gmessages_on_senduser_id"
     t.index ["user_id"], name: "index_gmessages_on_user_id"
+  end
+
+  create_table "gupdates", force: :cascade do |t|
+    t.string "content"
+    t.boolean "active"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.bigint "game_id", null: false
+    t.index ["game_id"], name: "index_gupdates_on_game_id"
+    t.index ["user_id"], name: "index_gupdates_on_user_id"
   end
 
   create_table "hopps", force: :cascade do |t|
@@ -702,6 +713,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_11_174849) do
   add_foreign_key "gmessages", "gmessages"
   add_foreign_key "gmessages", "users"
   add_foreign_key "gmessages", "users", column: "senduser_id"
+  add_foreign_key "gupdates", "games"
+  add_foreign_key "gupdates", "users"
   add_foreign_key "lemurs", "projects"
   add_foreign_key "news", "users"
   add_foreign_key "projects", "users"
