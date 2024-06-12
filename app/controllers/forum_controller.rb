@@ -5,6 +5,7 @@ class ForumController < ApplicationController
     
   end
   def indexketto
+    @game_name = Game.find(params[:id]).name
     @game_messages = Gamemessage.where(game_id: params[:id]).order(created_at: :desc)
   end
 end

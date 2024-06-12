@@ -6,6 +6,9 @@
           
             
           .game-data__download-section.col-lg-12.col-xs-12.rounded-3.text-center
+            h2 
+              = @game_name
+            
             = link_to "« Vissza", qc_path, class:"btn btn-secondary col-4" 
 
             = link_to "A játék oldala »", game_path(params[:id]), class:"btn m-2 btn-warning col-4" 
@@ -81,7 +84,7 @@
                 .col-8
                   
                   -if mes.accept || current_user&.admin?
-                    = mes.message
+                    = simple_format(mes.message)
                 -if !mes.accept
                   .col-12
                     h3.bg-info 
