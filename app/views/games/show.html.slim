@@ -381,8 +381,7 @@
                                                         -if !mes.accept
                                                             =link_to "OK", gameforumaccept_path(id: mes.id), data: {confirm: "Elfogadod??"}, class: "btn btn-success"      
                                                 -if mes.accept || current_user&.admin?
-                                                    pre
-                                                        = mes.message.html_safe
+                                                    = simple_format(mes.message)
                                             -if !mes.accept
                                                 .col-12
                                                     h3.bg-info 
