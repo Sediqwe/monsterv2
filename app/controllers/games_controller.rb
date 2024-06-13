@@ -279,7 +279,7 @@ def gupdate
 end
   def update
     upd = @game.updated_at
-    
+    akt_game = Game.find(@game.id)
     respond_to do |format|
       record_activity("Játék módosítva - Előtte: #{@game.name}")
       if @game.update(game_params)
@@ -290,10 +290,12 @@ end
           filename, extension = image.filename.to_s.split('.')
           image.filename = windows_compatible_file_name(@game.name.to_s) + "." + extension.to_s
           image.save
-          if game_params[:stipi]
-            @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id, okes: false )    
-          else
-            @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
+          if akt_game.stipiusername.to_i != current_user.id
+            if game_params[:stipi] 
+              @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id, okes: false )    
+            else
+              @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
+            end
           end
         record_activity("Játék módosítva - Utána: #{@game.name}")
         format.html { redirect_to game_url(@game), notice: "Game was successfully updated." }        

@@ -107,6 +107,15 @@
                                                             |Törlés
                                 -if current_user&.admin? || current_user&.moderator?
                                     -if @game.stipi && @game.stipiusername.to_i == current_user.id
+                                        h3.bg-warning.text-dark
+                                            |Ezt a játékot TE folglaltad le!
+                                        - if @game.hatarido.present?
+                                            - remaining_time = @game.hatarido - Time.now
+                                            - days = (remaining_time / 1.day).to_i
+                                            - hours = ((remaining_time % 1.day) / 1.hour).to_i
+                                            - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
+
+                                            p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
                                         textarea#lemondom name="lemondom" rows="6"
                                         .btn.btn-primary name="#{@game.id}" id="felold"
                                             |Feloldás
