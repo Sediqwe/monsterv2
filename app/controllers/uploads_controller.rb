@@ -61,16 +61,17 @@ class UploadsController < ApplicationController
   # POST /uploads or /uploads.json
   def create
     @upload = Upload.new(upload_params)
+    upd = Game.find(@upload.game_id)
     @upload.translater_id = 5
     @upload.user_id = current_user.id
     @upload.datum = Date.today()
-    @upload.name = Game.find(@upload.game_id).name
+    @upload.name = upd.name
     @upload.bad = false
-    upd = Game.find(@upload.game_id)
     upd.uploaded_at = DateTime.now
     upd.hidden = false
     if upd.stipi
       stipi = Stipi.new(user_id: current_user.id, gamename: upd.name, desc: "A játék elkészült, az adatlap feloldva.")
+      upd.stipiusername = ""
       stipi.save
     end
     upd.stipi = false
