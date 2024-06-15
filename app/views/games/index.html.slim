@@ -27,12 +27,12 @@
                 
             .step-filter
                 .row 
-                    .col-1 
+                    .col-2 
                         
                         - default_value = cookies[:selected_number] || "12"  # Alapértelmezett érték: 12, ha nincs cookie
                         = select_tag 'oldal', options_for_select(["3", "12", "24", "36", "48"], default_value)
                             
-                    .col-11 
+                    .col-10 
                         .step-filter__numbers
                             .row 
                                 = paginate @games
