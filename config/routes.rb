@@ -10,7 +10,7 @@ Rails.application.routes.draw do
   get "minus_upload", to: "uploads#minus_upload"
   get "yttodiscord", to: "games#yttodiscord"
   post "gameforum", to: "games#forum"
-  
+  delete "rssdelete", to: "rss#rssdelete"
   get "gameforumdelete", to: "games#forumdelete"
   get "gameforumaccept", to: "games#forumaccept"
   get "gamereqsdelete", to: "gamereqs#reqsdelete"

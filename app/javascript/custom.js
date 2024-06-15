@@ -577,6 +577,22 @@ $(document).on('turbo:load', function() {
                 })
         }
       });
+      $('div#reply').on('click', function(){
+        let id = $(this).attr('data-id');
+        let allapot = $('div#reply_' + id).attr('data-show');
+        
+        if(allapot == "ok"){
+          $('div#reply_' + id).show("slow");
+          $('div#reply_' + id).attr('data-show', 'nok');
+          
+        }
+        else{
+          $('div#reply_' + id).hide("slow");
+          $('div#reply_' + id).attr('data-show', 'ok');
+        }
+        
+        
+      });
       $('div#felold').on('click', function(){
         let id = $(this).attr('name');
         let adat = $('#lemondom').val();

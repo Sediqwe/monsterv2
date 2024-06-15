@@ -38,7 +38,9 @@
                         -parsed_date = DateTime.parse(rss.idouj3.to_s) 
                         |(
                         |#{parsed_date.strftime("%Y-%m-%d %H:%M") }
-                        |)   
+                        |)
+                        -if current_user&.admin?
+                            =button_to "Törlés", rssdelete_path(id: rss.id), method: "delete", data: {confirm: "Törlöd??"}, class: "btn btn-danger"   
 
     .side__header
         h5
