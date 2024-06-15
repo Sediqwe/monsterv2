@@ -402,11 +402,11 @@
                                                         |Erre válaszolt:  
                                                         = link_to 'ugrás oda', '#' + valaszolt_mes.id.to_s
                                                         .dashed-border.pl-4
-                                                            -if mes.username.present?
-                                                                = mes.username 
+                                                            -if valaszolt_mes.username.present?
+                                                                = valaszolt_mes.username 
                                                                 |:
                                                             -else
-                                                                = mes.user.alias || mes.user.name
+                                                                = valaszolt_mes.user.alias || valaszolt_mes.user.name
                                                                 | :
                                                             = simple_format(valaszolt_mes.message)
 
