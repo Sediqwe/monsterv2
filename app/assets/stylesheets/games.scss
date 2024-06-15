@@ -1,3 +1,6 @@
+html {
+  scroll-behavior: smooth;
+}
 .image-container {
     position: relative; /* A vízjel pozicionálásához */
   }
@@ -18,7 +21,13 @@
     position: relative;
     padding-bottom: 40px;
   }
-
+  .dashed-border {
+    padding-left: 4px;
+    padding-top: 3px;
+    padding-bottom:5px;
+    border-top: 2px dashed #ffffff; /* 1px vastag, szaggatott, fekete szegély */
+    border-left: 2px dashed #ffffff; /* 1px vastag, szaggatott, fekete szegély */
+  }
   div.no-underline:hover {
     color: inherit;
     text-decoration: none;

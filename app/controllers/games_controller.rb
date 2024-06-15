@@ -152,11 +152,18 @@ class GamesController < ApplicationController
     id = params[:id] 
     azon = params[:azon]
     username = params[:username] 
+    gamemessageid= params[:reply]
+    reply= false
+    if gamemessageid.present?
+      reply = true
+    end
+    
+
     game = Game.find(id)# Az űrlapból kapott id
     van = Gamemessage.find_by(azon: azon)
     if !van
       if current_user.present?
-        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id, azon: username + azon)        
+        adatok = Gamemessage.new(message: duma, user: current_user, game_id: game.id, azon: username + azon, reply: reply, gamemessage_id: gamemessageid)        
         adatok.accept= true
         if adatok.save
           if current_user.mute == false
@@ -167,7 +174,7 @@ class GamesController < ApplicationController
           end
         end
       else
-        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil, azon: username + azon)
+        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil, azon: username + azon, reply: reply, gamemessageid: gamemessageid)
         if adatok.save
         ApplicationMailer.new_email(1).deliver
         end

@@ -64,9 +64,8 @@ $('#oldal').on("change",function() {
     var id = $('#forumsubmit').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
     var username = $('#username').val(); 
-    var valasz = $('#valasz').val(); 
     var azon = $('#azon').val(); 
-    
+    var valasz = $('#valasz').val();
     if(dumaData.length > 5 && username.length >0){
       $.ajax({
         type: 'GET',
@@ -81,7 +80,7 @@ $('#oldal').on("change",function() {
             $.ajax({
               type: 'POST',
               url: '/gameforum', // A szerveroldali útvonal
-              data: { duma: dumaData, id: id, username: username, azon: azon, valasz: valasz }, // Az adatok elküldése a szervernek
+              data: { duma: dumaData, id: id, username: username, azon: azon,  }, // Az adatok elküldése a szervernek
               success: function(response) {
                 uzenetKuldesFolyamatban = false;
                 window.location.href = window.location.href; 
@@ -105,6 +104,53 @@ $('#oldal').on("change",function() {
     alert("Legalább 5 karakterben fogalmazd meg az üzeneted, és a felhasználói neved legyen kitöltve!");
   }
   });
+$('div[id^=replysubmit]').on('click', function () {
+    var valasz = $(this).data('id');
+    var gameid = $('#gameid').val();
+    var dumaData = $('#duma_'+ valasz).val(); // Az input mezőből származó adatok
+    var username = $('#username').val(); 
+     
+    var azon = $('#azon').val(); 
+    //alert(dumaData + "||" + username + "||" + valasz + "||" + azon + "||" + gameid);
+    if(dumaData.length > 5 && username.length >0){
+      $.ajax({
+        type: 'GET',
+        url: '/check_username', // A szerveroldali útvonal
+        data: { username: username }, // Az adatok elküldése a szervernek
+        success: function(response) {
+          if (response.exists) {
+            $("#username").removeClass();
+            $("#username").addClass(' col-12 bg-danger font-white ');
+          } else {
+            $("#username").removeClass("bg-danger");
+            $.ajax({
+              type: 'POST',
+              url: '/gameforum', // A szerveroldali útvonal
+              data: { duma: dumaData, id: gameid, username: username, azon: azon, reply: valasz }, // Az adatok elküldése a szervernek
+              success: function(response) {
+                uzenetKuldesFolyamatban = false;
+               window.location.href = window.location.href.split('#')[0];
+                
+              },
+              error: function(xhr, status, error) {
+                  alert("A rendszerben valami hiba van! Kérlek jelezd a discordon!");
+              }
+          });
+          }
+        },
+        error: function(xhr, status, error) {
+          
+        }
+    });
+
+
+    
+  }
+  else{
+    alert("Legalább 5 karakterben fogalmazd meg az üzeneted, és a felhasználói neved legyen kitöltve!");
+  }
+  });
+
 
   $('#forumsubmit2').on('click', function (event) {
     if (uzenetKuldesFolyamatban) {
@@ -180,7 +226,7 @@ $('#oldal').on("change",function() {
   });
 
   
-  $('[id^=delete_yt_').on('click', function () {
+  $('[id^=delete_yt_]').on('click', function () {
       var id = $(this).data('id');
       $.ajax({
         url: "/delete_yt",
@@ -194,7 +240,7 @@ $('#oldal').on("change",function() {
       })
     
   });
-  $('[id^=edit_').on('click', function () {
+  $('div[id^=edit_]').on('click', function () {
     
     var id = $(this).data('id');
     var adat = $('#edit_'+ id).val();
