@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   get "yttodiscord", to: "games#yttodiscord"
   post "gameforum", to: "games#forum"
   delete "rssdelete", to: "rss#rssdelete"
+  post "oldal", to: "games#oldal"
   get "gameforumdelete", to: "games#forumdelete"
   get "gameforumaccept", to: "games#forumaccept"
   get "gamereqsdelete", to: "gamereqs#reqsdelete"

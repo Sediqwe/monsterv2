@@ -3,7 +3,22 @@ $(document).on('turbo:load', function() {
   $('#uploadtranslaters_').on('click', function () {
     $("#upika").removeAttr("hidden");
 });
-
+$('#oldal').on("change",function() {
+ 
+  var selectedValue = $(this).val();
+ 
+  $.ajax({
+    url: '/oldal',
+    type: 'POST', // Use POST if you're creating or updating data; otherwise, use GET if you're just fetching data.
+    data: { selected_number: selectedValue },
+    success: function(response) {
+      window.location.href = window.location.href; 
+    },
+    error: function(xhr, status, error) {
+      
+    }
+  });
+});
   $('.delete-image').on('click', function() {
     var uploadId = $(this).data('upload-id');
     var imageId = $(this).data('image-id');
@@ -49,6 +64,7 @@ $(document).on('turbo:load', function() {
     var id = $('#forumsubmit').data('id');
     var dumaData = $('#duma_'+ id).val(); // Az input mezőből származó adatok
     var username = $('#username').val(); 
+    var valasz = $('#valasz').val(); 
     var azon = $('#azon').val(); 
     
     if(dumaData.length > 5 && username.length >0){
@@ -65,14 +81,14 @@ $(document).on('turbo:load', function() {
             $.ajax({
               type: 'POST',
               url: '/gameforum', // A szerveroldali útvonal
-              data: { duma: dumaData, id: id, username: username, azon: azon }, // Az adatok elküldése a szervernek
+              data: { duma: dumaData, id: id, username: username, azon: azon, valasz: valasz }, // Az adatok elküldése a szervernek
               success: function(response) {
                 uzenetKuldesFolyamatban = false;
                 window.location.href = window.location.href; 
                 
               },
               error: function(xhr, status, error) {
-                  // Hibakezelés
+                  alert("A rendszerben valami hiba van! Kérlek jelezd a discordon!");
               }
           });
           }
