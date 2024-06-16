@@ -15,10 +15,10 @@
                                 -if current_user.admin? || current_user.moderator?
                                     
                                         
-                                    -if @game.stipi && @game.user_id == current_user.id || current_user&.admin?
+                                    -if @game.stipi && @game.user_id == current_user.id 
                                         = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
                                         = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
-                                    - if !@game.stipi
+                                    - if !@game.stipi || current_user&.admin?
                                         = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
                                         = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
                                 
