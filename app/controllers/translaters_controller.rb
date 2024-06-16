@@ -25,7 +25,6 @@ class TranslatersController < ApplicationController
   end
   # GET /translaters/1 or /translaters/1.json
   def show
-    
     @feltoltesek = Upload.where(translater_id: params[:id]).order(id: :DESC)
     @upload = Upload.order("created_at DESC").first(10)
     @download = Download.order("created_at DESC").first(10)
