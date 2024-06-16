@@ -1,5 +1,5 @@
 - if current_user.admin? || current_user.moderator? 
-    -if @game.stipi && @game.user_id == current_user.id
+    -if @game.stipi && @game.user_id == current_user.id || current_user&.admin?
         == render 'form'
     -if !@game.stipi 
         == render 'form'
