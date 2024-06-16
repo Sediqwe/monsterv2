@@ -231,7 +231,7 @@ class GamesController < ApplicationController
     @game.user_id = current_user.id
     @game.uploaded_at = DateTime.now
     @game.hidden = true
-    if !game_params[:stipi].nil?
+    if game_params[:stipi].present?
       @game.hatarido = DateTime.now + 3.days
       @game.stipiusername = current_user.id
     end
@@ -295,7 +295,7 @@ end
     upd = @game.updated_at
     akt_game = Game.find(@game.id)
     respond_to do |format|
-      record_activity("Játék módosítva - Előtte: #{@game.name}")
+      record_activity("Játék módosítva: #{@game.name}")
       if @game.update(game_params)
         if game_params[:image].present?
           Gupdate.create(content: "Új kép lett feltöltve", user_id: current_user.id, game_id: @game.id)
@@ -305,10 +305,8 @@ end
           image.filename = windows_compatible_file_name(@game.name.to_s) + "." + extension.to_s
           image.save
           if akt_game.stipiusername.to_i != current_user.id
-            if game_params[:stipi] 
+            if game_params[:stipi].present?
               @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id, okes: false )    
-            else
-              @game.update(hatarido: DateTime.now + 3.days, stipiusername: current_user.id )
             end
           end
         record_activity("Játék módosítva - Utána: #{@game.name}")
