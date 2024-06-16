@@ -12,60 +12,64 @@
                             |Sajnos nincs találat...
 
                 - @facebook.each do |game|
-                   
+                   .col-xs-12.col-sm-6.col-md-6.col-lg-4
+                        .list-card
+                            .list-card__img
                                 
-                    .bg-light    
-                        b
-                            =game.name.upcase
-                            br
-                            |(
-                            = game.updated_at.strftime('%Y-%m-%d')
-                            |)
-                        br
-                        b Verzió:  
-                        - if game.version.downcase.exclude?("ismeretlen")
-                            = game.version
-                            br
-                            
-                        - if game.description.downcase.exclude?("ismeretlen")
-                            = game.description
-                            br
-                        
-                            
-                        b Készítő: 
-                        - adatok = Uploadtranslater.where(upload_id: game)
-                        - adatok.each_with_index do |dorka,index2|
-                            = dorka.translater.translater_name
-                            - if index2 < adatok.size-1
-                                | , 
-                        
-                        br
-                        b Fordító program: 
-                        - if game.mauto
-                            | Auto fordító
-                        - else 
-                            - if game.game_files.filename.to_s.downcase.include? "deepl"
-                                | Deepl
-                            - if game.game_files.filename.to_s.downcase.include? "google"
-                                | Google
-                        br
-                        b
-                            |Hozzászólás / Letöltés:
-                        br 
-                        br
-                        =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
-                        br
-                        b                                 
-                            |Támogatás:
-                        br
-                        br                                
-                        - adatok.each_with_index do |dorka,index2|
-                            br
-                            =link_to "https://gep.monster/translaters/#{dorka.translater.slug}", "https://gep.monster/translaters/#{dorka.translater.slug}" 
-                            - if index2 < adatok.size-1
-                                |    ,
-                        hr 
-                   
+                            .bg-light    
+                                b
+                                    =game.name.upcase
+                                br
+                                b Verzió:  
+                                - if game.version.downcase.exclude?("ismeretlen")
+                                    = game.version
+                                    br
+                                    
+                                - if game.description.downcase.exclude?("ismeretlen")
+                                    = game.description
+                                    br
+                                
+                                    
+                                b Készítő: 
+                                - adatok = Uploadtranslater.where(upload_id: game)
+                                - adatok.each_with_index do |dorka,index2|
+                                    = dorka.translater.translater_name
+                                    - if index2 < adatok.size-1
+                                        | , 
+                                
+                                br
+                                b Fordító program: 
+                                - if game.mauto
+                                    | Auto fordító
+                                - else 
+                                    - if game.game_files.filename.to_s.downcase.include? "deepl"
+                                        | Deepl
+                                    - if game.game_files.filename.to_s.downcase.include? "google"
+                                        | Google
+                                br
+                                
+                                |Hozzászólás / Letöltés: 
+                                =link_to "https://gep.monster/games/#{game.game.slug}", "https://gep.monster/games/#{game.game.slug}" 
+                                br                                
+                                |Támogatás:
+                                                              
+                                - adatok.each_with_index do |dorka,index2|
+                                    =link_to "https://gep.monster/translaters/#{dorka.translater.slug}", "https://gep.monster/translaters/#{dorka.translater.slug}" 
+                                    - if index2 < adatok.size-1
+                                        |    , 
+                                br                                
+                                h3 
+                                    b A Facebook oldalon a hozzászólás le van tiltva, ha szeretnél ehhez a játékhoz hozzászólni vagy kérdezni, azt a linkre kattintva megteheted.
+                                br
+                                = link_to game.game.image, download: true do
+                                    = image_tag game.game.image.variant(resize_to_fill: [413, 237], crop: "413x237+0+0"), class: 'img-fluid'
+                                
+
+                                
+                            .list-card__text
+                                h6
+                                    = game.name 
+                                    |  »
             step-filter
                 .step-filter__numbers
                         
