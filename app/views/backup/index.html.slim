@@ -2,31 +2,12 @@
     
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color.bg-dark.text-light
-            
-            -@backup.limit(10).each do |index|
-                = index.name
-                - filename = index.name.to_s
-                - filename = ActiveStorage::Filename.new(filename)
-                = link_to 'Kép letöltése', rails_blob_url(index.image)
-                - Upload.where(game_id: index.id).each do |upload|
-                    br
-                    = link_to upload.game_files.filename, upload.game_files
-                    
-                
-                br     
-                    
-                    
-                    
-                    
-                    
-            
-                   
-
-
-
-
-
-
+            ul
+                - @links.each do |game_link|
+                    - game_link[:game_files].each do |file|
+                        li
+                            = file[:file_link]
+                            
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
             = render 'shared/side'   
                 

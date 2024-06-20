@@ -1,8 +1,24 @@
 class BackupController < ApplicationController
-  
+  before_action :authorized?
   def index
-    @backup = Game.all.order(name: :ASC)
-  
+    
+    @backup = Game.all.order(name: :ASC).limit(10)
+    @links = []
+    
+    @backup.each do |game|
+      game_link = {}
+      game_link[:name] = game.name
+      game_link[:image_link] = rails_blob_url(game.image)
+      game_files = []
+    
+      Upload.where(game_id: game.id).each do |upload|
+        game_files << { filename: upload.game_files.filename, file_link: url_for(upload.game_files) }
+      end
+    
+      game_link[:game_files] = game_files
+      @links << game_link
+    end
+
   end
   
   def windows_compatible_file_name(filename)
