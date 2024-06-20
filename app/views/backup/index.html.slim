@@ -2,11 +2,7 @@
     
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color.bg-dark.text-light
-            ul
-                - @links.each do |game_link|
-                    - game_link[:game_files].each do |file|
-                        li
-                            = file[:file_link]
+          h1 Tedd be a letöltés kezelőbe, és hajrá :)
                             
         .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
             = render 'shared/side'   
