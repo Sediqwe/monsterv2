@@ -6,16 +6,12 @@ class BackupController < ApplicationController
     @links = []
     
     @backup.each do |game|
-      game_link = {}
-      game_link[:image_link] = rails_blob_url(game.image)
-      game_files = []
-    
+      @links << rails_blob_url(game.image)
       Upload.where(game_id: game.id).each do |upload|
-        game_files << {url_for(upload.game_files) }
+        @links << url_for(upload.game_files)
       end
+      
     
-      game_link[:game_files] = game_files
-      @links << game_link
     end
     send_data @links.join("\n"), filename: 'game_links.txt'
 
