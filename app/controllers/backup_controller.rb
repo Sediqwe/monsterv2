@@ -11,7 +11,7 @@ class BackupController < ApplicationController
       game_files = []
     
       Upload.where(game_id: game.id).each do |upload|
-        game_files << { filename: upload.game_files.filename, file_link: url_for(upload.game_files) }
+        game_files << {url_for(upload.game_files) }
       end
     
       game_link[:game_files] = game_files
