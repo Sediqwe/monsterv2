@@ -200,41 +200,43 @@
                                                 - else
                                                     - if t.game_files.present?
                                                         = link_to "Letöltés (#{number_to_human_size(t.game_files.byte_size)})", rails_blob_path(t.game_files, disposition: :attachment) , rel: 'nofollow', id: "letoltes_gomb", datagame: "#{@game.id}", done: "#{t.id}" ,class: "btn btn-primary"
-                                                br
-                                                |Feltöltve:
-                                                = t.updated_at.strftime("%Y-%m-%d %H:%M")
-                                                br
-                                                - if t.pictures.present?
-                                                    div id="ex_#{t.id}" class="modal bg-dark"
-                                                       
-                                                        div id="carouselExampleControls_#{t.id}" data-bs-interval="10000000000000000" data-bs-autoplay="false" class="carousel slide" data-bs-ride="carousel"
-                                                            .carousel-inner
-                                                                -t.pictures.each_with_index do |pic, index|
-                                                                    - if index==0
-                                                                        div class="carousel-item active"
-                                                                            img src="#{url_for(pic)}" class="d-block w-100" alt="..."
-                                                                    -else
-                                                                        div class="carousel-item"
-                                                                            img src="#{url_for(pic)}" class="d-block w-100" alt="..."
-                                                                    
+                                            - else 
+                                                | Ez már nem tölthető le, hibás / elavult.
+                                            br
+                                            |Feltöltve:
+                                            = t.updated_at.strftime("%Y-%m-%d %H:%M")
+                                            br
+                                            - if t.pictures.present?
+                                                div id="ex_#{t.id}" class="modal bg-dark"
+                                                    
+                                                    div id="carouselExampleControls_#{t.id}" data-bs-interval="10000000000000000" data-bs-autoplay="false" class="carousel slide" data-bs-ride="carousel"
+                                                        .carousel-inner
+                                                            -t.pictures.each_with_index do |pic, index|
+                                                                - if index==0
+                                                                    div class="carousel-item active"
+                                                                        img src="#{url_for(pic)}" class="d-block w-100" alt="..."
+                                                                -else
+                                                                    div class="carousel-item"
+                                                                        img src="#{url_for(pic)}" class="d-block w-100" alt="..."
                                                                 
-                                                            -if t.pictures.size >1
-                                                                button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="prev"
-                                                                    span class="carousel-control-prev-icon" aria-hidden="true"
-                                                                    span class="visually-hidden" Previous
-                                                                
-                                                                button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="next"
-                                                                    span class="carousel-control-next-icon" aria-hidden="true"
-                                                                    span class="visually-hidden" Next
                                                             
+                                                        -if t.pictures.size >1
+                                                            button class="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="prev"
+                                                                span class="carousel-control-prev-icon" aria-hidden="true"
+                                                                span class="visually-hidden" Previous
                                                             
+                                                            button class="carousel-control-next" type="button" data-bs-target="#carouselExampleControls_#{t.id}" data-bs-slide="next"
+                                                                span class="carousel-control-next-icon" aria-hidden="true"
+                                                                span class="visually-hidden" Next
+                                                        
+                                                        
 
-                                                    div.position-relative
-                                                        a href="#ex_#{t.id}" rel="modal:open" 
-                                                            i.bi.bi-card-image
-                                                            span.position-absolute.top-0.badge.bg-danger
-                                                                = t.pictures.size
-
+                                                div.position-relative
+                                                    a href="#ex_#{t.id}" rel="modal:open" 
+                                                        i.bi.bi-card-image
+                                                        span.position-absolute.top-0.badge.bg-danger
+                                                            = t.pictures.size
+                                            
                                                         
                                                     
                                         .col-lg-2.col-xs-12 
