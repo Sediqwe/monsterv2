@@ -9,7 +9,7 @@ Rails.application.configure do
     'x-content-type-options' => 'nosniff',
     'x-frame-options' => 'sameorigin'
   }
-  config.hosts << "gep.monster"
+  config.hosts << "sediqwe.eu"
   GA.tracker = "G-5Y9BZL1H1F"
 
 
