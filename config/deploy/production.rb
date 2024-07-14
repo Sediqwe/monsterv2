@@ -62,7 +62,8 @@
 set :rails_env, :production
 append :linked_files,  "config/master.key", "config/credentials/production.key"
 
-server "213.199.41.233",
+#server "213.199.41.233",
+server "144.91.120.41",
        user: "deploy",
        roles: %w{web app db},
        ssh_options: {
