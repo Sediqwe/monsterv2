@@ -22,7 +22,7 @@ xml.rss version: '2.0',
       xml.item do
         xml.title "Új üzenet"
         xml.link game.link
-        xml.pubDate game.idouj3.strftime("%Y-%m-%d %H:%M")
+        xml.pubDate game.idouj3.strftime("%a, %d %b %Y %H:%M:%S %z")
         xml.dc :creator, game.user
         xml.description do
           xml.cdata! game.desc
