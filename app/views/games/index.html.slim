@@ -53,9 +53,13 @@
 
                 - @games.each_with_index do |game, index|
                     = render 'games/game', game: game, index: index
+                h3 
+                    |Összes magyar:
+                    = Games.where(done: true).count
             step-filter
                 .step-filter__numbers
-                   = paginate @games       
+                   = paginate @games
+                 
 
 
 
