@@ -107,3 +107,5 @@ group :test do
 end
 
 gem "sidekiq", "~> 7.2"
+
+gem "feedjira", "~> 3.2"
