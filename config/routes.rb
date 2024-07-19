@@ -1,7 +1,7 @@
 Rails.application.routes.draw do
   get 'gamerss/index'
   resources :gamereqs
-  get 'games.rss', to: 'gamerss#index', defaults: { format: 'rss' }
+  get 'qc.rss', to: 'gamerss#index', defaults: { format: 'rss' }
   get 'gupdate', to: "games#gupdate"
   get 'qc', to: "forum#index"
   get 'qc/:id', to: 'forum#indexketto', as: 'qct'
