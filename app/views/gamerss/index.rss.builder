@@ -24,7 +24,6 @@ xml.rss version: '2.0',
         xml.link game.link
         xml.pubDate game.idouj3.strftime("%Y-%m-%d %H:%M")
         xml.dc :creator, game.user
-        xml.guid game.link # Assuming the link is unique for each item
         xml.description do
           xml.cdata! game.desc
         end
