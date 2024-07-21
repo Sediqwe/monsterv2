@@ -24,7 +24,8 @@ xml.rss version: '2.0',
         xml.link game.link
         xml.pubDate game.idouj3.strftime("%a, %d %b %Y %H:%M:%S %z")
         xml.dc :creator, game.user
-        xml.description  game.desc
+        xml.description game.desc.gsub("\n", ' ').gsub("\r", ' ')       
+
       end
     end
   end
