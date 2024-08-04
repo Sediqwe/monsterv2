@@ -30,6 +30,8 @@ gem 'httparty'
 gem 'simple_form'
 gem 'google-api-client', '~> 0.9', require: 'google/apis/gmail_v1'
 gem 'rss'
+gem 'feedjira'
+gem 'whenever'
 #gem "koala"
 # Bundle edge Rails instead: gem "rails", github: "rails/rails", branch: "main"
 gem "rails", "~> 7.0.4", ">= 7.0.4.2"
@@ -108,4 +110,3 @@ end
 
 gem "sidekiq", "~> 7.2"
 
-gem "feedjira", "~> 3.2"
