@@ -50,16 +50,7 @@
                     = image_tag(t.upload.game.image.variant(resize_to_fit: [492, 282]), class: 'listpage-imgs m-2', title: t.upload.game.name) if t.upload.game.image.attached?
           main role="main"
           
-            - Uploadtranslater.where(translater_id: @translater).order(id: :DESC).distinct.each do |t|  
-              
-                a href="/games/#{t.upload.game.slug}"
-                  - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
-
-                  span class="tag tag-#{adatok.sample} tag-lg"
-                    =t.upload.game.name 
-                    |(
-                    = Download.where(upload_id: t.upload_id).size
-                    |)
+            
       = link_to 'Vissza', translaters_path, class: "btn btn-primary"
     
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
