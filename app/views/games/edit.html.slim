@@ -1,8 +1,6 @@
 - if current_user.admin? || current_user.moderator? 
-    -if @game.stipi && @game.user_id == current_user.id || current_user&.admin?
-        == render 'form'
-    -if !@game.stipi 
-        == render 'form'
+    == render 'form'
+    
 => link_to 'Show', @game, class: "btn btn-success  text-light"
 '|
 =< link_to 'Back', games_path, class: "btn btn-success  text-light"

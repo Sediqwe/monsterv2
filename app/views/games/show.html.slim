@@ -15,12 +15,10 @@
                                 -if current_user.admin? || current_user.moderator?
                                     
                                         
-                                    -if @game.stipi && @game.user_id == current_user.id 
-                                        = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
-                                        = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
-                                    - if !@game.stipi || current_user&.admin?
-                                        = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
-                                        = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+                                    
+                                    = link_to "Fájl feltöltés »", new_upload_path(id: @game.id) , class: "btn btn-primary text-light"
+                                    = link_to 'Adatlap módosítása »', edit_game_path(@game), class: "btn btn-primary text-light mr-1"
+                                    
                                 
                                         
                                 -if current_user&.admin?
@@ -107,39 +105,6 @@
                                                     .col-2
                                                         .btn.btn-danger id="delete_yt_#{yt.id}" data-id="#{yt.id}"
                                                             |Törlés
-                                -if current_user&.admin? || current_user&.moderator?
-                                    -if @game.stipi && @game.stipiusername.to_i == current_user.id
-                                        h3.bg-warning.text-dark
-                                            |Ezt a játékot TE folglaltad le!
-                                        - if @game.hatarido.present?
-                                            - remaining_time = @game.hatarido - Time.now
-                                            - days = (remaining_time / 1.day).to_i
-                                            - hours = ((remaining_time % 1.day) / 1.hour).to_i
-                                            - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
-
-                                            p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
-                                        textarea#lemondom name="lemondom" rows="6"
-                                        .btn.btn-primary name="#{@game.id}" id="felold"
-                                            |Feloldás
-                                    - if @game.stipi && @game.stipiusername.to_i != current_user.id
-                                        .bg-warning.text-dark.rounded.p-4.m-1
-                                            | Ez a játék le van foglalva.                                        
-                                            
-                                            - if @game.hatarido.present?
-                                                - remaining_time = @game.hatarido - Time.now
-                                                - days = (remaining_time / 1.day).to_i
-                                                - hours = ((remaining_time % 1.day) / 1.hour).to_i
-                                                - minutes = ((remaining_time % 1.hour) / 1.minute).to_i
-
-                                                p Még hátra lévő idő: #{days} nap #{hours} óra #{minutes} perc
-                                            b Foglaló:
-                                            - foglaloadatai =  User.find(@game.stipiusername.to_i)
-                                            = foglaloadatai.alias || foglaloadatai.name
-                                    
-
-
-                            
-    
                             
                     .row
                         .col
