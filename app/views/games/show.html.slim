@@ -59,72 +59,74 @@
                             .gme-data__buy-game
                                 -if @system_requirement
                                     .row
-                                        .col 
-                                            
-                                            h3
-                                                | System Requirements
-                                            h4
+                                        .col-12
+                                            h4.text-center.p-3
+                                                |Rendszerkövetelmények 
+                                    .row
+                                        .col-6
+                                            h5
                                                 | Minimum:
                                             ul
                                                 li
                                                     strong
-                                                        | Operating System:
+                                                        | Operációs rendszer:  
                                                     = @system_requirement.min_os 
                                                 li
                                                     strong
-                                                        | Processor:
+                                                        | Processzor:  
                                                     = @system_requirement.min_processor 
                                                 li
                                                     strong
-                                                        | Memory:
+                                                        | Memória:  
                                                     = @system_requirement.min_memory 
                                                 li
                                                     strong
-                                                        | Graphics:
+                                                        | Grafikus kártya:  
                                                     = @system_requirement.min_graphics 
                                                 li
                                                     strong
-                                                        | DirectX:
+                                                        | DirectX:  
                                                     = @system_requirement.min_directx 
                                                 li
                                                     strong
-                                                        | Storage:
+                                                        | Tárhely:  
                                                     = @system_requirement.min_storage 
                                                 li
                                                     strong
-                                                        | Sound Card:
-                                                    = @system_requirement.min_sound_card 
-                                                h3
-                                                    | Recommended:
-                                                ul
-                                                    li
-                                                        strong
-                                                            | Operating System:
-                                                        = @system_requirement.rec_os 
-                                                    li
-                                                        strong
-                                                            | Processor:
-                                                        = @system_requirement.rec_processor 
-                                                    li
-                                                        strong
-                                                            | Memory:
-                                                        = @system_requirement.rec_memory 
-                                                    li
-                                                        strong
-                                                            | Graphics:
-                                                        = @system_requirement.rec_graphics 
-                                                    li
-                                                        strong
-                                                            | DirectX:
-                                                        = @system_requirement.rec_directx 
-                                                    li
-                                                        strong
-                                                            | Storage:
-                                                        = @system_requirement.rec_storage 
-                                                    li
-                                                        strong
-                                                            | Sound Card:
-                                                        = @system_requirement.rec_sound_card 
+                                                        | Hangkártya:  
+                                                    = @system_requirement.min_sound_card
+                                        .col-6 
+                                            h5
+                                                | Ajánlott:
+                                            ul
+                                                li
+                                                    strong
+                                                        | Operációs rendszer:  
+                                                    = @system_requirement.rec_os 
+                                                li
+                                                    strong
+                                                        | Processzor:  
+                                                    = @system_requirement.rec_processor 
+                                                li
+                                                    strong
+                                                        | Memória:  
+                                                    = @system_requirement.rec_memory 
+                                                li
+                                                    strong
+                                                        | Grafikus kártya:  
+                                                    = @system_requirement.rec_graphics 
+                                                li
+                                                    strong
+                                                        | DirectX:  
+                                                    = @system_requirement.rec_directx 
+                                                li
+                                                    strong
+                                                        | Tárhely:  
+                                                    = @system_requirement.rec_storage 
+                                                li
+                                                    strong
+                                                        | Hangkártya:  
+                                                    = @system_requirement.rec_sound_card 
                                 -if current_user&.admin?  || current_user&.moderator?                                  
                                     |Új gépi magyarítást használó YT videó beküldés:
                                     = text_field_tag (:ytvideo) 
