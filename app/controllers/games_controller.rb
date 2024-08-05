@@ -174,7 +174,7 @@ class GamesController < ApplicationController
           end
         end
       else
-        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil, azon: username + azon, reply: reply, gamemessageid: gamemessageid)
+        adatok = Gamemessage.new(message: duma, username: username, game_id: game.id, user_id: nil, azon: username + azon, reply: reply, gamemessage_id: gamemessageid)
         if adatok.save
         ApplicationMailer.new_email(1).deliver
         end
