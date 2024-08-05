@@ -43,7 +43,75 @@
                       | A játékhoz elérhető kézzel készült fordítás is, kérlek látogass el ide:                  
                       =link_to "Magyaritasok.hu »", @game.link_hun , target: :_blank , class: "btn btn-secondary text-warning"
                     h3.mokus.btn.btn-block
-        /! üzenetek oké tölthető ide még be kell majd másolni a mostani táblázatot
+        .row
+          .col 
+            h1
+              = @game.title 
+            h2
+              | System Requirements
+            h3
+              | Minimum:
+            ul
+              li
+                strong
+                  | Operating System:
+                  = @system_requirement.min_os 
+              li
+                strong
+                  | Processor:
+                  = @system_requirement.min_processor 
+              li
+                strong
+                  | Memory:
+                  = @system_requirement.min_memory 
+              li
+                strong
+                  | Graphics:
+                  = @system_requirement.min_graphics 
+              li
+                strong
+                  | DirectX:
+                  = @system_requirement.min_directx 
+              li
+                strong
+                  | Storage:
+                  = @system_requirement.min_storage 
+              li
+                strong
+                  | Sound Card:
+                  = @system_requirement.min_sound_card 
+            h3
+              | Recommended:
+            ul
+              li
+                strong
+                  | Operating System:
+                  = @system_requirement.rec_os 
+              li
+                strong
+                  | Processor:
+                  = @system_requirement.rec_processor 
+              li
+                strong
+                  | Memory:
+                  = @system_requirement.rec_memory 
+              li
+                strong
+                  | Graphics:
+                  = @system_requirement.rec_graphics 
+              li
+                strong
+                  | DirectX:
+                  = @system_requirement.rec_directx 
+              li
+                strong
+                  | Storage:
+                  = @system_requirement.rec_storage 
+              li
+                strong
+                  | Sound Card:
+                  = @system_requirement.rec_sound_card 
+          /! üzenetek oké tölthető ide még be kell majd másolni a mostani táblázatot
         .datasheet__message
           .row
             .col-sm-12.col-md-8.col-xs-12.mx-auto

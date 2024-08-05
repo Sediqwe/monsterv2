@@ -204,6 +204,43 @@ class GamesController < ApplicationController
     @meta_image = rails_blob_path(@user.image, only_path: true)
     @ytvideo = Youtubevideo.where(game_id: @user.id).where(ready: true).order("RANDOM()")
     @gamemessage = Gamemessage.where(game_id: @user.id).order(id: :DESC)
+    if @user.link_steam.present?
+        require 'nokogiri'
+        require 'open-uri'
+
+        url = @user.link_steam
+        doc = Nokogiri::HTML(URI.open(url))
+
+        game = @user
+
+        min_req = doc.at('div[data-os="win"] .game_area_sys_req_leftCol ul.bb_ul')
+    rec_req = doc.at('div[data-os="win"] .game_area_sys_req_rightCol ul.bb_ul')
+
+    def extract_text(node, selector, index)
+      element = node&.at("#{selector}:nth-child(#{index})")
+      element ? element.text.split(':').last.strip : 'N/A'
+    end
+
+    game.create_system_requirement(
+      min_os: extract_text(min_req, 'li', 2),
+      min_processor: extract_text(min_req, 'li', 3),
+      min_memory: extract_text(min_req, 'li', 4),
+      min_graphics: extract_text(min_req, 'li', 5),
+      min_directx: extract_text(min_req, 'li', 6),
+      min_storage: extract_text(min_req, 'li', 7),
+      min_sound_card: extract_text(min_req, 'li', 8),
+      rec_os: extract_text(rec_req, 'li', 2),
+      rec_processor: extract_text(rec_req, 'li', 3),
+      rec_memory: extract_text(rec_req, 'li', 4),
+      rec_graphics: extract_text(rec_req, 'li', 5),
+      rec_directx: extract_text(rec_req, 'li', 6),
+      rec_storage: extract_text(rec_req, 'li', 7),
+      rec_sound_card: extract_text(rec_req, 'li', 8)
+    )
+      
+    end
+    @system_requirement = @user.system_requirement
+
   end
 
 

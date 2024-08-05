@@ -57,6 +57,74 @@
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                             .gme-data__buy-game
+                                -if @system_requirement
+                                    .row
+                                        .col 
+                                            
+                                            h3
+                                                | System Requirements
+                                            h4
+                                                | Minimum:
+                                            ul
+                                                li
+                                                    strong
+                                                        | Operating System:
+                                                    = @system_requirement.min_os 
+                                                li
+                                                    strong
+                                                        | Processor:
+                                                    = @system_requirement.min_processor 
+                                                li
+                                                    strong
+                                                        | Memory:
+                                                    = @system_requirement.min_memory 
+                                                li
+                                                    strong
+                                                        | Graphics:
+                                                    = @system_requirement.min_graphics 
+                                                li
+                                                    strong
+                                                        | DirectX:
+                                                    = @system_requirement.min_directx 
+                                                li
+                                                    strong
+                                                        | Storage:
+                                                    = @system_requirement.min_storage 
+                                                li
+                                                    strong
+                                                        | Sound Card:
+                                                    = @system_requirement.min_sound_card 
+                                                h3
+                                                    | Recommended:
+                                                ul
+                                                    li
+                                                        strong
+                                                            | Operating System:
+                                                        = @system_requirement.rec_os 
+                                                    li
+                                                        strong
+                                                            | Processor:
+                                                        = @system_requirement.rec_processor 
+                                                    li
+                                                        strong
+                                                            | Memory:
+                                                        = @system_requirement.rec_memory 
+                                                    li
+                                                        strong
+                                                            | Graphics:
+                                                        = @system_requirement.rec_graphics 
+                                                    li
+                                                        strong
+                                                            | DirectX:
+                                                        = @system_requirement.rec_directx 
+                                                    li
+                                                        strong
+                                                            | Storage:
+                                                        = @system_requirement.rec_storage 
+                                                    li
+                                                        strong
+                                                            | Sound Card:
+                                                        = @system_requirement.rec_sound_card 
                                 -if current_user&.admin?  || current_user&.moderator?                                  
                                     |Új gépi magyarítást használó YT videó beküldés:
                                     = text_field_tag (:ytvideo) 

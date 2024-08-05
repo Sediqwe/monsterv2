@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_06_15_110914) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_04_193305) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -522,6 +522,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_110914) do
     t.index ["project_id"], name: "index_regexadatoks_on_project_id"
   end
 
+  create_table "rss_items", force: :cascade do |t|
+    t.string "title"
+    t.string "link"
+    t.text "summary"
+    t.datetime "published_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "scanners", force: :cascade do |t|
     t.string "start"
     t.string "stop"
@@ -558,6 +567,27 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_110914) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["user_id"], name: "index_supportlists_on_user_id"
+  end
+
+  create_table "system_requirements", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.string "min_os"
+    t.string "min_processor"
+    t.string "min_memory"
+    t.string "min_graphics"
+    t.string "min_directx"
+    t.string "min_storage"
+    t.string "min_sound_card"
+    t.string "rec_os"
+    t.string "rec_processor"
+    t.string "rec_memory"
+    t.string "rec_graphics"
+    t.string "rec_directx"
+    t.string "rec_storage"
+    t.string "rec_sound_card"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_system_requirements_on_game_id"
   end
 
   create_table "todos", force: :cascade do |t|
@@ -722,6 +752,7 @@ ActiveRecord::Schema[7.0].define(version: 2024_06_15_110914) do
   add_foreign_key "scanners", "beolvas"
   add_foreign_key "stipis", "users"
   add_foreign_key "supportlists", "users"
+  add_foreign_key "system_requirements", "games"
   add_foreign_key "todos", "users"
   add_foreign_key "uploads", "games"
   add_foreign_key "uploads", "platforms"

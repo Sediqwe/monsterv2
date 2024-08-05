@@ -1,0 +1,35 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  game: one
+  min_os: MyString
+  min_processor: MyString
+  min_memory: MyString
+  min_graphics: MyString
+  min_directx: MyString
+  min_storage: MyString
+  min_sound_card: MyString
+  rec_os: MyString
+  rec_processor: MyString
+  rec_memory: MyString
+  rec_graphics: MyString
+  rec_directx: MyString
+  rec_storage: MyString
+  rec_sound_card: MyString
+
+two:
+  game: two
+  min_os: MyString
+  min_processor: MyString
+  min_memory: MyString
+  min_graphics: MyString
+  min_directx: MyString
+  min_storage: MyString
+  min_sound_card: MyString
+  rec_os: MyString
+  rec_processor: MyString
+  rec_memory: MyString
+  rec_graphics: MyString
+  rec_directx: MyString
+  rec_storage: MyString
+  rec_sound_card: MyString

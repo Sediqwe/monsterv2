@@ -2,7 +2,8 @@ class Game < ApplicationRecord
     before_save :trim_name
     has_many :uploads , dependent: :delete_all
     has_many_attached :game_files , dependent: :delete_all
-    has_one_attached :image , dependent: :delete_all    
+    has_one_attached :image , dependent: :delete_all  
+    has_one :system_requirement, dependent: :destroy  
     has_many :autoforditoilist
     belongs_to :user
     has_many :stipis
