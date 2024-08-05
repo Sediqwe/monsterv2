@@ -197,7 +197,7 @@ class GamesController < ApplicationController
     if current_user.admin?
       GameGenre.delete_all
       Genre.delete_all
-      redirect_to admin_path, notice: "Game genres and genres have been reset."
+      redirect_to root_path, notice: "Game genres and genres have been reset."
     end
   end
   def show
