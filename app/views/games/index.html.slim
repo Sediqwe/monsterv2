@@ -2,11 +2,12 @@
     
     .row
         .col-xs-12.col-md-9.col-lg-10.bg-basic-color
-            - if current_user&.admin? 
-                .row
-                    .col-xs-12.col-md-9.col-lg-10.bg-basic-color 
-                            
             ul.abc
+                li 
+                    |Játék / oldal : 
+                    - default_value = cookies[:selected_number] || "12"  # Alapértelmezett érték: 12, ha nincs cookie
+                    = select_tag 'oldal', options_for_select(["3", "12", "24", "36", "48"], default_value)
+         
                 - if @games.any?
                     a class="abc__all" href="/games"
                         li 
@@ -24,15 +25,14 @@
                                     =letter
                     
             
-                
-            .step-filter
-                .row 
-                    .col-2 
+            .step-filter    
+                .row
+                    .col-12.text-light
                         
-                        - default_value = cookies[:selected_number] || "12"  # Alapértelmezett érték: 12, ha nincs cookie
-                        = select_tag 'oldal', options_for_select(["3", "12", "24", "36", "48"], default_value)
-                            
-                    .col-10 
+            .step-filter
+                
+                .row
+                    .col 
                         .step-filter__numbers
                             .row 
                                 = paginate @games
