@@ -38,10 +38,14 @@
                 = f.label "Uploader:", class:"p-3"                
                 - if @upload.persisted?
                   - selected_translaters = Uploadtranslater.where(upload_id: @upload).pluck(:translater_id)
-                  - options = Translater.all.order(:translater_name).pluck(:translater_name, :id)
-                  =select_tag "uploadtranslaters[]", options_for_select(options, selected_translaters), { multiple: true, class: "form-control", size: 10 }  
+                  - active_translaters = Translater.where(active: true).order(:translater_name).pluck(:translater_name, :id)
+                  - inactive_translaters = Translater.where(active: false).order(:translater_name).pluck(:translater_name, :id)
+                  - options = active_translaters + inactive_translaters
+                  = select_tag "uploadtranslaters[]", options_for_select(options, selected_translaters), { multiple: true, class: "form-control", size: 10 }
+
                 - else
-                  = select_tag "uploadtranslaters[]", options_for_select(Translater.all.order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters]), { multiple: true, class: "form-control", size: 10 }
+                  = select_tag "uploadtranslaters[]", options_for_select(Translater.where(active: true).order(:translater_name).pluck(:translater_name, :id) + Translater.where(active: false).order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters] ),  { multiple: true, class: "form-control", size: 10 }
+
                 .input-group-append
                   = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'
               
