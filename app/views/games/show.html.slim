@@ -57,76 +57,7 @@
                                 - if @game.link_hun.present?
                                     = link_to " Magyaritasok.hu", @game.link_hun, target: "_blank" , class: "btn btn-secondary text-light"
                             .gme-data__buy-game
-                                -if @system_requirement
-                                    .row
-                                        .col-12
-                                            h4.text-center.p-3
-                                                |Rendszerkövetelmények 
-                                    .row
-                                        .col-6
-                                            h5
-                                                | Minimum:
-                                            ul
-                                                li
-                                                    strong
-                                                        | Operációs rendszer:  
-                                                    = @system_requirement.min_os 
-                                                li
-                                                    strong
-                                                        | Processzor:  
-                                                    = @system_requirement.min_processor 
-                                                li
-                                                    strong
-                                                        | Memória:  
-                                                    = @system_requirement.min_memory 
-                                                li
-                                                    strong
-                                                        | Videókártya:  
-                                                    = @system_requirement.min_graphics 
-                                                li
-                                                    strong
-                                                        | DirectX:  
-                                                    = @system_requirement.min_directx 
-                                                li
-                                                    strong
-                                                        | Tárhely:  
-                                                    = @system_requirement.min_storage 
-                                                li
-                                                    strong
-                                                        | Hangkártya:  
-                                                    = @system_requirement.min_sound_card
-                                        .col-6 
-                                            h5
-                                                | Ajánlott:
-                                            ul
-                                                li
-                                                    strong
-                                                        | Operációs rendszer:  
-                                                    = @system_requirement.rec_os 
-                                                li
-                                                    strong
-                                                        | Processzor:  
-                                                    = @system_requirement.rec_processor 
-                                                li
-                                                    strong
-                                                        | Memória:  
-                                                    = @system_requirement.rec_memory 
-                                                li
-                                                    strong
-                                                        | Videókártya:  
-                                                    = @system_requirement.rec_graphics 
-                                                li
-                                                    strong
-                                                        | DirectX:  
-                                                    = @system_requirement.rec_directx 
-                                                li
-                                                    strong
-                                                        | Tárhely:  
-                                                    = @system_requirement.rec_storage 
-                                                li
-                                                    strong
-                                                        | Hangkártya:  
-                                                    = @system_requirement.rec_sound_card 
+                                
                                 -if current_user&.admin?  || current_user&.moderator?                                  
                                     |Új gépi magyarítást használó YT videó beküldés:
                                     = text_field_tag (:ytvideo) 
@@ -293,18 +224,23 @@
                                             = Download.where(upload_id: t.id).size 
                                             |X
                                         .col-lg-1.col-xs-12
+                                            - megjelolve = trues
                                             - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
+                                                -megjelolve = false
                                                 span class="tag tag-vue tag-lg"
                                                     |Google
                                             - if filename.include? "deepl"
-                                                - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
+                                                -megjelolve = false
                                                 span class="tag tag-javascript tag-lg"
                                                     |Deepl
                                             - if filename.include? "gpt"
-                                                - adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
+                                                -megjelolve = false
                                                 span class="tag tag-typescript tag-lg"
                                                     |GPT
+                                            - if megjelolve 
+                                                span class="tag tag-pro tag-lg"
+                                                    |Ismeretlen
                                         .col-lg-3.col-xs-12
                                             - if t.description.length > 0
                                                 span
