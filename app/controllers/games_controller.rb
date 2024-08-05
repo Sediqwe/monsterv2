@@ -204,7 +204,7 @@ class GamesController < ApplicationController
     @meta_image = rails_blob_path(@user.image, only_path: true)
     @ytvideo = Youtubevideo.where(game_id: @user.id).where(ready: true).order("RANDOM()")
     @gamemessage = Gamemessage.where(game_id: @user.id).order(id: :DESC)
-    if @user.link_steam.present?
+    if @user.link_steam.present? && @user.link_steam.include?("steampowered.") && @user.game_genres.empty?
         require 'nokogiri'
         require 'open-uri'
 
@@ -212,13 +212,17 @@ class GamesController < ApplicationController
         doc = Nokogiri::HTML(URI.open(url))
 
         game = @user
-        genres_hu = doc.css('#genresAndManufacturer b:contains("Genre:") + span a').map(&:text)
+        genres_hu = doc.css('.app_tag').map(&:text).map(&:strip)        
         genres_hu.each do |genre_hu|
-          Genre.find_or_create_by(name_en: genre_hu)
+          if genre_hu != "..." &&  genre_hu != "+"
+            Genre.find_or_create_by(name_en: genre_hu)
+          end
         end
-        genres_hu.each do |genre_en|
-          genre = Genre.find_by(name_en: genre_en)
-          GameGenre.find_or_create_by(game: game, genre: genre)
+        genres_hu.each_with_index do |genre_en,index|
+          if index<4
+            genre = Genre.find_by(name_en: genre_en)
+            GameGenre.find_or_create_by(game: game, genre: genre)
+          end
         end
         min_req = doc.at('div[data-os="win"] .game_area_sys_req_leftCol ul.bb_ul')
     rec_req = doc.at('div[data-os="win"] .game_area_sys_req_rightCol ul.bb_ul')
