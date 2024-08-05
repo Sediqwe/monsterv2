@@ -193,7 +193,13 @@ class GamesController < ApplicationController
       end
     end
   end
-  
+  def reset_game_genres
+    if current_user.admin?
+      GameGenre.delete_all
+      Genre.delete_all
+      redirect_to admin_path, notice: "Game genres and genres have been reset."
+    end
+  end
   def show
     Game.default_timezone = :utc
     @user = Game.friendly.find(params[:id])
