@@ -4,7 +4,7 @@ class GamesController < ApplicationController
   require 'rmagick'
   def index
     stored_number = cookies[:selected_number]
-
+    @adatok = ["green", "pro", "purple", "contrast", "javascript", "typescript", "angular", "firebase", "vue", "rxjs", "node", "cloud-functions", "flutter", "google-maps", "android", "stripe", "machine-learning", "python", "svelte", "react", "ios", "minimum-viable-product", "mvp", "ionic", "nest", "graphql", "electron"]
     @q = Game.where(hidden: false).ransack(params[:q])
     
       if cookies[:selected_number].present?
@@ -212,7 +212,14 @@ class GamesController < ApplicationController
         doc = Nokogiri::HTML(URI.open(url))
 
         game = @user
-
+        genres_hu = doc.css('#genresAndManufacturer b:contains("Genre:") + span a').map(&:text)
+        genres_hu.each do |genre_hu|
+          Genre.find_or_create_by(name_en: genre_hu)
+        end
+        genres_hu.each do |genre_en|
+          genre = Genre.find_by(name_en: genre_en)
+          GameGenre.find_or_create_by(game: game, genre: genre)
+        end
         min_req = doc.at('div[data-os="win"] .game_area_sys_req_leftCol ul.bb_ul')
     rec_req = doc.at('div[data-os="win"] .game_area_sys_req_rightCol ul.bb_ul')
 

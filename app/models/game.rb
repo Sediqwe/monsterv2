@@ -5,6 +5,8 @@ class Game < ApplicationRecord
     has_one_attached :image , dependent: :delete_all  
     has_one :system_requirement, dependent: :destroy  
     has_many :autoforditoilist
+    has_many :game_genres
+    has_many :genres, through: :game_genres
     belongs_to :user
     has_many :stipis
     has_many :gupdate    

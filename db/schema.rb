@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2024_08_04_193305) do
+ActiveRecord::Schema[7.0].define(version: 2024_08_05_082738) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
@@ -254,6 +254,15 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_04_193305) do
     t.index ["sluggable_type", "sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_type_and_sluggable_id"
   end
 
+  create_table "game_genres", force: :cascade do |t|
+    t.bigint "game_id", null: false
+    t.bigint "genre_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["game_id"], name: "index_game_genres_on_game_id"
+    t.index ["genre_id"], name: "index_game_genres_on_genre_id"
+  end
+
   create_table "gamemessages", force: :cascade do |t|
     t.text "message"
     t.boolean "accept"
@@ -322,6 +331,13 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_04_193305) do
     t.string "idouj"
     t.datetime "idouj3"
     t.index ["link"], name: "index_gemorsses_on_link"
+  end
+
+  create_table "genres", force: :cascade do |t|
+    t.string "name_en"
+    t.string "name_hu"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "gmessages", force: :cascade do |t|
@@ -734,6 +750,8 @@ ActiveRecord::Schema[7.0].define(version: 2024_08_04_193305) do
   add_foreign_key "forum_threads", "forum_categories"
   add_foreign_key "forum_threads", "users"
   add_foreign_key "forums", "users"
+  add_foreign_key "game_genres", "games"
+  add_foreign_key "game_genres", "genres"
   add_foreign_key "gamemessages", "gamemessages"
   add_foreign_key "gamemessages", "games"
   add_foreign_key "gamereqs", "games"

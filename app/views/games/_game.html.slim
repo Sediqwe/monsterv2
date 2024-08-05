@@ -25,7 +25,15 @@
             .list-card__text
                 h6
                     = game.name 
-                    |  »                    
+                    |  »
+                    br
+                    - genres = game.genres
+                    - genres.each do |genre|
+                        span class="tag tag-#{@adatok.sample} tag-lg"                        
+                            = genre.name_hu || genre.name_en
+                    
+
+                                    
                     
                 
         
