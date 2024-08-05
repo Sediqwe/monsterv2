@@ -224,7 +224,7 @@
                                             = Download.where(upload_id: t.id).size 
                                             |X
                                         .col-lg-1.col-xs-12
-                                            - megjelolve = trues
+                                            - megjelolve = true
                                             - filename = t.game_files.filename.to_s.downcase # Az ActiveStorage::Filename-t stringgé alakítjuk.
                                             - if filename.include? "google"
                                                 -megjelolve = false
