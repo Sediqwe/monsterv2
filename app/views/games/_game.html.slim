@@ -29,8 +29,10 @@
                     br
                     - genres = game.genres
                     - genres.each do |genre|
-                        span class="tag tag-#{@adatok.sample} tag-lg"                        
-                            = genre.name_hu || genre.name_en
+                        - name = genre.name_hu || genre.name_en
+                        - if name && name != '...' && name.length >= 2
+                            span class="tag tag-python tag-lg"
+                                = name
                     
 
                                     
