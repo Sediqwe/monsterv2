@@ -20,8 +20,8 @@
                   td
                       = genre.name_en
                   td
-                      = form_with model: genre, url: genre_path(genre), method: :patch, local: true do |form| 
-                        = form.text_field :name_hu, value: genre.name_hu
+                      = form_with model: genre, url: genre_path(genre), method: :patch, local: false,html: { class: 'genre-form' } do |form| 
+                        = form.text_field :name_hu, value: genre.name_hu, class: 'name_hu_field'
                         = form.submit "Mentés"
     .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
       = render'shared/side'

@@ -2,17 +2,19 @@ class GenresController < ApplicationController
   before_action :set_genre, only: [:edit, :update]
 
   def index
-    @genres = Genre.all.order(name_en: :DESC)
+    @genres = Genre.all.order(name_en: :ASC)
   end
 
   def edit
   end
 
   def update
-    if @genre.update(genre_params)
-      redirect_to genres_path, notice: 'Genre was successfully updated.'
-    else
-      render :edit
+    respond_to do |format|
+      if @genre.update(genre_params)
+        format.json { render json: @genre, status: :ok }
+      else
+        format.json { render json: @genre.errors, status: :unprocessable_entity }
+      end
     end
   end
 

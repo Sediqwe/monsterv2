@@ -3,6 +3,29 @@ $(document).on('turbo:load', function() {
   $('#uploadtranslaters_').on('click', function () {
     $("#upika").removeAttr("hidden");
 });
+$(document).on('submit', '.genre-form', function(e) {
+  e.preventDefault();
+  var form = $(this);
+  var url = form.attr('action');
+  var method = form.attr('method');
+  var data = form.serialize();
+
+  $.ajax({
+    url: url,
+    method: method,
+    data: data,
+    dataType: 'json',
+    success: function(response) {
+      form.find('.name_hu_field').css('background-color', 'green');
+    },
+    error: function(response) {
+      alert('Failed to update genre.');
+    }
+  });
+});
+
+
+
 $('#oldal').on("change",function() {
  
   var selectedValue = $(this).val();
