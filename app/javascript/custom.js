@@ -9,7 +9,11 @@ $(document).on('submit', '.genre-form', function(e) {
   var url = form.attr('action');
   var method = form.attr('method');
   var data = form.serialize();
-
+  $.each(data, function(index, field) {
+    if (field.name === 'genre[name_hu]') {
+      field.value = field.value.trim();
+    }
+  });
   $.ajax({
     url: url,
     method: method,
