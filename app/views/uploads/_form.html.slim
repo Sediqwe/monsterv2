@@ -44,7 +44,9 @@
                   = select_tag "uploadtranslaters[]", options_for_select(options, selected_translaters), { multiple: true, class: "form-control", size: 10 }
 
                 - else
-                  = select_tag "uploadtranslaters[]", options_for_select(Translater.where(active: true).order(:translater_name).pluck(:translater_name, :id) + Translater.where(active: false).order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters] ),  { multiple: true, class: "form-control", size: 10 }
+                  //= select_tag "uploadtranslaters[]", options_for_select(Translater.where(active: true).order(:translater_name).pluck(:translater_name, :id) + Translater.where(active: false).order(:translater_name).pluck(:translater_name, :id), params[:uploadtranslaters] ),  { multiple: true, class: "form-control", size: 10 }
+                  - current_user_translater = current_user.translater_id
+                  = select_tag "uploadtranslaters[]", options_for_select(Translater.where(active: true).order(:translater_name).pluck(:translater_name, :id) + Translater.where(active: false).order(:translater_name).pluck(:translater_name, :id),params[:uploadtranslaters] || [current_user_translater] ),          { multiple: true, class: "form-control", size: 10 }
 
                 .input-group-append
                   = link_to "+", new_translater_path(), class: 'btn btn-primary append-btn'
