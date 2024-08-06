@@ -18,21 +18,23 @@
       li
         = link_to " Projects", projects_path
     - if current_user&.admin || current_user&.moderator
+      li  
+        = link_to "Tagek", tags_path
       li
         = link_to 'Új játék »', new_game_path
       li  
-        = link_to 'Foglalt / Rejtett »', bel_path
-      li
-        = link_to 'Ötletek', todos_path
+        = link_to 'Rejtett »', bel_path      
      
     - if current_user
       li
         = link_to " Beállítások", edit_user_path(current_user)
     
     - if current_user&.admin?
+      
       li
-        = link_to " Kérések", disqus_path
-        = link_to " Kérések", gamereqs_path
+        = link_to "EX-Kérések", disqus_path
+      li
+        = link_to "Kérések", gamereqs_path
     li
       = link_to " QuickChat", qc_path
     - if !current_user

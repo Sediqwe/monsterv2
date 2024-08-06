@@ -1,4 +1,6 @@
 Rails.application.routes.draw do
+  get 'tags', to: "genres#index"
+  resources :genres  
   get 'gamerss/index'
   resources :gamereqs
   get 'qc.rss', to: 'gamerss#index', defaults: { format: 'rss' }

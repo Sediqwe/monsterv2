@@ -1,0 +1,28 @@
+.container-fluid
+  .row
+    .col-xs-12.col-md-9.col-lg-10.bg-basic-color
+      .row
+        .col-xs-12.col-sm-12.col-md-6.offset-md-3.col-lg-8.offset-lg-3.d-flex.flex-column.align-content-center.text-light
+
+          h1
+            | Tagek
+          table
+            thead
+              tr
+                th
+                  | Tag (EN)
+                th
+                  | Tag (HU)
+                th
+            tbody
+              - @genres.each do |genre|
+                  tr
+                  td
+                      = genre.name_en
+                  td
+                      = form_with model: genre, url: genre_path(genre), method: :patch, local: true do |form| 
+                        = form.text_field :name_hu, value: genre.name_hu
+                        = form.submit "Mentés"
+    .col-xs-12.col-md-3.col-lg-2.bg-grey-color.side-scroll
+      = render'shared/side'
+        
