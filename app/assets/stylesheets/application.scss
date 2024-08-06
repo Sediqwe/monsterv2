@@ -522,7 +522,12 @@ textarea {
     white-space: nowrap;
     text-overflow: ellipsis;
 }
-
+.list-card .list-card__text h7 {
+    overflow: visible;
+    white-space: normal;
+    text-overflow: clip;
+    font-size: small;
+}
 .list-card a:hover .list-card__text {
     background-color: #0E717E;
 }
